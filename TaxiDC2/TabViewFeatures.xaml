@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="TaxiDC2.TabViewFeatures "
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView" Title="Tab View">
+        <tabView:SfTabView x:Name="tabView" IndicatorPlacement="Top" TabBarPlacement="Top" TabWidthMode="Default" >
+        <tabView:SfTabView.Items>
+            <tabView:SfTabItem Header="Item 1">
+                <tabView:SfTabItem.Content>
+                    <Label Text="Item 1 Content" HorizontalOptions="Center" VerticalOptions="Center" />
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            <tabView:SfTabItem Header="Item 2">
+                <tabView:SfTabItem.Content>
+					<Label Text="Item 2 Content" HorizontalOptions="Center" VerticalOptions="Center" />
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            <tabView:SfTabItem Header="Item 3">
+                <tabView:SfTabItem.Content>
+					<Label Text="Item 3 Content" HorizontalOptions="Center" VerticalOptions="Center" />
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+        </tabView:SfTabView.Items>
+		</tabView:SfTabView>
+</ContentPage>

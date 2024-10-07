@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TaxiDC2"
+             xmlns:badge="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             x:Class="TaxiDC2.BadgeViewFeatures"
+             Title="Badge View">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <badge:SfBadgeView BadgeText="7" WidthRequest="{OnPlatform WinUI='150', Android='155'}" HeightRequest="{OnPlatform WinUI='90', Android='100'}">
+            <badge:SfBadgeView.Content>
+                <Button Text="Primary" WidthRequest="120" HeightRequest="60"/>
+            </badge:SfBadgeView.Content>
+            <badge:SfBadgeView.BadgeSettings>
+                <badge:BadgeSettings Type="Primary" BadgeAlignment="Start" Position="TopLeft"/>
+            </badge:SfBadgeView.BadgeSettings>
+        </badge:SfBadgeView>
+    </StackLayout>
+</ContentPage>

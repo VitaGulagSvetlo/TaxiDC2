@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TaxiDC2.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TaxiDC2"
+    Shell.FlyoutBehavior="Flyout">
+
+
+<ShellContent Title = "Nová jízda" ContentTemplate = "{DataTemplate local:NovaJizda}" Route ="NovaJizda" />
+<ShellContent Title = "DataGrid" ContentTemplate = "{DataTemplate local:DataGridFeatures}" Route ="DataGridFeatures" /> 
+<ShellContent Title = "TreeView" ContentTemplate = "{DataTemplate local:TreeViewFeatures}" Route ="TreeViewFeatures" /> 
+<ShellContent Title = "Maps" ContentTemplate = "{DataTemplate local:MapsFeatures}" Route ="MapsFeatures" /> 
+<ShellContent Title = "Autocomplete" ContentTemplate = "{DataTemplate local:AutocompleteFeatures}" Route ="AutocompleteFeatures" /> 
+<ShellContent Title = "ComboBox" ContentTemplate = "{DataTemplate local:ComboBoxFeatures}" Route ="ComboBoxFeatures" /> 
+<ShellContent Title = "DataForm" ContentTemplate = "{DataTemplate local:DataFormFeatures}" Route ="DataFormFeatures" /> 
+<ShellContent Title = "Rating" ContentTemplate = "{DataTemplate local:RatingFeatures}" Route ="RatingFeatures" /> 
+<ShellContent Title = "Numeric Entry" ContentTemplate = "{DataTemplate local:NumericEntryFeatures}" Route ="NumericEntryFeatures" /> 
+<ShellContent Title = "Masked Entry" ContentTemplate = "{DataTemplate local:MaskedEntryFeatures}" Route ="MaskedEntryFeatures" /> 
+<ShellContent Title = "DateTimePicker" ContentTemplate = "{DataTemplate local:DateTimePickerFeatures}" Route ="DateTimePickerFeatures" /> 
+<ShellContent Title = "TimePicker" ContentTemplate = "{DataTemplate local:TimePickerFeatures}" Route ="TimePickerFeatures" /> 
+<ShellContent Title = "DatePicker" ContentTemplate = "{DataTemplate local:DatePickerFeatures}" Route ="DatePickerFeatures" /> 
+<ShellContent Title = "Picker" ContentTemplate = "{DataTemplate local:PickerFeatures}" Route ="PickerFeatures" /> 
+<ShellContent Title = "Radio Button" ContentTemplate = "{DataTemplate local:RadioButtonFeatures}" Route ="RadioButtonFeatures" /> 
+<ShellContent Title = "CheckBox" ContentTemplate = "{DataTemplate local:CheckBoxFeatures}" Route ="CheckBoxFeatures" /> 
+<ShellContent Title = "Cards" ContentTemplate = "{DataTemplate local:CardsFeatures}" Route ="CardsFeatures" /> 
+<ShellContent Title = "ListView" ContentTemplate = "{DataTemplate local:ListViewFeatures}" Route ="ListViewFeatures" /> 
+<ShellContent Title = "Text Input Layout" ContentTemplate = "{DataTemplate local:TextInputLayoutFeatures}" Route ="TextInputLayoutFeatures" /> 
+<ShellContent Title = "Popup" ContentTemplate = "{DataTemplate local:PopupFeatures}" Route ="PopupFeatures" /> 
+<ShellContent Title = "Accordion" ContentTemplate = "{DataTemplate local:AccordionFeatures}" Route ="AccordionFeatures" /> 
+<ShellContent Title = "Expander" ContentTemplate = "{DataTemplate local:ExpanderFeatures}" Route ="ExpanderFeatures" /> 
+<ShellContent Title = "Tab View" ContentTemplate = "{DataTemplate local:TabViewFeatures}" Route ="TabViewFeatures" /> 
+<ShellContent Title = "Pull To Refresh" ContentTemplate = "{DataTemplate local:PullToRefreshFeatures}" Route ="PullToRefreshFeatures" /> 
+<ShellContent Title = "Badge View" ContentTemplate = "{DataTemplate local:BadgeViewFeatures}" Route ="BadgeViewFeatures" /> 
+<ShellContent Title = "Busy Indicator" ContentTemplate = "{DataTemplate local:BusyIndicatorFeatures}" Route ="BusyIndicatorFeatures" /> 
+<ShellContent Title = "Progress Bar" ContentTemplate = "{DataTemplate local:ProgressBarFeatures}" Route ="ProgressBarFeatures" /> 
+<ShellContent Title = "Shimmer" ContentTemplate = "{DataTemplate local:ShimmerFeatures}" Route ="ShimmerFeatures" /> 
+<ShellContent Title = "Slider" ContentTemplate = "{DataTemplate local:SliderFeatures}" Route ="SliderFeatures" /> 
+<ShellContent Title = "Chip" ContentTemplate = "{DataTemplate local:ChipFeatures}" Route ="ChipFeatures" /> 
+<ShellContent Title = "Button" ContentTemplate = "{DataTemplate local:ButtonFeatures}" Route ="ButtonFeatures" /> 
+<ShellContent Title = "Switch" ContentTemplate = "{DataTemplate local:SwitchFeatures}" Route ="SwitchFeatures" /> 
+
+
+</Shell>

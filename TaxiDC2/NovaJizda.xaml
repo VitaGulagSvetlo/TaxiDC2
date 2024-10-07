@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TaxiDC2"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
+             x:Class="TaxiDC2.NovaJizda"
+             Title="Nová jízda">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="20">
+
+            <!-- Zákazník -->
+            <Label Text="Číslo na zákazníka" />
+            <Entry x:Name="PhoneEntry" Placeholder="Zadejte telefonní číslo zákazníka" />
+            <Label Text="Jméno zákazník" />
+            <Entry x:Name="CustomerEntry" Placeholder="Zadejte jméno zákazníka" />
+
+            <!-- Odkud -->
+            <Label Text="Odkud" />
+            <Entry x:Name="FromEntry" Placeholder="Zadejte místo odjezdu" />
+
+            <!-- Kam -->
+            <Label Text="Kam" />
+            <Entry x:Name="ToEntry" Placeholder="Zadejte místo příjezdu" />
+
+            <!-- Čas jízdy -->
+            <Label Text="Datum a čas jízdy" />
+            <picker:SfDateTimePicker x:Name="RideDate" />
+
+            <!-- Status -->
+            <Label Text="Status" />
+            <Picker x:Name="StatusPicker">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Aktivní</x:String>
+                        <x:String>Dokončená</x:String>
+                        <x:String>Zrušená</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Poznámka -->
+            <Label Text="Poznámka" />
+            <Editor x:Name="NoteEditor" Placeholder="Poznámky k jízdě" HeightRequest="100" />
+
+            <!-- Uložit jízdu -->
+            <Button Text="Přidat jízdu" Clicked="OnAddRideClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
