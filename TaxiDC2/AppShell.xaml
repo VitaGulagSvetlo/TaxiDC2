@@ -8,7 +8,7 @@
 
 
 <ShellContent Title = "Nová jízda" ContentTemplate = "{DataTemplate local:NovaJizda}" Route ="NovaJizda" />
-<ShellContent Title = "DataGrid" ContentTemplate = "{DataTemplate local:DataGridFeatures}" Route ="DataGridFeatures" /> 
+<!--<ShellContent Title = "DataGrid" ContentTemplate = "{DataTemplate local:DataGridFeatures}" Route ="DataGridFeatures" /> 
 <ShellContent Title = "TreeView" ContentTemplate = "{DataTemplate local:TreeViewFeatures}" Route ="TreeViewFeatures" /> 
 <ShellContent Title = "Maps" ContentTemplate = "{DataTemplate local:MapsFeatures}" Route ="MapsFeatures" /> 
 <ShellContent Title = "Autocomplete" ContentTemplate = "{DataTemplate local:AutocompleteFeatures}" Route ="AutocompleteFeatures" /> 
@@ -38,7 +38,8 @@
 <ShellContent Title = "Slider" ContentTemplate = "{DataTemplate local:SliderFeatures}" Route ="SliderFeatures" /> 
 <ShellContent Title = "Chip" ContentTemplate = "{DataTemplate local:ChipFeatures}" Route ="ChipFeatures" /> 
 <ShellContent Title = "Button" ContentTemplate = "{DataTemplate local:ButtonFeatures}" Route ="ButtonFeatures" /> 
-<ShellContent Title = "Switch" ContentTemplate = "{DataTemplate local:SwitchFeatures}" Route ="SwitchFeatures" /> 
+<ShellContent Title = "Switch" ContentTemplate = "{DataTemplate local:SwitchFeatures}" Route ="SwitchFeatures" />-->
+    <ShellContent ContentTemplate = "{DataTemplate local:SeznamJizd}" Title = "SeznamJizd"  Route ="SeznamJizd" />
 
 
 </Shell>

@@ -1,0 +1,100 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
+             xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             x:Class="TaxiDC2.SeznamJizd">
+
+    <Grid BackgroundColor="#333333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Padding="10" BackgroundColor="#444444">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            
+            <Label Text="PH" FontSize="20" TextColor="White" VerticalOptions="Center" Grid.Column="0"/>
+
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" Spacing="5">
+                <Label Text="Zobrazit jen mé jízdy" FontSize="14" TextColor="White" VerticalOptions="Center"/>
+                <Switch IsToggled="True" VerticalOptions="Center" OnColor="Orange"></Switch>
+            </StackLayout>
+        </Grid>
+
+        <!-- List -->
+        <syncfusionList:SfListView x:Name="listView" Grid.Row="1" ItemSize="150">
+            <syncfusionList:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Main Frame with background color for each item -->
+                    <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="0,10,0,10" HeightRequest="150" BackgroundColor="Orange">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left Section (Time, Status) -->
+                            <StackLayout Orientation="Vertical">
+                                <Frame  BackgroundColor="Red" WidthRequest="75" HeightRequest="60">
+                                    <Label Text="0 Min" TextColor="White" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="15" />
+                                </Frame>
+                                
+                                <Frame BackgroundColor="Cyan" WidthRequest="75" HeightRequest="60" Margin="5">
+
+                                    
+                                    <Label Text="{Binding Status}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="14"/>
+
+                                </Frame>
+                            </StackLayout>
+                            
+                            <!-- Center Section (Details) -->
+                            <StackLayout Grid.Column="1" Padding="10,0" VerticalOptions="Center">
+                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                    <Image Source="C:\Users\vitsv\source\repos\TaxiDC2\TaxiDC2\img\phone_icon.png" WidthRequest="35" HeightRequest="35" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Phone}" FontSize="22" TextColor="Black" VerticalOptions="Center" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="C:\Users\vitsv\source\repos\TaxiDC2\TaxiDC2\img\user_icon.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Name}" Margin="5, 0, 0, 0" FontSize="15" TextColor="Black"/>
+                                </StackLayout>
+                                
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="C:\Users\vitsv\source\repos\TaxiDC2\TaxiDC2\img\img/start_icon.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center"/>
+                                            <Label Text="{Binding From}" FontSize="15" TextColor="Black"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="C:\Users\vitsv\source\repos\TaxiDC2\TaxiDC2\img\calendar_icon.png" WidthRequest="30" HeightRequest="30" />
+                                            <Label Text="{Binding Date}" FontSize="15" TextColor="Black"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="C:\Users\vitsv\source\repos\TaxiDC2\TaxiDC2\img\finish_icon.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center"/>
+                                        <Label Text="{Binding To}" FontSize="15" TextColor="Black"/>
+                                    </StackLayout>
+                                  
+                                </StackLayout>
+                            </StackLayout>
+
+                            <!-- Right Section (Square Icon) -->
+                            <Frame Grid.Column="2" BackgroundColor="{Binding IconColor}" VerticalOptions="Center"  WidthRequest="100" HorizontalOptions="Center">
+                                <Image Source="{Binding Icon}" Aspect="AspectFit"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </syncfusionList:SfListView.ItemTemplate>
+        </syncfusionList:SfListView>
+
+
+
+    </Grid>
+</ContentPage>

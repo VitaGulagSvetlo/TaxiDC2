@@ -2,50 +2,153 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TaxiDC2"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:rating="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              x:Class="TaxiDC2.NovaJizda"
-             Title="Nová jízda">
+             Title="Nová jízda"
+             BackgroundColor="#333333">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="20">
+    
 
-            <!-- Zákazník -->
-            <Label Text="Číslo na zákazníka" />
-            <Entry x:Name="PhoneEntry" Placeholder="Zadejte telefonní číslo zákazníka" />
-            <Label Text="Jméno zákazník" />
-            <Entry x:Name="CustomerEntry" Placeholder="Zadejte jméno zákazníka" />
+<ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
 
-            <!-- Odkud -->
-            <Label Text="Odkud" />
-            <Entry x:Name="FromEntry" Placeholder="Zadejte místo odjezdu" />
+            <!-- Phone Number -->
+            <Label Text="Telefonní číslo"></Label>
+            <HorizontalStackLayout Spacing="10" >
+                <Entry x:Name="PhoneEntry"
+                       Placeholder="+420123456789"
+                       PlaceholderColor="#FFEBB0"
+                       TextColor="White"
+                       FontSize="18"
+                       MinimumWidthRequest="200"
+                       BackgroundColor="#333333"/>
+                <Button Text="↻"
+                        BackgroundColor="#FF9900"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="50" />
+                
+            </HorizontalStackLayout>
 
-            <!-- Kam -->
-            <Label Text="Kam" />
-            <Entry x:Name="ToEntry" Placeholder="Zadejte místo příjezdu" />
+            <!-- Customer Name with Stars -->
+            <Label Text="Jméno"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+            <Entry x:Name="NameEntry"
+        Placeholder="Jméno"
+        PlaceholderColor="#FFEBB0"
+        TextColor="White"
+        FontSize="18"
+        WidthRequest="200"
+        BackgroundColor="#333333"
+        HorizontalOptions="FillAndExpand" />
 
-            <!-- Čas jízdy -->
-            <Label Text="Datum a čas jízdy" />
-            <picker:SfDateTimePicker x:Name="RideDate" />
+                <HorizontalStackLayout HorizontalOptions="Start">
+                <rating:SfRating x:Name="CustomerRating"
+                 ItemCount="5"
+                 Value="3" 
+                 ItemSize="10"
+                 HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+            </StackLayout>
+            <!-- From Location -->
+            <Label Text="Začátek"></Label>
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
+                <Entry x:Name="FromEntry"
+                       Placeholder="Praha2"
+                       PlaceholderColor="#FFEBB0"
+                       TextColor="White"
+                       FontSize="18"
+                       MinimumWidthRequest="200"
+                       BackgroundColor="#333333"
+                       HorizontalOptions="FillAndExpand" />
+                <Button Text="↻"
+                        BackgroundColor="#FF9900"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="50" />
+            </HorizontalStackLayout>
 
-            <!-- Status -->
-            <Label Text="Status" />
-            <Picker x:Name="StatusPicker">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Aktivní</x:String>
-                        <x:String>Dokončená</x:String>
-                        <x:String>Zrušená</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <!-- To Location -->
+            <Label Text="Cíl"></Label>
+            <HorizontalStackLayout Spacing="10">
+                <Entry x:Name="ToEntry"
+                       Placeholder="dvorakova"
+                       PlaceholderColor="#FFEBB0"
+                       TextColor="White"
+                       MinimumWidthRequest="200"
+                       FontSize="18"
+                       BackgroundColor="#333333"
+                       HorizontalOptions="FillAndExpand" />
+                <Button Text="↻"
+                        BackgroundColor="#FF9900"
+                        TextColor="White"
+                        CornerRadius="5"
+                        WidthRequest="50" />
+            </HorizontalStackLayout>
 
-            <!-- Poznámka -->
-            <Label Text="Poznámka" />
-            <Editor x:Name="NoteEditor" Placeholder="Poznámky k jízdě" HeightRequest="100" />
+            <!-- Time Selection -->
+            <Label Text="Čas jízdy"
+                   TextColor="White"
+                   FontSize="18" />
 
-            <!-- Uložit jízdu -->
-            <Button Text="Přidat jízdu" Clicked="OnAddRideClicked" />
+            <!-- PLACE POPUP WITH DATEPICKER HERE -->
+            <syncfusion:SfPopupLayout x:Name="popupLayout">
+                <syncfusion:SfPopupLayout.PopupView>
+                    <syncfusion:PopupView WidthRequest="300" HeightRequest="300">
+                        <syncfusion:PopupView.ContentTemplate>
+                            <!-- Popup Content: DatePicker with Close Button -->
+                            <DataTemplate>
+                                <StackLayout Padding="20" Spacing="10" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Select a Date" FontSize="20" HorizontalOptions="Center"/>
+                                    <syncfusion:SfDatePicker x:Name="datePicker" WidthRequest="250" />
+                                    <Button Text="Close" Clicked="ClosePopup" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </syncfusion:PopupView.ContentTemplate>
+                    </syncfusion:PopupView>
+                </syncfusion:SfPopupLayout.PopupView>
+
+                <!-- Button to open the popup -->
+                <Button Text="Open Date Picker" Clicked="OpenPopup" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
+            </syncfusion:SfPopupLayout>
+            <!-- Minute Selection -->
+            <Label Text="Minuty"
+                   TextColor="White"
+                   FontSize="18" />
+            <FlexLayout Direction="Row"
+            
+            Wrap="Wrap"   
+                JustifyContent="Start"
+            AlignItems="Center">
+
+                <Button Margin="2" Text="5" BackgroundColor="#FF9900" TextColor="White" WidthRequest="40" />
+                <Button Margin="2" Text="10" BackgroundColor="#FF9900" TextColor="White" WidthRequest="40" />
+                <Button Margin="2" Text="15" BackgroundColor="#FF9900" TextColor="White" WidthRequest="40" />
+                <Button Margin="2" Text="20" BackgroundColor="#FF9900" TextColor="White" WidthRequest="40" />
+                <Button Margin="2" Text="25" BackgroundColor="#FF9900" TextColor="White" WidthRequest="40" />
+                <Button Margin="2" Text="30" BackgroundColor="#FF9900" TextColor="White" WidthRequest="40" />
+
+            </FlexLayout>
+
+            <!-- Note -->
+            <Entry x:Name="NoteEntry"
+                   Placeholder="Poznámka"
+                   PlaceholderColor="#FFEBB0"
+                   TextColor="White"
+                   FontSize="18"
+                   BackgroundColor="#333333" />
+
+            <!-- Save Button -->
+            <Button Text="ULOŽIT"
+                    BackgroundColor="#FF9900"
+                    TextColor="White"
+                    FontSize="18"
+                    CornerRadius="5"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand" />
 
         </VerticalStackLayout>
     </ScrollView>

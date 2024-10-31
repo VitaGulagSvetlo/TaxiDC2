@@ -87,9 +87,22 @@
          </ItemGroup>
 	
 	 <ItemGroup>
+	   <Compile Update="SeznamJizd.xaml.cs">
+	     <DependentUpon>SeznamJizd.xaml</DependentUpon>
+	   </Compile>
+	 </ItemGroup>
+	
+	 <ItemGroup>
+	   <MauiXaml Update="SeznamJizd.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="NovaJizda.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
+	 </ItemGroup>
+	
+	 <ItemGroup>
+	   <Folder Include="Tridy\" />
 	 </ItemGroup>
 	<!-- Build Properties must be defined within these property groups to ensure successful publishing
        to the Mac App Store. See: https://aka.ms/maui-publish-app-store#define-build-properties-in-your-project-file -->

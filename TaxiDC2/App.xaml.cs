@@ -1,5 +1,4 @@
 ﻿using TaxiDC2.Tridy;
-
 namespace TaxiDC2
 {
     public partial class App : Application

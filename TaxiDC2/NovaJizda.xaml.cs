@@ -1,9 +1,10 @@
+using Syncfusion.Maui.Data;
+using System;
 using System.Globalization;
 using TaxiDC2.Tridy;
 
-namespace TaxiDC2;
-
-
+namespace TaxiDC2
+{
     public partial class NovaJizda : ContentPage
     {
         public NovaJizda()
@@ -11,43 +12,52 @@ namespace TaxiDC2;
             InitializeComponent();
         }
 
-        // Tato metoda bude volána po kliknutí na tlaèítko "Pøidat jízdu"
+        // Method to show the date picker popup
+        private void Show_DatePick(object sender, EventArgs e)
+        {
+            popupLayout.Show(); // Show the popup with the date picker
+        }
+
+        // This method is called when the "OK" button in the popup is clicked
+        private void OnDateSelected(object sender, EventArgs e)
+        {
+            DateTime selectedDate = datePicker.SelectedDate ?? DateTime.Now;
+            // Do something with the selected date (e.g., save it to a variable or display it in an Entry)
+            DisplayAlert("Datum vybráno", $"Vybrané datum: {selectedDate.ToShortDateString()}", "OK");
+            popupLayout.Dismiss(); // Close the popup
+        }
+
+        // Method called when "ULOŽIT" button is clicked
         private void OnAddRideClicked(object sender, EventArgs e)
         {
-        // Získání hodnot z formuláøe
             string phoneNumber = PhoneEntry.Text;
-            string customerName = CustomerEntry.Text;
+            string customerName = NameEntry.Text;
             string fromLocation = FromEntry.Text;
             string toLocation = ToEntry.Text;
-            DateTime rideDateTime = (DateTime)RideDate.SelectedDate;
-            string status = StatusPicker.SelectedItem?.ToString();
-            string note = NoteEditor.Text;
+            double rating = CustomerRating.Value;
+            string note = NoteEntry.Text;
 
-            // Validace vstupù (mùžete pøidat i složitìjší validaci)
             if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(fromLocation) || string.IsNullOrEmpty(toLocation))
             {
                 DisplayAlert("Chyba", "Vyplòte všechna povinná pole.", "OK");
                 return;
             }
 
-            // Vytvoøení nové instance jízdy
+            // Create a new instance of the ride
             Jizda newRide = new Jizda
             {
-                Cislo = phoneNumber,
-                Jmeno = customerName,
-                Odkud = fromLocation,
-                Kam = toLocation,
-                Kdy = rideDateTime,
-                Status = status,
-                Poznamka = note
+                Phone = phoneNumber,
+                Name = customerName,
+                From = fromLocation,
+                To = toLocation,
+                Status = "Aktivní",
+                Rating = rating,
+                Note = note
             };
 
-            // Uložení jízdy do databáze nebo seznamu (pøizpùsobte svému úložišti dat)
-            // Napøíklad pøidání do seznamu:
             App.Rides.Add(newRide);
-
-            // Zobrazení potvrzení a návrat zpìt
             DisplayAlert("Úspìch", "Jízda byla úspìšnì pøidána.", "OK");
             Navigation.PopAsync();
         }
     }
+}
