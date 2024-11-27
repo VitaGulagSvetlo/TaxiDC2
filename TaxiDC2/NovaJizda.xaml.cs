@@ -1,33 +1,83 @@
 using Syncfusion.Maui.Data;
+using Syncfusion.Maui.Picker;
+using Syncfusion.Maui.Popup;
 using System;
+using System.Threading.Tasks;
+
+using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
-using TaxiDC2.Tridy;
+using TaxiDC2.Models;
 
 namespace TaxiDC2
 {
     public partial class NovaJizda : ContentPage
     {
+        public ObservableCollection<int> MinutesList { get; set; }
+        public int SelectedMinute { get; set; }
         public NovaJizda()
         {
             InitializeComponent();
+            MinutesList = new ObservableCollection<int> { 5, 10, 15, 20, 25, 30 };
+            BindingContext = this;
         }
-
-        // Method to show the date picker popup
-        private void Show_DatePick(object sender, EventArgs e)
+        private async void OnTimePickerButtonClicked(object sender, EventArgs e)
         {
-            popupLayout.Show(); // Show the popup with the date picker
+            Syncfusion.Maui.Popup.SfPopup timePickerPopup = null;
+
+            var timePicker = new SfTimePicker
+            {
+                Format = PickerTimeFormat.HH_mm, 
+                SelectedTime = TimeSpan.Zero,  
+                WidthRequest = 300,
+                HeightRequest = 200
+            };
+
+            timePickerPopup = new Syncfusion.Maui.Popup.SfPopup
+            {
+                WidthRequest = 350,
+                HeightRequest = 400,
+                ContentTemplate = new DataTemplate(() =>
+                {
+                    return new VerticalStackLayout
+                    {
+                        Spacing = 10,
+                        Children =
+                {
+                    timePicker,
+                    new Button
+                    {
+                        Text = "OK",
+                        BackgroundColor = Colors.Orange,
+                        TextColor = Colors.White,
+                        WidthRequest = 100, 
+                        Command = new Command(() =>
+                        {
+                            string selectedTime = timePicker.SelectedTime?.ToString(@"hh\:mm") ?? "00:00";
+                            TimePickerButton.Text = selectedTime; 
+                            timePickerPopup.IsOpen = false; 
+                        })
+                    },
+                    new Button
+                    {
+                        Text = "Zrušit",
+                        BackgroundColor = Colors.Gray,
+                        TextColor = Colors.White,
+                        WidthRequest = 100,
+                        Command = new Command(() =>
+                        {
+                            timePickerPopup.IsOpen = false; 
+                        })
+                    }
+                }
+                    };
+                }),
+                IsOpen = true 
+            };
+
+            await Task.CompletedTask;
         }
 
-        // This method is called when the "OK" button in the popup is clicked
-        private void OnDateSelected(object sender, EventArgs e)
-        {
-            DateTime selectedDate = datePicker.SelectedDate ?? DateTime.Now;
-            // Do something with the selected date (e.g., save it to a variable or display it in an Entry)
-            DisplayAlert("Datum vybráno", $"Vybrané datum: {selectedDate.ToShortDateString()}", "OK");
-            popupLayout.Dismiss(); // Close the popup
-        }
-
-        // Method called when "ULOŽIT" button is clicked
         private void OnAddRideClicked(object sender, EventArgs e)
         {
             string phoneNumber = PhoneEntry.Text;
@@ -43,16 +93,12 @@ namespace TaxiDC2
                 return;
             }
 
-            // Create a new instance of the ride
-            Jizda newRide = new Jizda
+            Trip newRide = new Trip
             {
-                Phone = phoneNumber,
-                Name = customerName,
-                From = fromLocation,
-                To = toLocation,
-                Status = "Aktivní",
-                Rating = rating,
-                Note = note
+               
+                AddressBoarding = fromLocation,
+                AddressExit = toLocation,             
+              
             };
 
             App.Rides.Add(newRide);

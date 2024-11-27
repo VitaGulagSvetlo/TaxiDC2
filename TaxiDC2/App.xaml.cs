@@ -1,9 +1,9 @@
-﻿using TaxiDC2.Tridy;
+﻿using TaxiDC2.Models;
 namespace TaxiDC2
 {
     public partial class App : Application
     {
-        public static List<Jizda> Rides { get; set; } = new List<Jizda>();
+        public static List<Trip> Rides { get; set; } = new List<Trip>();
         public App()
         {
             //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate

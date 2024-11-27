@@ -46,7 +46,7 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		<!--<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />-->
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -90,19 +90,21 @@
 	   <Compile Update="SeznamJizd.xaml.cs">
 	     <DependentUpon>SeznamJizd.xaml</DependentUpon>
 	   </Compile>
+		 <Compile Update="NovaJizda.xaml.cs">
+			 <DependentUpon>NovaJizda.xaml</DependentUpon>
+		 </Compile>
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="DetailRidic.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="SeznamJizd.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="NovaJizda.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	 </ItemGroup>
-	
-	 <ItemGroup>
-	   <Folder Include="Tridy\" />
 	 </ItemGroup>
 	<!-- Build Properties must be defined within these property groups to ensure successful publishing
        to the Mac App Store. See: https://aka.ms/maui-publish-app-store#define-build-properties-in-your-project-file -->

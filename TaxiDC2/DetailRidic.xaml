@@ -1,0 +1,54 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:controls="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             x:Class="TaxiDC2.DetailRidic"
+             BackgroundColor="#333333">
+    <ContentPage.Content>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            
+
+            <!-- User Details -->
+            <Label Text="peno" FontSize="16" TextColor="#F89900" />
+            <Label Text="huawei" FontSize="16" TextColor="#F89900" />
+            <Label Text="123456" FontSize="16" TextColor="#F89900" />
+
+            <!-- Toggles -->
+            <StackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Aktivní" FontSize="16" TextColor="#FFC107" VerticalTextAlignment="Center"/>
+                    <Switch HorizontalOptions="End" IsToggled="True"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Notifikace zapnuty" FontSize="16" TextColor="#FFC107" VerticalTextAlignment="Center"/>
+                    <Switch IsToggled="True"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Administrator" FontSize="16" TextColor="#FFC107" VerticalTextAlignment="Center"/>
+                    <Switch IsToggled="True"/>
+                </HorizontalStackLayout>
+            </StackLayout>
+
+            <!-- Active Car Selection -->
+            <Label Text="Vyberta aktivní auto:" FontSize="16" TextColor="#FFC107" />
+            <inputs:SfComboBox x:Name="CarSelector" WidthRequest="300" 
+                                   BindingContext="{Binding Cars}" 
+                                   DisplayMemberPath="FullName" 
+                                   SelectedItem="{Binding SelectedCar}">
+                <inputs:SfComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Spacing="10">
+                            <Image Source="car_icon.png" WidthRequest="20" HeightRequest="20"/>
+                            <Label Text="{Binding FullName}" TextColor="White" VerticalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </inputs:SfComboBox.ItemTemplate>
+            </inputs:SfComboBox>
+
+            <!-- Save Button -->
+            <Button Text="ULOŽIT" BackgroundColor="#FFC107" TextColor="Black" FontSize="16" VerticalOptions="EndAndExpand"/>
+
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>
