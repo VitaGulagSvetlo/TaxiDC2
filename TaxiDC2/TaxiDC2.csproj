@@ -96,6 +96,9 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="DetailJizda.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="DetailRidic.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>

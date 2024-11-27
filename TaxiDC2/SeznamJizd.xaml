@@ -1,7 +1,8 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Class="TaxiDC2.SeznamJizd">
 
     <Grid BackgroundColor="#333333">
@@ -28,92 +29,93 @@
                 <Label VerticalOptions="Center" FontSize="16" Text="Zobrazit pouze mé jízdy"></Label>
                 <buttons:SfSwitch/>
             </HorizontalStackLayout>
-            
         </Grid>
 
         <!-- List -->
         <syncfusionList:SfListView x:Name="listView" Grid.Row="1" ItemSize="190">
+            
             <syncfusionList:SfListView.ItemTemplate>
                 <DataTemplate>
-                    <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" HeightRequest="180">
-                        <Frame.Background>
-                            <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                                <GradientStop Color="#404040" Offset="0.0" />
-                                <GradientStop Color="#FF8C00" Offset="1.1" />
-                            </LinearGradientBrush>
-                        </Frame.Background>
-                        <Grid>
-                            <!-- Define Grid Rows and Columns -->
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="1" />
-                                <!-- Orange Line -->
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="75" />
-                            </Grid.ColumnDefinitions>
+                    <SwipeView>
+                        <!-- Define swipe actions -->
+                        <SwipeView.RightItems>
+                            <SwipeItem Text="Detail" IconImageSource="info_icon.png"
+                        BackgroundColor="Orange" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                        </SwipeView.RightItems>
 
-                            <!-- Left Section (Main Info) -->
-                            <StackLayout Grid.Row="0" Grid.Column="0"  Padding="5">
-                            <Frame WidthRequest="100" HeightRequest="75" CornerRadius="5" BackgroundColor="Transparent">
-                                    <Frame.Background>
-                                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                            <GradientStop Color="#FF8C00" Offset="0.0" />
-                                            <GradientStop Color="DarkRed" Offset="1.1" />
-                                        </LinearGradientBrush>
-                                    </Frame.Background>
-                                    <Label Text="5min"  FontAttributes="Bold" FontSize="20" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" />
-                                </Frame>
-                            </StackLayout>
-                            <StackLayout Grid.Row="0" Grid.Column="1" Spacing="0" Padding="0">
-                            <!-- Contact Details -->
-                                <HorizontalStackLayout HorizontalOptions="Center">
-                                    <Image Source="phone_icon.png" HeightRequest="30" />
-                                    <Label Text="7124584624" FontSize="18" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout HorizontalOptions="Center">
-                                    <Image Source="user_icon.png" HeightRequest="30" />
-                                    <Label Text="Vita" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout HorizontalOptions="Center">
-                                    <Image Source="calendar_icon.png" HeightRequest="30" />
-                                    <Label Text="{Binding OrderTime}" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                                
-                            </StackLayout>
+                        <!-- Item content -->
+                        <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" HeightRequest="180">
+                            <Frame.Background>
+                                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                                    <GradientStop Color="#404040" Offset="0.0" />
+                                    <GradientStop Color="#FF8C00" Offset="1.1" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="1" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="75" />
+                                </Grid.ColumnDefinitions>
 
-                            <!-- Orange Line -->
-                            <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="Orange" HorizontalOptions="Fill" />
-
-                            <!-- Bottom Section (Addresses) -->
-                            <StackLayout Grid.Row="2" Grid.Column="0" Padding="5">
-                                <HorizontalStackLayout>
-                                    <Image Source="start_icon.png" HeightRequest="30" />
-                                    <Label Text="{Binding AddressBoarding}" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Image Source="finish_icon.png" HeightRequest="30" />
-                                    <Label Text="{Binding AddressExit}" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                            </StackLayout>
-
-                            <!-- Right Section (Car Icon) -->
-                            <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="HotPink" CornerRadius="10" WidthRequest="75" HeightRequest="150" VerticalOptions="Center" >
-                                <VerticalStackLayout>
-                                    <Image Source="car_icon.png" HeightRequest="50" WidthRequest="75" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    <BoxView Margin="0,25,0,15" HeightRequest="1" BackgroundColor="#404040" HorizontalOptions="Fill" />
-                                    <Frame Padding="0"  BackgroundColor="#404040" BorderColor="Black" WidthRequest="35" HeightRequest="35" HorizontalOptions="Center" VerticalOptions="Center">
-                                        <Label Text="PH"  TextColor="#FF8C00" FontSize="15"></Label>
+                                <!-- Left Section (Main Info) -->
+                                <StackLayout Grid.Row="0" Grid.Column="0" Padding="5">
+                                    <Frame WidthRequest="100" HeightRequest="75" CornerRadius="5" BackgroundColor="Transparent">
+                                        <Frame.Background>
+                                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                <GradientStop Color="#FF8C00" Offset="0.0" />
+                                                <GradientStop Color="DarkRed" Offset="1.1" />
+                                            </LinearGradientBrush>
+                                        </Frame.Background>
+                                        <Label Text="5min" FontAttributes="Bold" FontSize="20" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" />
                                     </Frame>
-                                   
-                                </VerticalStackLayout>
-                                
-                            </Frame>
-                        </Grid>
-                    </Frame>
+                                </StackLayout>
+
+                                <!-- Main Content -->
+                                <StackLayout Grid.Row="0" Grid.Column="1" Spacing="0" Padding="0">
+                                    <HorizontalStackLayout HorizontalOptions="Center">
+                                        <Image Source="phone_icon.png" HeightRequest="30" />
+                                        <Label Text="7124584624" FontSize="18" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout HorizontalOptions="Center">
+                                        <Image Source="user_icon.png" HeightRequest="30" />
+                                        <Label Text="Avit" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout HorizontalOptions="Center">
+                                        <Image Source="calendar_icon.png" HeightRequest="30" />
+                                        <Label Text="{Binding OrderTime}" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                </StackLayout>
+
+                                <!-- Orange Line -->
+                                <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="Orange" HorizontalOptions="Fill" />
+
+                                <!-- Bottom Section (Addresses) -->
+                                <StackLayout Grid.Row="2" Grid.Column="0" Padding="5">
+                                    <HorizontalStackLayout>
+                                        <Image Source="start_icon.png" HeightRequest="30" />
+                                        <Label Text="{Binding AddressBoarding}" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Image Source="finish_icon.png" HeightRequest="30" />
+                                        <Label Text="{Binding AddressExit}" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                </StackLayout>
+
+                                <!-- Right Section (Car Icon) -->
+                                <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="HotPink" CornerRadius="10" WidthRequest="75" HeightRequest="150" VerticalOptions="Center" >
+                                    <VerticalStackLayout>
+                                        <Image Source="car_icon.png" HeightRequest="50" WidthRequest="75" VerticalOptions="Center" HorizontalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </SwipeView>
                 </DataTemplate>
             </syncfusionList:SfListView.ItemTemplate>
         </syncfusionList:SfListView>

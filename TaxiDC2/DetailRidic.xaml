@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:controls="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Class="TaxiDC2.DetailRidic"
              BackgroundColor="#333333">
     <ContentPage.Content>
@@ -10,28 +11,28 @@
             
 
             <!-- User Details -->
-            <Label Text="peno" FontSize="16" TextColor="#F89900" />
-            <Label Text="huawei" FontSize="16" TextColor="#F89900" />
-            <Label Text="123456" FontSize="16" TextColor="#F89900" />
+            <Label Text="peno" FontSize="16" TextColor="#FF8C00" />
+            <Label Text="huawei" FontSize="16" TextColor="#FF8C00" />
+            <Label Text="123456" FontSize="16" TextColor="#FF8C00" />
 
             <!-- Toggles -->
             <StackLayout>
                 <HorizontalStackLayout Spacing="10">
-                    <Label Text="Aktivní" FontSize="16" TextColor="#FFC107" VerticalTextAlignment="Center"/>
-                    <Switch HorizontalOptions="End" IsToggled="True"/>
+                    <Label  HorizontalOptions="Start" Text="Aktivní" FontSize="16" TextColor="#FF8C00" VerticalTextAlignment="Center"/>
+                    <buttons:SfSwitch  HorizontalOptions="End"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="10">
-                    <Label Text="Notifikace zapnuty" FontSize="16" TextColor="#FFC107" VerticalTextAlignment="Center"/>
-                    <Switch IsToggled="True"/>
+                    <Label Text="Notifikace zapnuty" FontSize="16" TextColor="#FF8C00" VerticalTextAlignment="Center"/>
+                    <buttons:SfSwitch/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="10">
-                    <Label Text="Administrator" FontSize="16" TextColor="#FFC107" VerticalTextAlignment="Center"/>
-                    <Switch IsToggled="True"/>
+                    <Label Text="Administrator" FontSize="16" TextColor="#FF8C00" VerticalTextAlignment="Center"/>
+                    <buttons:SfSwitch/>
                 </HorizontalStackLayout>
             </StackLayout>
 
             <!-- Active Car Selection -->
-            <Label Text="Vyberta aktivní auto:" FontSize="16" TextColor="#FFC107" />
+            <Label Text="Vyberta aktivní auto:" FontSize="16" TextColor="#FF8C00" />
             <inputs:SfComboBox x:Name="CarSelector" WidthRequest="300" 
                                    BindingContext="{Binding Cars}" 
                                    DisplayMemberPath="FullName" 
@@ -47,7 +48,7 @@
             </inputs:SfComboBox>
 
             <!-- Save Button -->
-            <Button Text="ULOŽIT" BackgroundColor="#FFC107" TextColor="Black" FontSize="16" VerticalOptions="EndAndExpand"/>
+            <Button Text="ULOŽIT" BackgroundColor="#FF8C00" TextColor="Black" FontSize="16" VerticalOptions="EndAndExpand"/>
 
         </VerticalStackLayout>
     </ContentPage.Content>
