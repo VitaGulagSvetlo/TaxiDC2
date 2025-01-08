@@ -93,8 +93,11 @@
          </ItemGroup>
 	
 	 <ItemGroup>
-	   <Compile Update="DetailJAuto.xaml.cs">
-	     <DependentUpon>DetailJAuto.xaml</DependentUpon>
+	   <Compile Update="DetailZakaznik.xaml.cs">
+	     <DependentUpon>DetailZakaznik.xaml</DependentUpon>
+	   </Compile>
+	   <Compile Update="DetailAuto.xaml.cs">
+	     <DependentUpon>DetailAuto.xaml</DependentUpon>
 	   </Compile>
 	   <Compile Update="SeznamRidicu.xaml.cs">
 	     <DependentUpon>SeznamRidicu.xaml</DependentUpon>
@@ -114,7 +117,10 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
-	   <MauiXaml Update="DetailJAuto.xaml">
+	   <MauiXaml Update="DetailZakaznik.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="DetailAuto.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="SeznamRidicu.xaml">
