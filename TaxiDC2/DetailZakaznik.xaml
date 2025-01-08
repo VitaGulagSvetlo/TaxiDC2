@@ -1,18 +1,40 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.DetailZakaznik"
              Title="Detail Zákazníka">
+    <ContentPage.BindingContext>
+        <vm:CustomerDetailViewModel />
+    </ContentPage.BindingContext>
     <StackLayout>
-        <inputs:SfRating x:Name="Rating" />
-        <Entry x:Name="NameEntry"/>
-        <Entry x:Name="PhoneEntry"/>
-        <CheckBox x:Name="VIPcheck" />
+        <HorizontalStackLayout>
+            <Label>Jméno</Label>
+            <Entry Text="{Binding Name}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label>Telefon</Label>
+            <Entry Text="{Binding PhoneNumber}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label>VIP</Label>
+            <CheckBox IsChecked="{Binding VIP}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label>Nevozit !</Label>
+            <CheckBox IsChecked="{Binding Rejected}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label>Rating</Label>
+            <inputs:SfRating Value="{Binding VIP2}" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label>Posledni Cesta</Label>
+            <Label Text="{Binding Time}" TextColor="Aqua" Padding="3,0"/>
+            <Label Text="{Binding LastAddressBoarding}" Padding="3,0"/>
+            <Label Text="{Binding LastAddressExit}"/>
+        </HorizontalStackLayout>
+        <buttons:SfButton Text="Uložit změny" Command="{Binding SaveDataCmd}"></buttons:SfButton>
     </StackLayout>
-    
-
-
-
 </ContentPage>
