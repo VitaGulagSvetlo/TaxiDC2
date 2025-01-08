@@ -25,8 +25,9 @@ namespace TaxiDC2
 
             var timePicker = new SfTimePicker
             {
-                Format = PickerTimeFormat.HH_mm, 
-                SelectedTime = TimeSpan.Zero,  
+                
+                Format = PickerTimeFormat.HH_mm,
+                SelectedTime = TimeSpan.Zero,
                 WidthRequest = 300,
                 HeightRequest = 200
             };

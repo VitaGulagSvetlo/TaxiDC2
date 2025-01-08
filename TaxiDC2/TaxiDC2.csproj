@@ -87,6 +87,18 @@
          </ItemGroup>
 	
 	 <ItemGroup>
+	   <Compile Update="DetailJAuto.xaml.cs">
+	     <DependentUpon>DetailJAuto.xaml</DependentUpon>
+	   </Compile>
+	   <Compile Update="SeznamRidicu.xaml.cs">
+	     <DependentUpon>SeznamRidicu.xaml</DependentUpon>
+	   </Compile>
+	   <Compile Update="SeznamAut.xaml.cs">
+	     <DependentUpon>SeznamAut.xaml</DependentUpon>
+	   </Compile>
+	   <Compile Update="SeznamZakazniku.xaml.cs">
+	     <DependentUpon>SeznamZakazniku.xaml</DependentUpon>
+	   </Compile>
 	   <Compile Update="SeznamJizd.xaml.cs">
 	     <DependentUpon>SeznamJizd.xaml</DependentUpon>
 	   </Compile>
@@ -96,6 +108,18 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="DetailJAuto.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="SeznamRidicu.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="SeznamAut.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="SeznamZakazniku.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="DetailJizda.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
