@@ -8,10 +8,11 @@
 
 
 <ShellContent ContentTemplate = "{DataTemplate local:NovaJizda}" Title = "Nová jízda" Route ="NovaJizda" />
-<ShellContent ContentTemplate = "{DataTemplate local:SeznamJizd}" Title = "SeznamJizd"  Route ="SeznamJizd" />
-<ShellContent ContentTemplate = "{DataTemplate local:DetailRidic}" Title = "DetailRidic"  Route ="DetailRidic" />
-    <ShellContent ContentTemplate = "{DataTemplate local:DetailJizda}" Title = "DetailJizda"  Route ="DetailJizda" />
-
-
+<ShellContent ContentTemplate = "{DataTemplate local:SeznamJizd}" Title = "Seznam Jízd"  Route ="SeznamJizd" />
+<ShellContent ContentTemplate = "{DataTemplate local:DetailRidic}" Title = "Detail Řidič"  Route ="DetailRidic" />
+<ShellContent ContentTemplate = "{DataTemplate local:DetailJizda}" Title = "Detail Jízdy (zatím)"  Route ="DetailJizda" />
+<ShellContent ContentTemplate = "{DataTemplate local:SeznamAut}" Title = "Seznam Aut"  Route ="SeznamAut" />
+<ShellContent ContentTemplate = "{DataTemplate local:SeznamRidicu}" Title = "Seznam Řidičů"  Route ="SeznamRidicu" />
+<ShellContent ContentTemplate = "{DataTemplate local:SeznamZakazniku}" Title = "Seznam Zákazníků"  Route ="SeznamZakazniku" />
 
 </Shell>

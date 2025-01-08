@@ -93,8 +93,17 @@
          </ItemGroup>
 	
 	 <ItemGroup>
-	   <Compile Update="TripAlert.xaml.cs">
-	     <DependentUpon>TripAlert.xaml</DependentUpon>
+	   <Compile Update="DetailJAuto.xaml.cs">
+	     <DependentUpon>DetailJAuto.xaml</DependentUpon>
+	   </Compile>
+	   <Compile Update="SeznamRidicu.xaml.cs">
+	     <DependentUpon>SeznamRidicu.xaml</DependentUpon>
+	   </Compile>
+	   <Compile Update="SeznamAut.xaml.cs">
+	     <DependentUpon>SeznamAut.xaml</DependentUpon>
+	   </Compile>
+	   <Compile Update="SeznamZakazniku.xaml.cs">
+	     <DependentUpon>SeznamZakazniku.xaml</DependentUpon>
 	   </Compile>
 	   <Compile Update="SeznamJizd.xaml.cs">
 	     <DependentUpon>SeznamJizd.xaml</DependentUpon>
@@ -105,7 +114,16 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
-	   <MauiXaml Update="TripAlert.xaml">
+	   <MauiXaml Update="DetailJAuto.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="SeznamRidicu.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="SeznamAut.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="SeznamZakazniku.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="DetailJizda.xaml">

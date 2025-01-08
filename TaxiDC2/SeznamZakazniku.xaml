@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             x:Class="TaxiDC2.SeznamZakazniku"
+             Title="Seznam Zákazníků">
+    <ScrollView HorizontalOptions="Center">
+    <Grid BackgroundColor="{StaticResource GridBG}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Padding="10" HorizontalOptions="FillAndExpand">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
+                    <GradientStop Color="Purple" Offset="1.1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Label HorizontalOptions="Center" Text="...PROBÍHÁ..." FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20" Padding="20">
+
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Zákazník:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <HorizontalStackLayout>
+                            <Image Source="phone_icon.png" WidthRequest="30" HeightRequest="30" />
+                            <Label Text="222 222 222" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Image Source="user_icon.png" WidthRequest="30" HeightRequest="30" />
+                            <Label Text="Vita" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Čas nástupu:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="19.09.2024 3:15:00" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Start" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="Nezadána" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Cíl" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="Nezadána" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Řidič" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="NN" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
+
+                <Button Text="ZRUŠIT"
+                        BackgroundColor="{StaticResource CustomOrangeBG}"
+                        TextColor="Black"
+                        CornerRadius="8"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        WidthRequest="200"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+    </ScrollView>
+</ContentPage>
