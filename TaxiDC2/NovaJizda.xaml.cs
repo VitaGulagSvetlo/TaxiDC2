@@ -3,8 +3,6 @@ using Syncfusion.Maui.Picker;
 using Syncfusion.Maui.Popup;
 using System;
 using System.Threading.Tasks;
-
-using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using TaxiDC2.Models;

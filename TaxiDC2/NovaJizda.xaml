@@ -10,60 +10,61 @@
              Title="Nová jízda"
              BackgroundColor="#333333">
 
-    
+
 
     <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="15">
+        <StackLayout HorizontalOptions="Center">
+            <VerticalStackLayout Padding="10" Spacing="5">
 
-            <!-- Phone Number -->
-            <Label Margin="5" FontSize="17" Text="Telefonní číslo"></Label>
-            <HorizontalStackLayout Spacing="10" >
-                <Entry x:Name="PhoneEntry"
+                <!-- Phone Number -->
+                <Label Margin="5" FontSize="17" Text="Telefonní číslo"></Label>
+                <HorizontalStackLayout Spacing="10" >
+                    <Entry x:Name="PhoneEntry"
                        Placeholder="+420123456789"
                        PlaceholderColor="#80a3a3a3"
                        TextColor="White"
                        FontSize="18"
                        WidthRequest="250"
                        BackgroundColor="#333333"/>
-                <Button Text="↻"
+                    <Button Text="↻"
                         BackgroundColor="#FF9900"
                         TextColor="White"
                         CornerRadius="5"
                         WidthRequest="50" />
-                
-            </HorizontalStackLayout>
 
-            <!-- Customer Name with Stars -->
-            <HorizontalStackLayout>
-                <Label Margin="5" FontSize="17" Text="Jméno"></Label>
-                <inputs:SfRating x:Name="CustomerRating"
+                </HorizontalStackLayout>
+
+                <!-- Customer Name with Stars -->
+                <HorizontalStackLayout>
+                    <Label Margin="5" FontSize="17" Text="Jméno"></Label>
+                    <inputs:SfRating x:Name="CustomerRating"
                 ItemCount="5"
                 Value="3" 
                 Margin="5"
                 ItemSize="20"
                 HorizontalOptions="Start">
-                    <inputs:SfRating.RatingSettings>
-                        <inputs:RatingSettings RatedFill="#FF9900" RatedStroke="Transparent"/>
-                    </inputs:SfRating.RatingSettings>
-                </inputs:SfRating>
-            </HorizontalStackLayout>
-            
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
-            <Entry x:Name="NameEntry"
+                        <inputs:SfRating.RatingSettings>
+                            <inputs:RatingSettings RatedFill="#FF9900" RatedStroke="Transparent"/>
+                        </inputs:SfRating.RatingSettings>
+                    </inputs:SfRating>
+                </HorizontalStackLayout>
+
+                
+                    <Entry x:Name="NameEntry"
         Placeholder="Jan Petr"
         PlaceholderColor="#80a3a3a3"
         TextColor="White"
         FontSize="18"
-       WidthRequest="250"
+       
         BackgroundColor="#333333"
         HorizontalOptions="FillAndExpand" />
 
+
                 
-            </StackLayout>
-            <!-- From Location -->
-            <Label Margin="5" FontSize="17" Text="Začátek"></Label>
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
-                <Entry x:Name="FromEntry"
+                <!-- From Location -->
+                <Label Margin="5" FontSize="17" Text="Začátek"></Label>
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
+                    <Entry x:Name="FromEntry"
                        Placeholder="Praha2"
                        PlaceholderColor="#80a3a3a3"
                        TextColor="White"
@@ -71,17 +72,17 @@
                        WidthRequest="250"
                        BackgroundColor="#333333"
                        HorizontalOptions="FillAndExpand" />
-                <Button Text="↻"
+                    <Button Text="↻"
                         BackgroundColor="#FF9900"
                         TextColor="White"
                         CornerRadius="5"
                         WidthRequest="50" />
-            </HorizontalStackLayout>
+                </HorizontalStackLayout>
 
-            <!-- To Location -->
-            <Label Margin="5" FontSize="17" Text="Cíl"></Label>
-            <HorizontalStackLayout Spacing="10">
-                <Entry x:Name="ToEntry"
+                <!-- To Location -->
+                <Label Margin="5" FontSize="17" Text="Cíl"></Label>
+                <HorizontalStackLayout Spacing="10">
+                    <Entry x:Name="ToEntry"
                        Placeholder="dvorakova"
                        PlaceholderColor="#80a3a3a3"
                        TextColor="White"
@@ -89,21 +90,28 @@
                        FontSize="18"
                        BackgroundColor="#333333"
                        HorizontalOptions="FillAndExpand" />
-                <Button Text="↻"
+                    <Button Text="↻"
                         BackgroundColor="#FF9900"
                         TextColor="White"
                         CornerRadius="5"
                         WidthRequest="50" />
-            </HorizontalStackLayout>
-            <BoxView Margin="0"  HeightRequest="2"  WidthRequest="300" BackgroundColor="Orange" VerticalOptions="Fill" />
+                </HorizontalStackLayout>
+                <BoxView Margin="0"  HeightRequest="2"  WidthRequest="300" BackgroundColor="Orange" VerticalOptions="Fill" />
 
-            <!-- Time Selection -->
-            <Label Text="Čas jízdy"
-       TextColor="White"
-       FontSize="17" />
+                <!-- Time Selection -->
+                <HorizontalStackLayout Spacing="5">
+                    <Label  VerticalOptions="Center" 
+                            Text="Čas jízdy"
+                            TextColor="White"
+                            FontSize="17" />
+                    <Label  VerticalOptions="Center"
+                            Text="(čas nebo minuty do začátku jízdy)"
+                            FontSize="12"/>
+                </HorizontalStackLayout>
 
-            <HorizontalStackLayout>
-                <Button x:Name="TimePickerButton"
+
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button x:Name="TimePickerButton"
             Text="Vyberte čas"
             BackgroundColor="#FF8C00"
             TextColor="White"
@@ -113,11 +121,11 @@
             HorizontalOptions="Start"
             Clicked="OnTimePickerButtonClicked" />
 
-                <Frame WidthRequest="50" Margin="0,20,0,20" BackgroundColor="Transparent" BorderColor="Transparent">
-                    <BoxView Margin="0"  HeightRequest="25"  WidthRequest="2" BackgroundColor="Orange" VerticalOptions="Fill" />
-                </Frame>
-                
-                <inputs:SfComboBox x:Name="MinutesDropdown" 
+                    <Frame WidthRequest="50" Margin="0,20,0,20" BackgroundColor="Transparent" BorderColor="Transparent">
+                        <BoxView Margin="0"  HeightRequest="25"  WidthRequest="2" BackgroundColor="Orange" VerticalOptions="Fill" />
+                    </Frame>
+
+                    <inputs:SfComboBox x:Name="MinutesDropdown" 
                        HeightRequest="50"
                        WidthRequest="100"
                        Placeholder="Min"
@@ -127,22 +135,22 @@
                        Stroke="#FF8C00"
                        TextColor="White"
                        PlaceholderColor="#80a3a3a3"/>
-            </HorizontalStackLayout>
+                </HorizontalStackLayout>
 
 
-            <!-- Note -->
-            <Entry x:Name="NoteEntry"
+                <!-- Note -->
+                <Entry x:Name="NoteEntry"
                    Placeholder="Poznámka"
                    PlaceholderColor="#80a3a3a3"
                    TextColor="White"
                    FontSize="18"
                    BackgroundColor="#333333" 
-                   WidthRequest="250"
                    
-                   HorizontalOptions="Start"/>
-            
-            <!-- Save Button -->
-            <Button Text="ULOŽIT"
+                   
+                   HorizontalOptions="Fill"/>
+
+                <!-- Save Button -->
+                <Button Text="ULOŽIT"
                     BackgroundColor="#FF9900"
                     TextColor="White"
                     FontSize="18"
@@ -150,6 +158,7 @@
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand" />
 
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

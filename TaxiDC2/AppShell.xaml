@@ -10,6 +10,8 @@
 <ShellContent ContentTemplate = "{DataTemplate local:NovaJizda}" Title = "Nová jízda" Route ="NovaJizda" />
 <ShellContent ContentTemplate = "{DataTemplate local:SeznamJizd}" Title = "SeznamJizd"  Route ="SeznamJizd" />
 <ShellContent ContentTemplate = "{DataTemplate local:DetailRidic}" Title = "DetailRidic"  Route ="DetailRidic" />
+    <ShellContent ContentTemplate = "{DataTemplate local:DetailJizda}" Title = "DetailJizda"  Route ="DetailJizda" />
+
 
 
 </Shell>

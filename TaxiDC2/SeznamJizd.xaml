@@ -24,7 +24,6 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label Text="Seznam jízd" FontSize="22" TextColor="White" VerticalOptions="Center" Grid.Column="0" />
             <HorizontalStackLayout  HorizontalOptions="End" Grid.Column="1">
                 <Label VerticalOptions="Center" FontSize="16" Text="Zobrazit pouze mé jízdy"></Label>
                 <buttons:SfSwitch/>
@@ -65,35 +64,30 @@
 
                                 <!-- Left Section (Main Info) -->
                                 <StackLayout Grid.Row="0" Grid.Column="0" Padding="5">
-                                    <Frame WidthRequest="100" HeightRequest="75" CornerRadius="5" BackgroundColor="Transparent">
-                                        <Frame.Background>
-                                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                                <GradientStop Color="#FF8C00" Offset="0.0" />
-                                                <GradientStop Color="DarkRed" Offset="1.1" />
-                                            </LinearGradientBrush>
-                                        </Frame.Background>
+                                    <Frame  WidthRequest="100" HeightRequest="75" CornerRadius="5" BackgroundColor="DarkRed">
+                                       
                                         <Label Text="5min" FontAttributes="Bold" FontSize="20" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" />
                                     </Frame>
                                 </StackLayout>
 
                                 <!-- Main Content -->
                                 <StackLayout Grid.Row="0" Grid.Column="1" Spacing="0" Padding="0">
-                                    <HorizontalStackLayout HorizontalOptions="Center">
+                                    <HorizontalStackLayout HorizontalOptions="Start">
                                         <Image Source="phone_icon.png" HeightRequest="30" />
                                         <Label Text="7124584624" FontSize="18" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" />
                                     </HorizontalStackLayout>
-                                    <HorizontalStackLayout HorizontalOptions="Center">
+                                    <HorizontalStackLayout HorizontalOptions="Start">
                                         <Image Source="user_icon.png" HeightRequest="30" />
                                         <Label Text="Avit" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
                                     </HorizontalStackLayout>
-                                    <HorizontalStackLayout HorizontalOptions="Center">
+                                    <HorizontalStackLayout HorizontalOptions="Start">
                                         <Image Source="calendar_icon.png" HeightRequest="30" />
                                         <Label Text="{Binding OrderTime}" FontAttributes="Bold" FontSize="16" TextColor="White" VerticalOptions="Center" />
                                     </HorizontalStackLayout>
                                 </StackLayout>
 
                                 <!-- Orange Line -->
-                                <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="Orange" HorizontalOptions="Fill" />
+                                <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="Orange" HorizontalOptions="Fill" Margin="20, 0, 20, 0" />
 
                                 <!-- Bottom Section (Addresses) -->
                                 <StackLayout Grid.Row="2" Grid.Column="0" Padding="5">
@@ -108,10 +102,10 @@
                                 </StackLayout>
 
                                 <!-- Right Section (Car Icon) -->
-                                <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="HotPink" CornerRadius="10" WidthRequest="75" HeightRequest="150" VerticalOptions="Center" >
-                                    <VerticalStackLayout>
-                                        <Image Source="car_icon.png" HeightRequest="50" WidthRequest="75" VerticalOptions="Center" HorizontalOptions="Center" />
-                                    </VerticalStackLayout>
+                                <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="Green" CornerRadius="10" WidthRequest="75" HeightRequest="150" VerticalOptions="Center" >
+                                    
+                                        <Image Source="car_icon.png" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" />
+                                    
                                 </Frame>
                             </Grid>
                         </Frame>
