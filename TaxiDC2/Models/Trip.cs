@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaxiDC2.Models.Enums;
 
 namespace TaxiDC2.Models
 {
@@ -28,7 +29,7 @@ namespace TaxiDC2.Models
         public Customer? Customer { get; set; } = null;
         public Driver? Driver { get; set; } = null;
         public TimeSpan? DeadLine { get; set; }
-        //public TripState TripState { get; set; } = TripState.NewOrder;
+        public TripState TripState { get; set; } = TripState.NewOrder;
 
         public bool AddressBoardingIsValid { get; set; }
         public bool AddressExitIsValid { get; set; }

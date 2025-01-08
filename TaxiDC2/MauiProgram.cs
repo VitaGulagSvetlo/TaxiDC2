@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
+using TaxiDC2.Services;
 
 namespace TaxiDC2
 {
@@ -18,8 +19,11 @@ namespace TaxiDC2
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddLogging();
+            builder.Services.AddScoped<IDataService, DataService>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+			builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
