@@ -83,7 +83,7 @@ namespace TaxiDC2.ViewModels
             if (item == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(CustomerDetail)}?IdCustomer={item.IdCustomer}");
+            await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?IdCustomer={item.IdCustomer}");
         }
 
         public async Task SaveToggleData()

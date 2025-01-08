@@ -43,7 +43,7 @@ namespace TaxiDC2.ViewModels
 
         private void OnAddItem(object obj)
         {
-            Shell.Current.GoToAsync(nameof(TripNew));
+            Shell.Current.GoToAsync(nameof(NovaJizda));
         }
 
         public void OnAppearing()

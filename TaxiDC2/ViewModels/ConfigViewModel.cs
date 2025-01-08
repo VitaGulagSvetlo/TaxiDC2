@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
+using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
@@ -46,18 +47,18 @@ namespace TaxiDC2.ViewModels
             await PingCheck();
         }
 
-        public void HideKeyboard()
-        {
-            var context = Android.App.Application.Context;
-            var inputMethodManager = context.GetSystemService(Context.InputMethodService) as InputMethodManager;
-            if (inputMethodManager != null && context is Activity)
-            {
-                var activity = context as Activity;
-                var token = activity.CurrentFocus?.WindowToken;
-                inputMethodManager.HideSoftInputFromWindow(token, HideSoftInputFlags.None);
-                activity.Window.DecorView.ClearFocus();
-            }
-        }
+        //public void HideKeyboard()
+        //{
+        //    var context = Android.App.Application.Context;
+        //    var inputMethodManager = context.GetSystemService(Context.InputMethodService) as InputMethodManager;
+        //    if (inputMethodManager != null && context is Activity)
+        //    {
+        //        var activity = context as Activity;
+        //        var token = activity.CurrentFocus?.WindowToken;
+        //        inputMethodManager.HideSoftInputFromWindow(token, HideSoftInputFlags.None);
+        //        activity.Window.DecorView.ClearFocus();
+        //    }
+        //}
 
         public async Task SaveData()
         {
@@ -160,6 +161,6 @@ namespace TaxiDC2.ViewModels
         // Application Build Number (1)
         public string BuildString => AppInfo.BuildString;
 
-        public Color MessageColor { get; set; } = Color.Aqua;
+        public Color MessageColor { get; set; } = Color.Parse("Aqua");
     }
 }

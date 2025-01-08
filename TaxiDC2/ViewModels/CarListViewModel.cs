@@ -67,7 +67,7 @@ namespace TaxiDC2.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(DetailAuta));
+            await Shell.Current.GoToAsync(nameof(DetailAuto));
         }
 
         private async void OnItemSelected(Car item)
@@ -75,7 +75,7 @@ namespace TaxiDC2.ViewModels
             if (item == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(DetailAuta)}?IdCar={item.IdCar}");
+            await Shell.Current.GoToAsync($"{nameof(DetailAuto)}?IdCar={item.IdCar}");
 
         }
     }
