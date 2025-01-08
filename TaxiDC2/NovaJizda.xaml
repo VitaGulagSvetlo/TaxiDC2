@@ -21,14 +21,14 @@
                 <HorizontalStackLayout Spacing="10" >
                     <Entry x:Name="PhoneEntry"
                        Placeholder="+420123456789"
-                       PlaceholderColor="#80a3a3a3"
-                       TextColor="White"
+                       PlaceholderColor="{StaticResource NRph}"
+                       TextColor="{StaticResource TCwhite}"
                        FontSize="18"
                        WidthRequest="250"
-                       BackgroundColor="#333333"/>
+                       BackgroundColor="{StaticResource GridBG}"/>
                     <Button Text="↻"
-                        BackgroundColor="#FF9900"
-                        TextColor="White"
+                        BackgroundColor="{StaticResource CustomOrangeBG}"
+                        TextColor="{StaticResource TCwhite}"
                         CornerRadius="5"
                         WidthRequest="50" />
 
@@ -44,23 +44,23 @@
                 ItemSize="20"
                 HorizontalOptions="Start">
                         <inputs:SfRating.RatingSettings>
-                            <inputs:RatingSettings RatedFill="#FF9900" RatedStroke="Transparent"/>
+                            <inputs:RatingSettings RatedFill="{StaticResource CustomOrangeText}" RatedStroke="{StaticResource TP}"/>
                         </inputs:SfRating.RatingSettings>
                     </inputs:SfRating>
                 </HorizontalStackLayout>
 
-                
-                    <Entry x:Name="NameEntry"
+
+                <Entry x:Name="NameEntry"
         Placeholder="Jan Petr"
-        PlaceholderColor="#80a3a3a3"
-        TextColor="White"
+        PlaceholderColor="{StaticResource NRph}"
+        TextColor="{StaticResource TCwhite}"
         FontSize="18"
        
-        BackgroundColor="#333333"
+        BackgroundColor="{StaticResource GridBG}"
         HorizontalOptions="FillAndExpand" />
 
 
-                
+
                 <!-- From Location -->
                 <Label Margin="5" FontSize="17" Text="Začátek"></Label>
                 <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">

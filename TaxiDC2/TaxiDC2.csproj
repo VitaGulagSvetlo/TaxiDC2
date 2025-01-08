@@ -102,6 +102,12 @@
 	   <MauiXaml Update="DetailRidic.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
+	   <MauiXaml Update="Resources\Styles\CustomColors.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="SeznamJizd.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>

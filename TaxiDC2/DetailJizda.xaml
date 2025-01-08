@@ -1,116 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Class="TaxiDC2.DetailJizda"
-             Title="Detail jízdy"
-             BackgroundColor="Black">
+             Title="Detail jízdy">
+    <ScrollView HorizontalOptions="Center">
+    <Grid BackgroundColor="{StaticResource GridBG}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-    <ContentPage.Content>
-        <ScrollView>
-            
-            <Grid Padding="20" RowSpacing="20"
-                  HorizontalOptions="Center" 
-                  VerticalOptions="Center" 
-                  RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
-                <Label Margin="0,15,15,15" Text="PROBÍHA" Background="Purple" WidthRequest="250" FontSize="12" />
-                <!-- Title -->
-                <Label Grid.Row="0" Grid.ColumnSpan="2"
-                       Text="Detail jízdy"
-                       FontSize="24"
-                       TextColor="White"
-                       HorizontalOptions="Center" />
+        <Grid Padding="10" HorizontalOptions="FillAndExpand">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
+                    <GradientStop Color="Purple" Offset="1.1" />
+                </LinearGradientBrush>
+            </Grid.Background>
 
-                <!-- Customer Section -->
-                <Label Grid.Row="1" Grid.ColumnSpan="2" 
-                       Text="Zákazník" 
-                       FontSize="16" 
-                       TextColor="#F89900"
-                       HorizontalOptions="Center" />
+            <Label HorizontalOptions="Center" Text="...PROBÍHÁ..." FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+        </Grid>
 
-                <StackLayout Grid.Row="2" Grid.ColumnSpan="2" 
-                             Orientation="Horizontal"
-                             HorizontalOptions="Center"
-                             Spacing="10">
-                    <Image Source="phone_icon.png"
-                           WidthRequest="20" 
-                           HeightRequest="20"
-                           VerticalOptions="Center"/>
-                    <Label Text="222 222 222" 
-                           FontSize="20" 
-                           TextColor="White" 
-                           VerticalOptions="Center"/>
-                </StackLayout>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20" Padding="20">
 
-                <Label Grid.Row="3" Grid.ColumnSpan="2" 
-                       Text="Clovek 2" 
-                       FontSize="18" 
-                       TextColor="White"
-                       HorizontalOptions="Center" />
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Zákazník:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <HorizontalStackLayout>
+                            <Image Source="phone_icon.png" WidthRequest="30" HeightRequest="30" />
+                            <Label Text="222 222 222" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Image Source="user_icon.png" WidthRequest="30" HeightRequest="30" />
+                            <Label Text="Vita" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
 
-                <!-- Requested Time -->
-                <Label Grid.Row="4" Grid.ColumnSpan="2"
-                       Text="Pož. čas nástupu" 
-                       FontSize="16"
-                       TextColor="#F89900"
-                       HorizontalOptions="Center" />
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Čas nástupu:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="19.09.2024 3:15:00" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
 
-                <Label Grid.Row="5" Grid.ColumnSpan="2"
-                       Text="19.09.2024 3:15:00"
-                       FontSize="18"
-                       TextColor="White"
-                       HorizontalOptions="Center" />
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Start" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="Nezadána" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
 
-                <!-- Start Section -->
-                <Label Grid.Row="6" Grid.ColumnSpan="2" 
-                       Text="Start" 
-                       FontSize="16" 
-                       TextColor="#F89900"
-                       HorizontalOptions="Center" />
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Cíl" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="Nezadána" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
 
-                <Label Grid.Row="7" Grid.ColumnSpan="2"
-                       Text="Nezadána" 
-                       FontSize="18"
-                       TextColor="White"
-                       HorizontalOptions="Center" />
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Řidič" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Label Text="NN" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
 
-                <!-- Destination Section -->
-                <Label Grid.Row="8" Grid.ColumnSpan="2"
-                       Text="Cíl" 
-                       FontSize="16"
-                       TextColor="#F89900"
-                       HorizontalOptions="Center" />
-
-                <Label Grid.Row="9" Grid.ColumnSpan="2"
-                       Text="Nezadána" 
-                       FontSize="18"
-                       TextColor="White"
-                       HorizontalOptions="Center" />
-
-                <!-- Driver Section -->
-                <Label Grid.Row="10" Grid.ColumnSpan="2"
-                       Text="Řidič" 
-                       FontSize="16"
-                       TextColor="#F89900"
-                       HorizontalOptions="Center" />
-
-                <Label Grid.Row="11" Grid.ColumnSpan="2"
-                       Text="NN" 
-                       FontSize="18"
-                       TextColor="White"
-                       HorizontalOptions="Center" />
-
-                <!-- Cancel Button (to go back) -->
-                <Button Grid.Row="12" Grid.ColumnSpan="2"
-                        Text="ZRUŠIT"
-                        BackgroundColor="#F89900"
+                <Button Text="ZRUŠIT"
+                        BackgroundColor="{StaticResource CustomOrangeBG}"
                         TextColor="Black"
                         CornerRadius="8"
                         FontSize="18"
                         HorizontalOptions="Center"
                         WidthRequest="200"
-                        Margin="0,20,0,0"
-                        Clicked="OnCancelButtonClicked"/>
-            </Grid>
+                        Clicked="OnCancelButtonClicked" />
+            </VerticalStackLayout>
         </ScrollView>
-    </ContentPage.Content>
+    </Grid>
+    </ScrollView>
 </ContentPage>

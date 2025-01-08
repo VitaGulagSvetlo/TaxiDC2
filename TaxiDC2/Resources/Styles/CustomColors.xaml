@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaxiDC2.Resources.Styles.CustomColors">
+    <Color x:Key="CustomOrange">#FF8C00</Color>
+    <Color x:Key="CustomOrangeBG">#FF9900</Color>
+    <Color x:Key="CustomOrangeText">#FF8C00</Color>
+    <Color x:Key="GridBG">#333333</Color>
+    <Color x:Key="NRph">#80a3a3a3</Color>
+    <Color x:Key="TCwhite">White</Color>
+    <Color x:Key="TP">Transparent</Color>
+    <Color x:Key="GradientGray">#404040</Color>
+    <Color x:Key="GradientOrange">#FF8C00</Color>
+    <Color x:Key="GradientRed">Darkred</Color>
+</ResourceDictionary>
