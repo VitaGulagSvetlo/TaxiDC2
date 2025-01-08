@@ -2,7 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="TaxiDC2.DetailZakaznik"
-             Title="Detail Auta">
-   
+             Title="Detail Zákazníka">
+    <StackLayout>
+        <inputs:SfRating x:Name="Rating" />
+        <Entry x:Name="NameEntry"/>
+        <Entry x:Name="PhoneEntry"/>
+        <CheckBox x:Name="VIPcheck" />
+    </StackLayout>
+    
+
+
+
 </ContentPage>
