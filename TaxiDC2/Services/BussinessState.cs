@@ -1,9 +1,10 @@
-﻿namespace TaxiDC2.Services
+﻿using TaxiDC2.Code;
+
+namespace TaxiDC2.Services
 {
     public class BussinessState : IBussinessState
     {
         private static string _deviceKey;
-        private static string _serverUrl;
 
         private Driver _driver = null;
 
@@ -11,11 +12,6 @@
         /// Klic zarizeni
         /// </summary>
         public string DeviceKey { get => _deviceKey; set => _deviceKey = value; }
-
-        /// <summary>
-        /// Nastaveni filtru cest
-        /// </summary>
-        public bool TripFilter { get; set; }
 
         /// <summary>
         /// Je prihlasen uzivatel ?
@@ -50,19 +46,23 @@
         /// </summary>
         public string ServerUrl
         {
-            get => _serverUrl;
-            set
-            {
-                _serverUrl = value;
-                if (!_serverUrl.EndsWith("/"))
-                    _serverUrl += "/";
-            }
+	        get => Preferences.Get("ServerUrl", "https://test.advisor-soft.com:8015/api/");
+	        set => Preferences.Set("ServerUrl", value);
         }
 
-        /// <summary>
-        /// Nacti znovu uzivatele
-        /// </summary>
-        public void ReloadDriver()
+		/// <summary>
+		/// Nastaveni filtru cest
+		/// </summary>
+		public bool TripFilter
+        {
+	        get => Preferences.Get("TripFilter", false);
+	        set => Preferences.Set("TripFilter", value);
+        }
+        
+		/// <summary>
+		/// Nacti znovu uzivatele
+		/// </summary>
+		public void ReloadDriver()
         {
             if (string.IsNullOrWhiteSpace(_deviceKey)) return;
 
@@ -85,6 +85,11 @@
             }
             _deviceKey = eToken;
         }
+
+		/// <summary>
+		/// Google ID uzivatele
+		/// </summary>
+		public string GoogleSUB { get; set; }
 
         /// <summary>
         /// Otisk aktualniho zarizeni

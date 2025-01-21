@@ -10,7 +10,7 @@ namespace TaxiDC2
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzUwODQwNkAzMjM3MmUzMDJlMzBjOTNIOVE2aDUwcHNsMHp0UGQzdWd3YXFlTzRLWmlJRkVuWk9OWSsvZkYwPQ==");
             InitializeComponent();
 
-            MainPage = new AppShell();
-        }
+			MainPage = new AppShell();
+		}
     }
 }

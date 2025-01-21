@@ -6,6 +6,10 @@
     xmlns:local="clr-namespace:TaxiDC2"
     Shell.FlyoutBehavior="Flyout">
 
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
 <ShellContent ContentTemplate = "{DataTemplate local:NovaJizda}" Title = "Nová jízda" Route ="NovaJizda" />
 <ShellContent ContentTemplate = "{DataTemplate local:SeznamJizd}" Title = "Seznam Jízd"  Route ="SeznamJizd" />

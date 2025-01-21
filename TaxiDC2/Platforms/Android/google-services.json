@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "452290338563",
+    "project_id": "taxidc2-375cf",
+    "storage_bucket": "taxidc2-375cf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452290338563:android:3285ca50e849d77707d336",
+        "android_client_info": {
+          "package_name": "com.advisorsoft.taxidc2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452290338563-bi0b1j43suc7qiml8pkkia3lrb2ol5db.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.advisorsoft.taxidc2",
+            "certificate_hash": "0255f0f81839058fb6374efb9fdb0acfdd4cd8a5"
+          }
+        },
+        {
+          "client_id": "452290338563-6k1fq103e67qijf0rgo2ruavkq6dqb97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqmU3DFRQgHGJM1ZzMy5lXR3nImW0cj1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452290338563-6k1fq103e67qijf0rgo2ruavkq6dqb97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

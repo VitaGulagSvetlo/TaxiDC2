@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui;
+﻿using IdentityModel.OidcClient;
+using MauiApp1;
+using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 using TaxiDC2.Services;
@@ -21,6 +23,26 @@ namespace TaxiDC2
 
             builder.Services.AddLogging();
             builder.Services.AddScoped<IDataService, DataService>();
+
+            // setup OidcClient
+            builder.Services.AddSingleton(new OidcClient(new()
+            {
+	            Authority = "https://demo.duendesoftware.com",
+
+	            ClientId = "interactive.public",
+	            Scope = "openid profile api",
+	            RedirectUri = "taxidc://callback",
+                LoadProfile = true,
+                Browser = new MauiAuthenticationBrowser()
+            }));
+
+            // add main page
+            builder.Services.AddSingleton<MainPage>();
+
+			// add services
+			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();
+            builder.Services.AddSingleton<IBussinessState,BussinessState>();
+            builder.Services.AddSingleton<IApiProxy, ApiProxy>();
 
 #if DEBUG
 			builder.Logging.AddDebug();

@@ -1,17 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net;
+using Newtonsoft.Json;
 using System.Text;
 
 namespace TaxiDC2.Services
 {
     public class ApiProxy : IApiProxy
     {
-        private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
+	    private readonly IBussinessState _bs;
 
-        public ApiProxy()
+
+	    public ApiProxy(IBussinessState bs)
         {
-            //bypas SSL cert check
+	        _bs = bs;
+	        //bypas SSL cert check
             Client = new HttpClient();
-            Client.Timeout = TimeSpan.FromSeconds(5);
+			ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+			Client.BaseAddress =new Uri(_bs.ServerUrl);
+			Client.Timeout = TimeSpan.FromSeconds(5);
         }
 
         private HttpClient Client { get; }
@@ -57,7 +62,7 @@ namespace TaxiDC2.Services
         {
             try
             {
-                Uri uri = new($"{_bs.ServerUrl}base/ver");
+                Uri uri = new($"{_bs.ServerUrl}base/version");
                 System.Diagnostics.Debug.WriteLine($"[API GET] {uri}");
                 using HttpResponseMessage response = await Client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
@@ -134,6 +139,12 @@ namespace TaxiDC2.Services
 
         }
 
+        /// <summary>
+        /// Cancel cesty
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <param name="driver"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> RejectTrip(Guid trip, Guid driver)
         {
             try
@@ -189,6 +200,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Nacte objekt auta podle cesty
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Car>> GetCarByIdAsync(Guid id)
         {
             try
@@ -215,6 +231,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// List aut
+        /// </summary>
+        /// <param name="activeOnly"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Car[]>> GetCarsAsync(bool activeOnly = true)
         {
             try
@@ -241,6 +262,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// zakaznik podle ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Customer>> GetCustomerByIdAsync(Guid id)
         {
             try
@@ -267,11 +293,16 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// zakaznik podle tel. cisla
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Customer>> GetCustomerByPhone(string phone)
         {
             try
             {
-                Uri uri = new($"{_bs.ServerUrl}customers/getbyphone/{Base64Encode(phone)}");
+                Uri uri = new($"{_bs.ServerUrl}customers/getbyphone/{Base64EncodeUTF8(phone)}");
                 System.Diagnostics.Debug.WriteLine($"[API GET] {uri}");
                 using HttpResponseMessage response = await Client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
@@ -292,6 +323,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// List zakazniku
+        /// </summary>
+        /// <param name="activeOnly"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Customer[]>> GetCustomersAsync(bool activeOnly = true)
         {
             try
@@ -318,11 +354,16 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Zakaznici podle filtru
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Customer[]>> FindCustomersAsync(string filter)
         {
             try
             {
-                Uri uri = new($"{_bs.ServerUrl}customers/find/{Base64Encode(filter)}");
+                Uri uri = new($"{_bs.ServerUrl}customers/find/{Base64EncodeUTF8(filter)}");
                 System.Diagnostics.Debug.WriteLine($"[API GET] {uri}");
                 using HttpResponseMessage response = await Client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
@@ -344,6 +385,12 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Prirazeny ridic podle ID zarizeni
+        /// </summary>
+        /// <param name="deviceKey"></param>
+        /// <param name="deviceHash"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Driver>> GetDriverByDeviceKeyAsync(string deviceKey, string deviceHash)
         {
             try
@@ -370,6 +417,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// ridic podle id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Driver>> GetDriverByIdAsync(Guid id)
         {
             try
@@ -396,6 +448,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// List ridicu
+        /// </summary>
+        /// <param name="activeOnly"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Driver[]>> GetDriversAsync(bool activeOnly = true)
         {
             try
@@ -422,6 +479,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Cesta podle ID
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Trip>> GetTripByIdAsync(Guid tripId)
         {
             try
@@ -449,6 +511,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// List cest
+        /// </summary>
+        /// <param name="activeOnly"> jen aktiuvni</param>
+        /// <returns></returns>
         public async Task<ServiceResult<Trip[]>> GetTripsAsync(bool activeOnly = true)
         {
             try
@@ -475,6 +542,13 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Meni stav cesty
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <param name="newState"></param>
+        /// <param name="paramsStrings"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> ChangeTripState(Guid trip, TripState newState, params string[] paramsStrings)
         {
             try
@@ -498,6 +572,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// registrace noveho ridice
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> RegisterDriver(Driver driver)
         {
             try
@@ -520,6 +599,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Ulozeni auta
+        /// </summary>
+        /// <param name="car"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> SaveCar(Car car)
         {
             try
@@ -543,6 +627,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// ulozeni zakaznika
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> SaveCustomer(Customer customer)
         {
             try
@@ -566,6 +655,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Ulozeni ridice
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> SaveDriver(Driver driver)
         {
             try
@@ -589,6 +683,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// update ridice
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> UpdateDriverSetings(Driver driver)
         {
             try
@@ -612,6 +711,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// update zakaznika
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         public async Task<ServiceResult> UpdateCustomerSetings(Customer customer)
         {
             try
@@ -635,6 +739,11 @@ namespace TaxiDC2.Services
             }
         }
 
+        /// <summary>
+        /// Ulozeni cesty
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <returns></returns>
         public async Task<ServiceResult<Trip>> SaveTrip(Trip trip)
         {
             try
@@ -662,7 +771,15 @@ namespace TaxiDC2.Services
             }
         }
 
-        public async Task<ServiceResult> SendNotificationToAllDevice(string title, string body, string message,
+		/// <summary>
+		/// Poslani notifikaci vsem aktivnim ridicum
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="body"></param>
+		/// <param name="message"></param>
+		/// <param name="data"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> SendNotificationToAllDevice(string title, string body, string message,
             string data)
         {
             try
@@ -686,7 +803,13 @@ namespace TaxiDC2.Services
             }
         }
 
-        private async Task<HttpResponseMessage> PostAsync(string url, object param)
+		/// <summary>
+		/// Nizkourovnovy post na API
+		/// </summary>
+		/// <param name="url"></param>
+		/// <param name="param"></param>
+		/// <returns></returns>
+		private async Task<HttpResponseMessage> PostAsync(string url, object param)
         {
             Uri uri = new($"{_bs.ServerUrl}{url}");
             System.Diagnostics.Debug.WriteLine($"[API POST] {uri}");
@@ -779,16 +902,16 @@ namespace TaxiDC2.Services
             }
         }
 
-        public static string Base64Encode(string plainText)
+        public static string Base64EncodeUTF8(string plainText)
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
+            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
         }
         
-        public static string Base64Decode(string base64EncodedData)
+        public static string Base64DecoceUTF8(string base64EncodedData)
         {
-            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+            return Encoding.UTF8.GetString(base64EncodedBytes);
         }
     }
 }
