@@ -20,10 +20,7 @@ namespace TaxiDC2.ViewModels
         public string IdTrip { get; set; }
 
         public ICommand AddItemCommand { get; set; }
-
-
-
-
+        
         public SmsViewModel()
         {
             Title = "Send SMS";
