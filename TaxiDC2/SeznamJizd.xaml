@@ -31,7 +31,7 @@
         </Grid>
 
         <!-- List -->
-        <syncfusionList:SfListView x:Name="listView" Grid.Row="1" ItemSize="190">
+        <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190">
             
             <syncfusionList:SfListView.ItemTemplate>
                 <DataTemplate>

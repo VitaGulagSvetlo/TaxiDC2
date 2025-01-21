@@ -20,22 +20,10 @@ namespace TaxiDC2
                     AddressBoarding = "ff",
                     AddressExit = "dwad",
                     OrderTime = DateTime.Now,
-                },
-                new Trip
-                {
-                    AddressBoarding = "ff",
-                    AddressExit = "dwad",
-                    OrderTime = DateTime.Now,
-                },
-                new Trip
-                {
-                    AddressBoarding = "ff",
-                    AddressExit = "dwad",
-                    OrderTime = DateTime.Now,
                 }
             };
 
-            listView.ItemsSource = Items;
+            listJizdy.ItemsSource = Items;
         }
 
         // Handle the swipe action to navigate to another page
