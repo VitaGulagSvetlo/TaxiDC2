@@ -13,14 +13,103 @@ namespace TaxiDC2
             Items = new ObservableCollection<CarDetailViewModel>
             {
                 new CarDetailViewModel
-                {
-
-                Title = "Skoda Octavia 3",
-                CarType = "SUV",
-                Color = "Modra",
-                Rz = "1AX 1234"
-
-                }
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                 new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                  new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    },
+                   new CarDetailViewModel
+                    {
+                      Title = "Skoda Octavia 3",
+                      CarType = "SUV",
+                      Color = "Modra",
+                      Rz = "1AX 1234"
+                    }
             };
 
             listAut.ItemsSource = Items;
@@ -29,7 +118,7 @@ namespace TaxiDC2
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
             // Navigate to a new blank page
-            await Navigation.PushAsync(new DetailJizda());
+            await Navigation.PushAsync(new DetailAuto());
         }
     }
 }

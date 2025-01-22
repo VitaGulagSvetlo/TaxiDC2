@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.SeznamJizd">
 
     <Grid BackgroundColor="{StaticResource GridBG}">
@@ -41,6 +42,9 @@
                             <SwipeItem Text="Detail" IconImageSource="info_icon.png"
                         BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"></SwipeItem>
                         </SwipeView.RightItems>
+                        <SwipeView.LeftItems>
+                            <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                        </SwipeView.LeftItems>
 
                         <!-- Item content -->
                         <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" HeightRequest="180">

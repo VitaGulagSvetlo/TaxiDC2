@@ -12,13 +12,13 @@
 
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             
         </Grid.RowDefinitions>
 
 
         <!-- List -->
-        <syncfusionList:SfListView x:Name="listAut" Grid.Row="1" ItemSize="190">
+        <syncfusionList:SfListView x:Name="listAut" Grid.Row="1" ItemSize="130" ItemSpacing="5">
 
             <syncfusionList:SfListView.ItemTemplate>
                 <DataTemplate>
@@ -28,7 +28,9 @@
                             <SwipeItem Text="Detail" IconImageSource="info_icon.png"
                      BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"></SwipeItem>
                         </SwipeView.RightItems>
-
+                        <SwipeView.LeftItems>
+                            <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                        </SwipeView.LeftItems>
                         <!-- Item content -->
                         <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" BackgroundColor="{StaticResource GradientGray}">
                             

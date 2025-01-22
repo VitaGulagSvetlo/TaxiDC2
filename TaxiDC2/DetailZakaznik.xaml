@@ -1,40 +1,92 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.DetailZakaznik"
              Title="Detail Zákazníka">
     <ContentPage.BindingContext>
         <vm:CustomerDetailViewModel />
     </ContentPage.BindingContext>
-    <StackLayout>
-        <HorizontalStackLayout>
-            <Label>Jméno</Label>
-            <Entry Text="{Binding Name}"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label>Telefon</Label>
-            <Entry Text="{Binding PhoneNumber}"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label>VIP</Label>
-            <CheckBox IsChecked="{Binding VIP}" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label>Nevozit !</Label>
-            <CheckBox IsChecked="{Binding Rejected}" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label>Rating</Label>
-            <inputs:SfRating Value="{Binding VIP2}" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label>Posledni Cesta</Label>
-            <Label Text="{Binding Time}" TextColor="Aqua" Padding="3,0"/>
-            <Label Text="{Binding LastAddressBoarding}" Padding="3,0"/>
-            <Label Text="{Binding LastAddressExit}"/>
-        </HorizontalStackLayout>
-        <buttons:SfButton Text="Uložit změny" Command="{Binding SaveDataCmd}"></buttons:SfButton>
-    </StackLayout>
+
+    <Grid BackgroundColor="{StaticResource GridBG}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <Grid Padding="10">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
+                    <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label Text="ZÁKAZNÍK" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Content Section -->
+        <ScrollView Grid.Row="1" Padding="15">
+            <StackLayout Spacing="15" HorizontalOptions="Center">
+
+                <!-- Customer Details -->
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <HorizontalStackLayout>
+                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Label Text="{Binding Name}" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="Telefon:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Label Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Preferences -->
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <HorizontalStackLayout>
+                            <Label Text="VIP:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
+                            <buttons:SfSwitch IsOn="{Binding VIP}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="Nevozit!:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
+                            <buttons:SfSwitch IsOn="{Binding Rejected}" />
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Rating Section -->
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout>
+                        <Label Text="Hodnocení zákazníka:" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        <inputs:SfRating Value="{Binding VIP2}" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Last Trip Info -->
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10">
+                        <HorizontalStackLayout>
+                            <Label Text="Poslední cesta:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="Nástup:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="Výstup:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Save Button -->
+                <Button Text="ULOŽIT ZMĚNY" BackgroundColor="{StaticResource CustomOrangeBG}" TextColor="Black" FontSize="16" VerticalOptions="EndAndExpand" CornerRadius="10" Command="{Binding SaveDataCmd}" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

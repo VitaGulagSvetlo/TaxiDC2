@@ -2,7 +2,7 @@
 using Syncfusion.Maui.ListView;
 using System;
 using System.Collections.ObjectModel;
-using TaxiDC2.Models;
+using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
@@ -15,6 +15,30 @@ namespace TaxiDC2
             InitializeComponent();
             Items = new ObservableCollection<Trip>
             {
+                new Trip
+                {
+                    AddressBoarding = "ff",
+                    AddressExit = "dwad",
+                    OrderTime = DateTime.Now,
+                },
+                new Trip
+                {
+                    AddressBoarding = "ff",
+                    AddressExit = "dwad",
+                    OrderTime = DateTime.Now,
+                },
+                new Trip
+                {
+                    AddressBoarding = "ff",
+                    AddressExit = "dwad",
+                    OrderTime = DateTime.Now,
+                },
+                new Trip
+                {
+                    AddressBoarding = "ff",
+                    AddressExit = "dwad",
+                    OrderTime = DateTime.Now,
+                },
                 new Trip
                 {
                     AddressBoarding = "ff",
