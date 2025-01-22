@@ -14,7 +14,7 @@ public class VersionModel:INotifyPropertyChanged
 
     public VersionModel()
     {
-        Title = "Nastaven�";
+        Title = "Nastavení";
         UpdateCmd = new Command(async () => await Update());
         VersionString = VersionTracking.CurrentVersion;
         ServerVersionString = Task.Run(async()=>await _proxy.ClientMinVersion()).Result.Data;

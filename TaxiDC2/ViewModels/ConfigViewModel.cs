@@ -65,9 +65,11 @@ namespace TaxiDC2.ViewModels
             _bs.ServerUrl = ServerUrl;
             //HideKeyboard();
             Preferences.Set("serverURL", ServerUrl);
-            DependencyService.Get<IAlertMessage>().ShortAlert("Data uložena");
+//            DependencyService.Get<IAlertMessage>().ShortAlert("Data uložena");
+            await Shell.Current.DisplayAlert("Data uložena", "Data uložena","Cancel");
 
-            if (await PingCheck())
+
+			if (await PingCheck())
             {
                 App.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync($"///SeznamJizd");

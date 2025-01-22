@@ -36,10 +36,19 @@ namespace TaxiDC2
                 Browser = new MauiAuthenticationBrowser()
             }));
 
-            // add main page
-            builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<SeznamAut>();
-
+			// add main page
+			builder.Services.AddTransient<AboutPage>();
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<DetailAuto>();
+            builder.Services.AddTransient<DetailJizda>();
+            builder.Services.AddTransient<DetailRidic>();
+			builder.Services.AddTransient<DetailZakaznik>();
+			builder.Services.AddTransient<NovaJizda>();
+			builder.Services.AddTransient<SeznamAut>();
+			builder.Services.AddTransient<SeznamJizd>();
+			builder.Services.AddTransient<SeznamRidicu>();
+			builder.Services.AddTransient<SeznamZakazniku>();
+			
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();
             builder.Services.AddSingleton<IBussinessState,BussinessState>();

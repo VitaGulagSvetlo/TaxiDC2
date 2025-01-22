@@ -36,8 +36,9 @@ namespace TaxiDC2.ViewModels
 
             ServiceResult ret = await _proxy.SaveCar(cr);
             Message = ret.Message;
-            DependencyService.Get<IAlertMessage>().ShortAlert(ret.Message);
-            if (ret.State == ResultCode.OK)
+            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "Cancel");
+
+			if (ret.State == ResultCode.OK)
             {
                 // OK
             }

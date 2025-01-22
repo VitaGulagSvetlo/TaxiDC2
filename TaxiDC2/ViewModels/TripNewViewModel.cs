@@ -107,9 +107,9 @@ namespace TaxiDC2.ViewModels
 
             var ret = await proxy.SaveTrip(drv);
             Message = ret.Message;
-            DependencyService.Get<IAlertMessage>().ShortAlert(ret.Message);
+            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "Cancel");
 
-            if (ret.State == ResultCode.OK)
+			if (ret.State == ResultCode.OK)
             {
                 // OK prechazim na detailni stranku
                 await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?IdTrip={ret.Data.IdTrip}");
