@@ -18,11 +18,11 @@
             <Grid.Background>
                 <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
                     <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
-                    <GradientStop Color="Purple" Offset="1.1" />
+                    <GradientStop Color="{Binding StateColor}" Offset="1.1" />
                 </LinearGradientBrush>
             </Grid.Background>
 
-            <Label HorizontalOptions="Center" Text="...PROBÍHÁ..." FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+            <Label HorizontalOptions="Center" Text="{Binding TripState}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
         </Grid>
 
         <ScrollView Grid.Row="1">
@@ -33,11 +33,11 @@
                         <Label Text="Zákazník:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
                         <HorizontalStackLayout>
                             <Image Source="phone_icon.png" WidthRequest="30" HeightRequest="30" />
-                            <Label Text="222 222 222" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="{Binding Customer.Name}" FontSize="18" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Image Source="user_icon.png" WidthRequest="30" HeightRequest="30" />
-                            <Label Text="Vita" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="{Binding Customer.PhoneNumber}" FontSize="18" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
@@ -45,28 +45,28 @@
                 <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
                     <StackLayout Spacing="10">
                         <Label Text="Čas nástupu:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="19.09.2024 3:15:00" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        <Label Text="{Binding BoardingTime}" FontSize="18" TextColor="{StaticResource TCwhite}" />
                     </StackLayout>
                 </Frame>
 
                 <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
                     <StackLayout Spacing="10">
                         <Label Text="Start" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="Nezadána" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        <Label Text="{Binding AddressBoarding}" FontSize="18" TextColor="{StaticResource TCwhite}" />
                     </StackLayout>
                 </Frame>
 
                 <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
                     <StackLayout Spacing="10">
                         <Label Text="Cíl" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="Nezadána" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        <Label Text="{Binding AddressExit}" FontSize="18" TextColor="{StaticResource TCwhite}" />
                     </StackLayout>
                 </Frame>
 
                 <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
                     <StackLayout Spacing="10">
                         <Label Text="Řidič" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="NN" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        <Label Text="{Binding Driver}" FontSize="18" TextColor="{StaticResource TCwhite}" />
                     </StackLayout>
                 </Frame>
 

@@ -6,6 +6,51 @@
              Title="Detail Auta"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:DataType="vm:CarDetailViewModel">
-             
-   
+
+
+    
+
+        
+
+        <ScrollView BackgroundColor="{StaticResource GridBG}">
+            <VerticalStackLayout Spacing="20" Padding="20" HorizontalOptions="Fill">
+
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Vůz:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                    <Entry Text="{Binding CarType}" FontSize="18" WidthRequest="200"  TextColor="{StaticResource TCwhite}" />
+                        
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame  CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <StackLayout Spacing="10" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Barva:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                    <Entry Text="{Binding Color}" FontSize="18" WidthRequest="200"  TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                <StackLayout  HorizontalOptions="CenterAndExpand" Spacing="10">
+                        <Label Text="SPZ:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                    <Entry Text="{Binding Rz}" FontSize="18" WidthRequest="200" TextColor="{StaticResource TCwhite}" />
+                    </StackLayout>
+                </Frame>
+
+            <Button Text="ODEJÍT"
+                        BackgroundColor="{StaticResource CustomOrangeBG}"
+                        TextColor="Black"
+                        CornerRadius="8"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        MinimumWidthRequest="150"
+                        MaximumWidthRequest="250"
+                        />
+
+
+        </VerticalStackLayout>
+        </ScrollView>
+    
+
+
 </ContentPage>
