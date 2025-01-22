@@ -140,14 +140,14 @@ namespace TaxiDC2.ViewModels
             if (item == null)
                 return;
             // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?IdTrip={item.IdTrip}");
+            await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={item.IdTrip}");
         }
 
         private async void OnItemSwipedLeft(TripDetailViewModel item)
         {
             if (item == null)
                 return;
-            await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?IdTrip={item.IdTrip}");
+            await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={item.IdTrip}");
         }
 
         private async void OnItemSwipedRight(TripDetailViewModel item)

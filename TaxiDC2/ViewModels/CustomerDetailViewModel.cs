@@ -87,9 +87,22 @@ namespace TaxiDC2.ViewModels
 
 		#endregion Data
 
-		public void LoadData(Guid id)
+		public async Task LoadData(Guid id)
 		{
-
+            var customer = await _proxy.GetCustomerByIdAsync(id);
+            if (customer.State == ResultCode.OK && customer.Data != null)
+			{
+				IdCustomer = customer.Data.IdCustomer;
+				PhoneNumber = customer.Data.PhoneNumber;
+				LastAddressBoarding = customer.Data.LastAddressBoarding;
+				LastAddressExit = customer.Data.LastAddressExit;
+				Time = customer.Data.Time;
+				VIP = customer.Data.VIP;
+				Rejected = customer.Data.Rejected;
+				Memo = customer.Data.Memo;
+				VIP2 = customer.Data.VIP2;
+				Name = customer.Data.Name;
+			}
 		}
     }
 }

@@ -72,7 +72,7 @@ namespace TaxiDC2.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            //await Shell.Current.GoToAsync(nameof(NewItemPage));
+            await Shell.Current.GoToAsync(nameof(DetailRidic));
         }
 
         async void OnItemSelected(Driver item)
@@ -80,7 +80,7 @@ namespace TaxiDC2.ViewModels
             if (item == null)
                 return;
 
-             //await Shell.Current.GoToAsync($"{nameof(DriverReg)}?Id={item.IdDriver}");
+             await Shell.Current.GoToAsync($"{nameof(DetailRidic)}?id={item.IdDriver}");
         }
        
         public async Task SaveToggleData()

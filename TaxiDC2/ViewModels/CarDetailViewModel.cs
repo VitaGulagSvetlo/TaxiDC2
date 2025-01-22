@@ -51,8 +51,17 @@ namespace TaxiDC2.ViewModels
 
         public async Task LoadData(Guid id)
         {
-
-        }
+	        var car = await _proxy.GetCarByIdAsync(id);
+			if (car.State == ResultCode.OK && car.Data != null)
+			{
+				IdCar = car.Data.IdCar;
+				CarType = car.Data.CarType;
+				Rz = car.Data.Rz;
+				Color = car.Data.Color;
+				Memo = car.Data.Memo;
+				IsDeleted = car.Data.IsDeleted;
+			}
+		}
 
 
 		#region Data

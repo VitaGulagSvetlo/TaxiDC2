@@ -5,8 +5,11 @@ namespace TaxiDC2
 {
     public partial class DetailJizda : ContentPage, IQueryAttributable
 	{
-        public DetailJizda(TripDetailViewModel vm)
+		private readonly IApiProxy _proxy;
+
+		public DetailJizda(TripDetailViewModel vm, IApiProxy proxy)
         {
+	        _proxy = proxy;
 	        InitializeComponent();
 	        BindingContext = vm;
         }
@@ -20,7 +23,7 @@ namespace TaxiDC2
 		        {
 			        
 			        var vm = BindingContext as TripDetailViewModel;
-			        vm?.LoadData(parsedId);
+			        vm?.LoadData(parsedId,_proxy);
 		        }
 	        }
         }

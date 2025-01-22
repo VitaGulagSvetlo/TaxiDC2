@@ -90,7 +90,7 @@ namespace TaxiDC2.ViewModels
             {
                 await LoadData();
                 App.Current.MainPage = new AppShell();
-                await Shell.Current.GoToAsync($"///TripListPage");
+                await Shell.Current.GoToAsync($"TripListPage");
             }
             else
             {
@@ -132,6 +132,21 @@ namespace TaxiDC2.ViewModels
         public async Task LoadDataById(Guid parsedId)
         {
 	        await LoadData();
-        }
+            var driver = await _proxy.GetDriverByIdAsync(parsedId);
+			if (driver.State == ResultCode.OK && driver.Data != null)
+			{
+				FirstName = driver.Data.FirstName;
+				LastName = driver.Data.LastName;
+				PhoneNumber = driver.Data.PhoneNumber;
+				MobileDeviceKey = driver.Data.MobileDeviceKey;
+				Active = driver.Data.Active;
+				NotificationEnable = driver.Data.NotificationEnable;
+				IdDriver = driver.Data.IdDriver;
+				AssignedCar = driver.Data.AssignedCar;
+				Car = driver.Data.Car;
+				MobileDeviceHash = driver.Data.MobileDeviceHash;
+				IsAdmin = driver.Data.IsAdmin;
+			}
+		}
     }
 }

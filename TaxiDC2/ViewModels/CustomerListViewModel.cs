@@ -8,7 +8,7 @@ namespace TaxiDC2.ViewModels
         private IApiProxy _proxy;
 
         private Customer _selectedItem;
-        private string _filter;
+        private string _filter="A";
 
         public ObservableCollection<Customer> Items { get; }
         public Command LoadItemsCommand { get; }
@@ -76,7 +76,7 @@ namespace TaxiDC2.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            //await Shell.Current.GoToAsync(nameof(NewItemPage));
+            await Shell.Current.GoToAsync(nameof(DetailZakaznik));
         }
 
         async void OnItemSelected(Customer item)
@@ -84,7 +84,7 @@ namespace TaxiDC2.ViewModels
             if (item == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?IdCustomer={item.IdCustomer}");
+            await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={item.IdCustomer}");
         }
 
         public async Task SaveToggleData()

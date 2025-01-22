@@ -76,7 +76,7 @@ namespace TaxiDC2.ViewModels
             if (item == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(DetailAuto)}?IdCar={item.IdCar}");
+            await Shell.Current.GoToAsync($"{nameof(DetailAuto)}?id={item.IdCar}");
 
         }
     }

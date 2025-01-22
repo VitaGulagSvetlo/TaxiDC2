@@ -6,7 +6,12 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.SeznamZakazniku"
              Title="Seznam Zákazníků">
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Nový zákazník" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -15,7 +20,7 @@
 
 
             <!-- List -->
-            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="1" ItemSize="170" ItemSpacing="5">
+            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="1" ItemSize="170" ItemSpacing="5" ItemsSource="{Binding Items}">
 
                 <syncfusionList:SfListView.ItemTemplate>        
                     <DataTemplate>
@@ -73,5 +78,5 @@
                 </syncfusionList:SfListView.ItemTemplate>
             </syncfusionList:SfListView>
         </Grid>
-    
+    </RefreshView>
 </ContentPage>
