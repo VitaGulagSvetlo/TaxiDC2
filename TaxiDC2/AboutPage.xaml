@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             x:Class="TaxiDC2.AboutPage"
+             Title="{Binding Title}"
+             BackgroundColor="{StaticResource PozadiTmava}">
+    <ContentPage.BindingContext>
+        <vm:ConfigViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView BackgroundColor="{DynamicResource BackgroundColor}">
+        <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10" BackgroundColor="{DynamicResource BackgroundColor}">
+            <Label StyleClass="lblBilej" Text="Adresa API"></Label>
+            <Entry Placeholder="ServerURL" Text="{Binding ServerUrl}" ClearButtonVisibility="WhileEditing" ReturnType="Next"></Entry>
+            <Label Text="{Binding Message}" FontSize="16" TextColor="{Binding MessageColor}" HorizontalTextAlignment="Center"/>
+            <Button Margin="5,5,5,5" Text="Uložit a otestovat nastavení"                                                    
+                        Command="{Binding SaveDataCmd}"/>
+
+            <Label Text="{Binding Hash}" FontSize="16" TextColor="AliceBlue" HorizontalTextAlignment="Center"/>
+            <Image Source="install_qr.png" HeightRequest="150" Margin="5,50,5,0"></Image>
+
+            <Button Margin="5,5,5,5" Text="Aktualizace aplikace"                                                    
+                        Command="{Binding UpdateCmd}"/>
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>

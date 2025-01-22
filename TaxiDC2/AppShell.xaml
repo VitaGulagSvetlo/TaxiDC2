@@ -18,5 +18,6 @@
 <ShellContent ContentTemplate = "{DataTemplate local:SeznamAut}" Title = "Seznam Aut"  Route ="SeznamAut" />
 <ShellContent ContentTemplate = "{DataTemplate local:SeznamRidicu}" Title = "Seznam Řidičů"  Route ="SeznamRidicu" />
 <ShellContent ContentTemplate = "{DataTemplate local:SeznamZakazniku}" Title = "Seznam Zákazníků"  Route ="SeznamZakazniku" />
-    <ShellContent ContentTemplate = "{DataTemplate local:DetailZakaznik}" Title = "Detail zákazníka"  Route ="DetailZakaznik" />
+<ShellContent ContentTemplate = "{DataTemplate local:DetailZakaznik}" Title = "Detail zákazníka"  Route ="DetailZakaznik" />
+<ShellContent ContentTemplate = "{DataTemplate local:AboutPage}" Title = "O nás"  Route ="AboutPage" />
 </Shell>

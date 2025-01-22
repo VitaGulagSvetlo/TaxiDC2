@@ -119,6 +119,9 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="AboutPage.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="DetailZakaznik.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
