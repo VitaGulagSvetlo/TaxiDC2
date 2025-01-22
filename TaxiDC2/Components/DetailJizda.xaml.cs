@@ -10,14 +10,7 @@ namespace TaxiDC2
 	        InitializeComponent();
 	        BindingContext = vm;
         }
-
-        // This method will be called when the cancel button is clicked
-        private async void OnCancelButtonClicked(object sender, EventArgs e)
-        {
-            // Navigate back to the previous page (SeznamJizd)
-            await Navigation.PopAsync();
-        }
-
+		
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
 	        if (query.ContainsKey("id"))
@@ -34,7 +27,7 @@ namespace TaxiDC2
 
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
-	        Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+	        Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
         }
 
 

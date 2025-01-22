@@ -128,5 +128,10 @@ namespace TaxiDC2.ViewModels
         public bool NoKey => string.IsNullOrWhiteSpace(_bs.DeviceKey);
 
         public bool IsAdmin { get; set; } = false;
+
+        public async Task LoadDataById(Guid parsedId)
+        {
+	        await LoadData();
+        }
     }
 }

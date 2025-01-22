@@ -70,14 +70,14 @@
                     </StackLayout>
                 </Frame>
 
-                <Button Text="ZRUŠIT"
+                <!--<Button Text="ZRUŠIT"
                         BackgroundColor="{StaticResource CustomOrangeBG}"
                         TextColor="Black"
                         CornerRadius="8"
                         FontSize="18"
                         HorizontalOptions="Center"
                         WidthRequest="200"
-                        Clicked="OnCancelButtonClicked" />
+                        Clicked="OnCancelButtonClicked" />-->
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

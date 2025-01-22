@@ -8,10 +8,11 @@ namespace TaxiDC2
 {
 	public partial class DetailRidic : ContentPage, IQueryAttributable
 	{
-		public DetailRidic(DriverViewModel vm)
+		public DetailRidic(DriverNewViewModel vm)
 		{
 			InitializeComponent();
 			BindingContext = vm;
+			vm?.LoadData();
 		}
 
 		public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -22,8 +23,8 @@ namespace TaxiDC2
 				if (Guid.TryParse(idAsString, out var parsedId))
 				{
 					
-					var vm = BindingContext as DriverViewModel;
-					vm?.LoadData(parsedId);
+					var vm = BindingContext as DriverNewViewModel;
+					vm?.LoadDataById(parsedId);
 				}
 			}
 		}

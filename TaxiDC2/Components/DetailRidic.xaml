@@ -5,7 +5,7 @@
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.DetailRidic"
-             x:DataType="vm:DriverViewModel">
+             x:DataType="vm:DriverNewViewModel">
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -68,9 +68,9 @@
                     <StackLayout>
                         <Label Text="Vyberte aktivní auto:" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         <inputs:SfComboBox x:Name="CarSelector" HorizontalOptions="CenterAndExpand"
-                                           BindingContext="{Binding Car.FullName}"
                                            DisplayMemberPath="FullName"
-                                           SelectedItem="{Binding AssignedCar}">
+                                           SelectedItem="{Binding AssignedCar,Mode=TwoWay}"
+                                           ItemsSource="{Binding CarsList}">
                             <inputs:SfComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <HorizontalStackLayout Spacing="10">
