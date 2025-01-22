@@ -16,12 +16,12 @@
 
             <Grid BackgroundColor="{StaticResource GridBG}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
 
                 </Grid.RowDefinitions>
 
                 <!-- List -->
-                <syncfusionList:SfListView x:Name="listRidici" Grid.Row="1" ItemSize="250" ItemSpacing="5" HeightRequest="5000" ItemsSource="{Binding Items}">
+                <syncfusionList:SfListView x:Name="listRidici" Grid.Row="1" ItemSize="250" ItemSpacing="5" ItemsSource="{Binding Items}">
 
                     <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Driver">

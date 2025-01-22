@@ -69,15 +69,20 @@
                         <Label Text="{Binding Driver}" FontSize="18" TextColor="{StaticResource TCwhite}" />
                     </StackLayout>
                 </Frame>
-
-                <!--<Button Text="ZRUŠIT"
-                        BackgroundColor="{StaticResource CustomOrangeBG}"
-                        TextColor="Black"
-                        CornerRadius="8"
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        WidthRequest="200"
-                        Clicked="OnCancelButtonClicked" />-->
+                    <!--<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Button Text="Potvrdit WWW" Clicked="Con_OnClicked" IsVisible="{Binding BtnConVisibility}"></Button>
+                        <Button Text="Převzít" Clicked="Acc_OnClicked" IsVisible="{Binding BtnAccVisibility}"></Button>
+                        <Button Text="Odmítnout" Clicked="Rej_OnClicked" IsVisible="{Binding BtnRejectVisibility}"></Button>
+                        <Button Text="SMS" Clicked="Sms_OnClicked" IsVisible="{Binding BtnSmsVisibility}" />
+                        <Button Text="Zavolat" Clicked="Call_OnClicked" IsVisible="{Binding BtnCallVisibility}"></Button>
+                        <Button Text="Na cestě" Clicked="Run_OnClicked" IsVisible="{Binding BtnRunningVisibility}"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Button Text="Zrušit" Clicked="Storno_OnClicked" IsVisible="{Binding BtnCancelVisibility}" TextColor="DarkRed"></Button>
+                        <Button Text="Hotovo" Clicked="Complete_OnClicked" IsVisible="{Binding BtnCompleteVisibility}" TextColor="DarkGreen"></Button>
+                        <Button Text="Předat" Clicked="Forward_OnClicked" IsVisible="{Binding BtnForwardVisibility}"></Button>  
+                    </StackLayout>-->
+                    
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

@@ -31,16 +31,20 @@
                 <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
                     <StackLayout Spacing="10">
                         <HorizontalStackLayout>
-                            <Label Text="Jméno řidiče:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding LastName }" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Entry Text="{Binding FirstName }" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="Příjmení:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Entry Text="{Binding LastName }" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Label Text="Mobilní zařízení:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding MobileDeviceKey}" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                            <Entry Text="{Binding MobileDeviceKey}" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Label Text="Telefonní číslo:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
