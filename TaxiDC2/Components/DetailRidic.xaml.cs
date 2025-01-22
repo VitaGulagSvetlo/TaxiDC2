@@ -11,8 +11,8 @@ namespace TaxiDC2
 		public DetailRidic(DriverNewViewModel vm)
 		{
 			InitializeComponent();
+			Task.Run(async()=>await vm?.LoadData()!).Wait();
 			BindingContext = vm;
-			vm?.LoadData();
 		}
 
 		public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -22,7 +22,6 @@ namespace TaxiDC2
 				var idAsString = query["id"]?.ToString();
 				if (Guid.TryParse(idAsString, out var parsedId))
 				{
-					
 					var vm = BindingContext as DriverNewViewModel;
 					vm?.LoadDataById(parsedId);
 				}

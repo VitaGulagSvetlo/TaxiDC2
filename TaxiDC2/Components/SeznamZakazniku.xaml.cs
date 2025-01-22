@@ -30,8 +30,9 @@ namespace TaxiDC2
         }
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
-            // Navigate to a new blank page
-            Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}");
+	        var swipeItem = (SwipeItem)sender;
+	        var id = swipeItem.CommandParameter;
+	        Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={id.ToString()}");
         }
 
         // This method will be called when the cancel button is clicked

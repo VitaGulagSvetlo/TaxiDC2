@@ -46,7 +46,8 @@ namespace TaxiDC2.Services
         /// </summary>
         public string ServerUrl
         {
-	        get => Preferences.Get("ServerUrl", "https://test.advisor-soft.com:8015/api/");
+//	        get => Preferences.Get("ServerUrl", "https://test.advisor-soft.com:8015/api/");
+	        get => Preferences.Get("ServerUrl", "https://api.advisor-soft.com:9091/api/");
 	        set => Preferences.Set("ServerUrl", value);
         }
 

@@ -53,15 +53,15 @@
             <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190" ItemsSource="{Binding Items}">
 
                 <syncfusionList:SfListView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="vm:TripDetailViewModel">
                         <SwipeView>
                             <!-- Define swipe actions -->
                             <SwipeView.RightItems>
                                 <SwipeItem Text="Detail" IconImageSource="info_icon.png"
-                        BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                        BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeRightItemInvoked" CommandParameter="{Binding IdTrip }"></SwipeItem>
                             </SwipeView.RightItems>
                             <SwipeView.LeftItems>
-                                <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                                <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeLeftItemInvoked" CommandParameter="{Binding IdTrip }"></SwipeItem>
                             </SwipeView.LeftItems>
 
                             <!-- Item content -->

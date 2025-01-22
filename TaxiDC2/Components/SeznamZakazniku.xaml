@@ -4,6 +4,7 @@
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.SeznamZakazniku"
              Title="Seznam Zákazníků">
 
@@ -22,19 +23,15 @@
             <!-- List -->
             <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="1" ItemSize="170" ItemSpacing="5" ItemsSource="{Binding Items}">
 
-                <syncfusionList:SfListView.ItemTemplate>        
-                    <DataTemplate>
+                <syncfusionList:SfListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Customer">
                         <SwipeView>
                             <!-- Define swipe actions -->
-                        <SwipeView.RightItems>
+                            <SwipeView.RightItems>
                                 <SwipeItem Text="Detail" IconImageSource="info_icon.png"
-                     BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                     BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"  CommandParameter="{Binding IdCustomer}"></SwipeItem>
                             </SwipeView.RightItems>
-                        <SwipeView.LeftItems>
-                            <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeItemInvoked" ></SwipeItem>
-                            <!--<SwipeItem Text="dwadaw" BackgroundColor="Green" Invoked="OnSwipeItemInvoked"></SwipeItem>-->
-                        </SwipeView.LeftItems>
-                        <!-- Item content -->
+                            <!-- Item content -->
                             <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" BackgroundColor="{StaticResource GradientGray}">
 
                                 <Grid>

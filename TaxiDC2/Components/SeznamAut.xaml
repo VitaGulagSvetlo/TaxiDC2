@@ -4,6 +4,7 @@
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.SeznamAut"
              Title="Seznam Aut"
              >
@@ -26,11 +27,11 @@
                                        >
 
                 <syncfusionList:SfListView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:Car">
                         <SwipeView>
                             <!-- Define swipe actions -->
                             <SwipeView.RightItems>
-                                <SwipeItem Text="Detail" IconImageSource="info_icon.png" BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                                <SwipeItem Text="Detail" IconImageSource="info_icon.png" BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked" CommandParameter="{Binding IdCar }"></SwipeItem>
                             </SwipeView.RightItems>
                             <SwipeView.LeftItems>
                                 <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeItemInvoked"></SwipeItem>

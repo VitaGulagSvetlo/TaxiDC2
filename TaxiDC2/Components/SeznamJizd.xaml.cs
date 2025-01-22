@@ -23,20 +23,20 @@ namespace TaxiDC2
             _viewModel.OnAppearing();
 
         }
-
-
-        private async void OnBackButtonPressed(object sender, EventArgs e)
+        
+        // Handle the swipe action to navigate to another page
+        private async void OnSwipeRightItemInvoked(object sender, EventArgs e)
         {
-
-            //Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
-
+	        var swipeItem = (SwipeItem)sender;
+	        var id = swipeItem.CommandParameter;
+	        Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={id.ToString()}");
         }
 
-        // Handle the swipe action to navigate to another page
-        private async void OnSwipeItemInvoked(object sender, EventArgs e)
+        private async void OnSwipeLeftItemInvoked(object sender, EventArgs e)
         {
-            // Navigate to a new blank page
-            Shell.Current.GoToAsync($"{nameof(DetailJizda)}");
+	        var swipeItem = (SwipeItem)sender;
+	        var id = swipeItem.CommandParameter;
+	        Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={id.ToString()}");
         }
     }
 }

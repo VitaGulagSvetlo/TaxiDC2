@@ -31,7 +31,9 @@ namespace TaxiDC2
 
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync($"{nameof(DetailAuto)}");
+	        var swipeItem = (SwipeItem)sender;
+	        var id = swipeItem.CommandParameter;
+	        Shell.Current.GoToAsync($"{nameof(DetailAuto)}?id={id.ToString()}");
         }
 
         private void ListAut_OnItemTapped(object sender, ItemTappedEventArgs e)

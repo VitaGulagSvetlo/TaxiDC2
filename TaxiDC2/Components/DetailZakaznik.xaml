@@ -39,6 +39,10 @@
                             <Label Text="Telefon:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
                             <Label Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="Poznámka:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Label Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource TCwhite}" />
+                        </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
 

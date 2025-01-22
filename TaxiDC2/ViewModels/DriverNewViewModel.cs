@@ -28,7 +28,16 @@ namespace TaxiDC2.ViewModels
 
         public async Task LoadData()
         {
-            if (string.IsNullOrEmpty(_bs.DeviceKey)) return;
+	        var cars = await _proxy.GetCarsAsync();
+	        if (cars.State == ResultCode.OK)
+		        foreach (Car car in cars.Data)
+		        {
+			        CarsList.Add(car);
+			        if (car.IdCar == AssignedCar)
+				        SelectedCar = car;
+		        }
+            
+	        if (string.IsNullOrEmpty(_bs.DeviceKey)) return;
             ServiceResult<Driver> res = await _proxy.GetDriverByDeviceKeyAsync(_bs.DeviceKey, _bs.DeviceHash);
             if (res.State == ResultCode.OK && res.Data != null)
             {
@@ -44,16 +53,6 @@ namespace TaxiDC2.ViewModels
                 MobileDeviceHash = res.Data.MobileDeviceHash;
                 IsAdmin = res.Data.IsAdmin;
             }
-
-            var cars = await _proxy.GetCarsAsync();
-            if (cars.State == ResultCode.OK)
-                foreach (Car car in cars.Data)
-                {
-                    CarsList.Add(car);
-                    if (car.IdCar == AssignedCar)
-                        SelectedCar = car;
-                }
-
         }
 
         public string? MobileDeviceHash { get; set; }
@@ -90,7 +89,7 @@ namespace TaxiDC2.ViewModels
             {
                 await LoadData();
                 App.Current.MainPage = new AppShell();
-                await Shell.Current.GoToAsync($"TripListPage");
+                await Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
             }
             else
             {

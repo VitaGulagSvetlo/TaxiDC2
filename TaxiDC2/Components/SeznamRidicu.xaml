@@ -28,8 +28,7 @@
                             <SwipeView>
                                 <!-- Define swipe actions -->
                                 <SwipeView.RightItems>
-                                    <SwipeItem Text="Detail" IconImageSource="info_icon.png" BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeRight_Detail"
-                                               CommandParameter="{Binding IdDriver}"></SwipeItem>
+                                    <SwipeItem Text="Detail" IconImageSource="info_icon.png" BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeRight_Detail" CommandParameter="{Binding IdDriver}"></SwipeItem>
                                 </SwipeView.RightItems>
 
                                 <!-- Item content -->
