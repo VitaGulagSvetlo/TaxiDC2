@@ -5,18 +5,18 @@ namespace TaxiDC2.ViewModels
 {
     public class CarListViewModel : BaseViewModel
     {
-        private readonly IApiProxy _proxy = DependencyService.Get<IApiProxy>();
-
-        private Car _selectedItem;
+	    private readonly IApiProxy _proxy;
+	    private Car _selectedItem;
 
         public ObservableCollection<Car> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Car> ItemTapped { get; }
 
-        public CarListViewModel()
+        public CarListViewModel(IApiProxy proxy)
         {
-            Title = "Vozy";
+	        _proxy = proxy;
+	        Title = "Vozy";
             Items = new ObservableCollection<Car>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<Car>(OnItemSelected);
@@ -30,6 +30,7 @@ namespace TaxiDC2.ViewModels
             try
             {
                 Items.Clear();
+
                 var result = await _proxy.GetCarsAsync(true);
                 if (result.State == ResultCode.OK)
                 {

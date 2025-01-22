@@ -38,7 +38,6 @@ namespace TaxiDC2
         public bool Success => Result == ResultCode.OK;
         public bool NotSuccess => Result != ResultCode.OK;
         public ResultCode State => Result;
-
     }
 
 	public enum ResultCode
