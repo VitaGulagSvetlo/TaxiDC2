@@ -297,10 +297,32 @@ namespace TaxiDC2.ViewModels
            // await Shell.Current.GoToAsync($"{nameof(CustomerDetail)}?IdCustomer={Customer.IdCustomer}");
         }
 
-        public void LoadData(Guid id)
+        public async Task LoadData(Guid id, IApiProxy proxy)
         {
-
-        }
+	        if (proxy == null) throw new ArgumentNullException(nameof(proxy));
+	        var trip = await proxy.GetTripByIdAsync(id);
+             if (trip.State == ResultCode.OK && trip.Data != null)
+			{
+				AddressBoarding = trip.Data.AddressBoarding;
+				AddressBoardingIsValid = trip.Data.AddressBoardingIsValid;
+				AddressBoardingLocX = trip.Data.AddressBoardingLocX;
+				AddressBoardingLocY = trip.Data.AddressBoardingLocY;
+				AddressExit = trip.Data.AddressExit;
+				AddressExitIsValid = trip.Data.AddressExitIsValid;
+				AddressExitLocX = trip.Data.AddressExitLocX;
+				AddressExitLocY = trip.Data.AddressExitLocY;
+				BoardingTime = trip.Data.BoardingTime;
+				Complete = trip.Data.Complete;
+				Customer = trip.Data.Customer;
+				DeadLine = trip.Data.DeadLine;
+				Driver = trip.Data.Driver;
+				ExitTime = trip.Data.ExitTime;
+				IdTrip = trip.Data.IdTrip;
+				Memo = trip.Data.Memo;
+				OrderTime = trip.Data.OrderTime;
+				TripState = trip.Data.TripState;
+			}
+		}
 
 	}
 }

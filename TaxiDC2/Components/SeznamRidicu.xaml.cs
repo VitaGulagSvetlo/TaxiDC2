@@ -20,19 +20,25 @@ namespace TaxiDC2
             _viewModel.OnAppearing();
 
         }
-
         
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
 
-            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+            Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
 
         }
+
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
 
-            Shell.Current.GoToAsync($"///{nameof(DetailRidic)}");
+            Shell.Current.GoToAsync($"{nameof(DetailRidic)}");
         }
-       
-    }
+
+
+		private void Switch1_OnToggled(object sender, ToggledEventArgs e)
+		{
+			if (_viewModel != null)
+				Task.Run(async () => { return _viewModel.SaveToggleData(); });
+		}
+	}
 }

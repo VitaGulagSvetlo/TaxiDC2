@@ -74,7 +74,7 @@ namespace TaxiDC2.ViewModels
 			if (await PingCheck())
             {
                 App.Current.MainPage = new AppShell();
-                await Shell.Current.GoToAsync($"///SeznamJizd");
+                await Shell.Current.GoToAsync($"SeznamJizd");
             }
         }
 

@@ -31,7 +31,7 @@ namespace TaxiDC2
 		
 		private async void OnBackButtonPressed(object sender, EventArgs e)
 		{
-			Shell.Current.GoToAsync($"///{nameof(SeznamRidicu)}");
+			Shell.Current.GoToAsync($"{nameof(SeznamRidicu)}");
 		}
 	}
 }
