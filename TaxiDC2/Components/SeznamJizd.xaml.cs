@@ -28,7 +28,7 @@ namespace TaxiDC2
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
 
-            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+            Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
 
         }
 
@@ -36,7 +36,7 @@ namespace TaxiDC2
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
             // Navigate to a new blank page
-            Shell.Current.GoToAsync($"///{nameof(DetailJizda)}");
+            Shell.Current.GoToAsync($"{nameof(DetailJizda)}");
         }
     }
 }

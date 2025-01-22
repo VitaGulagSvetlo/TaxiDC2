@@ -17,7 +17,7 @@ namespace TaxiDC2.ViewModels
 
         public TripDetailViewModel()
         {
-	        IsAdmin = _bs.IsAdmin;
+	        IsAdmin =  true /*_bs.IsAdmin*/;
             PhoneNumberTapped = new Command(PerformPhoneNumberTapped);
         }
 

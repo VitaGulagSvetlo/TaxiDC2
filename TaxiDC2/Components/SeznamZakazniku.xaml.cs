@@ -25,13 +25,13 @@ namespace TaxiDC2
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
 
-            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+            Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
 
         }
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
             // Navigate to a new blank page
-            Shell.Current.GoToAsync($"///{nameof(DetailZakaznik)}");
+            Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}");
         }
 
         // This method will be called when the cancel button is clicked

@@ -25,7 +25,7 @@ namespace TaxiDC2
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
 
-            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+            Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
 
         }
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
