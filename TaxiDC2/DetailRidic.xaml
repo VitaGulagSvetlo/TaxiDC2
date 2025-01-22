@@ -49,20 +49,20 @@
 
 
                 <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
-                    <StackLayout Spacing="10">
+                    <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout>
                             <Label Text="Aktivní:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding Active}"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Label Text="Notifikace zapnuty:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding NotificationEnable}"/>
+                                <buttons:SfSwitch IsOn="{Binding NotificationEnable}"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout >
                             <Label Text="Administrator:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding IsAdmin}"/>
                         </HorizontalStackLayout>
-                    </StackLayout>
+                    </VerticalStackLayout>
                 </Frame>
 
 
