@@ -119,7 +119,7 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
-	   <MauiXaml Update="Components\DetailZakaznik.xaml">
+	   <MauiXaml Update="DetailZakaznik.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Components\DetailAuto.xaml">
