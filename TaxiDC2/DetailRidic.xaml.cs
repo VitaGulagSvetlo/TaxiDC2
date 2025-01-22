@@ -2,32 +2,32 @@ using Microsoft.Maui.Controls;
 using System;
 using System.Collections.ObjectModel;
 using TaxiDC2.Models;
+using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
     public partial class DetailRidic : ContentPage
     {
         public ObservableCollection<Car> Cars { get; set; }
-        public Car SelectedCar { get; set; }
+        
 
         public DetailRidic()
         {
             InitializeComponent();
 
-            // Initialize sample cars
-            Cars = new ObservableCollection<Car>
+            BindingContext = new DriverViewModel()
             {
-                new Car { IdCar = Guid.NewGuid(), CarType = "Škoda Superb", Color = "modrá", Rz = "2484" },
-                new Car { IdCar = Guid.NewGuid(), CarType = "Škoda Superb", Color = "bílá", Rz = "1716" },
-                new Car { IdCar = Guid.NewGuid(), CarType = "Škoda Superb", Color = "zelená", Rz = "0050" },
-                new Car { IdCar = Guid.NewGuid(), CarType = "Škoda Superb", Color = "modrá", Rz = "4884" }
+                FirstName = "Vita",
+                LastName = "svetelak",
+                PhoneNumber = "732485969",
+                Active = true,
+                IsAdmin = true,
+                NotificationEnable = false,
+                
+
+
             };
 
-            // Pre-select the green car
-            SelectedCar = Cars[2];
-
-            // Set BindingContext for data binding
-            BindingContext = this;
         }
     }
 }

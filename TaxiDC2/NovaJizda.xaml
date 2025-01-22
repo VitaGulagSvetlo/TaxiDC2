@@ -88,7 +88,7 @@
                        TextColor="{StaticResource TCwhite}"
                       WidthRequest="250"
                        FontSize="18"
-                       BackgroundColor="{StaticResource CustomOrangeBG}"
+                       BackgroundColor="{StaticResource GridBG}"
                        HorizontalOptions="FillAndExpand" />
                     <Button Text="↻"
                         BackgroundColor="{StaticResource CustomOrangeBG}"

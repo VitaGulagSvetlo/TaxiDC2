@@ -2,7 +2,7 @@
 using Syncfusion.Maui.ListView;
 using System;
 using System.Collections.ObjectModel;
-using TaxiDC2.Models;
+using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
@@ -32,10 +32,22 @@ namespace TaxiDC2
                     AddressBoarding = "ff",
                     AddressExit = "dwad",
                     OrderTime = DateTime.Now,
+                },
+                new Trip
+                {
+                    AddressBoarding = "ff",
+                    AddressExit = "dwad",
+                    OrderTime = DateTime.Now,
+                },
+                new Trip
+                {
+                    AddressBoarding = "ff",
+                    AddressExit = "dwad",
+                    OrderTime = DateTime.Now,
                 }
             };
 
-            listView.ItemsSource = Items;
+            listJizdy.ItemsSource = Items;
         }
 
         // Handle the swipe action to navigate to another page

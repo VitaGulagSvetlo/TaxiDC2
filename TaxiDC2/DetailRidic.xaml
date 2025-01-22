@@ -3,8 +3,11 @@
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:controls="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.DetailRidic">
-
+    <ContentPage.BindingContext>
+        <vm:DriverViewModel />
+    </ContentPage.BindingContext>
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -22,59 +25,59 @@
             <Label Text="ŘIDIČ" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
         </Grid>
 
-      
+
         <ScrollView Grid.Row="1" Padding="15">
             <StackLayout Spacing="15" HorizontalOptions="Center">
 
-     
+
                 <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
                     <StackLayout Spacing="10">
                         <HorizontalStackLayout>
                             <Label Text="Jméno řidiče:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="peno" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="{Binding LastName }" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Label Text="Mobilní zařízení:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="Huawei" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="{Binding MobileDeviceKey}" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Label Text="Telefonní číslo:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="123456789" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
 
 
                 <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
-                    <StackLayout Spacing="10">
+                    <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout>
                             <Label Text="Aktivní:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch/>
+                            <buttons:SfSwitch IsOn="{Binding Active}"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Label Text="Notifikace zapnuty:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch/>
+                                <buttons:SfSwitch IsOn="{Binding NotificationEnable}"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout >
                             <Label Text="Administrator:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch/>
+                            <buttons:SfSwitch IsOn="{Binding IsAdmin}"/>
                         </HorizontalStackLayout>
-                    </StackLayout>
+                    </VerticalStackLayout>
                 </Frame>
 
-      
+
                 <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
                     <StackLayout>
                         <Label Text="Vyberte aktivní auto:" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         <inputs:SfComboBox x:Name="CarSelector" HorizontalOptions="CenterAndExpand"
-                                           BindingContext="{Binding Cars}"
+                                           BindingContext="{Binding Car.FullName}"
                                            DisplayMemberPath="FullName"
-                                           SelectedItem="{Binding SelectedCar}">
+                                           SelectedItem="{Binding AssignedCar}">
                             <inputs:SfComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <HorizontalStackLayout Spacing="10">
                                         <Image Source="car_icon.png" WidthRequest="20" HeightRequest="20" />
-                                        <Label Text="{Binding FullName}" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
+                                        <Label Text="{Binding}" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
                                     </HorizontalStackLayout>
                                 </DataTemplate>
                             </inputs:SfComboBox.ItemTemplate>
