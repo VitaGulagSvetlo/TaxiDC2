@@ -12,4 +12,62 @@
     <Color x:Key="GradientGray">#404040</Color>
     <Color x:Key="GradientOrange">#FF8C00</Color>
     <Color x:Key="GradientRed">Darkred</Color>
+
+
+    //PENO old resource
+
+    <!-- TAXI DECIN BARVICKY -->
+    <Color x:Key="Zluta1">#FFD405</Color>
+    <Color x:Key="Zluta2">#ffbd00</Color>
+    <Color x:Key="Zluta3">#ffa600</Color>
+    <Color x:Key="ZlutaTmava">#996600</Color>
+    <Color x:Key="ZlutaPlaceholder">#805500</Color>
+    <Color x:Key="Cerna">#000000</Color>
+    <Color x:Key="PozadiTmava">#303030</Color>
+    <Color x:Key="Sediva2">#4b4a54</Color>
+
+    <!-- ZAKLADNI BARVICKY -->
+    <Color x:Key="Bila">#FFFFFF</Color>
+    <Color x:Key="Transparent">#0000ffff</Color>
+    <Color x:Key="Zelena">#33cc33</Color>
+    <Color x:Key="Oranzova">#ff9900</Color>
+    <Color x:Key="Cervena">#ff0000</Color>
+    <Color x:Key="SvModra">#0099DD</Color>
+    <Color x:Key="TmModra">#0046B5</Color>
+
+    <Color x:Key="Primary">#2196F3</Color>
+    <Color x:Key="Accent">#96d1ff</Color>
+
+    <!--BARVY pro STAVY-->
+    <Color x:Key="STC_NewOrder">#33cc33</Color>
+    <Color x:Key="STC_NewWWW">#E0E0E0</Color>
+    <Color x:Key="STC_AcceptedDiver">#00E2C5</Color>
+    <Color x:Key="STC_Running">#330480</Color>
+    <Color x:Key="STC_SMS1sended">#0099DD</Color>
+    <Color x:Key="STC_SMS2sended">#0072D4</Color>
+    <Color x:Key="STC_Call">#0046B5</Color>
+    <Color x:Key="STC_ForwardToDiver">Silver</Color>
+    <Color x:Key="STC_RejectedByDiver">#FC7049</Color>
+    <Color x:Key="STC_Comleted">#0000ffff</Color>
+    <Color x:Key="STC_Canceled">#DB245E</Color>
+
+    <!-- Matching Gradient -->
+    <Color x:Key="C1Color">#330480</Color>
+    <Color x:Key="C2Color">#0046B5</Color>
+    <Color x:Key="C3Color">#0072D4</Color>
+    <Color x:Key="C4Color">#0099DD</Color>
+    <Color x:Key="C5Color">#00BFD5</Color>
+    <Color x:Key="C6Color">#00E2C5</Color>
+
+    <!-- Generic Gradient -->
+    <Color x:Key="C11Color">#330480</Color>
+    <Color x:Key="C12Color">#9D0075</Color>
+    <Color x:Key="C13Color">#DB245E</Color>
+    <Color x:Key="C14Color">#FC7049</Color>
+    <Color x:Key="C15Color">#FFB647</Color>
+    <Color x:Key="C16Color">#F9F871</Color>
+
+
 </ResourceDictionary>
+
+

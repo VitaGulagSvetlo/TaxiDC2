@@ -20,4 +20,9 @@ public class DriverViewModel : INotifyPropertyChanged
 
     public string Inicials => $"{FirstName?.Substring(0, 1)}{LastName?.Substring(0, 1)}".ToUpper();
 
+    public void LoadData(Guid id)
+    {
+
+    }
+
 }

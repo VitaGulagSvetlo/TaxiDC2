@@ -4,10 +4,8 @@
              xmlns:controls="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
-             x:Class="TaxiDC2.DetailRidic">
-    <ContentPage.BindingContext>
-        <vm:DriverViewModel />
-    </ContentPage.BindingContext>
+             x:Class="TaxiDC2.DetailRidic"
+             x:DataType="vm:DriverViewModel">
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

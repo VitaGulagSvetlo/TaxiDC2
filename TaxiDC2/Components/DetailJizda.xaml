@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Class="TaxiDC2.DetailJizda"
-             Title="Detail jízdy">
+             Title="Detail jízdy"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             x:DataType="vm:TripDetailViewModel">
+
     <ScrollView HorizontalOptions="Center">
     <Grid BackgroundColor="{StaticResource GridBG}" >
         <Grid.RowDefinitions>

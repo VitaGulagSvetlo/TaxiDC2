@@ -6,9 +6,6 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.SeznamZakazniku"
              Title="Seznam Zákazníků">
-    <ContentPage.BindingContext>
-        <vm:CustomerDetailViewModel/>
-    </ContentPage.BindingContext>
     
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>

@@ -6,25 +6,31 @@ using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
-    public partial class DetailRidic : ContentPage
-    {
-        readonly DriverViewModel _viewModel;
+	public partial class DetailRidic : ContentPage, IQueryAttributable
+	{
+		public DetailRidic(DriverViewModel vm)
+		{
+			InitializeComponent();
+			BindingContext = vm;
+		}
 
-        public DetailRidic()
-        {
-            InitializeComponent();
-
-            BindingContext = _viewModel = new DriverViewModel();
-        }
-
-
-
-
-        private async void OnBackButtonPressed(object sender, EventArgs e)
-        {
-
-            Shell.Current.GoToAsync($"///{nameof(SeznamRidicu)}");
-
-        }
-    }
+		public void ApplyQueryAttributes(IDictionary<string, object> query)
+		{
+			if (query.ContainsKey("id"))
+			{
+				var idAsString = query["id"]?.ToString();
+				if (Guid.TryParse(idAsString, out var parsedId))
+				{
+					
+					var vm = BindingContext as DriverViewModel;
+					vm?.LoadData(parsedId);
+				}
+			}
+		}
+		
+		private async void OnBackButtonPressed(object sender, EventArgs e)
+		{
+			Shell.Current.GoToAsync($"///{nameof(SeznamRidicu)}");
+		}
+	}
 }

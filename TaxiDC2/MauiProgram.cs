@@ -4,6 +4,7 @@ using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 using TaxiDC2.Services;
+using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
@@ -48,7 +49,15 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SeznamJizd>();
 			builder.Services.AddTransient<SeznamRidicu>();
 			builder.Services.AddTransient<SeznamZakazniku>();
-			
+
+			//vm
+			builder.Services.AddTransient<ConfigViewModel>();
+			builder.Services.AddTransient<DriverViewModel>();
+			builder.Services.AddTransient<TripDetailViewModel>();
+			builder.Services.AddTransient<CarDetailViewModel>();
+			builder.Services.AddTransient<CustomerDetailViewModel>();
+			//builder.Services.AddTransient<>();
+
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();
             builder.Services.AddSingleton<IBussinessState,BussinessState>();

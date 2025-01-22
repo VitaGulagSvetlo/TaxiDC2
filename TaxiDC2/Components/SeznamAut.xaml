@@ -5,10 +5,8 @@
              xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.SeznamAut"
-             Title="Seznam Aut">
-    <!--<ContentPage.BindingContext>
-        <vm:CarListViewModel/>
-    </ContentPage.BindingContext>-->
+             Title="Seznam Aut"
+             >
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Nové vozidlo" Command="{Binding AddItemCommand}" />
@@ -23,7 +21,9 @@
             </Grid.RowDefinitions>
 
             <!-- List -->
-            <syncfusionList:SfListView x:Name="listAut" Grid.Row="1" ItemSize="130" ItemSpacing="5" ItemsSource="{Binding Items}">
+            <syncfusionList:SfListView x:Name="listAut" Grid.Row="1" ItemSize="130" ItemSpacing="5" ItemsSource="{Binding Items}"
+                                       ItemTapped="ListAut_OnItemTapped"
+                                       >
 
                 <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate>

@@ -41,7 +41,7 @@ namespace TaxiDC2.ViewModels
 
             ServiceResult ret = await _proxy.SaveCustomer(cu);
             Message = ret.Message;
-            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "Cancel");
+            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
             if (ret.State == ResultCode.OK)
             {
                 // OK
@@ -85,6 +85,11 @@ namespace TaxiDC2.ViewModels
         [DependsOn("VIP2")]
         public bool St5Visible => VIP2 > 4;
 
-        #endregion Data
+		#endregion Data
+
+		public void LoadData(Guid id)
+		{
+
+		}
     }
 }

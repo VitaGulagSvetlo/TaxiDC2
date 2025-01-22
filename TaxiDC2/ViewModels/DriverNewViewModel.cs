@@ -85,7 +85,7 @@ namespace TaxiDC2.ViewModels
                 ret = await _proxy.SaveDriver(drv);
             _bs.ReloadDriver();
             Message = ret.Message;
-            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "Cancel");
+            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
             if (ret.State == ResultCode.OK)
             {
                 await LoadData();

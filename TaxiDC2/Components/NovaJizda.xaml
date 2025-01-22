@@ -8,9 +8,10 @@
              xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
              x:Class="TaxiDC2.NovaJizda"
              Title="Nová jízda"
-             BackgroundColor="{StaticResource GridBG}">
-
-
+             BackgroundColor="{StaticResource GridBG}"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             >
+    <!--x:DataType="vm:TripNewViewModel"-->
 
     <ScrollView>
         <StackLayout HorizontalOptions="Center">

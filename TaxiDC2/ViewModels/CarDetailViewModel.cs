@@ -37,7 +37,7 @@ namespace TaxiDC2.ViewModels
 
             ServiceResult ret = await _proxy.SaveCar(cr);
             Message = ret.Message;
-            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "Cancel");
+            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
 
 			if (ret.State == ResultCode.OK)
             {
@@ -49,9 +49,15 @@ namespace TaxiDC2.ViewModels
             }
         }
 
-        #region Data
+        public async Task LoadData(Guid id)
+        {
 
-        [StringLength(50)]
+        }
+
+
+		#region Data
+
+		[StringLength(50)]
         [Required]
         public string CarType { get; set; }
 

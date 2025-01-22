@@ -109,7 +109,7 @@ namespace TaxiDC2.ViewModels
 
             var ret = await _proxy.SaveTrip(drv);
             Message = ret.Message;
-            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "Cancel");
+            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
 
 			if (ret.State == ResultCode.OK)
             {

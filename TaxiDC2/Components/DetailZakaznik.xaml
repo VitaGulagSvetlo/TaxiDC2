@@ -4,10 +4,8 @@
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.DetailZakaznik"
-             Title="Detail Zákazníka">
-    <ContentPage.BindingContext>
-        <vm:CustomerDetailViewModel />
-    </ContentPage.BindingContext>
+             Title="Detail Zákazníka"
+             x:DataType="vm:CustomerDetailViewModel">
 
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>

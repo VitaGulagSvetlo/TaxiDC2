@@ -26,7 +26,7 @@ namespace TaxiDC2.ViewModels
             _proxy = proxy;
             _bs = bs;
             Title = "Nastavení";
-            SaveDataCmd = new Command(async () => await SaveData());
+			SaveDataCmd = new Command(async () => await SaveData());
             UpdateCmd = new Command(async () => await Update());
             ServerUrl = _bs.ServerUrl; 
 
@@ -68,7 +68,7 @@ namespace TaxiDC2.ViewModels
             //HideKeyboard();
             Preferences.Set("serverURL", ServerUrl);
 //            DependencyService.Get<IAlertMessage>().ShortAlert("Data uložena");
-            await Shell.Current.DisplayAlert("Data uložena", "Data uložena","Cancel");
+            await Shell.Current.DisplayAlert("Data uložena", "Data uložena","OK");
 
 
 			if (await PingCheck())

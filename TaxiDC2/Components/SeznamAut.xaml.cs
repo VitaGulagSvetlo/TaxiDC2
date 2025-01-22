@@ -1,6 +1,8 @@
 using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 using TaxiDC2.ViewModels;
+using ItemTappedEventArgs = Syncfusion.Maui.ListView.ItemTappedEventArgs;
+
 namespace TaxiDC2
 {
     public partial class SeznamAut : ContentPage
@@ -31,5 +33,10 @@ namespace TaxiDC2
         {
             Shell.Current.GoToAsync($"///{nameof(DetailAuto)}");
         }
+
+        private void ListAut_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+			Shell.Current.GoToAsync($"{nameof(DetailAuto)}?id={((Car)e.DataItem).IdCar}");
+		}
     }
 }

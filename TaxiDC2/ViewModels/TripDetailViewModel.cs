@@ -6,7 +6,8 @@ namespace TaxiDC2.ViewModels
 {
     public class TripDetailViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+	    private readonly IApiProxy _proxy;
+	    public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
 
@@ -16,13 +17,13 @@ namespace TaxiDC2.ViewModels
 
         public TripDetailViewModel()
         {
-            IsAdmin = _bs.IsAdmin;
+	        IsAdmin = _bs.IsAdmin;
             PhoneNumberTapped = new Command(PerformPhoneNumberTapped);
         }
 
         internal static TripDetailViewModel FromTrip(Trip data)
         {
-            return new TripDetailViewModel
+            return new TripDetailViewModel()
             {
                 AddressBoarding = data.AddressBoarding,
                 AddressBoardingIsValid = data.AddressBoardingIsValid,
@@ -295,5 +296,11 @@ namespace TaxiDC2.ViewModels
         {
            // await Shell.Current.GoToAsync($"{nameof(CustomerDetail)}?IdCustomer={Customer.IdCustomer}");
         }
-    }
+
+        public void LoadData(Guid id)
+        {
+
+        }
+
+	}
 }

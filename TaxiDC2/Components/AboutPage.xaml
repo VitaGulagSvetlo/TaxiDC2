@@ -4,11 +4,9 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.AboutPage"
              Title="{Binding Title}"
-             BackgroundColor="{StaticResource PozadiTmava}">
-    <ContentPage.BindingContext>
-        <vm:ConfigViewModel />
-    </ContentPage.BindingContext>
-
+             BackgroundColor="{StaticResource PozadiTmava}"
+             x:DataType="vm:ConfigViewModel">
+    
     <ScrollView BackgroundColor="{DynamicResource BackgroundColor}">
         <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10" BackgroundColor="{DynamicResource BackgroundColor}">
             <Label StyleClass="lblBilej" Text="Adresa API"></Label>
