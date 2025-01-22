@@ -5,27 +5,28 @@ namespace TaxiDC2
 {
     public partial class SeznamRidicu : ContentPage
     {
-        public ObservableCollection<DriverViewModel> Items { get; set; }
-        public SeznamRidicu()
+        readonly DriverListViewModel _viewModel;
+
+        public SeznamRidicu(IApiProxy proxy, IBussinessState bs)
         {
             InitializeComponent();
-            Items = new ObservableCollection<DriverViewModel>
-            {
-                new DriverViewModel
-                {
-                    FirstName = "Vita",
-                    LastName = "Svetlo",
-                    PhoneNumber = "745845962",
-                    Active = true,
 
-                    
-                }
-               
-
-            };
-
-            listRidici.ItemsSource = Items;
+            BindingContext = _viewModel = new DriverListViewModel(proxy, bs);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _viewModel.OnAppearing();
+
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+            return true;
+        }
+        
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
             // Navigate to a new blank page

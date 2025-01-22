@@ -5,8 +5,8 @@ namespace TaxiDC2.ViewModels
 {
     public class DriverListViewModel : BaseViewModel
     {
-        private readonly IApiProxy _proxy = DependencyService.Get<IApiProxy>();
-        private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
+        private IApiProxy _proxy;
+        private IBussinessState _bs;
 
         private Driver _selectedItem;
 
@@ -14,8 +14,10 @@ namespace TaxiDC2.ViewModels
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Driver> ItemTapped { get; }
-        public DriverListViewModel()
+        public DriverListViewModel(IApiProxy proxy, IBussinessState bs)
         {
+            _bs = bs;  
+            _proxy = proxy;
             Title = "Řidiči";
             Items = new ObservableCollection<Driver>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
