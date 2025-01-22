@@ -5,6 +5,28 @@
         public AppShell()
         {
             InitializeComponent();
+
+			RegisterAllRoutes();
         }
-    }
+
+		/// <summary>
+		/// Registruje routy pro navigaci
+		/// </summary>
+        private void RegisterAllRoutes()
+        {
+	        Routing.RegisterRoute(nameof(DetailAuto), typeof(DetailAuto));
+	        Routing.RegisterRoute(nameof(DetailJizda), typeof(DetailJizda));
+	        Routing.RegisterRoute(nameof(DetailRidic), typeof(DetailRidic));
+	        Routing.RegisterRoute(nameof(DetailZakaznik), typeof(DetailZakaznik));
+	        Routing.RegisterRoute(nameof(NovaJizda), typeof(NovaJizda));
+	        Routing.RegisterRoute(nameof(SeznamAut), typeof(SeznamAut));
+	        Routing.RegisterRoute(nameof(SeznamRidicu), typeof(SeznamRidicu));
+	        Routing.RegisterRoute(nameof(SeznamZakazniku), typeof(SeznamZakazniku));
+//	        Routing.RegisterRoute(nameof(), typeof());
+
+	        Routing.RegisterRoute(nameof(TripAlert), typeof(TripAlert));
+
+        }
+
+	}
 }
