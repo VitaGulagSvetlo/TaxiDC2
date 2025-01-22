@@ -5,7 +5,7 @@ namespace TaxiDC2.ViewModels
 {
     public class CustomerListViewModel : BaseViewModel
     {
-        private readonly IApiProxy _proxy = DependencyService.Get<IApiProxy>();
+        private IApiProxy _proxy;
 
         private Customer _selectedItem;
         private string _filter;
@@ -15,8 +15,9 @@ namespace TaxiDC2.ViewModels
         public Command AddItemCommand { get; }
         public Command<Customer> ItemTapped { get; }
 
-        public CustomerListViewModel()
+        public CustomerListViewModel(IApiProxy proxy)
         {
+            _proxy = proxy;
             Title = "Zákazníci";
             Items = new ObservableCollection<Customer>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());

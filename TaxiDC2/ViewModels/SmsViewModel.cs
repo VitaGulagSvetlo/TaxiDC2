@@ -7,7 +7,7 @@ namespace TaxiDC2.ViewModels
     public class SmsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
+        private IBussinessState _bs;
 
         public bool IsBusy { get; set; }
         public string PhoneNumber { get; set; }
@@ -21,8 +21,9 @@ namespace TaxiDC2.ViewModels
 
         public ICommand AddItemCommand { get; set; }
         
-        public SmsViewModel()
+        public SmsViewModel(IBussinessState bs)
         {
+            _bs = bs;
             Title = "Send SMS";
             SendCmd = new Command<string>(
                 execute: async arg =>

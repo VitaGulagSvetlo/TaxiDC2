@@ -8,53 +8,35 @@ namespace TaxiDC2
 {
     public partial class SeznamJizd : ContentPage
     {
-        public ObservableCollection<Trip> Items { get; set; }
+        readonly TripListViewModel _viewModel;
 
-        public SeznamJizd()
+        public SeznamJizd(IApiProxy proxy, IBussinessState bs)
         {
             InitializeComponent();
-            Items = new ObservableCollection<Trip>
-            {
-                new Trip
-                {
-                    AddressBoarding = "ff",
-                    AddressExit = "dwad",
-                    OrderTime = DateTime.Now,
-                },
-                new Trip
-                {
-                    AddressBoarding = "ff",
-                    AddressExit = "dwad",
-                    OrderTime = DateTime.Now,
-                },
-                new Trip
-                {
-                    AddressBoarding = "ff",
-                    AddressExit = "dwad",
-                    OrderTime = DateTime.Now,
-                },
-                new Trip
-                {
-                    AddressBoarding = "ff",
-                    AddressExit = "dwad",
-                    OrderTime = DateTime.Now,
-                },
-                new Trip
-                {
-                    AddressBoarding = "ff",
-                    AddressExit = "dwad",
-                    OrderTime = DateTime.Now,
-                }
-            };
 
-            listJizdy.ItemsSource = Items;
+            BindingContext = _viewModel = new TripListViewModel(proxy, bs);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _viewModel.OnAppearing();
+
+        }
+
+
+        private async void OnBackButtonPressed(object sender, EventArgs e)
+        {
+
+            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+
         }
 
         // Handle the swipe action to navigate to another page
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
             // Navigate to a new blank page
-            await Navigation.PushAsync(new DetailJizda());
+            Shell.Current.GoToAsync($"///{nameof(DetailJizda)}");
         }
     }
 }

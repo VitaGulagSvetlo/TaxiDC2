@@ -7,8 +7,8 @@ namespace TaxiDC2.ViewModels
     public class ConfigViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
-        private readonly IApiProxy _proxy = DependencyService.Get<IApiProxy>();
+        private IBussinessState _bs;
+        private IApiProxy _proxy;
 
         public bool IsBusy { get; set; }
         public string Title { get;  set; }
@@ -21,8 +21,10 @@ namespace TaxiDC2.ViewModels
         public ICommand UpdateCmd { get; }
 
 
-        public ConfigViewModel()
+        public ConfigViewModel(IApiProxy proxy, IBussinessState bs)
         {
+            _proxy = proxy;
+            _bs = bs;
             Title = "Nastavení";
             SaveDataCmd = new Command(async () => await SaveData());
             UpdateCmd = new Command(async () => await Update());

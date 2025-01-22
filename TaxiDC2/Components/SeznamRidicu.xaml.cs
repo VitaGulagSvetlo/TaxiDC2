@@ -21,17 +21,18 @@ namespace TaxiDC2
 
         }
 
-        protected override bool OnBackButtonPressed()
-        {
-            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
-            return true;
-        }
         
+        private async void OnBackButtonPressed(object sender, EventArgs e)
+        {
+
+            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+
+        }
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
-            // Navigate to a new blank page
-            await Navigation.PushAsync(new DetailRidic());
+
+            Shell.Current.GoToAsync($"///{nameof(DetailRidic)}");
         }
-        // This method will be called when the cancel button is clicked
+       
     }
 }

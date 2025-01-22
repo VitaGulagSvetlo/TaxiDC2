@@ -7,14 +7,16 @@ namespace TaxiDC2.ViewModels
 {
     public class TripListViewModel : BaseViewModel, IDisposable
     {
-        private readonly IBussinessState bs = DependencyService.Get<IBussinessState>();
-        private readonly IApiProxy proxy = DependencyService.Get<IApiProxy>();
+        private IBussinessState _bs;
+        private IApiProxy _proxy;
         private TripDetailViewModel _selectedItem;
 
         private Timer timer = null;
 
-        public TripListViewModel()
+        public TripListViewModel(IApiProxy proxy, IBussinessState bs)
         {
+            _proxy = proxy;
+            _bs = bs;
             Title = "Jízdy";
             Items = new ObservableCollection<TripDetailViewModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -40,7 +42,7 @@ namespace TaxiDC2.ViewModels
             {
                 // Predani jizdy na ridice
                 var dd = JsonConvert.DeserializeObject<IDictionary<string, Guid>>(md.data);
-                if (dd != null && dd["driver"] == bs.DriverId)
+                if (dd != null && dd["driver"] == _bs.DriverId)
                 {
                     string t = dd["trip"].ToString();
                     // jsem prijemce 
@@ -54,7 +56,7 @@ namespace TaxiDC2.ViewModels
         }
 
         public Command AddItemCommand { get; }
-        public string DriverName => $"{bs?.Driver?.Inicials}";
+        public string DriverName => $"{_bs?.Driver?.Inicials}";
         public ObservableCollection<TripDetailViewModel> Items { get; }
         public Command<TripDetailViewModel> ItemSwipedL { get; }
         public Command<TripDetailViewModel> ItemSwipedR { get; }
@@ -97,13 +99,13 @@ namespace TaxiDC2.ViewModels
             try
             {
                 Items.Clear();
-                ServiceResult<Trip[]> result = await proxy.GetTripsAsync(true);
+                ServiceResult<Trip[]> result = await _proxy.GetTripsAsync(true);
                 if (result.State == ResultCode.OK)
                 {
                     var l = result.Data.Select(TripDetailViewModel.FromTrip);
 
                     if (ListMode != 0) // jen moje
-                        l = l.Where(w => w.TripState is  (TripState.NewOrder or TripState.RejectedByDiver) || w.Driver?.IdDriver == bs.DriverId);
+                        l = l.Where(w => w.TripState is  (TripState.NewOrder or TripState.RejectedByDiver) || w.Driver?.IdDriver == _bs.DriverId);
 
                     foreach (TripDetailViewModel item in l
                                  .OrderBy(o => o.TripState != TripState.NewWWW)

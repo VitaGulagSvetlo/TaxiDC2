@@ -6,14 +6,16 @@ namespace TaxiDC2.ViewModels;
 public class VersionModel:INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
-    private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
-    private readonly IApiProxy _proxy = DependencyService.Get<IApiProxy>();
+    private IBussinessState _bs;
+    private IApiProxy _proxy;
 
     public ICommand UpdateCmd { get; }
 
 
-    public VersionModel()
+    public VersionModel(IBussinessState bs, IApiProxy proxy)
     {
+        _bs = bs;
+        _proxy = proxy;
         Title = "Nastaven�";
         UpdateCmd = new Command(async () => await Update());
         VersionString = VersionTracking.CurrentVersion;

@@ -5,24 +5,28 @@ namespace TaxiDC2
 {
     public partial class DetailZakaznik : ContentPage
     {
-        public DetailZakaznik()
+        readonly CustomerDetailViewModel _viewModel;
+
+        public DetailZakaznik(IApiProxy proxy)
         {
             InitializeComponent();
-            BindingContext = new CustomerDetailViewModel()
-            {
-                Name = "Peno",
-				PhoneNumber = "123456789",
-				LastAddressBoarding = "Praha",
-				LastAddressExit = "Brno",
-				Time = DateTime.Now,
-				VIP = true,
-				Rejected = false,
-				Memo = "Poznamka",
-				VIP2 = 2
 
-			};
-		}
+            BindingContext = _viewModel = new CustomerDetailViewModel(proxy);
+        }
 
         
+
+
+        private async void OnBackButtonPressed(object sender, EventArgs e)
+        {
+
+            Shell.Current.GoToAsync($"///{nameof(SeznamZakazniku)}");
+
+        }
+
+        
+        
+
+
     }
 }

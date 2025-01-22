@@ -12,7 +12,6 @@ namespace TaxiDC2
 	    {
 		    _proxy = proxy;
 		    InitializeComponent();
-
 		    BindingContext = _viewModel = new CarListViewModel(proxy);
 	    }
 
@@ -23,16 +22,14 @@ namespace TaxiDC2
 
 		}
 
-	    protected override bool OnBackButtonPressed()
-	    {
-		    Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
-		    return true;
-	    }
-
-		private async void OnSwipeItemInvoked(object sender, EventArgs e)
+        private async void OnBackButtonPressed(object sender, EventArgs e)
         {
-            // Navigate to a new blank page
-            await Navigation.PushAsync(new DetailAuto());
+            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
+        }
+
+        private async void OnSwipeItemInvoked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync($"///{nameof(DetailAuto)}");
         }
     }
 }

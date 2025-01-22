@@ -7,6 +7,7 @@ namespace TaxiDC2
         public DetailAuto()
         {
             InitializeComponent();
+
         }
 
         

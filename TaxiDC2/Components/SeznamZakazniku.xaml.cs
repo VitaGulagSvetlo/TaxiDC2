@@ -5,61 +5,33 @@ namespace TaxiDC2
 {
     public partial class SeznamZakazniku : ContentPage
     {
-        public ObservableCollection<CustomerDetailViewModel> Items { get; set; }
+        readonly CustomerListViewModel _viewModel;
 
-        public SeznamZakazniku()
+        public SeznamZakazniku(IApiProxy proxy)
         {
             InitializeComponent();
-            Items = new ObservableCollection<CustomerDetailViewModel>
-            {
-                new CustomerDetailViewModel
-                {
-                    PhoneNumber = "1324568453",
-                    Name = "Jakub",
-                    VIP = false,
-                    Rejected = false,
+            
+            BindingContext = _viewModel = new CustomerListViewModel(proxy);
+        }
 
-                },
-                new CustomerDetailViewModel
-                {
-                   PhoneNumber = "1324568453",
-                    Name = "Jakub",
-                    VIP = false,
-                    Rejected = false,
-                },
-                new CustomerDetailViewModel
-                {
-                    PhoneNumber = "1324568453",
-                    Name = "Jakub",
-                    VIP = false,
-                    Rejected = true,
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _viewModel.OnAppearing();
 
-                },
-                new CustomerDetailViewModel
-                {
-                    PhoneNumber = "1324568453",
-                    Name = "Jakub",
-                    VIP = true,
-                    Rejected = false,
+        }
 
-                },
-                new CustomerDetailViewModel
-                {
-                    PhoneNumber = "1324568453",
-                    Name = "Jakub",
-                    VIP = false,
-                    Rejected = false,
 
-                }
+        private async void OnBackButtonPressed(object sender, EventArgs e)
+        {
 
-            };
+            Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
 
-            listZakaznici.ItemsSource = Items;
         }
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
             // Navigate to a new blank page
-            await Navigation.PushAsync(new DetailRidic());
+            Shell.Current.GoToAsync($"///{nameof(DetailZakaznik)}");
         }
 
         // This method will be called when the cancel button is clicked

@@ -7,10 +7,11 @@ namespace TaxiDC2.ViewModels
 {
     public class CustomerDetailViewModel : INotifyPropertyChanged
     {
-        private readonly IApiProxy _proxy = DependencyService.Get<IApiProxy>();
+        private IApiProxy _proxy;
 
-        public CustomerDetailViewModel()
+        public CustomerDetailViewModel(IApiProxy proxy)
         {
+            _proxy = proxy;
             Title = "Zákazník";
             SaveDataCmd = new Command(async () => await SaveData());
         }

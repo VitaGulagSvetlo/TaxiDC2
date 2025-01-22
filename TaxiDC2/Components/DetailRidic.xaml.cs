@@ -8,25 +8,22 @@ namespace TaxiDC2
 {
     public partial class DetailRidic : ContentPage
     {
-        public ObservableCollection<Car> Cars { get; set; }
-        
+        readonly DriverViewModel _viewModel;
 
         public DetailRidic()
         {
             InitializeComponent();
 
-            BindingContext = new DriverViewModel()
-            {
-                FirstName = "Vita",
-                LastName = "svetelak",
-                PhoneNumber = "732485969",
-                Active = true,
-                IsAdmin = true,
-                NotificationEnable = false,
-                
+            BindingContext = _viewModel = new DriverViewModel();
+        }
 
 
-            };
+
+
+        private async void OnBackButtonPressed(object sender, EventArgs e)
+        {
+
+            Shell.Current.GoToAsync($"///{nameof(SeznamRidicu)}");
 
         }
     }

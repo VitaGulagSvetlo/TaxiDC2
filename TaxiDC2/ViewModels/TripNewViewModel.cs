@@ -8,8 +8,8 @@ namespace TaxiDC2.ViewModels
 {
     public class TripNewViewModel : BaseViewModel
     {
-        private readonly IApiProxy proxy = DependencyService.Get<IApiProxy>();
-        private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
+        private IApiProxy _proxy;
+        private IBussinessState _bs;
 
         private string _phone;
         private string _adresaStart;
@@ -41,8 +41,10 @@ namespace TaxiDC2.ViewModels
         public ObservableCollection<CallListItem> ListCisel => _listCisel;
         public ObservableCollection<Lokace> ListLokaci => _listLokaci;
 
-        public TripNewViewModel()
+        public TripNewViewModel(IBussinessState bs, IApiProxy proxy)
         {
+            _bs = bs;
+            _proxy = proxy;
             Title = "Nová jízda";
             SendSMS = new Command(async () => await PosliSms("test zprava", _phone));
             //NactiCislo = new Command(async () => await NactiKontakty());
@@ -105,7 +107,7 @@ namespace TaxiDC2.ViewModels
                 Customer = _customer
             };
 
-            var ret = await proxy.SaveTrip(drv);
+            var ret = await _proxy.SaveTrip(drv);
             Message = ret.Message;
             DependencyService.Get<IAlertMessage>().ShortAlert(ret.Message);
 
@@ -215,7 +217,7 @@ namespace TaxiDC2.ViewModels
             try
             {
                 {
-                    var lo = await proxy.Geocode(v == 1 ? AdresaStart : AdresaCil);
+                    var lo = await _proxy.Geocode(v == 1 ? AdresaStart : AdresaCil);
                     if (lo.State == ResultCode.ERROR)
                         return;
 
@@ -405,7 +407,7 @@ namespace TaxiDC2.ViewModels
         {
             Task.Run(async () =>
             {
-                var res = await proxy.GetCustomerByPhone(cislo);
+                var res = await _proxy.GetCustomerByPhone(cislo);
                 if (res.State == ResultCode.OK && res.Data != null)
                 {
                     Customer = res.Data;

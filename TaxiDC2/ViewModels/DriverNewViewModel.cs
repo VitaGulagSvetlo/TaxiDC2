@@ -8,8 +8,8 @@ namespace TaxiDC2.ViewModels
 {
     public class DriverNewViewModel : INotifyPropertyChanged
     {
-        private readonly IApiProxy _proxy = DependencyService.Get<IApiProxy>();
-        private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
+        private IApiProxy _proxy;
+        private IBussinessState _bs;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -17,8 +17,10 @@ namespace TaxiDC2.ViewModels
 
         public string Title { get; private set; } = string.Empty;
 
-        public DriverNewViewModel()
+        public DriverNewViewModel(IApiProxy proxy, IBussinessState bs)
         {
+            _proxy = proxy;
+            _bs = bs;
             Title = "Řidič";
             SaveDataCmd = new Command(async () => await SaveData());
             LoadDataCmd = new Command(async () => await LoadData());
