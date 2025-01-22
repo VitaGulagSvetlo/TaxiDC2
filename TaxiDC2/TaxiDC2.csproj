@@ -95,52 +95,49 @@
          </ItemGroup>
 	
 	 <ItemGroup>
-	   <Compile Update="DetailZakaznik.xaml.cs">
+	   <Compile Update="Components\DetailZakaznik.xaml.cs">
 	     <DependentUpon>DetailZakaznik.xaml</DependentUpon>
 	   </Compile>
-	   <Compile Update="DetailAuto.xaml.cs">
+	   <Compile Update="Components\DetailAuto.xaml.cs">
 	     <DependentUpon>DetailAuto.xaml</DependentUpon>
 	   </Compile>
-	   <Compile Update="SeznamRidicu.xaml.cs">
+	   <Compile Update="Components\SeznamRidicu.xaml.cs">
 	     <DependentUpon>SeznamRidicu.xaml</DependentUpon>
 	   </Compile>
-	   <Compile Update="SeznamAut.xaml.cs">
+	   <Compile Update="Components\SeznamAut.xaml.cs">
 	     <DependentUpon>SeznamAut.xaml</DependentUpon>
 	   </Compile>
-	   <Compile Update="SeznamZakazniku.xaml.cs">
+	   <Compile Update="Components\SeznamZakazniku.xaml.cs">
 	     <DependentUpon>SeznamZakazniku.xaml</DependentUpon>
 	   </Compile>
-	   <Compile Update="SeznamJizd.xaml.cs">
+	   <Compile Update="Components\SeznamJizd.xaml.cs">
 	     <DependentUpon>SeznamJizd.xaml</DependentUpon>
 	   </Compile>
-		 <Compile Update="NovaJizda.xaml.cs">
+		 <Compile Update="Components\NovaJizda.xaml.cs">
 			 <DependentUpon>NovaJizda.xaml</DependentUpon>
 		 </Compile>
 	 </ItemGroup>
 	
 	 <ItemGroup>
-	   <MauiXaml Update="AboutPage.xaml">
-	     <Generator>MSBuild:Compile</Generator>
-	   </MauiXaml>
 	   <MauiXaml Update="DetailZakaznik.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="DetailAuto.xaml">
+	   <MauiXaml Update="Components\DetailAuto.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="SeznamRidicu.xaml">
+	   <MauiXaml Update="Components\SeznamRidicu.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="SeznamAut.xaml">
+	   <MauiXaml Update="Components\SeznamAut.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="SeznamZakazniku.xaml">
+	   <MauiXaml Update="Components\SeznamZakazniku.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="DetailJizda.xaml">
+	   <MauiXaml Update="Components\DetailJizda.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="DetailRidic.xaml">
+	   <MauiXaml Update="Components\DetailRidic.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Resources\Styles\CustomColors.xaml">
@@ -149,10 +146,10 @@
 	   <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="SeznamJizd.xaml">
+	   <MauiXaml Update="Components\SeznamJizd.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="NovaJizda.xaml">
+	   <MauiXaml Update="Components\NovaJizda.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	 </ItemGroup>

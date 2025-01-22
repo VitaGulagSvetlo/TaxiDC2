@@ -38,6 +38,7 @@ namespace TaxiDC2
 
             // add main page
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<SeznamAut>();
 
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();

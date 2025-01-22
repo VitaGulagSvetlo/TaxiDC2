@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             x:Class="TaxiDC2.SeznamAut"
+             Title="Seznam Aut">
+    <!--<ContentPage.BindingContext>
+        <vm:CarListViewModel/>
+    </ContentPage.BindingContext>-->
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Nové vozidlo" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+        <Grid BackgroundColor="{StaticResource GridBG}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+
+            <!-- List -->
+            <syncfusionList:SfListView x:Name="listAut" Grid.Row="1" ItemSize="130" ItemSpacing="5" ItemsSource="{Binding Items}">
+
+                <syncfusionList:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <!-- Define swipe actions -->
+                            <SwipeView.RightItems>
+                                <SwipeItem Text="Detail" IconImageSource="info_icon.png" BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                            </SwipeView.RightItems>
+                            <SwipeView.LeftItems>
+                                <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                            </SwipeView.LeftItems>
+                            <!-- Item content -->
+                            <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" BackgroundColor="{StaticResource GradientGray}">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="1" />
+
+                                    </Grid.RowDefinitions>
+                                    <!-- Main Content -->
+                                    <StackLayout Grid.Row="0" Grid.Column="1" Spacing="5" Padding="0">
+                                        <HorizontalStackLayout  HorizontalOptions="CenterAndExpand" Spacing="15">
+                                            <Label Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" Text="Auto:"/>
+                                            <Label Text="{Binding FullName}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout  HorizontalOptions="CenterAndExpand" Spacing="15">
+                                            <Label Text="Typ: " Style="{StaticResource FS-16}" FontAttributes="Bold"/>
+                                            <Label Text="{Binding CarType}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout  HorizontalOptions="CenterAndExpand" Spacing="15">
+                                            <Label Text="Barva: " Style="{StaticResource FS-16}" FontAttributes="Bold"/>
+                                            <Label Text="{Binding Color}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="15">
+                                            <Label Style="{StaticResource FS-16}" FontAttributes="Bold" Text="SPZ:"/>
+                                            <Label Text="{Binding Rz}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                    </StackLayout>
+
+                                    <!-- Orange Line -->
+                                    <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource CustomOrangeBG}" HorizontalOptions="Fill" Margin="20, 0, 0, 0" />
+
+
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </syncfusionList:SfListView.ItemTemplate>
+            </syncfusionList:SfListView>
+        </Grid>
+    </RefreshView>
+
+</ContentPage>
