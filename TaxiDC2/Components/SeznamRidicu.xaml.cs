@@ -28,10 +28,11 @@ namespace TaxiDC2
 
         }
 
-        private async void OnSwipeItemInvoked(object sender, EventArgs e)
+        private async void OnSwipeRight_Detail(object sender, EventArgs e)
         {
-
-            Shell.Current.GoToAsync($"{nameof(DetailRidic)}");
+	        var swipeItem = (SwipeItem)sender;
+	        var id = swipeItem.CommandParameter; 
+	        Shell.Current.GoToAsync($"{nameof(DetailRidic)}?id={id.ToString()}");
         }
 
 

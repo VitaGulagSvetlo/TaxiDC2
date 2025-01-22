@@ -4,6 +4,7 @@
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.SeznamRidicu"
              Title="Seznam Řidičů">
     <ContentPage.ToolbarItems>
@@ -23,12 +24,12 @@
                 <syncfusionList:SfListView x:Name="listRidici" Grid.Row="1" ItemSize="250" ItemSpacing="5" HeightRequest="5000" ItemsSource="{Binding Items}">
 
                     <syncfusionList:SfListView.ItemTemplate>
-                        <DataTemplate>
+                    <DataTemplate x:DataType="models:Driver">
                             <SwipeView>
                                 <!-- Define swipe actions -->
                                 <SwipeView.RightItems>
-                                    <SwipeItem Text="Detail" IconImageSource="info_icon.png"
-                     BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"></SwipeItem>
+                                    <SwipeItem Text="Detail" IconImageSource="info_icon.png" BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeRight_Detail"
+                                               CommandParameter="{Binding IdDriver}"></SwipeItem>
                                 </SwipeView.RightItems>
 
                                 <!-- Item content -->
