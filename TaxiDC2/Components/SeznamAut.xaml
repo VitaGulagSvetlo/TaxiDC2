@@ -21,15 +21,7 @@
         </Grid.RowDefinitions>
 
         <!-- Gradient Strip -->
-        <Grid Padding="10" Grid.Row="0">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
-                    <GradientStop Color="{StaticResource GradientOrange}" Offset="1.0" />
-                </LinearGradientBrush>
-            </Grid.Background>
-            <Label Text="SEZNAM AUT" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
-        </Grid>
+        
 
         <!-- Content Section -->
         <RefreshView Grid.Row="1" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">

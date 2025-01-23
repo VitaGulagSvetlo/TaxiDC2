@@ -14,16 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Header Section -->
-        <Grid Padding="10">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
-                    <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
-                </LinearGradientBrush>
-            </Grid.Background>
-            <Label Text="ŘIDIČ" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
-        </Grid>
+       
 
         <!-- Content Section -->
         <ScrollView Grid.Row="1" Padding="15">
