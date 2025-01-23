@@ -82,14 +82,14 @@ namespace TaxiDC2.ViewModels
                 ret = await _proxy.RegisterDriver(drv);
             else
                 ret = await _proxy.SaveDriver(drv);
-            _bs.ReloadDriver();
             Message = ret.Message;
             await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
             if (ret.State == ResultCode.OK)
             {
-                await LoadData();
-                App.Current.MainPage = new AppShell();
-                await Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
+	            _bs.ReloadDriver();
+                //await LoadData();
+				//App.Current.MainPage = new AppShell();
+				await Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
             }
             else
             {

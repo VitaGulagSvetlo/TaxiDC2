@@ -22,9 +22,11 @@
 	        Routing.RegisterRoute(nameof(SeznamAut), typeof(SeznamAut));
 	        Routing.RegisterRoute(nameof(SeznamRidicu), typeof(SeznamRidicu));
 	        Routing.RegisterRoute(nameof(SeznamZakazniku), typeof(SeznamZakazniku));
-//	        Routing.RegisterRoute(nameof(), typeof());
-
-	        Routing.RegisterRoute(nameof(TripAlert), typeof(TripAlert));
+				        Routing.RegisterRoute(nameof(SeznamJizd), typeof(SeznamJizd));
+				        Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
+				        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+			//	        Routing.RegisterRoute(nameof(), typeof());
+			Routing.RegisterRoute(nameof(TripAlert), typeof(TripAlert));
 
         }
 

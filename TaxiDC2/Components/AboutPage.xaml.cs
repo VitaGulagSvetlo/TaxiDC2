@@ -9,4 +9,10 @@ public partial class AboutPage : ContentPage
 		BindingContext = vm;
 		InitializeComponent();
 	}
+
+	private async void OnBackButtonPressed(object sender, EventArgs e)
+	{
+		Shell.Current.GoToAsync($"{nameof(MainPage)}");
+	}
+
 }

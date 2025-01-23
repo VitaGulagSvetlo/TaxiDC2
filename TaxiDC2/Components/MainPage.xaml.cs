@@ -45,12 +45,12 @@ namespace TaxiDC2
 			// ulozeni tokenu
 			await SecureStorage.SetAsync("access_token", result.AccessToken);
 			await SecureStorage.SetAsync("id_token", result.IdentityToken);
-			if (result.RefreshToken!=null)
-			await SecureStorage.SetAsync("refresh_token", result.RefreshToken);
+			if (result.RefreshToken != null)
+				await SecureStorage.SetAsync("refresh_token", result.RefreshToken);
 
-			
+
 			var sb = new StringBuilder(128);
-			var ui= await _client.GetUserInfoAsync(_currentAccessToken, CancellationToken.None);
+			var ui = await _client.GetUserInfoAsync(_currentAccessToken, CancellationToken.None);
 
 			_bussinessState.GoogleSUB = result.User.FindFirst("sub")?.Value;
 
@@ -97,8 +97,6 @@ namespace TaxiDC2
 			{
 				editor.Text = "No user info found";
 			}
-
-
 		}
 
 		private async void OnApiClicked(object sender, EventArgs e)
@@ -122,6 +120,21 @@ namespace TaxiDC2
 					editor.Text = response.ReasonPhrase;
 				}
 			}
+		}
+
+		private void OnNewClicked(object sender, EventArgs e)
+		{
+			Shell.Current.GoToAsync($"{nameof(NovaJizda)}");
+		}
+
+		private void OnListClicked(object sender, EventArgs e)
+		{
+			Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
+		}
+
+		private void OnSetClicked(object sender, EventArgs e)
+		{
+			Shell.Current.GoToAsync($"{nameof(AboutPage)}");
 		}
 	}
 

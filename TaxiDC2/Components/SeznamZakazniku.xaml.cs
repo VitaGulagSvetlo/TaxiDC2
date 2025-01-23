@@ -20,14 +20,12 @@ namespace TaxiDC2
             _viewModel.OnAppearing();
 
         }
-
-
+        
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
-
-            Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
-
+	        Shell.Current.GoToAsync($"{nameof(MainPage)}");
         }
+        
         private async void OnSwipeItemInvoked(object sender, EventArgs e)
         {
 	        var swipeItem = (SwipeItem)sender;

@@ -14,13 +14,27 @@ namespace TaxiDC2
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                .UseMauiApp<App>()
-                .ConfigureSyncfusionCore()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+	            .UseMauiApp<App>()
+	            .ConfigureSyncfusionCore()
+	            .ConfigureFonts(FAs =>
+	            {
+		            FAs.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+		            FAs.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+
+		            FAs.AddFont("FA6-Duotone-Light-300.otf", "FADuotoneLight");
+		            FAs.AddFont("FA6-Duotone-Regular-400.otf", "FADuotoneRegular");
+		            FAs.AddFont("FA6-Duotone-Solid-900.otf", "FADuotoneSolid");
+		            FAs.AddFont("FA6-Duotone-Thin-100.otf", "FADuotoneThin");
+		            FAs.AddFont("FA6-Pro-Light-300.otf", "FAProLight");
+		            //FAs.AddFont("FA6-Pro-Regular-400.otf", "FAProRegular");
+		            FAs.AddFont("FA6-Pro-Regular-400.otf", "FAPro");
+		            FAs.AddFont("FA6-Pro-Solid-900.otf", "FAProSolid");
+		            FAs.AddFont("FA6-Pro-Thin-100.otf", "FAProThin");
+		            FAs.AddFont("FA6-SharpDuotone-Light-300.otf", "FASharpDuoLight");
+		            FAs.AddFont("FA6-SharpDuotone-Regular-400.otf", "FASharpDuoRegular");
+		            FAs.AddFont("FA6-SharpDuotone-Solid-900.otf", "FASharpDuoSolid");
+		            FAs.AddFont("FA6-SharpDuotone-Thin-100.otf", "FASharpDuoThin");
+	            });
 
             builder.Services.AddLogging();
             builder.Services.AddScoped<IDataService, DataService>();

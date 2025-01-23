@@ -27,16 +27,36 @@ namespace TaxiDC2
         // Handle the swipe action to navigate to another page
         private async void OnSwipeRightItemInvoked(object sender, EventArgs e)
         {
-	        var swipeItem = (SwipeItem)sender;
-	        var id = swipeItem.CommandParameter;
+	        SwipeItem swipeItem = (SwipeItem)sender;
+	        object id = swipeItem.CommandParameter;
 	        Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={id.ToString()}");
         }
 
-        private async void OnSwipeLeftItemInvoked(object sender, EventArgs e)
+        private async void OnBackButtonPressed(object sender, EventArgs e)
         {
-	        var swipeItem = (SwipeItem)sender;
-	        var id = swipeItem.CommandParameter;
-	        Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={id.ToString()}");
+	        Shell.Current.GoToAsync($"{nameof(MainPage)}");
         }
-    }
+
+        private void OnSwipeLeftCancel(object sender, EventArgs e)
+        {
+	        SwipeItem swipeItem = (SwipeItem)sender;
+	        object id = swipeItem.CommandParameter;
+	        TripDetailViewModel m = _viewModel.Items.FirstOrDefault(f => f.IdTrip.ToString() == id.ToString());
+	        if (m != null)
+	        {
+                m.CancelTrip();
+			}
+        }
+
+		private void OnSwipeLeftAccept(object sender, EventArgs e)
+        {
+	        SwipeItem swipeItem = (SwipeItem)sender;
+	        object id = swipeItem.CommandParameter;
+	        TripDetailViewModel m = _viewModel.Items.FirstOrDefault(f => f.IdTrip.ToString() == id.ToString());
+	        if (m != null)
+	        {
+		        m.AcceptTrip();
+	        }
+        }
+	}
 }

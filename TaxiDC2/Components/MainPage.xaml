@@ -3,33 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaxiDC2.MainPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style  TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ZlutaTmava}" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            </Style>
+            <Style  TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource ZlutaTmava}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="MinimumHeightRequest" Value="80"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- První řádek zabere veškeré dostupné místo -->
+            <RowDefinition Height="*" />
+            <!-- Druhý řádek je pro status Label -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Kontejner pro tlačítka -->
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25"
+            Grid.Row="0"
+            Spacing="10"
+            Padding="20"
+            HorizontalOptions="Fill"
             VerticalOptions="Fill">
 
             <Label
-                Text="TAXI DC Login"
-                SemanticProperties.HeadingLevel="Level1" />
+                Text="TAXI DC"
+                SemanticProperties.HeadingLevel="Level1" 
+                FontSize="30"
+                FontAttributes="Bold"/>
 
-            <Button
-                x:Name="LoginButton"
-                Text="Login" 
-                Clicked="OnLoginClicked"
-                HorizontalOptions="Fill" />
-            <Button
-                x:Name="InfoButton"
-                Text="Login" 
-                Clicked="OnInfoClicked"
-                HorizontalOptions="Fill" />
-            <!--<Button
-                x:Name="ApiButton"
-                Text="Call API" 
-                Clicked="OnApiClicked"
-                HorizontalOptions="Fill" />-->
+            <Button Text="Nová jízda" Clicked="OnNewClicked"   
+                    ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+            <Button Text="Přehled jízd" Clicked="OnListClicked"   
+                    ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+            <Button Text="Settings" Clicked="OnSetClicked"   
+                    ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+            <Button Text="Login (dev test)" Clicked="OnLoginClicked"  
+                    ImageSource="{FontImageSource Glyph={StaticResource login}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+            <Button Text="User info  (dev test)" Clicked="OnInfoClicked"  
+                    ImageSource="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
 
-            <Editor x:Name="editor" VerticalOptions="Fill" HorizontalOptions="Fill" MinimumHeightRequest="300"/>
+            <Editor x:Name="editor" HorizontalOptions="Fill" MinimumHeightRequest="100" />
 
         </VerticalStackLayout>
 
+        <!-- Label na spodku obrazovky -->
+        <Label
+            Grid.Row="1"
+            Text="ver. 0.1 alfa"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End"
+            Padding="5"
+            BackgroundColor="LightGray"
+            FontSize="12"
+            HorizontalTextAlignment="Start"
+            VerticalTextAlignment="Center"
+        />
+    </Grid>
 </ContentPage>
+
+    
+    

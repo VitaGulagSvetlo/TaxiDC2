@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <x:String x:Key="user">&#xf007;</x:String>
+    <x:String x:Key="star">&#xf005;</x:String>
+    <x:String x:Key="route">&#xf4d7;</x:String>
+    <x:String x:Key="gear">&#xf013;</x:String>
+    <x:String x:Key="login">&#xf2f6;</x:String>
+    <x:String x:Key="cancel">&#xf057;</x:String>
+    <x:String x:Key="accept">&#xf058;</x:String>
+
+</ResourceDictionary>

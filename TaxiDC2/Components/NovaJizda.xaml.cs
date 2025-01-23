@@ -104,5 +104,13 @@ namespace TaxiDC2
             DisplayAlert("Úspìch", "Jízda byla úspìšnì pøidána.", "OK");
             Navigation.PopAsync();
         }
-    }
+
+
+        private async void OnBackButtonPressed(object sender, EventArgs e)
+        {
+
+	        Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
+
+        }
+	}
 }

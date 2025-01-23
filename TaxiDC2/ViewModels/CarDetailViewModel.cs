@@ -41,9 +41,9 @@ namespace TaxiDC2.ViewModels
 
 			if (ret.State == ResultCode.OK)
             {
-                // OK
-            }
-            else
+				await Shell.Current.GoToAsync($"///{nameof(SeznamAut)}");
+			}
+			else
             {
                 //ERR
             }

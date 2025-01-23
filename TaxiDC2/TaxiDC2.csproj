@@ -141,16 +141,19 @@
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Resources\Styles\CustomColors.xaml">
-	     <Generator>MSBuild:Compile</Generator>
+	     <Generator></Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
-	     <Generator>MSBuild:Compile</Generator>
+	     <Generator></Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Components\SeznamJizd.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Components\NovaJizda.xaml">
 	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="Resources\Styles\Icons.xaml">
+	     <Generator></Generator>
 	   </MauiXaml>
 	 </ItemGroup>
 	<!-- Build Properties must be defined within these property groups to ensure successful publishing

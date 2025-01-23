@@ -61,8 +61,14 @@
                         BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeRightItemInvoked" CommandParameter="{Binding IdTrip }"></SwipeItem>
                             </SwipeView.RightItems>
                             <SwipeView.LeftItems>
-                                <SwipeItem Text="╳" BackgroundColor="Red" Invoked="OnSwipeLeftItemInvoked" CommandParameter="{Binding IdTrip }"></SwipeItem>
+                                <SwipeItem 
+                                           IconImageSource="{FontImageSource Glyph={StaticResource cancel}, FontFamily=FAPro, Size=24, Color={StaticResource Zluta1}}"
+                                           BackgroundColor="{StaticResource Cervena}" Invoked="OnSwipeLeftCancel" CommandParameter="{Binding IdTrip }"/>
+                                <SwipeItem 
+                                           IconImageSource="{FontImageSource Glyph={StaticResource accept}, FontFamily=FAPro, Size=24, Color={StaticResource Zluta1}}"
+                                    BackgroundColor="{StaticResource Zelena}" Invoked="OnSwipeLeftAccept" CommandParameter="{Binding IdTrip }"/>
                             </SwipeView.LeftItems>
+
 
                             <!-- Item content -->
                             <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" HeightRequest="180">
