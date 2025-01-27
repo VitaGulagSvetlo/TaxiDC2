@@ -7,45 +7,60 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:DataType="vm:CarDetailViewModel">
 
-    <ScrollView BackgroundColor="{StaticResource GridBG}">
-        <VerticalStackLayout Spacing="20" Padding="20" HorizontalOptions="Fill">
+    <Grid BackgroundColor="{StaticResource GridBG}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
-                <VerticalStackLayout Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Vůz:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                    <Entry Text="{Binding CarType}" FontSize="18" WidthRequest="200"  TextColor="{StaticResource TCwhite}" />
+        <!-- Header Section -->
+        <Grid Padding="10" Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
+                    <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label Text="DETAIL AUTA" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
 
-                </VerticalStackLayout>
-            </Frame>
+        <!-- Content Section -->
+        <ScrollView Grid.Row="1">
+            <StackLayout Spacing="15" Padding="15" HorizontalOptions="FillAndExpand">
 
-            <Frame  CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
-                <StackLayout Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Label Text="Barva:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                    <Entry Text="{Binding Color}" FontSize="18" WidthRequest="200"  TextColor="{StaticResource TCwhite}" />
-                </StackLayout>
-            </Frame>
+                <!-- Car Type -->
+                <Frame Padding="15" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                    <StackLayout Spacing="10">
+                        <Label Text="Vůz:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Entry Text="{Binding CarType}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Frame>
 
-            <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
-                <StackLayout  HorizontalOptions="CenterAndExpand" Spacing="10">
-                    <Label Text="SPZ:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                    <Entry Text="{Binding Rz}" FontSize="18" WidthRequest="200" TextColor="{StaticResource TCwhite}" />
-                </StackLayout>
-            </Frame>
+                <!-- Color -->
+                <Frame Padding="15" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                    <StackLayout Spacing="10">
+                        <Label Text="Barva:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Entry Text="{Binding Color}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Frame>
 
-            <Button Text="ULOŽIT ZMĚNY"
+                <!-- License Plate -->
+                <Frame Padding="15" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                    <StackLayout Spacing="10">
+                        <Label Text="SPZ:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                        <Entry Text="{Binding Rz}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Save Button -->
+                <Button Text="ULOŽIT ZMĚNY"
                         BackgroundColor="{StaticResource CustomOrangeBG}"
                         TextColor="Black"
-                        CornerRadius="8"
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        MinimumWidthRequest="150"
-                        MaximumWidthRequest="250"
-                        Command="{Binding SaveDataCmd}"
-                        />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
-
-
+                        FontSize="16"
+                        VerticalOptions="EndAndExpand"
+                        CornerRadius="10"
+                        Command="{Binding SaveDataCmd}" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

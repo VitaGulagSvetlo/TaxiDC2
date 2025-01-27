@@ -11,5 +11,13 @@
     <x:String x:Key="login">&#xf2f6;</x:String>
     <x:String x:Key="cancel">&#xf057;</x:String>
     <x:String x:Key="accept">&#xf058;</x:String>
-
+    <x:String x:Key="time">&#xf017;</x:String>
+    <x:String x:Key="refresh">&#xf021;</x:String>
+    <x:String x:Key="info">&#xf05a;</x:String>
+    <x:String x:Key="phone">&#xf095;</x:String>
+    <x:String x:Key="start">&#xf276;</x:String>
+    <x:String x:Key="finish">&#xf11e;</x:String>
+    <x:String x:Key="calendar">&#xf073;</x:String>
+    <x:String x:Key="banned">&#xf06a;</x:String>
+    <x:String x:Key="search">&#xf002;</x:String>
 </ResourceDictionary>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:syncfusionList="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.SeznamZakazniku"
@@ -12,62 +13,79 @@
         <ToolbarItem Text="Nový zákazník" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
 
-    <RefreshView  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- Gradient Strip -->
+                <RowDefinition Height="Auto" />
+                <!-- Search Bar -->
                 <RowDefinition Height="*" />
-
+                <!-- List -->
             </Grid.RowDefinitions>
 
+            <!-- Gradient Strip -->
+            <Grid Padding="10" Grid.Row="0">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                        <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
+                        <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Label Text="SEZNAM ZÁKAZNÍKŮ" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Search Bar Strip -->
+            <Grid Padding="10" Grid.Row="1" BackgroundColor="{StaticResource GradientGray}">
+                <SearchBar Placeholder="Hledat zákazníka..."
+                           Text="{Binding SearchText, Mode=TwoWay}"
+                           TextColor="{StaticResource TCwhite}"
+                           PlaceholderColor="{StaticResource CustomOrangeText}" 
+                           CancelButtonColor="{StaticResource CustomOrangeText}" />
+            </Grid>
 
             <!-- List -->
-            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="1" ItemSize="170" ItemSpacing="5" ItemsSource="{Binding Items}">
-
+            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="2" ItemSize="170" ItemSpacing="5" ItemsSource="{Binding Items}">
                 <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Customer">
                         <SwipeView>
                             <!-- Define swipe actions -->
                             <SwipeView.RightItems>
                                 <SwipeItem Text="Detail" IconImageSource="info_icon.png"
-                     BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked"  CommandParameter="{Binding IdCustomer}"></SwipeItem>
+                                           BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeItemInvoked" CommandParameter="{Binding IdCustomer}" />
                             </SwipeView.RightItems>
                             <!-- Item content -->
                             <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" BackgroundColor="{StaticResource GradientGray}">
-
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="1" />
-
                                     </Grid.RowDefinitions>
-
-
-
-
                                     <!-- Main Content -->
                                     <StackLayout Grid.Row="0" Grid.Column="1" Spacing="5" Padding="0">
-                                        <HorizontalStackLayout  HorizontalOptions="CenterAndExpand" Spacing="5">
-                                            <Label Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" Text="Telefonní číslo:"/>
+                                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="5">
+                                            <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource Bila}}" />
                                             <Label Text="{Binding PhoneNumber}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
                                         </HorizontalStackLayout>
-                                        <HorizontalStackLayout  HorizontalOptions="CenterAndExpand" Spacing="5">
-                                            <Label Text="Jméno: " Style="{StaticResource FS-16}" FontAttributes="Bold"/>
+                                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="5">
+                                            <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Bila}}" />
                                             <Label Text="{Binding Name}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
                                         </HorizontalStackLayout>
-                                        <HorizontalStackLayout  HorizontalOptions="CenterAndExpand" Spacing="5">
-                                            <Label Text="VIP: " Style="{StaticResource FS-16}" FontAttributes="Bold"/>
-                                            <buttons:SfCheckBox IsChecked="{Binding VIP}" CornerRadius="5.0"/>
+                                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="5">
+                                            <inputs:SfRating x:Name="CustomerRating" IsReadOnly="True" ItemCount="5" Value="3" Margin="5" ItemSize="25">
+                                                <inputs:SfRating.RatingSettings>
+                                                    <inputs:RatingSettings RatedFill="{StaticResource CustomOrangeText}" RatedStroke="{StaticResource TP}" />
+                                                </inputs:SfRating.RatingSettings>
+                                            </inputs:SfRating>
                                         </HorizontalStackLayout>
                                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="5">
-                                            <Label Style="{StaticResource FS-16}" FontAttributes="Bold" Text="Zákaz:"/>
-                                            <buttons:SfCheckBox IsChecked="{Binding Rejected}" CornerRadius="5.0" IsEnabled="False"/>
+                                            <Image Source="{FontImageSource Glyph={StaticResource banned}, FontFamily=FAPro, Size=20, Color={StaticResource Cervena}}" />
+                                            <buttons:SfCheckBox IsChecked="{Binding Rejected}" CornerRadius="5.0" IsEnabled="False" />
                                         </HorizontalStackLayout>
                                     </StackLayout>
 
                                     <!-- Orange Line -->
-                                    <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource CustomOrangeBG}" HorizontalOptions="Fill" Margin="20, 0, 0, 0" />
-
-
+                                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource CustomOrangeBG}" HorizontalOptions="Fill" Margin="20, 0, 0, 0" />
                                 </Grid>
                             </Frame>
                         </SwipeView>

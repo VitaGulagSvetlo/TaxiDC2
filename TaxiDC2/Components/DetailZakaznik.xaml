@@ -14,54 +14,46 @@
         </Grid.RowDefinitions>
 
         <!-- Header Section -->
-        <Grid Padding="10">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
-                    <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
-                </LinearGradientBrush>
-            </Grid.Background>
-            <Label Text="ZÁKAZNÍK" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
-        </Grid>
+        
 
         <!-- Content Section -->
         <ScrollView Grid.Row="1" Padding="15">
-            <StackLayout Spacing="15" HorizontalOptions="Center">
+            <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
 
                 <!-- Customer Details -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
                     <StackLayout Spacing="10">
-                        <HorizontalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding Name}" FontSize="16" TextColor="{StaticResource TCwhite}" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
+                            <Entry Text="{Binding Name}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="Telefon:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
+                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="Poznámka:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource TCwhite}" />
-                        </HorizontalStackLayout>
+                            <Entry Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Preferences -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
                     <StackLayout Spacing="10">
-                        <HorizontalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="VIP:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding VIP}" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
+                            <buttons:SfSwitch IsOn="{Binding VIP}" HorizontalOptions="Start" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="Nevozit!:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding Rejected}" />
-                        </HorizontalStackLayout>
+                            <buttons:SfSwitch IsOn="{Binding Rejected}" HorizontalOptions="Start" />
+                        </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Rating Section -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
                     <StackLayout>
                         <Label Text="Hodnocení zákazníka:" FontSize="16" TextColor="{StaticResource TCwhite}" />
                         <inputs:SfRating Value="{Binding VIP2}" />
@@ -69,20 +61,20 @@
                 </Frame>
 
                 <!-- Last Trip Info -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}">
+                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
                     <StackLayout Spacing="10">
-                        <HorizontalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="Poslední cesta:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource TCwhite}" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
+                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="Nástup:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource TCwhite}" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
+                            <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
                             <Label Text="Výstup:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource TCwhite}" />
-                        </HorizontalStackLayout>
+                            <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
