@@ -27,8 +27,9 @@
 				        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 			//	        Routing.RegisterRoute(nameof(), typeof());
 			Routing.RegisterRoute(nameof(TripAlert), typeof(TripAlert));
+			Routing.RegisterRoute(nameof(SmsSendView), typeof(SmsSendView));
 
-        }
+		}
 
 	}
 }

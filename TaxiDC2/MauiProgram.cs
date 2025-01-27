@@ -63,14 +63,14 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SeznamJizd>();
 			builder.Services.AddTransient<SeznamRidicu>();
 			builder.Services.AddTransient<SeznamZakazniku>();
-
+			builder.Services.AddTransient<SmsSendView>();
 			//vm
 			builder.Services.AddTransient<ConfigViewModel>();
 			builder.Services.AddTransient<TripDetailViewModel>();
 			builder.Services.AddTransient<DriverNewViewModel>(); 
 			builder.Services.AddTransient<CarDetailViewModel>();
 			builder.Services.AddTransient<CustomerDetailViewModel>();
-			//builder.Services.AddTransient<>();
+			builder.Services.AddTransient<SmsViewModel>();
 
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();

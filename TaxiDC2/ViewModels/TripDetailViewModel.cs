@@ -100,8 +100,7 @@ namespace TaxiDC2.ViewModels
 		[DependsOn("Memo")]
 		public Boolean IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Memo);
 
-		[DependsOn("Memo")]
-		public Boolean IsOwner => Driver != null && Driver.IdDriver == _bs.DriverId;
+		[DependsOn("Memo")] public Boolean IsOwner => true;//Driver != null && Driver.IdDriver == _bs.DriverId;
 
 		public bool AddressBoardingIsValid { get; set; }
 
@@ -332,5 +331,17 @@ namespace TaxiDC2.ViewModels
 		{
 			throw new NotImplementedException();
 		}
+
+		/*
+		WWW_OnClicked
+		Acc_OnClicked
+		Rej_OnClicked
+		Sms_OnClicked
+		Call_OnClicked
+		Run_OnClicked
+		Storno_OnClicked
+		Complete_OnClicked
+		Forward_OnClicked
+		*/
 	}
 }

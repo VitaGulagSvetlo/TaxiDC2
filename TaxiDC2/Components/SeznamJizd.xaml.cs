@@ -13,7 +13,6 @@ namespace TaxiDC2
         public SeznamJizd(IApiProxy proxy, IBussinessState bs)
         {
             InitializeComponent();
-
             BindingContext = _viewModel = new TripListViewModel(proxy, bs);
         }
 
@@ -29,33 +28,35 @@ namespace TaxiDC2
         {
 	        SwipeItem swipeItem = (SwipeItem)sender;
 	        object id = swipeItem.CommandParameter;
-	        Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={id.ToString()}");
+	        await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={id.ToString()}");
         }
 
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
-	        Shell.Current.GoToAsync($"{nameof(MainPage)}");
+	        await Shell.Current.GoToAsync($"{nameof(MainPage)}");
         }
 
-        private void OnSwipeLeftCancel(object sender, EventArgs e)
+		private async void OnSwipeLeftCancel(object sender, EventArgs e)
         {
 	        SwipeItem swipeItem = (SwipeItem)sender;
-	        object id = swipeItem.CommandParameter;
+	        object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
 	        TripDetailViewModel m = _viewModel.Items.FirstOrDefault(f => f.IdTrip.ToString() == id.ToString());
 	        if (m != null)
 	        {
-                m.CancelTrip();
+		        _viewModel.Items.Remove(m);
+
+				//await m.CancelTrip();
 			}
-        }
+		}
 
-		private void OnSwipeLeftAccept(object sender, EventArgs e)
+		private async void OnSwipeLeftAccept(object sender, EventArgs e)
         {
 	        SwipeItem swipeItem = (SwipeItem)sender;
-	        object id = swipeItem.CommandParameter;
+	        object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
 	        TripDetailViewModel m = _viewModel.Items.FirstOrDefault(f => f.IdTrip.ToString() == id.ToString());
 	        if (m != null)
 	        {
-		        m.AcceptTrip();
+		        await m.AcceptTrip();
 	        }
         }
 	}

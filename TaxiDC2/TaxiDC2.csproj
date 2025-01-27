@@ -119,6 +119,9 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="Components\SmsSendView.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="DetailZakaznik.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
