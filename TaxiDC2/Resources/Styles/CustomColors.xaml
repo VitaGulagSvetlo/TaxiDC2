@@ -14,7 +14,7 @@
     <Color x:Key="GradientRed">Darkred</Color>
 
 
-    //PENO old resource
+    <!--///////////////////////////PENO old resource///////////////////////////-->
 
     <!-- TAXI DECIN BARVICKY -->
     <Color x:Key="Zluta1">#FFD405</Color>

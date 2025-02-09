@@ -50,7 +50,7 @@
             </Grid>
 
             <!-- List -->
-            <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190" ItemsSource="{Binding Items}" ItemSpacing="10">
+            <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190" ItemsSource="{Binding Items}" ItemSpacing="5">
 
                 <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:TripDetailViewModel">
@@ -114,7 +114,7 @@
                                     </StackLayout>
 
                                     <!-- Orange Line -->
-                                    <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{Binding StateColor}" HorizontalOptions="Fill" Margin="20, 0, 20, 0" />
+                                    <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource Oranzova}" HorizontalOptions="Fill" Margin="20, 0, 20, 0" />
 
                                     <!-- Bottom Section (Addresses) -->
                                     <StackLayout Grid.Row="2" Grid.Column="0" Padding="10">

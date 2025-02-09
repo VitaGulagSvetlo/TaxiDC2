@@ -21,65 +21,69 @@
             <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
 
                 <!-- Customer Details -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding Name}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Entry Text="{Binding Name}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Telefon:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Telefon:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Poznámka:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Poznámka:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Entry Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Preferences -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="VIP:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
+                            <Label Text="VIP:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding VIP}" HorizontalOptions="Start" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Nevozit!:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
+                            <Label Text="Nevozit!:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding Rejected}" HorizontalOptions="Start" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Rating Section -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout>
-                        <Label Text="Hodnocení zákazníka:" FontSize="16" TextColor="{StaticResource TCwhite}" />
-                        <inputs:SfRating Value="{Binding VIP2}" />
+                        <Label Text="Hodnocení zákazníka:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <inputs:SfRating Value="{Binding VIP2}">
+                            <inputs:SfRating.RatingSettings>
+                                <inputs:RatingSettings RatedStroke="Transparent" RatedFill="{StaticResource Oranzova}" UnratedFill="{StaticResource GradientGray}"/>
+                            </inputs:SfRating.RatingSettings>
+                        </inputs:SfRating>
                     </StackLayout>
                 </Frame>
 
                 <!-- Last Trip Info -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="Poslední cesta:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Poslední cesta:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Nástup:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Nástup:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Výstup:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Výstup:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Save Button -->
-                <Button Text="ULOŽIT ZMĚNY" BackgroundColor="{StaticResource CustomOrangeBG}" TextColor="Black" FontSize="16" VerticalOptions="EndAndExpand" CornerRadius="10" Command="{Binding SaveDataCmd}" />
+                <Button Text="ULOŽIT ZMĚNY" BackgroundColor="{StaticResource CustomOrangeBG}" TextColor="{StaticResource Cerna}" FontSize="16" VerticalOptions="EndAndExpand" CornerRadius="10" Command="{Binding SaveDataCmd}" />
             </StackLayout>
         </ScrollView>
     </Grid>

@@ -21,42 +21,42 @@
             <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
 
                 <!-- Driver Details -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding FirstName}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Entry Text="{Binding FirstName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Příjmení:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding LastName}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Příjmení:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Entry Text="{Binding LastName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Mobilní zařízení:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding MobileDeviceKey}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Mobilní zařízení:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Entry Text="{Binding MobileDeviceKey}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Telefonní číslo:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Telefonní číslo:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Preferences -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <HorizontalStackLayout>
-                            <Label Text="Aktivní:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
+                            <Label Text="Aktivní:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding Active}" HorizontalOptions="Start" />
 
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="Notifikace zapnuty:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
+                            <Label Text="Notifikace zapnuty:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding NotificationEnable}" HorizontalOptions="Start" />
 
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="Administrator:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
+                            <Label Text="Administrator:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding IsAdmin}" HorizontalOptions="Start" />
 
                         </HorizontalStackLayout>
@@ -64,9 +64,9 @@
                 </Frame>
 
                 <!-- Car Selection -->
-                <Frame Padding="10" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout>
-                        <Label Text="Vyberte aktivní auto:" FontSize="16" TextColor="{StaticResource TCwhite}" />
+                        <Label Text="Vyberte aktivní auto:" FontSize="16" TextColor="{StaticResource Bila}" />
                         <inputs:SfComboBox x:Name="CarSelector" HorizontalOptions="CenterAndExpand"
                                            DisplayMemberPath="FullName"
                                            SelectedItem="{Binding SelectedCar,Mode=TwoWay}"
@@ -75,7 +75,7 @@
                                 <DataTemplate x:DataType="models:Car">
                                     <HorizontalStackLayout Spacing="10">
                                         <Image Source="car_icon.png" WidthRequest="20" HeightRequest="20" />
-                                        <Label Text="{Binding FullName}" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
+                                        <Label Text="{Binding FullName}" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                                     </HorizontalStackLayout>
                                 </DataTemplate>
                             </inputs:SfComboBox.ItemTemplate>
@@ -84,7 +84,7 @@
                 </Frame>
 
                 <!-- Save Button -->
-                <Button Text="ULOŽIT ZMENY" BackgroundColor="{StaticResource CustomOrangeBG}" TextColor="Black" FontSize="16" VerticalOptions="EndAndExpand" CornerRadius="10" Command="{Binding SaveDataCmd}" />
+                <Button Text="ULOŽIT ZMĚNY" BackgroundColor="{StaticResource Oranzova}" TextColor="Black" FontSize="16" VerticalOptions="EndAndExpand" CornerRadius="10" Command="{Binding SaveDataCmd}" />
             </StackLayout>
         </ScrollView>
     </Grid>
