@@ -22,51 +22,51 @@
                 </LinearGradientBrush>
             </Grid.Background>
 
-            <Label HorizontalOptions="Center" Text="{Binding TripState}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+            <Label HorizontalOptions="Center" Text="{Binding TripState}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Bila}" VerticalOptions="Center" />
         </Grid>
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="20" Padding="20">
 
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Zákazník:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
+                            <Label Text="Zákazník:" FontSize="16" TextColor="{StaticResource Oranzova}" />
                         <HorizontalStackLayout>
                             <Image Source="phone_icon.png" WidthRequest="30" HeightRequest="30" />
-                            <Label Text="{Binding Customer.Name}" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="{Binding Customer.Name}" FontSize="18" TextColor="{StaticResource Bila}" />
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Image Source="user_icon.png" WidthRequest="30" HeightRequest="30" />
-                            <Label Text="{Binding Customer.PhoneNumber}" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="{Binding Customer.PhoneNumber}" FontSize="18" TextColor="{StaticResource Bila}" />
                         </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
 
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Čas nástupu:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding BoardingTime}" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="Čas nástupu:" FontSize="16" TextColor="{StaticResource Oranzova}" />
+                        <Label Text="{Binding BoardingTime}" FontSize="18" TextColor="{StaticResource Bila}" />
                     </StackLayout>
                 </Frame>
 
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Start" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding AddressBoarding}" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="Start" FontSize="16" TextColor="{StaticResource Oranzova}" />
+                            <Label Text="{Binding AddressBoarding}" FontSize="18" TextColor="{StaticResource Bila}" />
                     </StackLayout>
                 </Frame>
 
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Cíl" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding AddressExit}" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                            <Label Text="Cíl" FontSize="16" TextColor="{StaticResource Oranzova}" />
+                            <Label Text="{Binding AddressExit}" FontSize="18" TextColor="{StaticResource Bila}" />
                     </StackLayout>
                 </Frame>
 
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                    <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Řidič" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding Driver}" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        <Label Text="Řidič" FontSize="16" TextColor="{StaticResource Oranzova}" />
+                        <Label Text="{Binding Driver}" FontSize="18" TextColor="{StaticResource Bila}" />
                     </StackLayout>
                 </Frame>
                     <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">

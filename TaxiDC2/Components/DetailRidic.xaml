@@ -47,7 +47,7 @@
                     <StackLayout Spacing="10">
                         <HorizontalStackLayout>
                             <Label Text="Aktivní:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding Active}" HorizontalOptions="Start" />
+                            <buttons:SfSwitch IsOn="{Binding Active}" HorizontalOptions="Start" ></buttons:SfSwitch>
 
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
@@ -57,7 +57,7 @@
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <Label Text="Administrator:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding IsAdmin}" HorizontalOptions="Start" />
+                            <buttons:SfSwitch IsOn="{Binding IsAdmin}" HorizontalOptions="End" />
 
                         </HorizontalStackLayout>
                     </StackLayout>
