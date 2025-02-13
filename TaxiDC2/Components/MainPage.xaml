@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid>
+    <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
             <!-- První řádek zabere veškeré dostupné místo -->
             <RowDefinition Height="*" />

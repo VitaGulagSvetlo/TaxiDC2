@@ -22,6 +22,7 @@
         <Setter Property="HeightRequest" Value="35"/>
         <Setter Property="Margin" Value="2.5"/>
     </Style>
+    
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>

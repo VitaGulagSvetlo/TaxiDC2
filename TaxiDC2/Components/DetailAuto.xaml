@@ -19,24 +19,24 @@
                 <!-- Car Type -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Vůz:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Entry Text="{Binding CarType}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        <Label Text="Vůz:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Entry Placeholder="Škoda" Text="{Binding CarType}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </Frame>
 
                 <!-- Color -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Barva:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Entry Text="{Binding Color}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        <Label Text="Barva:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Entry Placeholder="Černá" Text="{Binding Color}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </Frame>
 
                 <!-- License Plate -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="SPZ:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Entry Text="{Binding Rz}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
+                        <Label Text="SPZ:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Entry  Placeholder="1AX 1234" Text="{Binding Rz}" PlaceholderColor="{StaticResource NRph}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </Frame>
 
