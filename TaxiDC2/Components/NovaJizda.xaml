@@ -128,8 +128,7 @@
                            Placeholder="Poznámka"
                            PlaceholderColor="{StaticResource NRph}"
                            TextColor="{StaticResource TCwhite}"
-                           FontSize="18"
-                            />
+                           FontSize="18" />
                 
 
                 <!-- Save Button -->
