@@ -20,11 +20,13 @@
        
 
         <!-- Content Section -->
+        
         <ScrollView Grid.Row="1" Padding="15" HorizontalOptions="Fill">
+            <Frame Style="{StaticResource CustomFrame}">
             <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
 
                 <!-- Phone Number -->
-                <Frame Style="{StaticResource CustomFrame}">
+                
                     <VerticalStackLayout Spacing="10">
                         <Label Text="Telefonní číslo" FontSize="17" TextColor="{StaticResource Bila}" />
                         <Grid ColumnDefinitions="*,Auto" HorizontalOptions="FillAndExpand">
@@ -38,10 +40,10 @@
                             
                         </Grid>
                     </VerticalStackLayout>
-                </Frame>
+                
 
                 <!-- Customer Name with Rating -->
-                <Frame Style="{StaticResource CustomFrame}">
+                
                     <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout>
                             <Label Text="Jméno" FontSize="17" TextColor="{StaticResource Bila}" />
@@ -62,10 +64,10 @@
                                FontSize="18"
                                />
                     </VerticalStackLayout>
-                </Frame>
+                
 
                 <!-- From Location -->
-                <Frame  Style="{StaticResource CustomFrame}">
+                
                     <VerticalStackLayout Spacing="10">
                         <Label Text="Začátek" FontSize="17" TextColor="{StaticResource Bila}" />
                         <Grid ColumnDefinitions="*,Auto" HorizontalOptions="FillAndExpand">
@@ -79,10 +81,10 @@
                             
                         </Grid>
                     </VerticalStackLayout>
-                </Frame>
+               
 
                 <!-- To Location -->
-                <Frame  Style="{StaticResource CustomFrame}">
+                
                     <VerticalStackLayout Spacing="10">
                         <Label Text="Cíl" FontSize="17" TextColor="{StaticResource Bila}" />
                         <Grid ColumnDefinitions="*,Auto" HorizontalOptions="FillAndExpand">
@@ -96,10 +98,9 @@
                             
                         </Grid>
                     </VerticalStackLayout>
-                </Frame>
+
 
                 <!-- Time Selection -->
-                <Frame Style="{StaticResource CustomFrame}">
                     <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
                             <Label Text="Čas jízdy" FontSize="17" TextColor="{StaticResource Bila}" />
@@ -121,17 +122,15 @@
 
 
                     </VerticalStackLayout>
-                </Frame>
 
                 <!-- Note -->
-                <Frame Style="{StaticResource CustomFrame}">
                     <Entry x:Name="NoteEntry"
                            Placeholder="Poznámka"
                            PlaceholderColor="{StaticResource NRph}"
                            TextColor="{StaticResource TCwhite}"
                            FontSize="18"
                             />
-                </Frame>
+                
 
                 <!-- Save Button -->
                 <Button Text="ULOŽIT ZMĚNY"
@@ -143,6 +142,8 @@
                         Command="{Binding SaveDataCmd}" />
 
             </StackLayout>
+        </Frame>
         </ScrollView>
+        
     </Grid>
 </ContentPage>
