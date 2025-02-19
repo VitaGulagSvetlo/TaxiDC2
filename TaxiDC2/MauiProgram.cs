@@ -1,8 +1,12 @@
-﻿using IdentityModel.OidcClient;
+﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Firebase.Auth.Repository;
+using IdentityModel.OidcClient;
 using MauiApp1;
 using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
+using TaxiDC2.Components.Login;
 using TaxiDC2.Services;
 using TaxiDC2.ViewModels;
 
@@ -51,6 +55,16 @@ namespace TaxiDC2
                 Browser = new MauiAuthenticationBrowser()
             }));
 
+			builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
+				{
+				ApiKey = "AIzaSyBdd4AMgyptsYcOC5hhbDuQIiblzwpPfOc",
+				AuthDomain = "taxidc2-375cf.firebaseapp.com",
+				Providers = [new EmailProvider(),new GoogleProvider()],
+				UserRepository = new FileUserRepository("Taxi2")
+			}
+				
+				));
+
 			// add main page
 			builder.Services.AddTransient<AboutPage>();
             builder.Services.AddTransient<MainPage>();
@@ -71,6 +85,9 @@ namespace TaxiDC2
 			builder.Services.AddTransient<CarDetailViewModel>();
 			builder.Services.AddTransient<CustomerDetailViewModel>();
 			builder.Services.AddTransient<SmsViewModel>();
+
+			builder.Services.AddSingleton<SignInViewModel>();
+			builder.Services.AddSingleton<SignInPage>();
 
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();

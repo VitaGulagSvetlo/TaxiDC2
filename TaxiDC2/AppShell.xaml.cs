@@ -1,4 +1,6 @@
-﻿namespace TaxiDC2
+﻿using TaxiDC2.Components.Login;
+
+namespace TaxiDC2
 {
     public partial class AppShell : Shell
     {
@@ -28,6 +30,7 @@
 			//	        Routing.RegisterRoute(nameof(), typeof());
 			Routing.RegisterRoute(nameof(TripAlert), typeof(TripAlert));
 			Routing.RegisterRoute(nameof(SmsSendView), typeof(SmsSendView));
+			Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
 
 		}
 

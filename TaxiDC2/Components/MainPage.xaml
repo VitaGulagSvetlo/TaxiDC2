@@ -53,7 +53,7 @@
                    BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource login}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
             <Button Text="User info  (dev test)" Clicked="OnInfoClicked"  
                    BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
-
+<Label x:Name="l1"></Label>
             <Editor x:Name="editor" HorizontalOptions="Fill" MinimumHeightRequest="100" />
 
         </VerticalStackLayout>

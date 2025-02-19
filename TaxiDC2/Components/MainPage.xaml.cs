@@ -26,6 +26,7 @@ namespace TaxiDC2
 			_identityHelper = identityHelper;
 			_bussinessState = bussinessState;
 			_proxy = proxy;
+			l1.Text = bussinessState.AuthClient;
 		}
 
 		private async void OnLoginClicked(object sender, EventArgs e)

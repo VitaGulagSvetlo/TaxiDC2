@@ -56,6 +56,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
 		<PackageReference Include="Fody" Version="6.9.1">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -101,6 +103,9 @@
 	   <Compile Update="Components\DetailAuto.xaml.cs">
 	     <DependentUpon>DetailAuto.xaml</DependentUpon>
 	   </Compile>
+	   <Compile Update="Components\Login\SignInPage.xaml.cs">
+	     <DependentUpon>SignInPage.xaml</DependentUpon>
+	   </Compile>
 	   <Compile Update="Components\SeznamRidicu.xaml.cs">
 	     <DependentUpon>SeznamRidicu.xaml</DependentUpon>
 	   </Compile>
@@ -119,6 +124,9 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="Components\Login\SignInPage.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="Components\SmsSendView.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
