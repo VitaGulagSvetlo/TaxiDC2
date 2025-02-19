@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             x:DataType="vm:SignInViewModel"
+             x:Class="TaxiDC2.Components.Login.SignInPage"
+             Title="Login"
+             BindingContext="vm"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             >
+    <VerticalStackLayout>
+
+        <Image Source="taxi.png" WidthRequest="200" HeightRequest="300"  VerticalOptions="Center"/>
+        <Label 
+            Text="Welcome to TAXI app!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="18"/>
+        <Label 
+            Text="Please sign in"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="14"
+            TextColor="Aqua"/>
+<Frame Padding="20" BackgroundColor="{StaticResource Gray900}" Margin="20">
+    <VerticalStackLayout >
+    <HorizontalStackLayout>
+            <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}" WidthRequest="20"></Image>
+            <Entry Placeholder="User email" Text="{Binding Email}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}" WidthRequest="20"></Image>
+            <Entry Placeholder="User password" Text="{Binding Password}" IsPassword="True"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+        </Frame>
+        <Button Command="{Binding SignInCommand}" HorizontalOptions="Center" Text="Sign In"></Button>
+        <!--<Button Command="{Binding SignInGoogleCommand}" HorizontalOptions="Center" Text="G"></Button>-->
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -83,7 +83,7 @@
                                     </StackLayout>
 
                                     <!-- Orange Line -->
-                                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource CustomOrangeBG}" HorizontalOptions="Fill" Margin="20, 0, 0, 0" />
+                                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource Oranzova}" HorizontalOptions="Fill" Margin="20, 0, 0, 0" />
                                 </Grid>
                             </Frame>
                         </SwipeView>

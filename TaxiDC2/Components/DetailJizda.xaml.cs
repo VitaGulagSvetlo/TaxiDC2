@@ -35,9 +35,7 @@ namespace TaxiDC2
         {
 	        Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
         }
-
-
-
+		
 		private async void Sms_OnClicked(object sender, EventArgs e)
 		{
 			await Shell.Current.GoToAsync($"{nameof(SmsSendView)}?IdTrip={_viewModel.IdTrip}&Phone={Uri.EscapeDataString(_viewModel.Customer.PhoneNumber)}");
@@ -198,17 +196,24 @@ namespace TaxiDC2
 
 		private async Task PlacePhoneCall(string number)
 		{
-			try
+			if (PhoneDialer.Default.IsSupported)
 			{
-				PhoneDialer.Open(number);
+				try
+				{
+					PhoneDialer.Open(number);
+				}
+				catch (ArgumentNullException)
+				{
+					await DisplayAlert("POZOR", "Neznámé tel. èíslo", "OK");
+				}
+				catch (Exception ex)
+				{
+					await DisplayAlert("", $"Chyba \n{ex.Message}", "OK");
+				}
 			}
-			catch (ArgumentNullException)
+			else
 			{
-				await DisplayAlert("POZOR", "Neznámé tel. èíslo", "OK");
-			}
-			catch (Exception ex)
-			{
-				await DisplayAlert("", $"Chyba \n{ex.Message}", "OK");
+				await DisplayAlert("", $"Call not supported", "OK");
 			}
 		}
 

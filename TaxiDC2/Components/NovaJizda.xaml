@@ -21,10 +21,11 @@
 
         <!-- Scrollovatelný obsah -->
         <ScrollView Grid.Row="0" Padding="15" HorizontalOptions="Fill">
+            <Frame Style="{StaticResource CustomFrame}">
             <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
 
                 <!-- Phone Number -->
-                <Frame Style="{StaticResource CustomFrame}">
+                
                     <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
@@ -63,7 +64,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
-                               BackgroundColor="{StaticResource GridBG}" />
+                               />
                     </VerticalStackLayout>
                 </Frame>
 
@@ -118,17 +119,14 @@
                                     ImageSource="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=15, Color={StaticResource Bila}}"/>
                         </FlexLayout>
                     </VerticalStackLayout>
-                </Frame>
 
                 <!-- Note -->
-                <Frame Style="{StaticResource CustomFrame}">
                     <Entry x:Name="NoteEntry"
                            Placeholder="Poznámka"
                            PlaceholderColor="{StaticResource NRph}"
                            TextColor="{StaticResource TCwhite}"
-                           FontSize="18"
-                           BackgroundColor="{StaticResource GridBG}" />
-                </Frame>
+                           FontSize="18" />
+                
 
             </StackLayout>
         </ScrollView>

@@ -1,10 +1,16 @@
-﻿namespace TaxiDC2
+﻿using TaxiDC2.Components.Login;
+using TaxiDC2.ViewModels;
+
+namespace TaxiDC2
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+	    private readonly AppShellViewModel _model;
+
+	    public AppShell(AppShellViewModel model)
         {
-            InitializeComponent();
+	        InitializeComponent();
+	        BindingContext = _model = model;
 
 			RegisterAllRoutes();
         }
@@ -28,6 +34,7 @@
 			//	        Routing.RegisterRoute(nameof(), typeof());
 			Routing.RegisterRoute(nameof(TripAlert), typeof(TripAlert));
 			Routing.RegisterRoute(nameof(SmsSendView), typeof(SmsSendView));
+			Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
 
 		}
 

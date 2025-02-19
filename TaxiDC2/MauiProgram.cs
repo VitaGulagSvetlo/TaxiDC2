@@ -1,8 +1,14 @@
-﻿using IdentityModel.OidcClient;
+﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Firebase.Auth.Repository;
+using IdentityModel.OidcClient;
 using MauiApp1;
 using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Biometric;
 using Syncfusion.Maui.Core.Hosting;
+using TaxiDC2.Components;
+using TaxiDC2.Components.Login;
 using TaxiDC2.Services;
 using TaxiDC2.ViewModels;
 
@@ -51,6 +57,16 @@ namespace TaxiDC2
                 Browser = new MauiAuthenticationBrowser()
             }));
 
+			builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
+				{
+				ApiKey = "AIzaSyBdd4AMgyptsYcOC5hhbDuQIiblzwpPfOc",
+				AuthDomain = "taxidc2-375cf.firebaseapp.com",
+				Providers = [new EmailProvider(),new GoogleProvider()],
+				UserRepository = new FileUserRepository("Taxi2")
+			}
+				
+				));
+
 			// add main page
 			builder.Services.AddTransient<AboutPage>();
             builder.Services.AddTransient<MainPage>();
@@ -64,6 +80,7 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SeznamRidicu>();
 			builder.Services.AddTransient<SeznamZakazniku>();
 			builder.Services.AddTransient<SmsSendView>();
+
 			//vm
 			builder.Services.AddTransient<ConfigViewModel>();
 			builder.Services.AddTransient<TripDetailViewModel>();
@@ -72,10 +89,22 @@ namespace TaxiDC2
 			builder.Services.AddTransient<CustomerDetailViewModel>();
 			builder.Services.AddTransient<SmsViewModel>();
 
+
+			builder.Services.AddTransient<SignInViewModel>();
+			builder.Services.AddTransient<SignInPage>();
+
+			builder.Services.AddSingleton<LoadingPageViewModel>();
+			builder.Services.AddSingleton<LoadingPage>();
+
+			builder.Services.AddSingleton<AppShellViewModel>();
+			builder.Services.AddSingleton<AppShell>();
+
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();
             builder.Services.AddSingleton<IBussinessState,BussinessState>();
             builder.Services.AddSingleton<IApiProxy, ApiProxy>();
+
+            builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
 
 #if DEBUG
 			builder.Logging.AddDebug();

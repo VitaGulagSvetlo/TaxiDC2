@@ -17,5 +17,8 @@
 
         void ReloadDriver ();
         void UpdateDeviceKey(string eToken);
-    }
+
+        public string AuthClient { get;  }
+
+	}
 }

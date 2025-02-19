@@ -5,9 +5,11 @@
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
-             x:Class="TaxiDC2.SeznamJizd">
+             x:Class="TaxiDC2.SeznamJizd"
+             Title="Aktuální jízdy"
+             >
 
-    <RefreshView  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -27,26 +29,14 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Fill">
-                    <!-- Avatar View aligned to the left -->
-                    <!--<sfavatar:SfAvatarView       
-                 ContentType="Custom"                          
-                 HeightRequest="50"
-                 CornerRadius="25"
-                 WidthRequest="50" 
-                 Stroke="Black"
-                 StrokeThickness="1"
-                 HorizontalOptions="Start" />-->
-
-                    <!-- Other content aligned to the right -->
-                    <StackLayout HorizontalOptions="EndAndExpand">
-                        <HorizontalStackLayout>
-                            <Label VerticalOptions="Center" FontSize="16" Text="Zobrazit pouze mé jízdy"></Label>
-                            <buttons:SfSwitch/>
-                        </HorizontalStackLayout>
-                    </StackLayout>
-                </HorizontalStackLayout>
-
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" VerticalOptions="Center" FontSize="16" Text="Zobrazit pouze mé jízdy" />
+                    <buttons:SfSwitch Grid.Column="1" VerticalOptions="Center" />
+                </Grid>
             </Grid>
 
             <!-- List -->
@@ -72,10 +62,8 @@
                                     BackgroundColor="{StaticResource Zelena}" Invoked="OnSwipeLeftAccept" CommandParameter="{Binding IdTrip }"/>
                             </SwipeView.LeftItems>
 
-
                             <!-- Item content -->
                             <Frame CornerRadius="10" Padding="10" HasShadow="False" Margin="10,5" HeightRequest="180" BorderColor="{StaticResource CustomOrange}" BackgroundColor="{StaticResource GradientGray}">
-                                
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -83,20 +71,18 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="75" />
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Left Section (Main Info) -->
                                     <StackLayout Grid.Row="0" Grid.Column="0" Padding="5">
-                                        <Frame  WidthRequest="70" HeightRequest="70" CornerRadius="15" BorderColor="Transparent" BackgroundColor="{Binding TimeColor}">
-                                            
-                                            <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="Center"   IsVisible="{Binding TimeVisible}">
+                                        <Frame WidthRequest="70" HeightRequest="70" CornerRadius="15" BorderColor="Transparent" BackgroundColor="{Binding TimeColor}">
+                                            <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="Center" IsVisible="{Binding TimeVisible}">
                                                 <Label FontSize="13" TextColor="Black" Text="{Binding MinToDeadLineTxt}" />
-                                                <Label FontSize="13" TextColor="Black" Text="Min" IsVisible="{Binding MinLabelVisible}"/>
+                                                <Label FontSize="13" TextColor="Black" Text="Min" IsVisible="{Binding MinLabelVisible}" />
                                             </FlexLayout>
-
                                         </Frame>
                                     </StackLayout>
 
@@ -117,33 +103,56 @@
                                     </StackLayout>
 
                                     <!-- Orange Line -->
-                                    <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource Oranzova}" HorizontalOptions="Fill" Margin="20, 0, 20, 0" />
+                                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource Oranzova}" HorizontalOptions="Fill" Margin="20,0,20,0" />
 
                                     <!-- Bottom Section (Addresses) -->
                                     <StackLayout Grid.Row="2" Grid.Column="0" Padding="5">
                                         <Frame BackgroundColor="Purple" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent">
-                                            <Label Style="{StaticResource FS-14}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding Driver.Inicials}"></Label>
+                                            <Label Style="{StaticResource FS-14}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Driver.Inicials}" />
                                         </Frame>
                                     </StackLayout>
                                     <StackLayout Grid.Row="2" Grid.Column="1" Padding="5">
-                                        <HorizontalStackLayout Spacing="5">
-                                            <Image Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                                            <Label Text="{Binding AddressBoarding}" FontAttributes="Bold" FontSize="16" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
-                                        </HorizontalStackLayout>
-                                        <HorizontalStackLayout Spacing="5">
-                                            <Image Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                                            <Label Text="{Binding AddressExit}" FontAttributes="Bold" FontSize="16" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
-                                        </HorizontalStackLayout>
+                                        <!-- Boarding Address -->
+                                        <Grid HorizontalOptions="Start">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" 
+                                                   Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}"
+                                                   VerticalOptions="Center" />
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding AddressBoarding}" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="16" 
+                                                   TextColor="{StaticResource TCwhite}" 
+                                                   VerticalOptions="Center" 
+                                                   Margin="5,0,0,0"/>
+                                        </Grid>
+                                        <!-- Exit Address -->
+                                        <Grid HorizontalOptions="Start">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" 
+                                                   Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}"
+                                                   VerticalOptions="Center" />
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding AddressExit}" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="16" 
+                                                   TextColor="{StaticResource TCwhite}" 
+                                                   VerticalOptions="Center" 
+                                                   Margin="5,0,0,0"/>
+                                        </Grid>
                                     </StackLayout>
 
-                                    <!-- Pravá strana -->
-                                    <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="{Binding StateColor}" CornerRadius="10" WidthRequest="75" HeightRequest="150" BorderColor="Transparent" >
+                                    <!-- Right Side -->
+                                    <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="{Binding StateColor}" CornerRadius="10" WidthRequest="75" HeightRequest="150" BorderColor="Transparent">
                                         <StackLayout VerticalOptions="Center">
                                             <Image Source="{Binding StateImage}" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" />
-
-
                                         </StackLayout>
-
                                     </Frame>
                                 </Grid>
                             </Frame>

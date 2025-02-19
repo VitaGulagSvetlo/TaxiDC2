@@ -1,9 +1,19 @@
-﻿using TaxiDC2.Code;
+﻿using Firebase.Auth;
+using TaxiDC2.Code;
 
 namespace TaxiDC2.Services
 {
     public class BussinessState : IBussinessState
     {
+	    private readonly FirebaseAuthClient _authClient;
+
+	    public BussinessState(FirebaseAuthClient authClient)
+	    {
+		    _authClient = authClient;
+	    }
+
+	    public string AuthClient => _authClient?.User?.Info?.DisplayName;
+
         private static string _deviceKey;
 
         private Driver _driver = null;
