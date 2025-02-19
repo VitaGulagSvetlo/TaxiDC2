@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.SeznamAut"
+             BackgroundColor="{StaticResource GridBG}"
              Title="Seznam Aut">
 
     <ContentPage.ToolbarItems>

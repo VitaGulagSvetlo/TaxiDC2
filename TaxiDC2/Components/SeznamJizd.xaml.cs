@@ -14,6 +14,7 @@ namespace TaxiDC2
         {
             InitializeComponent();
             BindingContext = _viewModel = new TripListViewModel(proxy, bs);
+            Avatar.Text = bs?.Driver?.Inicials;
         }
 
         protected override void OnAppearing()

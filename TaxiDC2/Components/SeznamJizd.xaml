@@ -6,11 +6,12 @@
              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.SeznamJizd"
+             BackgroundColor="{StaticResource GridBG}"
              Title="Aktuální jízdy"
              >
 
     <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <Grid BackgroundColor="{StaticResource GridBG}">
+        <Grid BackgroundColor="{StaticResource GridBG}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -25,15 +26,23 @@
                     </LinearGradientBrush>
                 </Grid.Background>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="1">
+                <!-- Avatar -->
+                <Frame Grid.Column="0" BackgroundColor="Purple" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent">
+                    <Label x:Name="Avatar" Text="A" Style="{StaticResource FS-14}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+
+                <!-- Switch and Label -->
+                <Grid Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+
                     <Label Grid.Column="0" VerticalOptions="Center" FontSize="16" Text="Zobrazit pouze mé jízdy" />
                     <buttons:SfSwitch Grid.Column="1" VerticalOptions="Center" />
                 </Grid>
@@ -160,6 +169,17 @@
                     </DataTemplate>
                 </syncfusionList:SfListView.ItemTemplate>
             </syncfusionList:SfListView>
+            <Frame Grid.RowSpan="2"
+                   Style="{StaticResource FloatingAdd}"
+                   >
+                <Image Source="{FontImageSource Glyph={StaticResource plus}, FontFamily=FAPro, Size=35, Color=White}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                      />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FloatingButtonCommand}" />
+                </Frame.GestureRecognizers>
+            </Frame>
         </Grid>
     </RefreshView>
 </ContentPage>

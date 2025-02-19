@@ -5,6 +5,7 @@
              x:Class="TaxiDC2.DetailAuto"
              Title="Detail Auta"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             BackgroundColor="{StaticResource GridBG}"
              x:DataType="vm:CarDetailViewModel">
 
     <Grid BackgroundColor="{StaticResource GridBG}">
@@ -23,7 +24,7 @@
                 <!-- Car Type -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Vůz:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Label Text="Vůz:" Style="{StaticResource CustomLblO}" />
                         <Entry Placeholder="Škoda" Text="{Binding CarType}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </Frame>
@@ -31,7 +32,7 @@
                 <!-- Color -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Barva:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Label Text="Barva:" Style="{StaticResource CustomLblO}"  />
                         <Entry Placeholder="Černá" Text="{Binding Color}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </Frame>
@@ -39,7 +40,7 @@
                 <!-- License Plate -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="SPZ:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Label Text="SPZ:" Style="{StaticResource CustomLblO}"  />
                         <Entry  Placeholder="1AX 1234" Text="{Binding Rz}" PlaceholderColor="{StaticResource NRph}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                     </StackLayout>
                 </Frame>

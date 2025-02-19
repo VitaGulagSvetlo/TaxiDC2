@@ -22,4 +22,6 @@
     <x:String x:Key="search">&#xf002;</x:String>
     <x:String x:Key="car">&#xf1b9;</x:String>
     <x:String x:Key="edit">&#xf304;</x:String>
+    <x:String x:Key="list">&#xf03a;</x:String>
+    <x:String x:Key="plus">&#x2b;</x:String>
 </ResourceDictionary>

@@ -5,100 +5,107 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.DetailZakaznik"
              Title="Detail Zákazníka"
-             x:DataType="vm:CustomerDetailViewModel">
+             x:DataType="vm:CustomerDetailViewModel"
+             BackgroundColor="{StaticResource GridBG}">
 
     <Grid BackgroundColor="{StaticResource GridBG}">
+        <!-- Grid layout definition -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <!-- Scrollable Content -->
+            <RowDefinition Height="Auto" />
+            <!-- Save Button -->
         </Grid.RowDefinitions>
 
-        <!-- Header Section -->
-        
-
-        <!-- Content Section -->
-        <ScrollView Grid.Row="1" Padding="15">
+        <!-- Main Scrollable Content -->
+        <ScrollView Grid.Row="0" Padding="15">
             <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
-
                 <!-- Customer Details -->
-                <Frame  Style="{StaticResource CustomFrame}">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="Jméno:" Style="{StaticResource CustomLblO}"/>
+                            <Label Text="Jméno:" Style="{StaticResource CustomLblO}" />
                             <Entry Text="{Binding Name}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Telefon:" Style="{StaticResource CustomLblO}"/>
+                            <Label Text="Telefon:" Style="{StaticResource CustomLblO}" />
                             <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Poznámka:"  Style="{StaticResource CustomLblO}" />
+                            <Label Text="Poznámka:" Style="{StaticResource CustomLblO}" />
                             <Entry Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Preferences -->
-                <Frame  Style="{StaticResource CustomFrame}">
-                    <StackLayout Spacing="10">
-                        <HorizontalStackLayout>
-                            <Label Text="VIP:"  Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                            <Switch IsEnabled="True"  IsToggled="{Binding VIP}" HorizontalOptions="Start" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Label Text="Nevozit!:"  Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                            <Switch IsEnabled="True"  IsToggled="{Binding Rejected}" HorizontalOptions="Start" />
-                            </HorizontalStackLayout> 
-                    </StackLayout>
+                <Frame Style="{StaticResource CustomFrame}">
+                    <Grid ColumnSpacing="10">
+
+                        <!-- Define rows and columns for each switch -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- VIP Switch -->
+                        <Label Grid.Row="0" Grid.Column="0" Text="VIP:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
+                        <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding VIP}" HorizontalOptions="Start" />
+
+                        <!-- Rejected Switch -->
+                        <Label Grid.Row="1" Grid.Column="0" Text="Nevozit!:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
+                        <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding Rejected}" HorizontalOptions="Start" />
+
+                    </Grid>
                 </Frame>
 
+
                 <!-- Rating Section -->
-                <Frame  Style="{StaticResource CustomFrame}">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout>
-                        <Label Text="Hodnocení zákazníka:"  Style="{StaticResource CustomLblO}" />
+                        <Label Text="Hodnocení zákazníka:" Style="{StaticResource CustomLblO}" />
                         <inputs:SfRating Value="{Binding VIP2}">
                             <inputs:SfRating.RatingSettings>
-                                <inputs:RatingSettings RatedStroke="Transparent" RatedFill="{StaticResource Oranzova}" UnratedFill="{StaticResource GradientGray}"/>
+                                <inputs:RatingSettings RatedStroke="Transparent" RatedFill="{StaticResource Oranzova}" UnratedFill="{StaticResource GradientGray}" />
                             </inputs:SfRating.RatingSettings>
                         </inputs:SfRating>
                     </StackLayout>
                 </Frame>
 
                 <!-- Last Trip Info -->
-                <Frame  Style="{StaticResource CustomFrame}">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                       
                         <VerticalStackLayout>
-                            <HorizontalStackLayout>
-                                <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                            </HorizontalStackLayout>
-                            <Label Text="Nástup:"  Style="{StaticResource CustomLblO}" />
+                            <Label Text="Nástup:" Style="{StaticResource CustomLblO}" />
                             <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <HorizontalStackLayout>
-                                <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                            </HorizontalStackLayout>
-                            <Label Text="Výstup:"  Style="{StaticResource CustomLblO}" />
+                            <Label Text="Výstup:" Style="{StaticResource CustomLblO}" />
                             <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <HorizontalStackLayout>
-                                <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                                <Label Text="Poslední cesta:" Style="{StaticResource CustomLblO}" />
-                            </HorizontalStackLayout>
-                            
+                            <Label Text="Poslední cesta:" Style="{StaticResource CustomLblO}" />
                             <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
-
-                <!-- Save Button -->
-                <Button Text="ULOŽIT ZMĚNY" BackgroundColor="{StaticResource CustomOrangeBG}" TextColor="{StaticResource Cerna}" FontSize="16" VerticalOptions="EndAndExpand" CornerRadius="10" Command="{Binding SaveDataCmd}" />
             </StackLayout>
         </ScrollView>
+
+        <!-- Save Button -->
+        <Button Text="ULOŽIT ZMĚNY"
+                Grid.Row="1"
+                BackgroundColor="{StaticResource CustomOrangeBG}"
+                TextColor="{StaticResource Cerna}"
+                FontSize="16"
+                CornerRadius="10"
+                Command="{Binding SaveDataCmd}"
+                HorizontalOptions="Center" 
+                VerticalOptions="End" />
     </Grid>
 </ContentPage>

@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.SeznamRidicu"
+             BackgroundColor="{StaticResource GridBG}"
              Title="Seznam Řidičů">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Nový řidič" Command="{Binding AddItemCommand}" />
@@ -21,7 +22,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- List -->
-                <syncfusionList:SfListView x:Name="listRidici" ItemSize="200" Grid.Row="0" ItemSpacing="5" ItemsSource="{Binding Items}">
+                <syncfusionList:SfListView x:Name="listRidici" ItemSize="200" Grid.Row="0" ItemSpacing="10" ItemsSource="{Binding Items}">
 
                     <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Driver">
@@ -71,6 +72,7 @@
                                     </HorizontalStackLayout>
 
                                     <!-- Active -->
+                                    
                                     <Label Grid.Row="4" Grid.Column="0" Text="Aktivní:" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
                                     <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding Active}" Toggled="Switch1_OnToggled" IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vm:DriverListViewModel}}, Path=IsAdmin}" HorizontalOptions="Start" />
 

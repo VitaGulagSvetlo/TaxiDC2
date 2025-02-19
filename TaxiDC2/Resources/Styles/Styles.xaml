@@ -17,7 +17,18 @@
         <Setter Property="BorderColor" Value="{StaticResource Oranzova}"/>
         <Setter Property="BackgroundColor" Value="{StaticResource Sediva}"/>
         <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-    </Style> 
+    </Style>
+    <Style x:Key="FloatingAdd" TargetType="Frame">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Oranzova}" />
+        <Setter Property="WidthRequest" Value="60" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="CornerRadius" Value="40" />
+        <Setter Property="BorderColor" Value="Transparent" />
+    </Style>
     <Style x:Key="TimeBtn" TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource Bila}"/>
         <Setter Property="FontAttributes" Value="Bold"/>
@@ -28,8 +39,30 @@
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="Margin" Value="2.5"/>
     </Style>
+    <Style x:Key="CallLogBtn" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Bila}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Oranzova}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="WidthRequest" Value="40"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="Margin" Value="2.5"/>
+    </Style>
+    <Style x:Key="CustomSettingsBtn" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Cerna}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Oranzova}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="WidthRequest" Value="250"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="Margin" Value="2.5"/>
+    </Style>
     <Style x:Key="MenuBtn" TargetType="Button">
         <Setter Property="BorderColor" Value="{StaticResource Oranzova}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Sediva}"/>
+        <Setter Property="TextColor" Value="{StaticResource Oranzova}"/>
+        
     </Style>
     <Style x:Key="RideDetailBtn" TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource Cerna}"/>

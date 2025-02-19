@@ -43,14 +43,14 @@
                 Text="TAXI DC"
                 SemanticProperties.HeadingLevel="Level1" 
                 FontSize="30"
-                FontAttributes="Bold"/>
-            
-            <Button Text="Nová jízda" Clicked="OnNewClicked"   
-                  BackgroundColor="{StaticResource GridBG}" BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                Style="{StaticResource CustomLblO}"/>
+
+                <Button Text="Nová jízda" Clicked="OnNewClicked"   
+                  Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
             <Button Text="Přehled jízd" Clicked="OnListClicked"   
-                   BackgroundColor="{StaticResource GridBG}" BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                   Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
             <Button Text="Settings" Clicked="OnSetClicked"   
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                   Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
             <!--<Button Text="Login (dev test)" Clicked="OnLoginClicked"  
                    BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource login}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
             <Button Text="User info  (dev test)" Clicked="OnInfoClicked"  

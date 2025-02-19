@@ -14,41 +14,45 @@
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <!-- Scrollovatelný obsah -->
+           
             <RowDefinition Height="Auto" />
-            <!-- Fixované tlačítko -->
+          
         </Grid.RowDefinitions>
 
-        <!-- Scrollovatelný obsah -->
+       
         <ScrollView Grid.Row="0" Padding="15" HorizontalOptions="Fill">
             <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
                 <Frame Style="{StaticResource CustomFrame}">
 
-
-                    <!-- Phone Number -->
-
+                   
                     <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                            <Label Text="Telefonní číslo" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                            <Label Text="Telefonní číslo" Style="{StaticResource CustomLblO}"/>
                         </HorizontalStackLayout>
 
-                        <Entry x:Name="PhoneEntry"
-                               Placeholder="+420123456789"
-                               PlaceholderColor="{StaticResource NRph}"
-                               TextColor="{StaticResource Bila}"
-                               FontSize="18"
-                               />
+                  
+                        <Grid  HorizontalOptions="FillAndExpand">
+                          
+                            <Entry x:Name="PhoneEntry"
+                                   Placeholder="+420123456789"
+                                   PlaceholderColor="{StaticResource NRph}"
+                                   TextColor="{StaticResource Bila}"
+                                   FontSize="18"
+                                   HorizontalOptions="FillAndExpand"
+                                   Grid.Column="0" />
+                         
+                            <Button Style="{StaticResource CallLogBtn}"
+                                    CornerRadius="5"
+                                    ImageSource="{FontImageSource Glyph={StaticResource list}, FontFamily=FAPro, Size=18, Color={StaticResource Bila}}"
+                                    Grid.Column="1" HorizontalOptions="End" />
+                        </Grid>
 
-
-                        <!-- Customer Name with Rating -->
-
+                       
                         <HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                                <Label Text="Jméno" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                                <Label Text="Jméno"  Style="{StaticResource CustomLblO}" />
                             </HorizontalStackLayout>
                             <inputs:SfRating x:Name="CustomerRating"
                                              ItemCount="5"
@@ -66,6 +70,7 @@
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
                                />
+
                     </VerticalStackLayout>
 
                 </Frame>
@@ -75,8 +80,7 @@
                     <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                            <Label Text="Začátek" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                            <Label Text="Začátek" Style="{StaticResource CustomLblO}" />
                         </HorizontalStackLayout>
                         <Entry x:Name="FromEntry"
                                Placeholder="Praha2"
@@ -87,8 +91,7 @@
 
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                            <Label Text="Cíl" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                            <Label Text="Cíl" Style="{StaticResource CustomLblO}" />
                         </HorizontalStackLayout>
                         <Entry x:Name="ToEntry"
                                Placeholder="dvorakova"
@@ -97,14 +100,11 @@
                                FontSize="18"
                               />
 
-
                         <!-- Time Selection -->
-
                         <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-
-                                <Label Text="Čas jízdy" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                                <Label Text="Čas jízdy"  Style="{StaticResource CustomLblO}" />
                             </HorizontalStackLayout>
                             <Label Text="(čas nebo minuty do začátku jízdy)" FontSize="12" />
                         </HorizontalStackLayout>
@@ -122,6 +122,7 @@
                         </FlexLayout>
                     </VerticalStackLayout>
                 </Frame>
+
                 <!-- Note -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <Entry x:Name="NoteEntry"
@@ -136,10 +137,8 @@
         </ScrollView>
 
         <!-- Fixované tlačítko na spodku -->
-        
         <Grid Grid.Row="1" Padding="15">
-           
-                <Button Text="ULOŽIT ZMĚNY"
+            <Button Text="ULOŽIT ZMĚNY"
                     BackgroundColor="{StaticResource CustomOrangeBG}"
                     TextColor="{StaticResource Cerna}"
                     FontSize="16"
@@ -147,7 +146,6 @@
                     CornerRadius="10"
                     Command="{Binding SaveDataCmd}"
                     HeightRequest="50"/>
-            
         </Grid>
 
     </Grid>
