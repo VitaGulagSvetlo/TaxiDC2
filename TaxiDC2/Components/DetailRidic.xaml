@@ -53,13 +53,13 @@
 
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="Notifikace zapnuty:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding NotificationEnable}" HorizontalOptions="Start" />
+                            <Label Text="Notifikace zapnuty:"  Style="{StaticResource CustomLblO}"  VerticalTextAlignment="Center" />
+                            <Switch IsEnabled="True"  IsToggled="{Binding NotificationEnable}" HorizontalOptions="Start" />
 
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="Administrator:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding IsAdmin}" HorizontalOptions="Start" />
+                            <Label Text="Administrator:"  Style="{StaticResource CustomLblO}"  VerticalTextAlignment="Center" />
+                            <Switch IsEnabled="True"  IsToggled="{Binding IsAdmin}" HorizontalOptions="Start" />
 
                         </HorizontalStackLayout>
                     </StackLayout>

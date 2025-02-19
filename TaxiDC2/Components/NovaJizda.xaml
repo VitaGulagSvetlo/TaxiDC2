@@ -21,28 +21,29 @@
 
         <!-- Scrollovatelný obsah -->
         <ScrollView Grid.Row="0" Padding="15" HorizontalOptions="Fill">
-            <Frame Style="{StaticResource CustomFrame}">
             <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
+                <Frame Style="{StaticResource CustomFrame}">
 
-                <!-- Phone Number -->
-                
+
+                    <!-- Phone Number -->
+
                     <VerticalStackLayout Spacing="10">
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
 
                             <Label Text="Telefonní číslo" FontSize="18" TextColor="{StaticResource Oranzova}" />
                         </HorizontalStackLayout>
-                       
+
                         <Entry x:Name="PhoneEntry"
                                Placeholder="+420123456789"
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
-                               BackgroundColor="{StaticResource GridBG}" />
-                    
+                               />
 
-                <!-- Customer Name with Rating -->
-                
+
+                        <!-- Customer Name with Rating -->
+
                         <HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
@@ -66,6 +67,7 @@
                                FontSize="18"
                                />
                     </VerticalStackLayout>
+
                 </Frame>
 
                 <!-- From and To Location -->
@@ -81,7 +83,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource TCwhite}"
                                FontSize="18"
-                               BackgroundColor="{StaticResource GridBG}" />
+                                />
 
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
@@ -93,11 +95,11 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
-                               BackgroundColor="{StaticResource GridBG}" />
-                   
+                              />
 
-                <!-- Time Selection -->
-               
+
+                        <!-- Time Selection -->
+
                         <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
@@ -119,21 +121,25 @@
                                     ImageSource="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=15, Color={StaticResource Bila}}"/>
                         </FlexLayout>
                     </VerticalStackLayout>
-
+                </Frame>
                 <!-- Note -->
+                <Frame Style="{StaticResource CustomFrame}">
                     <Entry x:Name="NoteEntry"
                            Placeholder="Poznámka"
                            PlaceholderColor="{StaticResource NRph}"
                            TextColor="{StaticResource TCwhite}"
                            FontSize="18" />
-                
+                </Frame>
 
             </StackLayout>
+
         </ScrollView>
 
         <!-- Fixované tlačítko na spodku -->
+        
         <Grid Grid.Row="1" Padding="15">
-            <Button Text="ULOŽIT ZMĚNY"
+           
+                <Button Text="ULOŽIT ZMĚNY"
                     BackgroundColor="{StaticResource CustomOrangeBG}"
                     TextColor="{StaticResource Cerna}"
                     FontSize="16"
@@ -141,6 +147,7 @@
                     CornerRadius="10"
                     Command="{Binding SaveDataCmd}"
                     HeightRequest="50"/>
+            
         </Grid>
 
     </Grid>

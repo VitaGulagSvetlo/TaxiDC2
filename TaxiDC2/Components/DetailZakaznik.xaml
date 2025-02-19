@@ -41,14 +41,14 @@
                 <!-- Preferences -->
                 <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <VerticalStackLayout>
+                        <HorizontalStackLayout>
                             <Label Text="VIP:"  Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding VIP}" HorizontalOptions="Start" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout>
+                            <Switch IsEnabled="True"  IsToggled="{Binding VIP}" HorizontalOptions="Start" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
                             <Label Text="Nevozit!:"  Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding Rejected}" HorizontalOptions="Start" />
-                        </VerticalStackLayout>
+                            <Switch IsEnabled="True"  IsToggled="{Binding Rejected}" HorizontalOptions="Start" />
+                            </HorizontalStackLayout> 
                     </StackLayout>
                 </Frame>
 
@@ -69,15 +69,28 @@
                     <StackLayout Spacing="10">
                        
                         <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+
+                            </HorizontalStackLayout>
                             <Label Text="Nástup:"  Style="{StaticResource CustomLblO}" />
                             <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+
+                            </HorizontalStackLayout>
                             <Label Text="Výstup:"  Style="{StaticResource CustomLblO}" />
                             <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Poslední cesta:" Style="{StaticResource CustomLblO}" />
+                            <HorizontalStackLayout>
+                                <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+
+                                <Label Text="Poslední cesta:" Style="{StaticResource CustomLblO}" />
+                            </HorizontalStackLayout>
+                            
                             <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
