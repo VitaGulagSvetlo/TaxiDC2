@@ -6,24 +6,28 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using TaxiDC2.Models;
+using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
     public partial class NovaJizda : ContentPage
     {
-        public ObservableCollection<int> MinutesList { get; set; }
+	    private readonly TripNewViewModel _model;
+	    public ObservableCollection<int> MinutesList { get; set; }
         public int SelectedMinute { get; set; }
-        public NovaJizda()
+        public NovaJizda(TripNewViewModel model)
         {
-            InitializeComponent();
-            MinutesList = new ObservableCollection<int> { 5, 10, 15, 20, 25, 30 };
-            BindingContext = this;
+	        _model = model;
+	        InitializeComponent();
+            
+            BindingContext = _model = model;
         }
+
         private async void OnTimePickerButtonClicked(object sender, EventArgs e)
         {
-            Syncfusion.Maui.Popup.SfPopup timePickerPopup = null;
+            SfPopup timePickerPopup = null;
 
-            var timePicker = new SfTimePicker
+			var timePicker = new SfTimePicker
             {
                 
                 Format = PickerTimeFormat.HH_mm,
@@ -32,7 +36,9 @@ namespace TaxiDC2
                 HeightRequest = 200
             };
 
-            timePickerPopup = new Syncfusion.Maui.Popup.SfPopup
+            timePicker.SelectedTime = _model.CasNastupuD ?? new TimeSpan(0,DateTime.Now.Hour, DateTime.Now.Minute, 0);
+
+			timePickerPopup = new SfPopup
             {
                 WidthRequest = 350,
                 HeightRequest = 400,
@@ -53,7 +59,8 @@ namespace TaxiDC2
                         Command = new Command(() =>
                         {
                             string selectedTime = timePicker.SelectedTime?.ToString(@"hh\:mm") ?? "00:00";
-                            TimePickerButton.Text = selectedTime; 
+                            //TimePickerButton.Text = selectedTime;
+                            _model.CasNastupuD = timePicker.SelectedTime;
                             timePickerPopup.IsOpen = false; 
                         })
                     },

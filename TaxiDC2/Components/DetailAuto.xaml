@@ -51,7 +51,7 @@
                         FontSize="16"
                         VerticalOptions="EndAndExpand"
                         CornerRadius="10"
-                        Command="{Binding SaveDataCmd}" />
+                        Command="{Binding SaveDataCommand}" />
             </StackLayout>
         </ScrollView>
     </Grid>

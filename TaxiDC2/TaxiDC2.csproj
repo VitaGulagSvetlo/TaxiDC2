@@ -123,6 +123,9 @@
 		 <Compile Update="Components\NovaJizda.xaml.cs">
 			 <DependentUpon>NovaJizda.xaml</DependentUpon>
 		 </Compile>
+		 <Compile Update="Platforms\iOS\CallLogService.cs">
+		   <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+		 </Compile>
 	 </ItemGroup>
 	
 	 <ItemGroup>

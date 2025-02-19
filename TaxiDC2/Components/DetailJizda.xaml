@@ -107,7 +107,7 @@
                         <Label Text="Řidič" FontSize="18" TextColor="{StaticResource Oranzova}" />
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                            <Label Text="{Binding Driver}" FontSize="18" TextColor="{StaticResource Bila}" />
+                            <Label Text="{Binding Driver.FullName}" FontSize="18" TextColor="{StaticResource Bila}" />
                         </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
