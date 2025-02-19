@@ -3,13 +3,12 @@ using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
 using IdentityModel.OidcClient;
 using MauiApp1;
-using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Biometric;
 using Syncfusion.Maui.Core.Hosting;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
-using TaxiDC2.Services;
+using TaxiDC2.Interfaces;
 using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
@@ -80,6 +79,7 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SeznamRidicu>();
 			builder.Services.AddTransient<SeznamZakazniku>();
 			builder.Services.AddTransient<SmsSendView>();
+			builder.Services.AddTransient<TripNewViewModel>();
 
 			//vm
 			builder.Services.AddTransient<ConfigViewModel>();
@@ -105,6 +105,12 @@ namespace TaxiDC2
             builder.Services.AddSingleton<IApiProxy, ApiProxy>();
 
             builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
+
+#if ANDROID
+	        builder.Services.AddSingleton<ICallLogService, TaxiDC2.Platforms.Android.CallLogService >();
+#elif IOS
+            builder.Services.AddSingleton<ICallLogService, TaxiDC2.Platforms.iOS.CallLogService >();
+#endif
 
 #if DEBUG
 			builder.Logging.AddDebug();

@@ -9,7 +9,8 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.NovaJizda"
              Title="Nová jízda"
-             BackgroundColor="{StaticResource GridBG}">
+             BackgroundColor="{StaticResource GridBG}"
+             x:DataType="vm:TripNewViewModel">
 
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
@@ -39,6 +40,7 @@
                                    PlaceholderColor="{StaticResource NRph}"
                                    TextColor="{StaticResource Bila}"
                                    FontSize="18"
+                                   Text="{Binding Customer.PhoneNumber}
                                    HorizontalOptions="FillAndExpand"
                                    Grid.Column="0" />
                          
@@ -56,7 +58,7 @@
                             </HorizontalStackLayout>
                             <inputs:SfRating x:Name="CustomerRating"
                                              ItemCount="5"
-                                             Value="3"
+                                             Value="{Binding Customer.VIP2}"
                                              Margin="5"
                                              ItemSize="20">
                                 <inputs:SfRating.RatingSettings>
@@ -69,6 +71,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
+                               Text="{Binding Customer.Name}"
                                />
 
                     </VerticalStackLayout>
@@ -87,6 +90,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource TCwhite}"
                                FontSize="18"
+                               Text="{Binding AdresaStart}"
                                 />
 
                         <HorizontalStackLayout Spacing="5">
@@ -98,6 +102,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
+                               Text="{Binding AdresaCil}"
                               />
 
                         <!-- Time Selection -->
@@ -110,15 +115,16 @@
                         </HorizontalStackLayout>
 
                         <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
-                            <Button Text="5" Style="{StaticResource TimeBtn}"/>
-                            <Button Text="10" Style="{StaticResource TimeBtn}"/>
-                            <Button Text="15" Style="{StaticResource TimeBtn}"/>
-                            <Button Text="20" Style="{StaticResource TimeBtn}"/>
-                            <Button Text="25" Style="{StaticResource TimeBtn}"/>
-                            <Button Text="30" Style="{StaticResource TimeBtn}"/>
+                            <Button Text="5" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="5"/>
+                            <Button Text="10" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="10"/>
+                            <Button Text="15" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="15"/>
+                            <Button Text="20" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="20"/>
+                            <Button Text="25" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="25"/>
+                            <Button Text="30" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="30"/>
                             <Button Style="{StaticResource TimeBtn}" x:Name="TimePickerButton" Clicked="OnTimePickerButtonClicked"
                                     CornerRadius="5" FontSize="17" 
                                     ImageSource="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=15, Color={StaticResource Bila}}"/>
+                            <Label Text="{Binding CasTxt}" IsVisible="{Binding CasVisible}"></Label>
                         </FlexLayout>
                     </VerticalStackLayout>
                 </Frame>
@@ -129,7 +135,9 @@
                            Placeholder="Poznámka"
                            PlaceholderColor="{StaticResource NRph}"
                            TextColor="{StaticResource TCwhite}"
-                           FontSize="18" />
+                           FontSize="18" 
+                            Text="{Binding Memo}"
+                    />
                 </Frame>
 
             </StackLayout>
@@ -144,7 +152,7 @@
                     FontSize="16"
                     VerticalOptions="End"
                     CornerRadius="10"
-                    Command="{Binding SaveDataCmd}"
+                    Command="{Binding SaveCmd}"
                     HeightRequest="50"/>
         </Grid>
 

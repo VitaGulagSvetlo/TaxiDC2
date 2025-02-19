@@ -1,11 +1,12 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
 using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
-    public class CarDetailViewModel : INotifyPropertyChanged
+    public partial class CarDetailViewModel : INotifyPropertyChanged
     {
         private IApiProxy _proxy;
 
@@ -13,17 +14,16 @@ namespace TaxiDC2.ViewModels
         {
             _proxy = proxy;
             Title = "Vozidlo";
-            SaveDataCmd = new Command(async () => await SaveData());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsBusy { get; set; }
         public string Message { get; set; } = "";
-        public ICommand SaveDataCmd { get; }
         public string Title { get; set; } = string.Empty;
 
-        public async Task SaveData()
+		[RelayCommand]
+		private async Task SaveData()
         {
             Car cr = new()
             {
@@ -49,7 +49,8 @@ namespace TaxiDC2.ViewModels
             }
         }
 
-        public async Task LoadData(Guid id)
+		[RelayCommand]
+		public async Task LoadData(Guid id)
         {
 	        var car = await _proxy.GetCarByIdAsync(id);
 			if (car.State == ResultCode.OK && car.Data != null)
