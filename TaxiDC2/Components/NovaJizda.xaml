@@ -40,7 +40,7 @@
                                    PlaceholderColor="{StaticResource NRph}"
                                    TextColor="{StaticResource Bila}"
                                    FontSize="18"
-                                   Text="{Binding Customer.PhoneNumber}
+                                   Text="{Binding Customer.PhoneNumber}"
                                    HorizontalOptions="FillAndExpand"
                                    Grid.Column="0" />
                          
