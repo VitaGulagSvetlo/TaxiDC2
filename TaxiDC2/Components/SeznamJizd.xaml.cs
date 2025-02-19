@@ -2,6 +2,7 @@
 using Syncfusion.Maui.ListView;
 using System;
 using System.Collections.ObjectModel;
+using Syncfusion.Maui.Buttons;
 using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
@@ -10,11 +11,10 @@ namespace TaxiDC2
     {
         readonly TripListViewModel _viewModel;
 
-        public SeznamJizd(IApiProxy proxy, IBussinessState bs)
+        public SeznamJizd(IBussinessState bs,TripListViewModel model)
         {
             InitializeComponent();
-            BindingContext = _viewModel = new TripListViewModel(proxy, bs);
-            Avatar.Text = bs?.Driver?.Inicials;
+            BindingContext = _viewModel = model;
         }
 
         protected override void OnAppearing()
@@ -60,5 +60,11 @@ namespace TaxiDC2
 		        await m.AcceptTrip();
 	        }
         }
-	}
+
+        private async void SfSwitch_OnStateChanged(object sender, SwitchStateChangedEventArgs e)
+        {
+	        _viewModel.ListMode = e.NewValue==true ? 1 : 0;
+			await _viewModel.RefreshData();
+		}
+    }
 }

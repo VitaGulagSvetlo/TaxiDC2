@@ -80,6 +80,8 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SeznamZakazniku>();
 			builder.Services.AddTransient<SmsSendView>();
 			builder.Services.AddTransient<TripNewViewModel>();
+			builder.Services.AddTransient<TripListViewModel>();
+
 
 			//vm
 			builder.Services.AddTransient<ConfigViewModel>();
@@ -108,8 +110,10 @@ namespace TaxiDC2
 
 #if ANDROID
 	        builder.Services.AddSingleton<ICallLogService, TaxiDC2.Platforms.Android.CallLogService >();
+	        builder.Services.AddSingleton<IPlaySoundService, TaxiDC2.Platforms.Android.PlaySoundServiceAndroid>();
 #elif IOS
             builder.Services.AddSingleton<ICallLogService, TaxiDC2.Platforms.iOS.CallLogService >();
+	        builder.Services.AddSingleton<IPlaySoundService, TaxiDC2.Platforms.iOS.PlaySoundServiceIOS>();
 #endif
 
 #if DEBUG

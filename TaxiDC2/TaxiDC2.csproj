@@ -126,6 +126,9 @@
 		 <Compile Update="Platforms\iOS\CallLogService.cs">
 		   <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
 		 </Compile>
+		 <Compile Update="Platforms\iOS\PlaySoundService.cs">
+		   <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+		 </Compile>
 	 </ItemGroup>
 	
 	 <ItemGroup>

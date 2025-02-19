@@ -4,6 +4,7 @@ namespace TaxiDC2.Interfaces
 {
     public interface IPlaySoundService
     {
-        void PlaySystemSound();
-    }
+        void PlaySystemSound(string soundName);
+
+}
 }
