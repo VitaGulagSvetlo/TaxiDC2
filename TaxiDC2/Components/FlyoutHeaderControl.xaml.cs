@@ -11,7 +11,6 @@ public partial class FlyoutHeaderControl :StackLayout
 		if (!string.IsNullOrWhiteSpace(authClient?.User?.Info?.Email))
 		{
 			lblUserEmail.Text = authClient?.User?.Info?.Email;
-			lblUserName.Text = authClient?.User?.Info?.DisplayName;
 		}
 	}
 }

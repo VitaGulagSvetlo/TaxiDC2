@@ -5,6 +5,7 @@ using IdentityModel.OidcClient;
 using MauiApp1;
 using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Biometric;
 using Syncfusion.Maui.Core.Hosting;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
@@ -102,6 +103,8 @@ namespace TaxiDC2
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();
             builder.Services.AddSingleton<IBussinessState,BussinessState>();
             builder.Services.AddSingleton<IApiProxy, ApiProxy>();
+
+            builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
 
 #if DEBUG
 			builder.Logging.AddDebug();

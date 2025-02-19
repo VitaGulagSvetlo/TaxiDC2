@@ -10,14 +10,32 @@
              Shell.NavBarIsVisible="False"
              >
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
-        <Entry Placeholder="User email" Text="{Binding Email}"/>
-        <Entry Placeholder="User password" Text="{Binding Password}"/>
-        <Button Command="{Binding SignInCommand}" HorizontalOptions="Center" Text="Login"></Button>
+        <Image Source="taxi.png" WidthRequest="200" HeightRequest="300"  VerticalOptions="Center"/>
+        <Label 
+            Text="Welcome to TAXI app!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="18"/>
+        <Label 
+            Text="Please sign in"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="14"
+            TextColor="Aqua"/>
+<Frame Padding="20" BackgroundColor="{StaticResource Gray900}" Margin="20">
+    <VerticalStackLayout >
+    <HorizontalStackLayout>
+            <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}" WidthRequest="20"></Image>
+            <Entry Placeholder="User email" Text="{Binding Email}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}" WidthRequest="20"></Image>
+            <Entry Placeholder="User password" Text="{Binding Password}" IsPassword="True"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+        </Frame>
+        <Button Command="{Binding SignInCommand}" HorizontalOptions="Center" Text="Sign In"></Button>
         <!--<Button Command="{Binding SignInGoogleCommand}" HorizontalOptions="Center" Text="G"></Button>-->
 
     </VerticalStackLayout>

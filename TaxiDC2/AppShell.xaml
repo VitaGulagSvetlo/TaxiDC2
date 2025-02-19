@@ -16,7 +16,6 @@
         ContentTemplate="{DataTemplate components:LoadingPage}"
         Route="LoadingPage" 
         Shell.FlyoutBehavior="Disabled"
-        IsVisible="{Binding IsNotSigned}"
         />
 
     <ShellContent ContentTemplate = "{DataTemplate local:MainPage}" Title = "Main page" Route ="MainPage" Shell.FlyoutBehavior="Flyout" />
