@@ -20,4 +20,6 @@
     <x:String x:Key="calendar">&#xf073;</x:String>
     <x:String x:Key="banned">&#xf06a;</x:String>
     <x:String x:Key="search">&#xf002;</x:String>
+    <x:String x:Key="car">&#xf1b9;</x:String>
+    <x:String x:Key="edit">&#xf304;</x:String>
 </ResourceDictionary>

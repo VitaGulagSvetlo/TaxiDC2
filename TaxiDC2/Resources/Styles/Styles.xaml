@@ -4,22 +4,65 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Oranzova">#FFA500</Color>
-    <Color x:Key="GradientGray">#404040</Color>
-    <Color x:Key="TCwhite">#FFFFFF</Color>
+    <Color x:Key="Oranzova">#FF8C00</Color>
+    <Color x:Key="Sediva">#404040</Color>
+    <Color x:Key="Bila">#FFFFFF</Color>
+    <Color x:Key="Cerna">#000000</Color>
+    <Color x:Key="Cervena">#FF0000</Color>
+    <Color x:Key="Zelena">#00FF00</Color>
+   
     <Style x:Key="CustomFrame" TargetType="Frame">
         <Setter Property="Padding" Value="10"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BorderColor" Value="{StaticResource Oranzova}"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource GradientGray}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Sediva}"/>
         <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-    </Style>
+    </Style> 
     <Style x:Key="TimeBtn" TargetType="Button">
-        <Setter Property="TextColor" Value="{StaticResource TCwhite}"/>
+        <Setter Property="TextColor" Value="{StaticResource Bila}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="13"/>
         <Setter Property="BackgroundColor" Value="{StaticResource Oranzova}"/>
         <Setter Property="CornerRadius" Value="5"/>
-        <Setter Property="WidthRequest" Value="35"/>
-        <Setter Property="HeightRequest" Value="35"/>
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="Margin" Value="2.5"/>
+    </Style>
+    <Style x:Key="MenuBtn" TargetType="Button">
+        <Setter Property="BorderColor" Value="{StaticResource Oranzova}"/>
+    </Style>
+    <Style x:Key="RideDetailBtn" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Cerna}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Oranzova}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="CornerRadius" Value="5"/>
+         <Setter Property="Margin" Value="2.5"/>
+    </Style>
+    <Style x:Key="CustomLblWH" TargetType="Label">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor" Value="{StaticResource Bila}"/>
+    </Style>
+    <Style x:Key="CustomLblO" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor" Value="{StaticResource Oranzova}"/>
+    </Style>
+    <Style x:Key="RideCancelBtn" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Bila}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Cervena}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Margin" Value="2.5"/>
+    </Style>
+    <Style x:Key="RideCompleteBtn" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Bila}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Zelena}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="CornerRadius" Value="5"/>
         <Setter Property="Margin" Value="2.5"/>
     </Style>
     <Style TargetType="ActivityIndicator">
@@ -42,8 +85,8 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Primary}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Oranzova}, Dark={StaticResource Oranzova}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Sediva}, Dark={StaticResource Sediva}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="BorderWidth" Value="0"/>
@@ -341,9 +384,11 @@
     <Style TargetType="SwipeItem">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
     </Style>
-
+    
+        
+    
     <Style TargetType="Switch">
-        <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Oranzova}, Dark={StaticResource Oranzova}}" />
         <Setter Property="ThumbColor" Value="{StaticResource White}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -351,19 +396,19 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Bila}, Dark={StaticResource Oranzova}}" />
+                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Bila}}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="On">
                         <VisualState.Setters>
-                            <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray200}}" />
-                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+                            <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Oranzova}, Dark={StaticResource Oranzova}}" />
+                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Bila}, Dark={StaticResource Bila}}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="Off">
                         <VisualState.Setters>
-                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray500}}" />
+                            <Setter Property="ThumbColor" Value="{AppThemeBinding Light={StaticResource Bila}, Dark={StaticResource Bila}}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>

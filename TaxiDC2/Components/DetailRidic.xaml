@@ -24,19 +24,19 @@
                 <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Jméno:" Style="{StaticResource CustomLblO}" />
                             <Entry Text="{Binding FirstName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Příjmení:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Příjmení:"  Style="{StaticResource CustomLblO}" />
                             <Entry Text="{Binding LastName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Mobilní zařízení:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Mobilní zařízení:"  Style="{StaticResource CustomLblO}"  />
                             <Entry Text="{Binding MobileDeviceKey}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Telefonní číslo:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Telefonní číslo:"  Style="{StaticResource CustomLblO}"  />
                             <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
@@ -46,18 +46,19 @@
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <HorizontalStackLayout>
-                            <Label Text="Aktivní:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding Active}" HorizontalOptions="Start" />
+                            <Label Text="Aktivní:"  Style="{StaticResource CustomLblO}"  VerticalTextAlignment="Center" />
+                            <Switch IsEnabled="True"  IsToggled="{Binding Active}" HorizontalOptions="Start" />
 
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="Notifikace zapnuty:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding NotificationEnable}" HorizontalOptions="Start" />
+                            <Label Text="Notifikace zapnuty:"  Style="{StaticResource CustomLblO}"  VerticalTextAlignment="Center" />
+                            <Switch IsEnabled="True"  IsToggled="{Binding NotificationEnable}" HorizontalOptions="Start" />
 
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="Administrator:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
-                            <buttons:SfSwitch IsOn="{Binding IsAdmin}" HorizontalOptions="Start" />
+                            <Label Text="Administrator:"  Style="{StaticResource CustomLblO}"  VerticalTextAlignment="Center" />
+                            <Switch IsEnabled="True"  IsToggled="{Binding IsAdmin}" HorizontalOptions="Start" />
+
 
                         </HorizontalStackLayout>
                     </StackLayout>
@@ -66,7 +67,7 @@
                 <!-- Car Selection -->
                 <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout>
-                        <Label Text="Vyberte aktivní auto:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Label Text="Vyberte aktivní auto:" Style="{StaticResource CustomLblO}" />
                         <inputs:SfComboBox x:Name="CarSelector" HorizontalOptions="CenterAndExpand"
                                            DisplayMemberPath="FullName"
                                            SelectedItem="{Binding SelectedCar,Mode=TwoWay}"
@@ -74,7 +75,7 @@
                             <inputs:SfComboBox.ItemTemplate>
                                 <DataTemplate x:DataType="models:Car">
                                     <HorizontalStackLayout Spacing="10">
-                                        <Image Source="car_icon.png" WidthRequest="20" HeightRequest="20" />
+                                        <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" WidthRequest="20" HeightRequest="20" />
                                         <Label Text="{Binding FullName}" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                                     </HorizontalStackLayout>
                                 </DataTemplate>

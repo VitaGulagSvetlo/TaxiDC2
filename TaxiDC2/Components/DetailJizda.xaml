@@ -7,84 +7,132 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:DataType="vm:TripDetailViewModel">
 
-    <ScrollView HorizontalOptions="Center">
-    <Grid BackgroundColor="{StaticResource GridBG}" >
+    <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <!-- Horní pruh -->
+            <RowDefinition Height="*"/>
+            <!-- Scrollovatelný obsah -->
+            <RowDefinition Height="Auto"/>
+            <!-- Fixní tlačítka dole -->
         </Grid.RowDefinitions>
 
-        <Grid Padding="10" HorizontalOptions="FillAndExpand">
+        <!-- HORNÍ PRUH -->
+        <Grid Grid.Row="0" Padding="10" HorizontalOptions="FillAndExpand">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
                     <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
                     <GradientStop Color="{Binding StateColor}" Offset="1.1" />
                 </LinearGradientBrush>
             </Grid.Background>
-
-            <Label HorizontalOptions="Center" Text="{Binding TripState}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+            <Label HorizontalOptions="Center" Text="{Binding TripState}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Bila}" VerticalOptions="Center" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="20" Padding="20">
+        <!-- HLAVNÍ OBSAH (SCROLL) -->
+        <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <VerticalStackLayout Spacing="15" Padding="10">
+                <Frame Style="{StaticResource CustomFrame}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Nadpis -->
+                        <Label Grid.Row="0" Grid.Column="0"
+               Text="Zákazník:" 
+               FontSize="18" 
+               TextColor="{StaticResource Oranzova}" />
+
+                        <!-- Ikona tužky -->
+                        <Button Grid.Row="0" Grid.Column="1"            
+                BackgroundColor="Transparent">
+                            <Button.ImageSource>
+                                <FontImageSource Glyph="{StaticResource edit}"
+                                 FontFamily="FAPro" 
+                                 Size="18"
+                                 Color="{StaticResource Oranzova}" />
+                            </Button.ImageSource>
+                        </Button>
+
+                        <!-- Obsah pod nadpisem -->
+                        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2">
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                                <Label Text="{Binding Customer.PhoneNumber}" FontSize="18" TextColor="{StaticResource Bila}" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                                <Label Text="{Binding Customer.Name}" FontSize="18" TextColor="{StaticResource Bila}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource CustomFrame}">
+                    <StackLayout Spacing="20">
+                        <StackLayout Spacing="10">
+                            <Label Text="Start" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                                <Label Text="{Binding AddressBoarding}" FontSize="18" TextColor="{StaticResource Bila}" />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+
+                        <StackLayout Spacing="10">
+                            <Label Text="Cíl" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                                <Label Text="{Binding AddressExit}" FontSize="18" TextColor="{StaticResource Bila}" />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+
+                        <StackLayout Spacing="10">
+                            <Label Text="Čas nástupu:" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                                <Label Text="{Binding BoardingTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" FontSize="18" TextColor="{StaticResource Bila}" />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
-                        <Label Text="Zákazník:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <HorizontalStackLayout>
-                            <Image Source="phone_icon.png" WidthRequest="30" HeightRequest="30" />
-                            <Label Text="{Binding Customer.Name}" FontSize="18" TextColor="{StaticResource TCwhite}" />
+                        <Label Text="Řidič" FontSize="18" TextColor="{StaticResource Oranzova}" />
+                        <HorizontalStackLayout Spacing="5">
+                            <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                            <Label Text="{Binding Driver}" FontSize="18" TextColor="{StaticResource Bila}" />
                         </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Image Source="user_icon.png" WidthRequest="30" HeightRequest="30" />
-                            <Label Text="{Binding Customer.PhoneNumber}" FontSize="18" TextColor="{StaticResource TCwhite}" />
-                        </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
-
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
-                    <StackLayout Spacing="10">
-                        <Label Text="Čas nástupu:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding BoardingTime}" FontSize="18" TextColor="{StaticResource TCwhite}" />
-                    </StackLayout>
-                </Frame>
-
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
-                    <StackLayout Spacing="10">
-                        <Label Text="Start" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding AddressBoarding}" FontSize="18" TextColor="{StaticResource TCwhite}" />
-                    </StackLayout>
-                </Frame>
-
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
-                    <StackLayout Spacing="10">
-                        <Label Text="Cíl" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding AddressExit}" FontSize="18" TextColor="{StaticResource TCwhite}" />
-                    </StackLayout>
-                </Frame>
-
-                <Frame CornerRadius="10" Padding="15" BackgroundColor="{StaticResource GradientGray}">
-                    <StackLayout Spacing="10">
-                        <Label Text="Řidič" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
-                        <Label Text="{Binding Driver}" FontSize="18" TextColor="{StaticResource TCwhite}" />
-                    </StackLayout>
-                </Frame>
-                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
-                        <Button Text="Potvrdit WWW" Clicked="Con_OnClicked" IsVisible="{Binding BtnConVisibility}"/>
-                        <Button Text="Převzít" Clicked="Acc_OnClicked" IsVisible="{Binding BtnAccVisibility}"/>
-                        <Button Text="Odmítnout" Clicked="Rej_OnClicked" IsVisible="{Binding BtnRejectVisibility}"/>
-                        <Button Text="SMS" Clicked="Sms_OnClicked" IsVisible="{Binding BtnSmsVisibility}" />
-                        <Button Text="Zavolat" Clicked="Call_OnClicked" IsVisible="{Binding BtnCallVisibility}"/>
-                        <Button Text="Na cestě" Clicked="Run_OnClicked" IsVisible="{Binding BtnRunningVisibility}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
-                        <Button Text="Zrušit" Clicked="Storno_OnClicked" IsVisible="{Binding BtnCancelVisibility}" TextColor="DarkRed"/>
-                        <Button Text="Hotovo" Clicked="Complete_OnClicked" IsVisible="{Binding BtnCompleteVisibility}" TextColor="DarkGreen"/>
-                        <!--<Button Text="Předat" Clicked="Forward_OnClicked" IsVisible="{Binding BtnForwardVisibility}"/>  -->
-                    </StackLayout>
-                    
             </VerticalStackLayout>
         </ScrollView>
+
+        <!-- SEKCE S TLAČÍTKY -->
+        <Grid Grid.Row="2" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Style="{StaticResource RideDetailBtn}" Text="Potvrdit WWW" Clicked="Con_OnClicked" IsVisible="{Binding BtnConVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Převzít" Clicked="Acc_OnClicked" IsVisible="{Binding BtnAccVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Odmítnout" Clicked="Rej_OnClicked" IsVisible="{Binding BtnRejectVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="SMS" Clicked="Sms_OnClicked" IsVisible="{Binding BtnSmsVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Zavolat" Clicked="Call_OnClicked" IsVisible="{Binding BtnCallVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Na cestě" Clicked="Run_OnClicked" IsVisible="{Binding BtnRunningVisibility}" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Style="{StaticResource RideCancelBtn}" Text="Zrušit" Clicked="Storno_OnClicked" IsVisible="{Binding BtnCancelVisibility}" />
+                <Button Style="{StaticResource RideCompleteBtn}" Text="Hotovo" Clicked="Complete_OnClicked" IsVisible="{Binding BtnCompleteVisibility}"/>
+            </StackLayout>
+        </Grid>
     </Grid>
-    </ScrollView>
 </ContentPage>

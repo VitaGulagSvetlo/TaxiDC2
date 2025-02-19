@@ -14,22 +14,14 @@
         </Grid.RowDefinitions>
 
         <!-- Header Section -->
-        <Grid Padding="10" Grid.Row="0">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
-                    <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
-                </LinearGradientBrush>
-            </Grid.Background>
-            <Label Text="DETAIL AUTA" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" HorizontalOptions="Center" VerticalOptions="Center" />
-        </Grid>
+       
 
         <!-- Content Section -->
         <ScrollView Grid.Row="1">
             <StackLayout Spacing="15" Padding="15" HorizontalOptions="FillAndExpand">
 
                 <!-- Car Type -->
-                <Frame Padding="15" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <Label Text="Vůz:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
                         <Entry Text="{Binding CarType}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
@@ -37,7 +29,7 @@
                 </Frame>
 
                 <!-- Color -->
-                <Frame Padding="15" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <Label Text="Barva:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
                         <Entry Text="{Binding Color}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />
@@ -45,7 +37,7 @@
                 </Frame>
 
                 <!-- License Plate -->
-                <Frame Padding="15" CornerRadius="10" BackgroundColor="{StaticResource GradientGray}" HorizontalOptions="FillAndExpand">
+                <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <Label Text="SPZ:" FontSize="16" TextColor="{StaticResource CustomOrangeText}" />
                         <Entry Text="{Binding Rz}" FontSize="16" TextColor="{StaticResource TCwhite}" HorizontalOptions="FillAndExpand" />

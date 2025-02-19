@@ -50,22 +50,25 @@
             </Grid>
 
             <!-- List -->
-            <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190" ItemsSource="{Binding Items}" ItemSpacing="5">
+            <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190" ItemsSource="{Binding Items}" ItemSpacing="0">
 
                 <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:TripDetailViewModel">
-                        <SwipeView>
+                        <SwipeView >
                             <!-- Define swipe actions -->
                             <SwipeView.RightItems>
-                                <SwipeItem IconImageSource="{FontImageSource Glyph={StaticResource info}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
-                        BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeRightItemInvoked" CommandParameter="{Binding IdTrip }"></SwipeItem>
+                                <SwipeItems Mode="Execute">
+
+                                    <SwipeItem  IconImageSource="{FontImageSource Glyph={StaticResource info}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
+                        BackgroundColor="{StaticResource CustomOrangeBG}" Invoked="OnSwipeRightItemInvoked" CommandParameter="{Binding IdTrip }"/>
+                                </SwipeItems>
                             </SwipeView.RightItems>
                             <SwipeView.LeftItems>
                                 <SwipeItem 
-                                           IconImageSource="{FontImageSource Glyph={StaticResource cancel}, FontFamily=FAPro, Size=24, Color={StaticResource Zluta1}}"
+                                           IconImageSource="{FontImageSource Glyph={StaticResource cancel}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
                                            BackgroundColor="{StaticResource Cervena}" Invoked="OnSwipeLeftCancel" CommandParameter="{Binding IdTrip }"/>
                                 <SwipeItem 
-                                           IconImageSource="{FontImageSource Glyph={StaticResource accept}, FontFamily=FAPro, Size=24, Color={StaticResource Zluta1}}"
+                                           IconImageSource="{FontImageSource Glyph={StaticResource accept}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
                                     BackgroundColor="{StaticResource Zelena}" Invoked="OnSwipeLeftAccept" CommandParameter="{Binding IdTrip }"/>
                             </SwipeView.LeftItems>
 
@@ -109,7 +112,7 @@
                                         </HorizontalStackLayout>
                                         <HorizontalStackLayout HorizontalOptions="Start" Spacing="5">
                                             <Image Source="{FontImageSource Glyph={StaticResource calendar}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                                            <Label Text="{Binding BoardingTime}" FontAttributes="Bold" Style="{StaticResource FS-16}" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+                                            <Label Text="{Binding BoardingTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" FontAttributes="Bold" Style="{StaticResource FS-16}" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
                                         </HorizontalStackLayout>
                                     </StackLayout>
 
@@ -117,7 +120,7 @@
                                     <BoxView  Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="{StaticResource Oranzova}" HorizontalOptions="Fill" Margin="20, 0, 20, 0" />
 
                                     <!-- Bottom Section (Addresses) -->
-                                    <StackLayout Grid.Row="2" Grid.Column="0" Padding="10">
+                                    <StackLayout Grid.Row="2" Grid.Column="0" Padding="5">
                                         <Frame BackgroundColor="Purple" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent">
                                             <Label Style="{StaticResource FS-14}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding Driver.Inicials}"></Label>
                                         </Frame>

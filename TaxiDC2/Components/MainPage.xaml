@@ -30,7 +30,8 @@
         </Grid.RowDefinitions>
 
         <!-- Kontejner pro tlačítka -->
-        <VerticalStackLayout
+        <ScrollView>
+            <VerticalStackLayout
             Grid.Row="0"
             Spacing="10"
             Padding="20"
@@ -42,22 +43,22 @@
                 SemanticProperties.HeadingLevel="Level1" 
                 FontSize="30"
                 FontAttributes="Bold"/>
-
+            
             <Button Text="Nová jízda" Clicked="OnNewClicked"   
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                  BackgroundColor="{StaticResource GridBG}" BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
             <Button Text="Přehled jízd" Clicked="OnListClicked"   
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                   BackgroundColor="{StaticResource GridBG}" BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
             <Button Text="Settings" Clicked="OnSetClicked"   
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                   BackgroundColor="{StaticResource GridBG}" BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
             <Button Text="Login (dev test)" Clicked="OnLoginClicked"  
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource login}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                  BackgroundColor="{StaticResource GridBG}" BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource login}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
             <Button Text="User info  (dev test)" Clicked="OnInfoClicked"  
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
+                   BackgroundColor="{StaticResource GridBG}" BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
 
             <Editor x:Name="editor" HorizontalOptions="Fill" MinimumHeightRequest="100" />
 
         </VerticalStackLayout>
-
+        </ScrollView>
         <!-- Label na spodku obrazovky -->
         <Label
             Grid.Row="1"

@@ -24,15 +24,15 @@
                 <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="Jméno:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Jméno:" Style="{StaticResource CustomLblO}"/>
                             <Entry Text="{Binding Name}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Telefon:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Telefon:" Style="{StaticResource CustomLblO}"/>
                             <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Poznámka:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Poznámka:"  Style="{StaticResource CustomLblO}" />
                             <Entry Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
@@ -42,11 +42,11 @@
                 <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
-                            <Label Text="VIP:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
+                            <Label Text="VIP:"  Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding VIP}" HorizontalOptions="Start" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Nevozit!:" FontSize="16" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
+                            <Label Text="Nevozit!:"  Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
                             <buttons:SfSwitch IsOn="{Binding Rejected}" HorizontalOptions="Start" />
                         </VerticalStackLayout>
                     </StackLayout>
@@ -55,7 +55,7 @@
                 <!-- Rating Section -->
                 <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout>
-                        <Label Text="Hodnocení zákazníka:" FontSize="16" TextColor="{StaticResource Bila}" />
+                        <Label Text="Hodnocení zákazníka:"  Style="{StaticResource CustomLblO}" />
                         <inputs:SfRating Value="{Binding VIP2}">
                             <inputs:SfRating.RatingSettings>
                                 <inputs:RatingSettings RatedStroke="Transparent" RatedFill="{StaticResource Oranzova}" UnratedFill="{StaticResource GradientGray}"/>
@@ -67,17 +67,18 @@
                 <!-- Last Trip Info -->
                 <Frame  Style="{StaticResource CustomFrame}">
                     <StackLayout Spacing="10">
+                       
                         <VerticalStackLayout>
-                            <Label Text="Poslední cesta:" FontSize="16" TextColor="{StaticResource Bila}" />
-                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout>
-                            <Label Text="Nástup:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Nástup:"  Style="{StaticResource CustomLblO}" />
                             <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Výstup:" FontSize="16" TextColor="{StaticResource Bila}" />
+                            <Label Text="Výstup:"  Style="{StaticResource CustomLblO}" />
                             <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label Text="Poslední cesta:" Style="{StaticResource CustomLblO}" />
+                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
