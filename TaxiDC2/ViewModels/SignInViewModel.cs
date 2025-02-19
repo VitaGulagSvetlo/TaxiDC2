@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+using TaxiDC2.Components;
 
 namespace TaxiDC2.ViewModels
 {
@@ -25,7 +26,8 @@ namespace TaxiDC2.ViewModels
 			var result = await _authClient.SignInWithEmailAndPasswordAsync(Email,Password);
 			if (result.User!=null)
 			{
-				Shell.Current.GoToAsync($"{nameof(SeznamJizd)}",true);
+				Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
+				Shell.Current.GoToAsync($"///{nameof(MainPage)}",true);
 			}
 		}
 

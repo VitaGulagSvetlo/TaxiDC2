@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
     x:Class="TaxiDC2.SmsSendView"
-    x:DataType="vm:SmsViewModel">
+    x:DataType="vm:SmsViewModel"
+    Title="Odeslání SMS"
+    >
 
     <!--<ContentPage.ToolbarItems>
         <ToolbarItem Text="Nová jízda" Command="{Binding AddItemCommand}" />

@@ -1,12 +1,16 @@
 ﻿using TaxiDC2.Components.Login;
+using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+	    private readonly AppShellViewModel _model;
+
+	    public AppShell(AppShellViewModel model)
         {
-            InitializeComponent();
+	        InitializeComponent();
+	        BindingContext = _model = model;
 
 			RegisterAllRoutes();
         }

@@ -5,7 +5,9 @@
              xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
-             x:Class="TaxiDC2.SeznamJizd">
+             x:Class="TaxiDC2.SeznamJizd"
+             Title="Aktuální jízdy"
+             >
 
     <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <Grid BackgroundColor="{StaticResource GridBG}">

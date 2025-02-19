@@ -6,7 +6,9 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.DetailRidic"
-             x:DataType="vm:DriverNewViewModel">
+             x:DataType="vm:DriverNewViewModel"
+             Title="Řidič"
+             >
 
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>

@@ -124,6 +124,12 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="Components\FlyoutHeaderControl.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="Components\LoadingPage.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="Components\Login\SignInPage.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>

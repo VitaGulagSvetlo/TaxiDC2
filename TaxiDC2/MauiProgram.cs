@@ -6,6 +6,7 @@ using MauiApp1;
 using Microsoft.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
+using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
 using TaxiDC2.Services;
 using TaxiDC2.ViewModels;
@@ -78,6 +79,7 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SeznamRidicu>();
 			builder.Services.AddTransient<SeznamZakazniku>();
 			builder.Services.AddTransient<SmsSendView>();
+
 			//vm
 			builder.Services.AddTransient<ConfigViewModel>();
 			builder.Services.AddTransient<TripDetailViewModel>();
@@ -86,8 +88,15 @@ namespace TaxiDC2
 			builder.Services.AddTransient<CustomerDetailViewModel>();
 			builder.Services.AddTransient<SmsViewModel>();
 
-			builder.Services.AddSingleton<SignInViewModel>();
-			builder.Services.AddSingleton<SignInPage>();
+
+			builder.Services.AddTransient<SignInViewModel>();
+			builder.Services.AddTransient<SignInPage>();
+
+			builder.Services.AddSingleton<LoadingPageViewModel>();
+			builder.Services.AddSingleton<LoadingPage>();
+
+			builder.Services.AddSingleton<AppShellViewModel>();
+			builder.Services.AddSingleton<AppShell>();
 
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();

@@ -5,7 +5,8 @@
              x:Class="TaxiDC2.DetailJizda"
              Title="Detail jízdy"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
-             x:DataType="vm:TripDetailViewModel">
+             x:DataType="vm:TripDetailViewModel"
+             >
 
     <ScrollView HorizontalOptions="Center">
     <Grid BackgroundColor="{StaticResource GridBG}" >

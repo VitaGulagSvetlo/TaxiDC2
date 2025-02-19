@@ -18,7 +18,7 @@
         <Entry Placeholder="User email" Text="{Binding Email}"/>
         <Entry Placeholder="User password" Text="{Binding Password}"/>
         <Button Command="{Binding SignInCommand}" HorizontalOptions="Center" Text="Login"></Button>
-        <Button Command="{Binding SignInGoogleCommand}" HorizontalOptions="Center" Text="G"></Button>
+        <!--<Button Command="{Binding SignInGoogleCommand}" HorizontalOptions="Center" Text="G"></Button>-->
 
     </VerticalStackLayout>
 </ContentPage>
