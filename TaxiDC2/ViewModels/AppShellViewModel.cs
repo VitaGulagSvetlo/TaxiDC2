@@ -1,20 +1,31 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+using System.Threading;
 using TaxiDC2.Components.Login;
 
 namespace TaxiDC2.ViewModels
 {
-	public partial class AppShellViewModel:BaseViewModel
+	public partial class AppShellViewModel:BaseViewModel, IDisposable
 	{
 		private readonly FirebaseAuthClient _authClient;
+		private readonly IDataService _dataService;
+		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-		public AppShellViewModel(FirebaseAuthClient authClient)
+		public AppShellViewModel(FirebaseAuthClient authClient, IDataService dataService)
 		{
 			_authClient = authClient;
+			_dataService = dataService;
+
+			// Spustíme periodickou kontrolu serveru
+			StartServerCheck();
 		}
 
+		public bool IsServerOk { get; set; }
+
 		public bool IsSigned => !string.IsNullOrWhiteSpace(_authClient?.User?.Info?.Email);
-		public bool IsNotSigned => !IsSigned;
+
+		public Color ServerColor => IsServerOk ? Color.FromArgb("#ff141414"):Colors.DarkRed;
 
 		[RelayCommand]
 		async void Logout()
@@ -25,6 +36,33 @@ namespace TaxiDC2.ViewModels
 				_authClient.SignOut();
 				await Shell.Current.GoToAsync($"{nameof(SignInPage)}");
 			}
+		}
+
+		private async void StartServerCheck()
+		{
+			while (!_cancellationTokenSource.IsCancellationRequested)
+			{
+				try
+				{
+					// Provede asynchroní kontrolu serveru
+					var pingResult = await _dataService.PingAsync();
+					IsServerOk = pingResult;
+				}
+				catch
+				{
+					// Pokud dojde k chybě, považujeme server za nedostupný
+					IsServerOk = false;
+				}
+
+				// Počká 10 sekund před dalším pingem
+				await Task.Delay(10000, _cancellationTokenSource.Token);
+			}
+		}
+
+		// Uvolníme zdroje při dispose
+		public void Dispose()
+		{
+			_cancellationTokenSource.Cancel();
 		}
 	}
 }

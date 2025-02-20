@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             xmlns:converters="using:TaxiDC2.Converters"
              x:DataType="vm:SignInViewModel"
              x:Class="TaxiDC2.Components.Login.SignInPage"
              Title="Login"
@@ -9,6 +10,12 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
              >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <VerticalStackLayout>
 
         <Image Source="taxi.png" WidthRequest="200" HeightRequest="300"  VerticalOptions="Center"/>
@@ -25,18 +32,21 @@
             FontSize="14"
             TextColor="{StaticResource Oranzova}"/>
         <Frame Margin="20" Style="{StaticResource CustomFrame}" BackgroundColor="{StaticResource GridBG}">
-    <VerticalStackLayout >
-    <HorizontalStackLayout HorizontalOptions="Center">
-                    <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}" WidthRequest="20"></Image>
+            <VerticalStackLayout >
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}" WidthRequest="20"/>
                     <Entry HorizontalOptions="FillAndExpand" Placeholder="Přihlašovací email" Text="{Binding Email}" WidthRequest="200"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout HorizontalOptions="Center">
-            <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}" WidthRequest="20"></Image>
-            <Entry Placeholder="Přihlašovací heslo" Text="{Binding Password}" IsPassword="True" WidthRequest="200"/>
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}" WidthRequest="20"/>
+                    <Entry Placeholder="Přihlašovací heslo" Text="{Binding Password}" IsPassword="True" WidthRequest="200"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
         </Frame>
         <Button Command="{Binding SignInCommand}" Style="{StaticResource CustomSettingsBtn}" Text="Přihlásit se"></Button>
+        <Label Text="Server OK" IsVisible="{Binding ServerOK}" TextColor="Green" HorizontalTextAlignment="Center" Margin="5,10"/>
+        <Label Text="Server ERROR" IsVisible="{Binding ServerOK, Converter={StaticResource InverseBoolConverter}}" TextColor="Red" HorizontalTextAlignment="Center"  Margin="5,10"/>
+        <Label Text="{Binding Message}" IsVisible="{Binding IsMessageVisible}" TextColor="Red" HorizontalTextAlignment="Center"  Margin="5,10"/>
         <!--<Button Command="{Binding SignInGoogleCommand}" HorizontalOptions="Center" Text="G"></Button>-->
 
     </VerticalStackLayout>

@@ -15,10 +15,12 @@ namespace TaxiDC2
 	    bool data = false,
 	    string message = "",
 	    Exception exception = null)
-	    : ServiceResult<bool>(result, data, message, exception);
+	    : ServiceResult<bool>(result, data, message, exception)
+	{
+	}
 
 
-    [DebuggerDisplay("RESULT : ({Result}) {Message}")]
+	[DebuggerDisplay("RESULT : ({Result}) {Message}")]
     public class ServiceResult<T>(
 	    ResultCode result = ResultCode.INFO,
 	    T data = default,
@@ -30,8 +32,9 @@ namespace TaxiDC2
 
         public bool IsOk => Result == ResultCode.OK;
         public bool IsError => Result == ResultCode.ERROR || Result == ResultCode.EXCEPTION;
+        public bool IsSuccess => Result == ResultCode.OK;
 
-        public T Data { get; internal set; } = data;
+		public T Data { get; internal set; } = data;
         public string Message { get; } = message;
         public Exception Exception { get; } = exception;
         public ResultCode Result { get; internal set; } = result;

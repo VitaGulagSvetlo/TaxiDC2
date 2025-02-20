@@ -23,7 +23,7 @@
         Task<ServiceResult<Trip>> GetTripByIdAsync(Guid tripId);
 
         Task<ServiceResult<Trip[]>> GetTripsAsync(bool activeOnly = true);
-
+        
         Task<ServiceResult> ChangeTripState(Guid trip, TripState newState, params string[] paramsStrings);
 
         Task<ServiceResult> RegisterDriver(Driver driver);

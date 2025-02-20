@@ -6,6 +6,7 @@ namespace TaxiDC2.Services
     public class BussinessState : IBussinessState
     {
 	    private readonly FirebaseAuthClient _authClient;
+	    private readonly IDataService _dataService;
 
 	    public BussinessState(FirebaseAuthClient authClient)
 	    {
@@ -14,7 +15,8 @@ namespace TaxiDC2.Services
 
 	    public string AuthClient => _authClient?.User?.Info?.DisplayName;
 
-        private static string _deviceKey;
+
+	    private static string _deviceKey;
 
         private Driver _driver = null;
 
@@ -31,15 +33,7 @@ namespace TaxiDC2.Services
         // je uzivatel povolen ?
         public bool IsActive => _driver?.Active??false;
 
-        public Driver Driver
-        {
-            get
-            {
-                if (_driver == null)
-                    ReloadDriver();
-                return _driver;
-            }
-        }
+        public Driver Driver { get;  set; }
 
         /// <summary>
         /// ID aktualniho usera

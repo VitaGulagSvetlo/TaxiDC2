@@ -6,7 +6,7 @@
 
         string DeviceHash { get; }
         string DeviceKey { get; set; }
-        Driver Driver { get; }
+        Driver Driver { get; set; }
         Guid? DriverId { get; }
         public bool IsLogged { get; }
         public bool IsActive { get; }
@@ -20,5 +20,5 @@
 
         public string AuthClient { get;  }
 
-	}
+    }
 }

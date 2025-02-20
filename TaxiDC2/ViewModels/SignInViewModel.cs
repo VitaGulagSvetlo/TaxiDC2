@@ -8,41 +8,63 @@ namespace TaxiDC2.ViewModels
 	public partial class SignInViewModel : BaseViewModel
 	{
 		private readonly FirebaseAuthClient _authClient;
+		private readonly IDataService _dataService;
+		private readonly IBussinessState _bs;
 		public string Email { get; set; } = "peno@penodc.com";
 		public string Password { get; set; } = "penox22";
 		public string Message { get; set; }
-		//public ICommand SignInCommand { get; }
+		public bool IsMessageVisible => !string.IsNullOrWhiteSpace(Message);
+
+		public bool ServerOK
+		{
+			get
+			{
+				var r = Task.Run(async ()=> await _dataService.PingAsync()).Result;
+				return r;
+			}
+		}
 
 		/// <inheritdoc/>
-		public SignInViewModel(FirebaseAuthClient authClient)
+		public SignInViewModel(FirebaseAuthClient authClient,IDataService dataService,IBussinessState bs)
 		{
 			_authClient = authClient;
-			//SignInCommand = new Command(async () => await SignIn());
+			_dataService = dataService;
+			_bs = bs;
 		}
 
 		[RelayCommand]
 		private async Task SignIn()
 		{
+			Message = String.Empty;
+
+			if(string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+			{
+				Message = "Email and password are required !";
+				return;
+			}
+
 			var result = await _authClient.SignInWithEmailAndPasswordAsync(Email,Password);
 			if (result.User!=null)
 			{
+				await LoadDriver();
 				Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
-				Shell.Current.GoToAsync($"///{nameof(MainPage)}",true);
+				Shell.Current.GoToAsync($"///{nameof(MainPage)}",false);
 			}
 		}
 
-		[RelayCommand]
-		private async Task SignInGoogle()
+		private async Task LoadDriver()
 		{
-			var result = await _authClient. SignInWithRedirectAsync( FirebaseProviderType.Google,RedirectDelegate);
-			if (result.User != null)
+			var drl = await _dataService.GetDriversAsync(true);
+			var driver = drl.FirstOrDefault(f => f.MobileDeviceHash == _authClient.User.Uid);
+			if (driver != null)
 			{
+				_bs.Driver = driver;
+			}
+			else
+			{
+				_bs.Driver = null;
 			}
 		}
 
-		private Task<string> RedirectDelegate(string uri)
-		{
-			return Task.FromResult("dsd");
-		}
 	}
 }

@@ -6,10 +6,7 @@ namespace TaxiDC2.ViewModels
 {
 	public class TripDetailViewModel : INotifyPropertyChanged
 	{
-		private readonly IApiProxy _proxy;
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		private readonly IBussinessState _bs = DependencyService.Get<IBussinessState>();
 
 		private ObservableCollection<Driver> _listRidicu = new();
 

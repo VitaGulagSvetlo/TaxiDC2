@@ -9,7 +9,9 @@
     xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
     Shell.FlyoutBehavior="Flyout"
     x:DataType="vm:AppShellViewModel"
-    Title="TAXI DC 2">
+    Title="TAXI DC 2"
+    BackgroundColor="{Binding ServerColor}"
+    >
 
     <ShellContent
         Title="Sign In"

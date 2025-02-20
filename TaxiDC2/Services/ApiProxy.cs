@@ -514,7 +514,7 @@ namespace TaxiDC2.Services
         /// <summary>
         /// List cest
         /// </summary>
-        /// <param name="activeOnly"> jen aktiuvni</param>
+        /// <param name="activeOnly"> jen aktivni</param>
         /// <returns></returns>
         public async Task<ServiceResult<Trip[]>> GetTripsAsync(bool activeOnly = true)
         {

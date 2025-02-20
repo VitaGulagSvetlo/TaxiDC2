@@ -104,7 +104,8 @@ namespace TaxiDC2
 			// add services
 			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();
             builder.Services.AddSingleton<IBussinessState,BussinessState>();
-            builder.Services.AddSingleton<IApiProxy, ApiProxy>();
+            builder.Services.AddSingleton<IDataService, DataService>();
+			builder.Services.AddSingleton<IApiProxy, ApiProxy>();
 
             builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
 
