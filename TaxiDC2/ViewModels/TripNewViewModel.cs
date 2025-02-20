@@ -124,7 +124,7 @@ namespace TaxiDC2.ViewModels
 			if (ret.State == ResultCode.OK)
 			{
 				// OK prechazim na detailni stranku
-				await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?IdTrip={ret.Data.IdTrip}");
+				await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={ret.Data.IdTrip}");
 			}
 			else
 			{
@@ -176,6 +176,7 @@ namespace TaxiDC2.ViewModels
 			}
 			finally
 			{
+				PhoneSelected = _listCisel.First().Cislo;
 				TelPickerVisible = true;
 			}
 		}
@@ -367,32 +368,45 @@ namespace TaxiDC2.ViewModels
 			public Color CallColor => Missed ? Color.Parse("DarkRed") : Color.FromHex("#ffbd00");
 		}
 
-		public void SetContactFromPhone(string cislo, string jmeno = "")
+		public async Task SetContactFromPhone(string cislo, string jmeno = "")
 		{
-			Task.Run(async () =>
+			var res = await _proxy.GetCustomerByPhone(cislo);
+			if (res.State == ResultCode.OK && res.Data != null)
 			{
-				var res = await _proxy.GetCustomerByPhone(cislo);
-				if (res.State == ResultCode.OK && res.Data != null)
+				Customer = res.Data;
+				TelCislo = res.Data.PhoneNumber;
+			}
+			else
+			{
+				Customer = new Customer()
 				{
-					Customer = res.Data;
-					TelCislo = res.Data.PhoneNumber;
-				}
-				else
-				{
-					Customer = new Customer()
-					{
-						IdCustomer = Guid.Empty,
-						Name = jmeno ?? "",
-						PhoneNumber = cislo
-					};
-					TelCislo = cislo;
-				}
-			}).Wait();
+					IdCustomer = Guid.Empty,
+					Name = jmeno ?? "",
+					PhoneNumber = cislo
+				};
+				TelCislo = cislo;
+			}
 		}
 
 		public string CasTxt => VypoctiCas()?.ToShortTimeString();
 
-		public bool CasVisible => _casNastupuD != null || Deadline>0;
+		public bool CasVisible => _casNastupuD != null || Deadline > 0;
+		public string[] ListCisel2 => ListCisel.Select(s => s.Cislo).ToArray();
+
+		public string PhoneSelected { get; set; }
+
+		[RelayCommand]
+		public async Task PhoneAccept()
+		{
+			await SetContactFromPhone(PhoneSelected);
+			TelPickerVisible = false;
+		}
+
+		[RelayCommand]
+		public async Task PhoneCancel()
+		{
+			TelPickerVisible = false;
+		}
 	}
 
 }

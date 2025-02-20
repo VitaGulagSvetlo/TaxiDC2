@@ -1,11 +1,6 @@
-using Syncfusion.Maui.Data;
 using Syncfusion.Maui.Picker;
 using Syncfusion.Maui.Popup;
-using System;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using TaxiDC2.Models;
 using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
@@ -84,33 +79,33 @@ namespace TaxiDC2
             await Task.CompletedTask;
         }
 
-        private void OnAddRideClicked(object sender, EventArgs e)
-        {
-            string phoneNumber = PhoneEntry.Text;
-            string customerName = NameEntry.Text;
-            string fromLocation = FromEntry.Text;
-            string toLocation = ToEntry.Text;
-            double rating = CustomerRating.Value;
-            string note = NoteEntry.Text;
+        //private void OnAddRideClicked(object sender, EventArgs e)
+        //{
+        //    string phoneNumber = PhoneEntry.Text;
+        //    string customerName = NameEntry.Text;
+        //    string fromLocation = FromEntry.Text;
+        //    string toLocation = ToEntry.Text;
+        //    double rating = CustomerRating.Value;
+        //    string note = NoteEntry.Text;
 
-            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(fromLocation) || string.IsNullOrEmpty(toLocation))
-            {
-                DisplayAlert("Chyba", "Vyplòte všechna povinná pole.", "OK");
-                return;
-            }
+        //    if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(fromLocation) || string.IsNullOrEmpty(toLocation))
+        //    {
+        //        DisplayAlert("Chyba", "Vyplòte všechna povinná pole.", "OK");
+        //        return;
+        //    }
 
-            Trip newRide = new Trip
-            {
+        //    Trip newRide = new Trip
+        //    {
                
-                AddressBoarding = fromLocation,
-                AddressExit = toLocation,             
+        //        AddressBoarding = fromLocation,
+        //        AddressExit = toLocation,             
               
-            };
+        //    };
 
-            App.Rides.Add(newRide);
-            DisplayAlert("Úspìch", "Jízda byla úspìšnì pøidána.", "OK");
-            Navigation.PopAsync();
-        }
+        //    App.Rides.Add(newRide);
+        //    DisplayAlert("Úspìch", "Jízda byla úspìšnì pøidána.", "OK");
+        //    Navigation.PopAsync();
+        //}
 
 
         private async void OnBackButtonPressed(object sender, EventArgs e)
@@ -119,5 +114,11 @@ namespace TaxiDC2
 	        Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
 
         }
-	}
+
+        private async void CallLog_OnClicked(object sender, EventArgs e)
+        {
+	        await _model.NactiKontakty();
+
+        }
+    }
 }

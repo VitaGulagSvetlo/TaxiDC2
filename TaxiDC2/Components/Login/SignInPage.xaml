@@ -24,7 +24,7 @@
             HorizontalOptions="Center" 
             FontSize="14"
             TextColor="{StaticResource Oranzova}"/>
-<Frame Margin="20" Style="{StaticResource CustomFrame}">
+        <Frame Margin="20" Style="{StaticResource CustomFrame}" BackgroundColor="{StaticResource GridBG}">
     <VerticalStackLayout >
     <HorizontalStackLayout HorizontalOptions="Center">
                     <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}" WidthRequest="20"></Image>

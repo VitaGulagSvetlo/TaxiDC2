@@ -23,5 +23,8 @@ namespace TaxiDC2.Code
                 return BitConverter.ToString(hash).Replace("-", string.Empty);
             }
         }
-    }
+
+	}
+
+
 }

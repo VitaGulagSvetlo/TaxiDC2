@@ -137,6 +137,12 @@ namespace TaxiDC2
 		{
 			Shell.Current.GoToAsync($"{nameof(AboutPage)}");
 		}
+
+		private async void OnBackButtonPressed(object sender, EventArgs e)
+		{
+			//await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+		}
+
 	}
 
 }

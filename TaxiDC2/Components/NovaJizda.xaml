@@ -11,62 +11,62 @@
              Title="Nová jízda"
              BackgroundColor="{StaticResource GridBG}"
              x:DataType="vm:TripNewViewModel">
+    <StackLayout>
+        <Grid BackgroundColor="{StaticResource GridBG}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
 
-    <Grid BackgroundColor="{StaticResource GridBG}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-           
-            <RowDefinition Height="Auto" />
-          
-        </Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
 
-       
-        <ScrollView Grid.Row="0" Padding="15" HorizontalOptions="Fill">
-            <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
-                <Frame Style="{StaticResource CustomFrame}">
+            </Grid.RowDefinitions>
 
-                   
-                    <VerticalStackLayout Spacing="10">
-                        <HorizontalStackLayout Spacing="5">
-                            <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                            <Label Text="Telefonní číslo" Style="{StaticResource CustomLblO}"/>
-                        </HorizontalStackLayout>
 
-                  
-                        <Grid  HorizontalOptions="FillAndExpand">
-                          
-                            <Entry x:Name="PhoneEntry"
+            <ScrollView Grid.Row="0" Padding="15" HorizontalOptions="Fill">
+                <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
+                    <Frame Style="{StaticResource CustomFrame}">
+
+
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+                                <Label Text="Telefonní číslo" Style="{StaticResource CustomLblO}"/>
+                            </HorizontalStackLayout>
+
+
+                            <Grid  HorizontalOptions="FillAndExpand">
+
+                                <Entry x:Name="PhoneEntry"
                                    Placeholder="+420123456789"
                                    PlaceholderColor="{StaticResource NRph}"
                                    TextColor="{StaticResource Bila}"
                                    FontSize="18"
-                                   Text="{Binding Customer.PhoneNumber}"
+                                   Text="{Binding TelCislo}"
                                    HorizontalOptions="FillAndExpand"
                                    Grid.Column="0" />
-                         
-                            <Button Style="{StaticResource CallLogBtn}"
+
+                                <Button Style="{StaticResource CallLogBtn}"
                                     CornerRadius="5"
                                     ImageSource="{FontImageSource Glyph={StaticResource list}, FontFamily=FAPro, Size=18, Color={StaticResource Bila}}"
-                                    Grid.Column="1" HorizontalOptions="End" />
-                        </Grid>
+                                    Grid.Column="1" HorizontalOptions="End" Clicked="CallLog_OnClicked" />
+                            </Grid>
 
-                       
-                        <HorizontalStackLayout>
-                            <HorizontalStackLayout Spacing="5">
-                                <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                                <Label Text="Jméno"  Style="{StaticResource CustomLblO}" />
-                            </HorizontalStackLayout>
-                            <inputs:SfRating x:Name="CustomerRating"
+
+                            <HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="5">
+                                    <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+                                    <Label Text="Jméno"  Style="{StaticResource CustomLblO}" />
+                                </HorizontalStackLayout>
+                                <inputs:SfRating x:Name="CustomerRating"
                                              ItemCount="5"
                                              Value="{Binding Customer.VIP2}"
                                              Margin="5"
                                              ItemSize="20">
-                                <inputs:SfRating.RatingSettings>
-                                    <inputs:RatingSettings RatedFill="{StaticResource Oranzova}" RatedStroke="{StaticResource TP}" />
-                                </inputs:SfRating.RatingSettings>
-                            </inputs:SfRating>
-                        </HorizontalStackLayout>
-                        <Entry x:Name="NameEntry"
+                                    <inputs:SfRating.RatingSettings>
+                                        <inputs:RatingSettings RatedFill="{StaticResource Oranzova}" RatedStroke="{StaticResource TP}" />
+                                    </inputs:SfRating.RatingSettings>
+                                </inputs:SfRating>
+                            </HorizontalStackLayout>
+                            <Entry x:Name="NameEntry"
                                Placeholder="Jan Petr"
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
@@ -74,18 +74,18 @@
                                Text="{Binding Customer.Name}"
                                />
 
-                    </VerticalStackLayout>
+                        </VerticalStackLayout>
 
-                </Frame>
+                    </Frame>
 
-                <!-- From and To Location -->
-                <Frame Style="{StaticResource CustomFrame}">
-                    <VerticalStackLayout Spacing="10">
-                        <HorizontalStackLayout Spacing="5">
-                            <Image Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                            <Label Text="Začátek" Style="{StaticResource CustomLblO}" />
-                        </HorizontalStackLayout>
-                        <Entry x:Name="FromEntry"
+                    <!-- From and To Location -->
+                    <Frame Style="{StaticResource CustomFrame}">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+                                <Label Text="Začátek" Style="{StaticResource CustomLblO}" />
+                            </HorizontalStackLayout>
+                            <Entry x:Name="FromEntry"
                                Placeholder="Praha2"
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource TCwhite}"
@@ -93,11 +93,11 @@
                                Text="{Binding AdresaStart}"
                                 />
 
-                        <HorizontalStackLayout Spacing="5">
-                            <Image Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                            <Label Text="Cíl" Style="{StaticResource CustomLblO}" />
-                        </HorizontalStackLayout>
-                        <Entry x:Name="ToEntry"
+                            <HorizontalStackLayout Spacing="5">
+                                <Image Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+                                <Label Text="Cíl" Style="{StaticResource CustomLblO}" />
+                            </HorizontalStackLayout>
+                            <Entry x:Name="ToEntry"
                                Placeholder="dvorakova"
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
@@ -105,48 +105,48 @@
                                Text="{Binding AdresaCil}"
                               />
 
-                        <!-- Time Selection -->
-                        <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
-                            <HorizontalStackLayout Spacing="5">
-                                <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                                <Label Text="Čas jízdy"  Style="{StaticResource CustomLblO}" />
+                            <!-- Time Selection -->
+                            <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="5">
+                                    <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+                                    <Label Text="Čas jízdy"  Style="{StaticResource CustomLblO}" />
+                                </HorizontalStackLayout>
+                                <Label Text="(čas nebo minuty do začátku jízdy)" FontSize="12" />
                             </HorizontalStackLayout>
-                            <Label Text="(čas nebo minuty do začátku jízdy)" FontSize="12" />
-                        </HorizontalStackLayout>
 
-                        <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
-                            <Button Text="5" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="5"/>
-                            <Button Text="10" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="10"/>
-                            <Button Text="15" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="15"/>
-                            <Button Text="20" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="20"/>
-                            <Button Text="25" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="25"/>
-                            <Button Text="30" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="30"/>
-                            <Button Style="{StaticResource TimeBtn}" x:Name="TimePickerButton" Clicked="OnTimePickerButtonClicked"
+                            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
+                                <Button Text="5" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="5"/>
+                                <Button Text="10" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="10"/>
+                                <Button Text="15" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="15"/>
+                                <Button Text="20" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="20"/>
+                                <Button Text="25" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="25"/>
+                                <Button Text="30" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineClick}" CommandParameter="30"/>
+                                <Button Style="{StaticResource TimeBtn}" x:Name="TimePickerButton" Clicked="OnTimePickerButtonClicked"
                                     CornerRadius="5" FontSize="17" 
                                     ImageSource="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=15, Color={StaticResource Bila}}"/>
-                            <Label Text="{Binding CasTxt}" IsVisible="{Binding CasVisible}"></Label>
-                        </FlexLayout>
-                    </VerticalStackLayout>
-                </Frame>
+                                <Label Text="{Binding CasTxt}" IsVisible="{Binding CasVisible}"></Label>
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
 
-                <!-- Note -->
-                <Frame Style="{StaticResource CustomFrame}">
-                    <Entry x:Name="NoteEntry"
+                    <!-- Note -->
+                    <Frame Style="{StaticResource CustomFrame}">
+                        <Entry x:Name="NoteEntry"
                            Placeholder="Poznámka"
                            PlaceholderColor="{StaticResource NRph}"
                            TextColor="{StaticResource TCwhite}"
                            FontSize="18" 
                             Text="{Binding Memo}"
                     />
-                </Frame>
+                    </Frame>
 
-            </StackLayout>
+                </StackLayout>
 
-        </ScrollView>
+            </ScrollView>
 
-        <!-- Fixované tlačítko na spodku -->
-        <Grid Grid.Row="1" Padding="15">
-            <Button Text="ULOŽIT ZMĚNY"
+            <!-- Fixované tlačítko na spodku -->
+            <Grid Grid.Row="1" Padding="15">
+                <Button Text="ULOŽIT ZMĚNY"
                     BackgroundColor="{StaticResource CustomOrangeBG}"
                     TextColor="{StaticResource Cerna}"
                     FontSize="16"
@@ -154,7 +154,26 @@
                     CornerRadius="10"
                     Command="{Binding SaveCmd}"
                     HeightRequest="50"/>
-        </Grid>
+            </Grid>
 
-    </Grid>
+        </Grid>
+        <popup:SfPopup IsOpen="{Binding TelPickerVisible}" HeaderTitle="Select phone" HeightRequest="500">
+            <popup:SfPopup.ContentTemplate>
+                <DataTemplate>
+                    <picker:SfPicker x:Name="picker"
+                         TextDisplayMode="FadeAndShrink"
+                         AcceptCommand="{Binding PhoneAcceptCommand}"
+                         DeclineCommand="{Binding PhoneCancelCommand}"
+                         >
+                        <picker:SfPicker.Columns>
+                            <picker:PickerColumn ItemsSource="{Binding ListCisel2}" SelectedItem="{Binding PhoneSelected ,Mode=TwoWay}"/>
+                        </picker:SfPicker.Columns>
+                        <picker:SfPicker.FooterView>
+                            <picker:PickerFooterView ShowOkButton="True" Height="40" />
+                        </picker:SfPicker.FooterView>
+                    </picker:SfPicker>
+                </DataTemplate>
+            </popup:SfPopup.ContentTemplate>
+        </popup:SfPopup>
+    </StackLayout>
 </ContentPage>

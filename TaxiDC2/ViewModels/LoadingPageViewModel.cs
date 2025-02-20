@@ -43,6 +43,12 @@ namespace TaxiDC2.ViewModels
 			}
 			else
 			{
+				//todo: debug
+				Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
+				await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+				return;
+				//todo: debug
+
 				var biometricStatus = await _biometricService.GetAuthenticationStatusAsync();
 				// Handle biometricStatus based on the application's logic
 
