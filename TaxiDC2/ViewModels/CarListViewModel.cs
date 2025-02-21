@@ -1,83 +1,60 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.Input;
 
 namespace TaxiDC2.ViewModels
 {
-    public class CarListViewModel : BaseViewModel
-    {
-	    private readonly IApiProxy _proxy;
-	    private Car _selectedItem;
+	public partial class CarListViewModel : BaseViewModel
+	{
 
-        public ObservableCollection<Car> Items { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command<Car> ItemTapped { get; }
+		public ObservableCollection<Car> Items { get; }
 
-        public CarListViewModel(IApiProxy proxy)
-        {
-	        _proxy = proxy;
-	        Title = "Vozy";
-            Items = new ObservableCollection<Car>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            ItemTapped = new Command<Car>(OnItemSelected);
-            AddItemCommand = new Command(OnAddItem);
-        }
+		public CarListViewModel(IDataService dataService) : base(dataService)
+		{
+			Items = new ObservableCollection<Car>();
+		}
 
-        private async Task ExecuteLoadItemsCommand()
-        {
-            IsBusy = true;
+		public void OnAppearing()
+		{
+			IsBusy = true;
+		}
 
-            try
-            {
-                Items.Clear();
+		[RelayCommand]
+		private async Task LoadData()
+		{
+			IsBusy = true;
 
-                var result = await _proxy.GetCarsAsync(true);
-                if (result.State == ResultCode.OK)
-                {
-                    foreach (Car item in result.Data)
-                    {
-                        Items.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
+			try
+			{
+				Items.Clear();
+				Car[] result = await DataService.GetCarsAsync(true);
+				foreach (Car item in result.OrderByDescending(o=>o.DateCreated))
+					Items.Add(item);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
 
-        public void OnAppearing()
-        {
-            IsBusy = true;
-            SelectedItem = null;
-        }
+		[RelayCommand]
+		private async void AddItem(object obj)
+		{
+			await Shell.Current.GoToAsync(nameof(DetailAuto));
+		}
 
-        public Car SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
-        }
+		[RelayCommand]
+		private async void ItemSelected(Guid id)
+		{
+			if (id == null)
+				return;
 
-        private async void OnAddItem(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(DetailAuto));
-        }
+			await Shell.Current.GoToAsync($"{nameof(DetailAuto)}?id={id}");
 
-        private async void OnItemSelected(Car item)
-        {
-            if (item == null)
-                return;
-
-            await Shell.Current.GoToAsync($"{nameof(DetailAuto)}?id={item.IdCar}");
-
-        }
-    }
+		}
+	}
 }

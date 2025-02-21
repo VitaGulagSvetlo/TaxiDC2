@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaxiDC2.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TaxiDC2.Models
 {
-    public class Car : BaseModel
+    [ObservableObject]
+    public partial class Car : BaseModel
     {
-        [Key]
         public Guid IdCar { get; set; }
 
         [StringLength(50)]

@@ -17,7 +17,7 @@ namespace TaxiDC2.ViewModels
 		private readonly IServiceProvider _serviceProvider;
 		private readonly IBiometric _biometricService;
 
-		public LoadingPageViewModel(FirebaseAuthClient authClient, IServiceProvider serviceProvider, IBiometric biometricService)
+		public LoadingPageViewModel(IDataService dataService, FirebaseAuthClient authClient, IServiceProvider serviceProvider, IBiometric biometricService) : base(dataService)
 		{
 			_authClient = authClient;
 			_serviceProvider = serviceProvider;

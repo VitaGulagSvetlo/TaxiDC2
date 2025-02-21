@@ -1,113 +1,100 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.Input;
 
 namespace TaxiDC2.ViewModels
 {
-    public class CustomerListViewModel : BaseViewModel
+    public partial class CustomerListViewModel : BaseViewModel
     {
-        private IApiProxy _proxy;
+        public ObservableCollection<Customer> Items { get; }= new ObservableCollection<Customer>();
 
-        private Customer _selectedItem;
-        private string _filter="A";
-
-        public ObservableCollection<Customer> Items { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command<Customer> ItemTapped { get; }
-
-        public CustomerListViewModel(IApiProxy proxy)
-        {
-            _proxy = proxy;
+        public CustomerListViewModel(IDataService dataService) : base(dataService)
+		{
             Title = "Zákazníci";
-            Items = new ObservableCollection<Customer>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            ItemTapped = new Command<Customer>(OnItemSelected);
-            AddItemCommand = new Command(OnAddItem);
-        }
-
-        async Task ExecuteLoadItemsCommand()
-        {
-            IsBusy = true;
-
-            try
-            {
-                await RefreshData();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
         }
 
         private async Task RefreshData()
         {
-            Items.Clear();
-            var result = await _proxy.FindCustomersAsync(_filter);
-            IEnumerable<Customer> d = result.Data.ToList();
-
-            if (result.State == ResultCode.OK)
-            {
-                foreach (Customer item in d)
-                {
-                    Items.Add(item);
-                }
-            }
+	        IsBusy = true;
+	        try
+	        {
+		        Items.Clear();
+		        var result = await DataService.FindCustomersAsync(SearchText);
+		        foreach (var item in result.OrderBy(o => o.Name))
+		        {
+			        Items.Add(item);
+		        }
+	        }
+	        catch (Exception ex)
+	        {
+		        Debug.WriteLine(ex);
+	        }
+	        finally
+	        {
+		        IsBusy = false;
+	        }
         }
 
-        public void OnAppearing()
+		public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
         }
 
-        public Customer SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
-        }
+        public string SearchText { get; set; } = " ";
 
-        private async void OnAddItem(object obj)
+        [RelayCommand]
+        private async void AddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(DetailZakaznik));
         }
 
-        async void OnItemSelected(Customer item)
+		[RelayCommand]
+		async void ItemSelected(Guid? id)
         {
-            if (item == null)
+            if (id == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={item.IdCustomer}");
+            await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={id}");
         }
 
-        public async Task SaveToggleData()
+        [RelayCommand]
+        public async Task Search()
         {
-            try
-            {
-                foreach (Customer customer in Items.Where(w => w.IsDirty))
-                {
-                    ServiceResult ret = await _proxy.UpdateCustomerSetings(customer);
-                    if (ret.State == ResultCode.OK)
-                        customer.IsDirty = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
+            await RefreshData();
         }
 
-        public void Search(string te)
+        [RelayCommand]
+        async Task LoadData()
         {
-            _filter = te;
-            RefreshData();
+	        IsBusy = true;
+
+	        try
+	        {
+		        await RefreshData();
+	        }
+	        catch (Exception ex)
+	        {
+		        Debug.WriteLine(ex);
+	        }
+	        finally
+	        {
+		        IsBusy = false;
+	        }
         }
-    }
+
+        [RelayCommand]
+        public async Task SaveToggleData(Customer customer)
+        {
+	        try
+	        {
+		        var ret = await DataService.UpdateCustomerSettingsAsync(customer);
+	        }
+	        catch (Exception ex)
+	        {
+		        Debug.WriteLine(ex);
+	        }
+        }
+
+
+	}
 }

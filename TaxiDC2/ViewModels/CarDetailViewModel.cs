@@ -2,91 +2,45 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
-    public partial class CarDetailViewModel : INotifyPropertyChanged
+	
+	public partial class CarDetailViewModel : BaseViewModel
     {
-        private IApiProxy _proxy;
+        
+        private readonly IDataService _dataService;
 
-        public CarDetailViewModel(IApiProxy proxy)
-        {
-            _proxy = proxy;
-            Title = "Vozidlo";
+        public CarDetailViewModel(IDataService dataService) : base(dataService)
+		{
+	        _dataService = dataService;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public bool IsBusy { get; set; }
-        public string Message { get; set; } = "";
-        public string Title { get; set; } = string.Empty;
+        [ObservableProperty]
+        private Car _car  = new Car();
 
 		[RelayCommand]
 		private async Task SaveData()
         {
-            Car cr = new()
-            {
-                IdCar = this.IdCar,
-                CarType = this.CarType,
-                Rz = this.Rz,
-                Color = this.Color,
-                Memo = this.Memo,
-                IsDeleted = this.IsDeleted
-            };
+            var ret = await _dataService.SaveCarAsync(_car);
 
-            ServiceResult ret = await _proxy.SaveCar(cr);
-            Message = ret.Message;
-            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
-
-			if (ret.State == ResultCode.OK)
+			if (ret)
             {
-				await Shell.Current.GoToAsync($"///{nameof(SeznamAut)}");
+	            await Shell.Current.DisplayAlert("Cars", "Auto uloženo", "OK");
+				await Shell.Current.GoToAsync($"..");
 			}
 			else
             {
-                //ERR
-            }
-        }
+	            //Message = "Chyba ukládání auta";
+			}
+		}
 
 		[RelayCommand]
 		public async Task LoadData(Guid id)
         {
-	        var car = await _proxy.GetCarByIdAsync(id);
-			if (car.State == ResultCode.OK && car.Data != null)
-			{
-				IdCar = car.Data.IdCar;
-				CarType = car.Data.CarType;
-				Rz = car.Data.Rz;
-				Color = car.Data.Color;
-				Memo = car.Data.Memo;
-				IsDeleted = car.Data.IsDeleted;
-			}
+	        _car = await _dataService.GetCarByIdAsync(id);
 		}
-
-
-		#region Data
-
-		[StringLength(50)]
-        [Required]
-        public string CarType { get; set; }
-
-        [StringLength(50)]
-        [Required]
-        public string Color { get; set; }
-
-        public Guid IdCar { get; set; } = Guid.Empty;
-
-        public bool IsDeleted { get; set; } = false;
-
-        public bool IsDirty { get; set; } = false;
-
-        public string Memo { get; set; }
-
-        [StringLength(50)]
-        [Required]
-        public string Rz { get; set; }
-
-        #endregion Data
     }
 }

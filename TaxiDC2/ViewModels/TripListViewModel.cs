@@ -10,18 +10,16 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 {
 	private IBussinessState _bs;
 	private readonly IPlaySoundService _soundService;
-	private readonly IDataService _dataService;
 	private IApiProxy _proxy;
 	private TripDetailViewModel _selectedItem;
 
 	private Timer timer = null;
 
-	public TripListViewModel(IApiProxy proxy, IBussinessState bs, IPlaySoundService soundService, IDataService dataService)
+	public TripListViewModel(IApiProxy proxy, IBussinessState bs, IPlaySoundService soundService, IDataService dataService) : base(dataService)
 	{
 		_proxy = proxy;
 		_bs = bs;
 		_soundService = soundService;
-		_dataService = dataService;
 		Items = new ObservableCollection<TripDetailViewModel>();
 		ItemTapped = new Command<TripDetailViewModel>(OnItemSelected);
 		ItemSwipedR = new Command<TripDetailViewModel>(OnItemSwipedRight);
@@ -101,7 +99,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 			Items.Clear();
 			//ServiceResult<Trip[]> result = await _proxy.GetTripsAsync(true);
 			//if (result.State == ResultCode.OK)
-			var result = await _dataService.GetTripAsync(true);
+			var result = await DataService.GetTripAsync(true);
 			{
 				//var l = result.Data.Select(TripDetailViewModel.FromTrip);
 				var l = result.Select(TripDetailViewModel.FromTrip);

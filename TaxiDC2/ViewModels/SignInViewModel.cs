@@ -25,7 +25,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		/// <inheritdoc/>
-		public SignInViewModel(FirebaseAuthClient authClient,IDataService dataService,IBussinessState bs)
+		public SignInViewModel(IDataService dataService, FirebaseAuthClient authClient,IBussinessState bs) : base(dataService)
 		{
 			_authClient = authClient;
 			_dataService = dataService;

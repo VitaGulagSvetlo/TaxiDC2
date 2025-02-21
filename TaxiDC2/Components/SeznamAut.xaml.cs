@@ -7,38 +7,23 @@ namespace TaxiDC2
 {
     public partial class SeznamAut : ContentPage
     {
-	    private readonly IApiProxy _proxy;
 	    readonly CarListViewModel _viewModel;
 
-	    public SeznamAut(IApiProxy proxy)
+	    public SeznamAut(CarListViewModel model)
 	    {
-		    _proxy = proxy;
 		    InitializeComponent();
-		    BindingContext = _viewModel = new CarListViewModel(proxy);
+		    BindingContext = _viewModel = model;
 	    }
 
 	    protected override void OnAppearing()
 	    {
 		    base.OnAppearing();
 		    _viewModel.OnAppearing();
-
 		}
 
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync($"{nameof(MainPage)}");
+            await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
         }
-
-        private async void OnSwipeItemInvoked(object sender, EventArgs e)
-        {
-	        var swipeItem = (SwipeItem)sender;
-	        var id = swipeItem.CommandParameter;
-	        Shell.Current.GoToAsync($"{nameof(DetailAuto)}?id={id.ToString()}");
-        }
-
-        private void ListAut_OnItemTapped(object sender, ItemTappedEventArgs e)
-        {
-			Shell.Current.GoToAsync($"{nameof(DetailAuto)}?id={((Car)e.DataItem).IdCar}");
-		}
     }
 }

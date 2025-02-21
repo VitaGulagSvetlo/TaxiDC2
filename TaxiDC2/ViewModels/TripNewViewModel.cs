@@ -51,7 +51,7 @@ namespace TaxiDC2.ViewModels
 		public ObservableCollection<CallListItem> ListCisel => _listCisel;
 		public ObservableCollection<Lokace> ListLokaci => _listLokaci;
 
-		public TripNewViewModel(IBussinessState bs, IApiProxy proxy, ICallLogService callLogService)
+		public TripNewViewModel(IDataService dataService, IBussinessState bs, IApiProxy proxy, ICallLogService callLogService) : base(dataService)
 		{
 			_bs = bs;
 			_proxy = proxy;

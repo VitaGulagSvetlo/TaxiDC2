@@ -7,18 +7,16 @@ namespace TaxiDC2
     {
         readonly CustomerListViewModel _viewModel;
 
-        public SeznamZakazniku(IApiProxy proxy)
+        public SeznamZakazniku(CustomerListViewModel model)
         {
             InitializeComponent();
-            
-            BindingContext = _viewModel = new CustomerListViewModel(proxy);
+            BindingContext = _viewModel = model;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             _viewModel.OnAppearing();
-
         }
         
         private async void OnBackButtonPressed(object sender, EventArgs e)
@@ -26,14 +24,5 @@ namespace TaxiDC2
 	        Shell.Current.GoToAsync($"{nameof(MainPage)}");
         }
         
-        private async void OnSwipeItemInvoked(object sender, EventArgs e)
-        {
-	        var swipeItem = (SwipeItem)sender;
-	        var id = swipeItem.CommandParameter;
-	        Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={id.ToString()}");
-        }
-
-        // This method will be called when the cancel button is clicked
-
     }
 }

@@ -9,13 +9,11 @@ namespace TaxiDC2.ViewModels
 	public partial class AppShellViewModel:BaseViewModel, IDisposable
 	{
 		private readonly FirebaseAuthClient _authClient;
-		private readonly IDataService _dataService;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-		public AppShellViewModel(FirebaseAuthClient authClient, IDataService dataService)
+		public AppShellViewModel(IDataService dataService, FirebaseAuthClient authClient):base(dataService)
 		{
 			_authClient = authClient;
-			_dataService = dataService;
 
 			// Spustíme periodickou kontrolu serveru
 			StartServerCheck();
@@ -45,7 +43,7 @@ namespace TaxiDC2.ViewModels
 				try
 				{
 					// Provede asynchroní kontrolu serveru
-					var pingResult = await _dataService.PingAsync();
+					var pingResult = await DataService.PingAsync();
 					IsServerOk = pingResult;
 				}
 				catch

@@ -1,103 +1,109 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.Input;
 
 namespace TaxiDC2.ViewModels
 {
-    public class DriverListViewModel : BaseViewModel
-    {
-        private IApiProxy _proxy;
-        private IBussinessState _bs;
+	public partial class DriverListViewModel : BaseViewModel
+	{
+		private readonly IBussinessState _bs;
+		private Driver _selectedItem;
 
-        private Driver _selectedItem;
+		public ObservableCollection<Driver> Items { get; }
+		
+		public bool IsAdmin => _bs.IsAdmin;
 
-        public ObservableCollection<Driver> Items { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command<Driver> ItemTapped { get; }
-        public DriverListViewModel(IApiProxy proxy, IBussinessState bs)
-        {
-            _bs = bs;  
-            _proxy = proxy;
-            Title = "Řidiči";
-            Items = new ObservableCollection<Driver>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            ItemTapped = new Command<Driver>(OnItemSelected);
+		public DriverListViewModel(IBussinessState bs, IDataService dataService) : base(dataService)
+		{
+			_bs = bs;
+			Items = new ObservableCollection<Driver>();
+		}
 
-            AddItemCommand = new Command(OnAddItem);
+		public void OnAppearing()
+		{
+			IsBusy = true;
+		}
 
-        }
-        
-        async Task ExecuteLoadItemsCommand()
-        {
-            IsBusy = true;
-            IsAdmin = _bs.IsAdmin;
-            try
-            {
-                Items.Clear();
-                var result = await _proxy.GetDriversAsync(true);
-                if (result.State == ResultCode.OK)
-                {
-                    foreach (Driver item in result.Data.OrderBy(o=>o.FullName))
-                    {
-                        Items.Add(item);
-                        item.IsDirty = false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
+		[RelayCommand]
+		public async Task SaveToggleData(Driver driver)
+		{
+			IsBusy = true;
+			try
+			{
+				var ret = await DataService.UpdateDriverSettingsAsync(driver);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
 
-        public void OnAppearing()
-        {
-            IsBusy = true;
-            SelectedItem = null;
-        }
+		[RelayCommand]
+		async Task LoadData()
+		{
+			IsBusy = true;
+			try
+			{
+				Items.Clear();
+				var result = await DataService.GetDriversAsync(true);
+				foreach (Driver item in result.OrderBy(o => o.FullName))
+				{
+					Items.Add(item);
+					item.IsDirty = false;
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
 
-        public Driver SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
-        }
+		[RelayCommand]
+		async void ItemSelected(Guid? id)
+		{
+			if (id == null) return;
 
-        private async void OnAddItem(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(DetailRidic));
-        }
+			await Shell.Current.GoToAsync($"{nameof(DetailRidic)}?id={id}");
+		}
 
-        async void OnItemSelected(Driver item)
-        {
-            if (item == null)
-                return;
+		[RelayCommand]
+		private async Task ActiveToggled(Guid id)
+		{
+			if (id == null) return;
+			var driver = Items.FirstOrDefault(f => f.IdDriver == id);
+			if (driver != null)
+			{
+				//driver.Active = !driver.Active;
+				driver.IsDirty = true;
+				await SaveToggleData(driver);
+			}
+		}
 
-             await Shell.Current.GoToAsync($"{nameof(DetailRidic)}?id={item.IdDriver}");
-        }
-       
-        public async Task SaveToggleData()
-        {
-            try
-            {
-                foreach (Driver driver in Items.Where(w=>w.IsDirty))
-                {
-                    ServiceResult ret = await _proxy.UpdateDriverSetings(driver);
-                    if (ret.State==ResultCode.OK)
-                        driver.IsDirty = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-        }
-    }
+		[RelayCommand]
+		private async Task NotifiToggled(Guid id)
+		{
+			if (id == null) return;
+			var driver = Items.FirstOrDefault(f => f.IdDriver == id);
+			if (driver != null)
+			{
+				//driver.NotificationEnable = !driver.NotificationEnable;
+				driver.IsDirty = true;
+				await SaveToggleData(driver);
+			}
+		}
+
+		[RelayCommand]
+		private async void AddItem(object obj)
+		{
+			await Shell.Current.GoToAsync(nameof(DetailRidic));
+		}
+	}
 }

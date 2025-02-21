@@ -7,14 +7,15 @@
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.SeznamZakazniku"
+             x:DataType="vm:CustomerListViewModel"
              BackgroundColor="{StaticResource GridBG}"
              Title="Seznam Zákazníků">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Nový zákazník" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Nový" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
 
-    <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -24,9 +25,6 @@
                 <RowDefinition Height="*" />
                 <!-- List -->
             </Grid.RowDefinitions>
-
-            <!-- Gradient Strip -->
-            
 
             <!-- Search Bar Strip -->
             <Grid Padding="10" Grid.Row="1" >
@@ -40,7 +38,9 @@
                            Text="{Binding SearchText, Mode=TwoWay}"
                            TextColor="{StaticResource TCwhite}"
                            PlaceholderColor="{StaticResource Bila}" 
-                           CancelButtonColor="{StaticResource Bila}" />
+                           CancelButtonColor="{StaticResource Bila}" 
+                           SearchCommand="{Binding SearchCommand}"
+                           />
             </Grid>
 
             <!-- List -->
@@ -52,7 +52,8 @@
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Execute">
                                     <SwipeItem    IconImageSource="{FontImageSource Glyph={StaticResource info}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
-BackgroundColor="{StaticResource CustomOrangeBG}"  Invoked="OnSwipeItemInvoked" CommandParameter="{Binding IdCustomer}"/>
+                                                  BackgroundColor="{StaticResource CustomOrangeBG}"  
+                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CustomerListViewModel}}, Path=ItemSelectedCommand}" CommandParameter="{Binding IdCustomer}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <!-- Item content -->

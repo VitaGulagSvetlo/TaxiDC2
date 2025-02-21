@@ -1,4 +1,5 @@
-﻿using Firebase.Auth;
+﻿using CommunityToolkit.Maui;
+using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
 using IdentityModel.OidcClient;
@@ -20,6 +21,7 @@ namespace TaxiDC2
             var builder = MauiApp.CreateBuilder();
             builder
 	            .UseMauiApp<App>()
+	            .UseMauiCommunityToolkit()
 	            .ConfigureSyncfusionCore()
 	            .ConfigureFonts(FAs =>
 	            {
@@ -86,9 +88,12 @@ namespace TaxiDC2
 			//vm
 			builder.Services.AddTransient<ConfigViewModel>();
 			builder.Services.AddTransient<TripDetailViewModel>();
-			builder.Services.AddTransient<DriverNewViewModel>(); 
+			builder.Services.AddTransient<DriverNewViewModel>();
+			builder.Services.AddTransient<DriverListViewModel>();
 			builder.Services.AddTransient<CarDetailViewModel>();
+			builder.Services.AddTransient<CarListViewModel>();
 			builder.Services.AddTransient<CustomerDetailViewModel>();
+			builder.Services.AddTransient<CustomerListViewModel>();
 			builder.Services.AddTransient<SmsViewModel>();
 
 

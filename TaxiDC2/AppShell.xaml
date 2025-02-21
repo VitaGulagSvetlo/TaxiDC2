@@ -4,10 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TaxiDC2"
-    xmlns:login="using:TaxiDC2.Components.Login"
     xmlns:components="clr-namespace:TaxiDC2.Components"
     xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
-    Shell.FlyoutBehavior="Flyout"
+    FlyoutBehavior="Flyout"
     x:DataType="vm:AppShellViewModel"
     Title="TAXI DC 2"
     BackgroundColor="{Binding ServerColor}"
@@ -18,17 +17,18 @@
         ContentTemplate="{DataTemplate components:LoadingPage}"
         Route="LoadingPage" 
         Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"
         />
 
-    <ShellContent ContentTemplate = "{DataTemplate local:MainPage}" Title = "Main page" Route ="MainPage" Shell.FlyoutBehavior="Flyout" />
+    <ShellContent ContentTemplate = "{DataTemplate local:MainPage}" Title = "Hlavní stránka" Route ="MainPage" Shell.FlyoutBehavior="Flyout" />
+    <ShellContent ContentTemplate = "{DataTemplate local:SeznamJizd}" Title = "Seznam jízd"  Route ="SeznamJizd" />
     <ShellContent ContentTemplate = "{DataTemplate local:NovaJizda}" Title = "Nová jízda" Route ="NovaJizda" />
-    <ShellContent ContentTemplate = "{DataTemplate local:SeznamJizd}" Title = "Seznam Jízd"  Route ="SeznamJizd" />
-    <ShellContent ContentTemplate = "{DataTemplate local:DetailRidic}" Title = "Detail Řidič"  Route ="DetailRidic" />
-    <ShellContent ContentTemplate = "{DataTemplate local:DetailJizda}" Title = "Detail Jízdy (zatím)"  Route ="DetailJizda" />
-    <ShellContent ContentTemplate = "{DataTemplate local:SeznamAut}" Title = "Seznam Aut"  Route ="SeznamAut" />
-    <ShellContent ContentTemplate = "{DataTemplate local:SeznamRidicu}" Title = "Seznam Řidičů"  Route ="SeznamRidicu" />
-    <ShellContent ContentTemplate = "{DataTemplate local:SeznamZakazniku}" Title = "Seznam Zákazníků"  Route ="SeznamZakazniku" />
-    <ShellContent ContentTemplate = "{DataTemplate local:DetailZakaznik}" Title = "Detail zákazníka"  Route ="DetailZakaznik" />
+    <ShellContent ContentTemplate = "{DataTemplate local:SeznamAut}" Title = "Seznam aut"  Route ="SeznamAut" />
+    <ShellContent ContentTemplate = "{DataTemplate local:DetailAuto}" Title = "Nové auto"  Route ="DetailAuto" />
+    <ShellContent ContentTemplate = "{DataTemplate local:SeznamRidicu}" Title = "Seznam řidičů"  Route ="SeznamRidicu" />
+    <ShellContent ContentTemplate = "{DataTemplate local:DetailRidic}" Title = "Nový řidič"  Route ="DetailRidic" />
+    <ShellContent ContentTemplate = "{DataTemplate local:SeznamZakazniku}" Title = "Seznam zákazníků"  Route ="SeznamZakazniku" />
+    <ShellContent ContentTemplate = "{DataTemplate local:DetailZakaznik}" Title = "Nový zákazník"  Route ="DetailZakaznik" />
     <ShellContent ContentTemplate = "{DataTemplate local:AboutPage}" Title = "O nás"  Route ="AboutPage" />
 
     <Shell.FlyoutFooter>
