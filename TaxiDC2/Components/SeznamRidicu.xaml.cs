@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls;
-using System.Collections.ObjectModel;
 using TaxiDC2.ViewModels;
 namespace TaxiDC2
 {

@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls;
-
 namespace TaxiDC2
 {
     public partial class TripAlert : ContentPage

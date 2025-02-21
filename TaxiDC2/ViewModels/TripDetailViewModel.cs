@@ -295,7 +295,7 @@ namespace TaxiDC2.ViewModels
 		public async Task LoadData(Guid id, IApiProxy proxy)
 		{
 			if (proxy == null) throw new ArgumentNullException(nameof(proxy));
-			var trip = await proxy.GetTripByIdAsync(id);
+			ServiceResult<Trip> trip = await proxy.GetTripByIdAsync(id);
 			if (trip.State == ResultCode.OK && trip.Data != null)
 			{
 				AddressBoarding = trip.Data.AddressBoarding;

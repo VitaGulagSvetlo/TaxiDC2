@@ -1,108 +1,46 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
-    public class CustomerDetailViewModel : INotifyPropertyChanged
+    public partial class CustomerDetailViewModel :BaseViewModel
     {
-        private IApiProxy _proxy;
 
-        public CustomerDetailViewModel(IApiProxy proxy)
+        public CustomerDetailViewModel(IDataService dataService):base(dataService)
         {
-            _proxy = proxy;
-            Title = "Zákazník";
-            SaveDataCmd = new Command(async () => await SaveData());
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		[ObservableProperty]
+		private Customer _customer = new Customer();
 
-        public bool IsBusy { get; set; }
-        public string Message { get; set; } = "";
-        public ICommand SaveDataCmd { get; }
-        public string Title { get; set; } = string.Empty;
+		public async Task LoadData(Guid id)
+		{
+			Customer customer = await DataService.GetCustomerByIdAsync(id);
+			if (customer != null)
+			{
+				Customer = customer??new Customer();
+			}
+		}
 
+		[RelayCommand]
         public async Task SaveData()
         {
-            Customer cu = new()
+            bool ret = await DataService.SaveCustomerAsync(Customer);
+            if (ret)
             {
-                IdCustomer = this.IdCustomer,
-                PhoneNumber = this.PhoneNumber,
-                LastAddressBoarding = this.LastAddressBoarding,
-                LastAddressExit =  this.LastAddressExit,
-                Time = this.Time,   
-                VIP = this.VIP,
-                Rejected = this.Rejected,
-                Memo = this.Memo,
-                VIP2 = this.VIP2,
-                Name = this.Name
-            };
-
-            ServiceResult ret = await _proxy.SaveCustomer(cu);
-            Message = ret.Message;
-            await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
-            if (ret.State == ResultCode.OK)
-            {
+	            await Shell.Current.DisplayAlert("Zákazníci", "Zákazník uložen", "OK");
                 // OK
-                await Shell.Current.GoToAsync("..");
+				await Shell.Current.GoToAsync("..");
             }
             else
             {
                 //ERR
             }
         }
-
-        #region Data
-
-        public Guid IdCustomer { get; set; } = Guid.Empty;
-        [StringLength(500)]
-        public string? LastAddressBoarding { get; set; }
-
-        [StringLength(500)]
-        public string? LastAddressExit { get; set; }
-
-        public string Memo { get; set; }
-
-        [StringLength(50)]
-        public string Name { get; set; }
-
-        [StringLength(20)]
-        public string? PhoneNumber { get; set; }
-        public bool Rejected { get; set; }
-        public DateTime Time { get; set; }
-        public bool VIP { get; set; }
-        public short VIP2 { get; set; } = 0;
         
-        [DependsOn("VIP2")]
-        public bool St1Visible => VIP2 > 0;
-        [DependsOn("VIP2")]
-        public bool St2Visible => VIP2 > 1;
-        [DependsOn("VIP2")]
-        public bool St3Visible => VIP2 > 2;
-        [DependsOn("VIP2")]
-        public bool St4Visible => VIP2 > 3;
-        [DependsOn("VIP2")]
-        public bool St5Visible => VIP2 > 4;
-
-		#endregion Data
-
-		public async Task LoadData(Guid id)
-		{
-            var customer = await _proxy.GetCustomerByIdAsync(id);
-            if (customer.State == ResultCode.OK && customer.Data != null)
-			{
-				IdCustomer = customer.Data.IdCustomer;
-				PhoneNumber = customer.Data.PhoneNumber;
-				LastAddressBoarding = customer.Data.LastAddressBoarding;
-				LastAddressExit = customer.Data.LastAddressExit;
-				Time = customer.Data.Time;
-				VIP = customer.Data.VIP;
-				Rejected = customer.Data.Rejected;
-				Memo = customer.Data.Memo;
-				VIP2 = customer.Data.VIP2;
-				Name = customer.Data.Name;
-			}
-		}
     }
 }

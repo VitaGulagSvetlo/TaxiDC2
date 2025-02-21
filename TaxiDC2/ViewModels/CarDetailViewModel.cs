@@ -22,25 +22,27 @@ namespace TaxiDC2.ViewModels
         private Car _car  = new Car();
 
 		[RelayCommand]
-		private async Task SaveData()
+		public async Task LoadData(Guid id)
         {
-            var ret = await _dataService.SaveCarAsync(_car);
-
-			if (ret)
-            {
-	            await Shell.Current.DisplayAlert("Cars", "Auto uloženo", "OK");
-				await Shell.Current.GoToAsync($"..");
-			}
-			else
-            {
-	            //Message = "Chyba ukládání auta";
-			}
+	        Car c = await _dataService.GetCarByIdAsync(id);
+	        Car= c ?? new Car();
 		}
 
 		[RelayCommand]
-		public async Task LoadData(Guid id)
-        {
-	        _car = await _dataService.GetCarByIdAsync(id);
+		private async Task SaveData()
+		{
+			bool ret = await _dataService.SaveCarAsync(Car);
+
+			if (ret)
+			{
+				await Shell.Current.DisplayAlert("Cars", "Auto uloženo", "OK");
+				await Shell.Current.GoToAsync($"..");
+			}
+			else
+			{
+				//Message = "Chyba ukládání auta";
+			}
 		}
-    }
+
+	}
 }

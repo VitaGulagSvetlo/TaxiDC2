@@ -40,7 +40,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		if (md.msg == MessageType.FWD.ToString())
 		{
 			// Predani jizdy na ridice
-			var dd = JsonConvert.DeserializeObject<IDictionary<string, Guid>>(md.data);
+			IDictionary<string, Guid> dd = JsonConvert.DeserializeObject<IDictionary<string, Guid>>(md.data);
 			if (dd != null && dd["driver"] == _bs.DriverId)
 			{
 				string t = dd["trip"].ToString();
@@ -99,10 +99,10 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 			Items.Clear();
 			//ServiceResult<Trip[]> result = await _proxy.GetTripsAsync(true);
 			//if (result.State == ResultCode.OK)
-			var result = await DataService.GetTripAsync(true);
+			Trip[] result = await DataService.GetTripAsync(true);
 			{
 				//var l = result.Data.Select(TripDetailViewModel.FromTrip);
-				var l = result.Select(TripDetailViewModel.FromTrip);
+				IEnumerable<TripDetailViewModel> l = result.Select(TripDetailViewModel.FromTrip);
 
 				if (ListMode != 0) // jen moje
 					l = l.Where(w =>

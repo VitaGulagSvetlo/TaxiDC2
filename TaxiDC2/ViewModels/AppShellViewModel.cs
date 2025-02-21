@@ -43,7 +43,7 @@ namespace TaxiDC2.ViewModels
 				try
 				{
 					// Provede asynchroní kontrolu serveru
-					var pingResult = await DataService.PingAsync();
+					bool pingResult = await DataService.PingAsync();
 					IsServerOk = pingResult;
 				}
 				catch

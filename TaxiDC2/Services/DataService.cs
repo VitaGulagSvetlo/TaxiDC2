@@ -8,6 +8,7 @@ public interface IDataService
 	Task<Customer> GetCustomerByIdAsync(Guid customerId);
 	Task<Customer> GetCustomerByPhoneAsync(string phone);
 	Task<Driver> GetDriverByDeviceKeyAsync(string deviceKey, string deviceHash);
+	Task<Driver> GetDriverByIdAsync(Guid driverId);
 	Task<Trip> GetTripByIdAsync(Guid tripId);
 	Task<bool> ChangeTripStateAsync(Guid tripId, TripState newState, params string[] paramsStrings);
 	Task<bool> RegisterDriverAsync(Driver driver);
@@ -98,6 +99,9 @@ public class DataService : IDataService
 
 	public Task<Customer?> GetCustomerByIdAsync(Guid customerId) =>
 		ExecuteWithRetry(() => _apiProxy.GetCustomerByIdAsync(customerId));
+
+	public Task<Driver?> GetDriverByIdAsync(Guid customerId) =>
+		ExecuteWithRetry(() => _apiProxy.GetDriverByIdAsync(customerId));
 
 	public Task<Customer?> GetCustomerByPhoneAsync(string phone) =>
 		ExecuteWithRetry(() => _apiProxy.GetCustomerByPhone(phone));

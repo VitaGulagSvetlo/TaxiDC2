@@ -19,7 +19,7 @@ namespace TaxiDC2.ViewModels
 		{
 			get
 			{
-				var r = Task.Run(async ()=> await _dataService.PingAsync()).Result;
+				bool r = Task.Run(async ()=> await _dataService.PingAsync()).Result;
 				return r;
 			}
 		}
@@ -43,7 +43,7 @@ namespace TaxiDC2.ViewModels
 				return;
 			}
 
-			var result = await _authClient.SignInWithEmailAndPasswordAsync(Email,Password);
+			UserCredential result = await _authClient.SignInWithEmailAndPasswordAsync(Email,Password);
 			if (result.User!=null)
 			{
 				await LoadDriver();
@@ -54,8 +54,8 @@ namespace TaxiDC2.ViewModels
 
 		private async Task LoadDriver()
 		{
-			var drl = await _dataService.GetDriversAsync(true);
-			var driver = drl.FirstOrDefault(f => f.MobileDeviceHash == _authClient.User.Uid);
+			Driver[] drl = await _dataService.GetDriversAsync(true);
+			Driver driver = drl.FirstOrDefault(f => f.MobileDeviceHash == _authClient.User.Uid);
 			if (driver != null)
 			{
 				_bs.Driver = driver;

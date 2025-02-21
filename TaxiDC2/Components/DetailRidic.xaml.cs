@@ -1,14 +1,10 @@
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.ObjectModel;
-using TaxiDC2.Models;
 using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
 	public partial class DetailRidic : ContentPage, IQueryAttributable
 	{
-		public DetailRidic(DriverNewViewModel vm)
+		public DetailRidic(DriverDetailViewModel vm)
 		{
 			InitializeComponent();
 			Task.Run(async()=>await vm?.LoadData()!).Wait();
@@ -22,7 +18,7 @@ namespace TaxiDC2
 				var idAsString = query["id"]?.ToString();
 				if (Guid.TryParse(idAsString, out var parsedId))
 				{
-					var vm = BindingContext as DriverNewViewModel;
+					var vm = BindingContext as DriverDetailViewModel;
 					vm?.LoadDataById(parsedId);
 				}
 			}

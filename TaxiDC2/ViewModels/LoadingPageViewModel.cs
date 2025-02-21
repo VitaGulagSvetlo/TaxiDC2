@@ -49,7 +49,7 @@ namespace TaxiDC2.ViewModels
 				return;
 				//todo: debug
 
-				var biometricStatus = await _biometricService.GetAuthenticationStatusAsync();
+				BiometricHwStatus biometricStatus = await _biometricService.GetAuthenticationStatusAsync();
 				// Handle biometricStatus based on the application's logic
 
 				if (biometricStatus != BiometricHwStatus.Success)
@@ -59,7 +59,7 @@ namespace TaxiDC2.ViewModels
 					return;
 				}
 
-				var authenticationRequest = new AuthenticationRequest
+				AuthenticationRequest authenticationRequest = new AuthenticationRequest
 				{
 					AllowPasswordAuth = true, // A chance to fallback to password auth
 					Title = "Authenticate", // On iOS only the title is relevant, everything else is unused. 
@@ -74,7 +74,7 @@ namespace TaxiDC2.ViewModels
 				// rozchozeno nahodou a nevim co to presne dela :-)
 				Shell.Current.Dispatcher.Dispatch(async () =>
 				{
-					var authenticationResponse = await _biometricService.AuthenticateAsync(authenticationRequest, CancellationToken.None);
+					AuthenticationResponse authenticationResponse = await _biometricService.AuthenticateAsync(authenticationRequest, CancellationToken.None);
 					if (authenticationResponse.Status != BiometricResponseStatus.Success)
 					{
 						await Shell.Current.DisplayAlert("Error", authenticationResponse.ErrorMsg, "Close");

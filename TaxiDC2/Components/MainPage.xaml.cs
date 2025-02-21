@@ -1,8 +1,4 @@
-﻿using IdentityModel.Client;
-using IdentityModel.OidcClient;
-using Microsoft.Maui.Controls;
-using System.Text.Json;
-using System.Text;
+﻿using IdentityModel.OidcClient;
 
 namespace TaxiDC2
 {

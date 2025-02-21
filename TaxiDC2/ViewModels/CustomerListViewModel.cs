@@ -19,8 +19,8 @@ namespace TaxiDC2.ViewModels
 	        try
 	        {
 		        Items.Clear();
-		        var result = await DataService.FindCustomersAsync(SearchText);
-		        foreach (var item in result.OrderBy(o => o.Name))
+		        Customer[] result = await DataService.FindCustomersAsync(SearchText);
+		        foreach (Customer item in result.OrderBy(o => o.Name))
 		        {
 			        Items.Add(item);
 		        }
@@ -87,7 +87,7 @@ namespace TaxiDC2.ViewModels
         {
 	        try
 	        {
-		        var ret = await DataService.UpdateCustomerSettingsAsync(customer);
+		        bool ret = await DataService.UpdateCustomerSettingsAsync(customer);
 	        }
 	        catch (Exception ex)
 	        {

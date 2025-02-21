@@ -1,13 +1,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
-             xmlns:controls="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              xmlns:models="clr-namespace:TaxiDC2.Models"
              BackgroundColor="{StaticResource GridBG}"
              x:Class="TaxiDC2.DetailRidic"
-             x:DataType="vm:DriverNewViewModel"
+             x:DataType="vm:DriverDetailViewModel"
              Title="Řidič">
 
     <Grid BackgroundColor="{StaticResource GridBG}">
@@ -29,19 +27,19 @@
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
                             <Label Text="Jméno:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding FirstName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Entry Text="{Binding Driver.FirstName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Příjmení:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding LastName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Entry Text="{Binding Driver.LastName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Mobilní zařízení:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding MobileDeviceKey}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Entry Text="{Binding Driver.MobileDeviceKey}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Telefonní číslo:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Entry Text="{Binding Driver.PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
@@ -64,15 +62,15 @@
 
                         <!-- Active Switch -->
                         <Label Grid.Row="0" Grid.Column="0" Text="Aktivní:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                        <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding Active}" HorizontalOptions="Start" />
+                        <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding Driver.Active}" HorizontalOptions="Start" />
 
                         <!-- Notification Switch -->
                         <Label Grid.Row="1" Grid.Column="0" Text="Notifikace zapnuty:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                        <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding NotificationEnable}" HorizontalOptions="Start" />
+                        <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding Driver.NotificationEnable}" HorizontalOptions="Start" />
 
                         <!-- Admin Switch -->
                         <Label Grid.Row="2" Grid.Column="0" Text="Administrator:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                        <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding IsAdmin}" HorizontalOptions="Start" />
+                        <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding Driver.IsAdmin}" HorizontalOptions="Start" />
 
                     </Grid>
                 </Frame>
@@ -107,7 +105,7 @@
                     FontSize="16" 
                     VerticalOptions="End" 
                     CornerRadius="10" 
-                    Command="{Binding SaveDataCmd}" 
+                    Command="{Binding SaveDataCommand}" 
                     HeightRequest="50" />
         </Grid>
     </Grid>

@@ -117,7 +117,7 @@ namespace TaxiDC2.ViewModels
 				Customer = _customer
 			};
 
-			var ret = await _proxy.SaveTrip(drv);
+			ServiceResult<Trip> ret = await _proxy.SaveTrip(drv);
 			Message = ret.Message;
 			await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
 
@@ -154,11 +154,11 @@ namespace TaxiDC2.ViewModels
 		{
 			try
 			{
-				var log = await _callLogService.GetCallLogEntriesAsync();
+				List<CallLogEntry> log = await _callLogService.GetCallLogEntriesAsync();
 
 				_listCisel.Clear();
 
-				foreach (var item in _listCisel)
+				foreach (CallListItem item in _listCisel)
 					_listCisel.Add(new CallListItem() { Cislo = item.Cislo, Jmeno = item.Jmeno });
 
 #if DEBUG
@@ -192,7 +192,7 @@ namespace TaxiDC2.ViewModels
 			try
 			{
 				{
-					var lo = await _proxy.Geocode(v == 1 ? AdresaStart : AdresaCil);
+					ServiceResult<Lokace[]> lo = await _proxy.Geocode(v == 1 ? AdresaStart : AdresaCil);
 					if (lo.State == ResultCode.ERROR)
 						return;
 
@@ -370,7 +370,7 @@ namespace TaxiDC2.ViewModels
 
 		public async Task SetContactFromPhone(string cislo, string jmeno = "")
 		{
-			var res = await _proxy.GetCustomerByPhone(cislo);
+			ServiceResult<Customer> res = await _proxy.GetCustomerByPhone(cislo);
 			if (res.State == ResultCode.OK && res.Data != null)
 			{
 				Customer = res.Data;

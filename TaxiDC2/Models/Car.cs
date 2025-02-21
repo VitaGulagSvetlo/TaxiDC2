@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TaxiDC2.Models
 {
-    [ObservableObject]
     public partial class Car : BaseModel
     {
         public Guid IdCar { get; set; }

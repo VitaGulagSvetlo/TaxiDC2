@@ -30,7 +30,7 @@ namespace TaxiDC2.ViewModels
 			IsBusy = true;
 			try
 			{
-				var ret = await DataService.UpdateDriverSettingsAsync(driver);
+				bool ret = await DataService.UpdateDriverSettingsAsync(driver);
 			}
 			catch (Exception ex)
 			{
@@ -49,7 +49,7 @@ namespace TaxiDC2.ViewModels
 			try
 			{
 				Items.Clear();
-				var result = await DataService.GetDriversAsync(true);
+				Driver[] result = await DataService.GetDriversAsync(true);
 				foreach (Driver item in result.OrderBy(o => o.FullName))
 				{
 					Items.Add(item);
@@ -78,7 +78,7 @@ namespace TaxiDC2.ViewModels
 		private async Task ActiveToggled(Guid id)
 		{
 			if (id == null) return;
-			var driver = Items.FirstOrDefault(f => f.IdDriver == id);
+			Driver driver = Items.FirstOrDefault(f => f.IdDriver == id);
 			if (driver != null)
 			{
 				//driver.Active = !driver.Active;
@@ -91,7 +91,7 @@ namespace TaxiDC2.ViewModels
 		private async Task NotifiToggled(Guid id)
 		{
 			if (id == null) return;
-			var driver = Items.FirstOrDefault(f => f.IdDriver == id);
+			Driver driver = Items.FirstOrDefault(f => f.IdDriver == id);
 			if (driver != null)
 			{
 				//driver.NotificationEnable = !driver.NotificationEnable;

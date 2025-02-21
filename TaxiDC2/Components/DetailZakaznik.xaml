@@ -25,15 +25,15 @@
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
                             <Label Text="Jméno:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding Name}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Entry Text="{Binding Customer.Name}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Telefon:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Entry Text="{Binding Customer.PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Poznámka:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding Memo}" FontSize="10" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Entry Text="{Binding Customer.Memo}" FontSize="10" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
@@ -55,11 +55,11 @@
 
                         <!-- VIP Switch -->
                         <Label Grid.Row="0" Grid.Column="0" Text="VIP:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                        <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding VIP}" HorizontalOptions="Start" />
+                        <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding Customer.VIP}" HorizontalOptions="Start" />
 
                         <!-- Rejected Switch -->
                         <Label Grid.Row="1" Grid.Column="0" Text="Nevozit!:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                        <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding Rejected}" HorizontalOptions="Start" />
+                        <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding Customer.Rejected}" HorizontalOptions="Start" />
 
                     </Grid>
                 </Frame>
@@ -69,7 +69,7 @@
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout>
                         <Label Text="Hodnocení zákazníka:" Style="{StaticResource CustomLblO}" />
-                        <inputs:SfRating Value="{Binding VIP2}">
+                        <inputs:SfRating Value="{Binding Customer.VIP2}">
                             <inputs:SfRating.RatingSettings>
                                 <inputs:RatingSettings RatedStroke="Transparent" RatedFill="{StaticResource Oranzova}" UnratedFill="{StaticResource GradientGray}" />
                             </inputs:SfRating.RatingSettings>
@@ -82,15 +82,15 @@
                     <StackLayout Spacing="10">
                         <VerticalStackLayout>
                             <Label Text="Nástup:" Style="{StaticResource CustomLblO}" />
-                            <Label Text="{Binding LastAddressBoarding}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding Customer.LastAddressBoarding}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Výstup:" Style="{StaticResource CustomLblO}" />
-                            <Label Text="{Binding LastAddressExit}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding Customer.LastAddressExit}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Poslední cesta:" Style="{StaticResource CustomLblO}" />
-                            <Label Text="{Binding Time}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding Customer.Time}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
@@ -104,7 +104,7 @@
                 TextColor="{StaticResource Cerna}"
                 FontSize="16"
                 CornerRadius="10"
-                Command="{Binding SaveDataCmd}"
+                Command="{Binding SaveDataCommand}"
                 HorizontalOptions="Center" 
                 VerticalOptions="End" />
     </Grid>

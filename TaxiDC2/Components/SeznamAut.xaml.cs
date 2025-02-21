@@ -1,7 +1,4 @@
-using Microsoft.Maui.Controls;
-using System.Collections.ObjectModel;
 using TaxiDC2.ViewModels;
-using ItemTappedEventArgs = Syncfusion.Maui.ListView.ItemTappedEventArgs;
 
 namespace TaxiDC2
 {

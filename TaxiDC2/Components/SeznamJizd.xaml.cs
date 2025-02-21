@@ -1,8 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-using Syncfusion.Maui.ListView;
-using System;
-using System.Collections.ObjectModel;
-using Syncfusion.Maui.Buttons;
+﻿using Syncfusion.Maui.Buttons;
 using TaxiDC2.ViewModels;
 
 namespace TaxiDC2

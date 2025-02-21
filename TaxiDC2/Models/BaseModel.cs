@@ -1,8 +1,14 @@
-﻿namespace TaxiDC2.Models
+﻿using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace TaxiDC2.Models
 {
     
-        public class BaseModel
+        public class BaseModel :  INotifyPropertyChanged
         {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+		
             public DateTime? DateModified { get; set; } = null;
             public DateTime? DateCreated { get; set; } = null;
             public DateTime? DateDeleted { get; set; } = null;
