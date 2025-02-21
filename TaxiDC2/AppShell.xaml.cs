@@ -38,5 +38,31 @@ namespace TaxiDC2
 
 		}
 
+
+        protected override bool OnBackButtonPressed()
+        {
+	        // Pokud je pouze aktuální stránka (nebo žádná) v navigačním zásobníku
+	        if (Navigation.NavigationStack.Count <= 1)
+	        {
+		        // Spustíme asynchronně dialog pro potvrzení opuštění aplikace
+		        Device.BeginInvokeOnMainThread(async () =>
+		        {
+			        bool exit = await DisplayAlert("Upozornění", "Opravdu chcete opustit aplikaci?", "Ano", "Ne");
+			        if (exit)
+			        {
+				        // Platformově specifické ukončení aplikace – implementujte dle cílové platformy
+				        System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+				        // Nebo např. pro Android:
+						#if ANDROID
+				         Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+#endif
+			        }
+		        });
+		        // Vracíme true, čímž potlačíme defaultní chování tlačítka zpět
+		        return true;
+	        }
+	        return base.OnBackButtonPressed();
+        }
+
 	}
 }

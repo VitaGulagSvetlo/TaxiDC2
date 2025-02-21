@@ -289,7 +289,7 @@ namespace TaxiDC2.ViewModels
 
 		private async void PerformPhoneNumberTapped()
 		{
-			await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?IdCustomer={Customer.IdCustomer}");
+			await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={Customer.IdCustomer}");
 		}
 
 		public async Task LoadData(Guid id, IApiProxy proxy)
