@@ -31,7 +31,7 @@ namespace TaxiDC2
                 HeightRequest = 200
             };
 
-            timePicker.SelectedTime = _model.CasNastupuD ?? new TimeSpan(0,DateTime.Now.Hour, DateTime.Now.Minute, 0);
+            timePicker.SelectedTime = _model.CasNastupu ?? new TimeSpan(0,DateTime.Now.Hour, DateTime.Now.Minute, 0);
 
 			timePickerPopup = new SfPopup
             {
@@ -55,7 +55,7 @@ namespace TaxiDC2
                         {
                             string selectedTime = timePicker.SelectedTime?.ToString(@"hh\:mm") ?? "00:00";
                             //TimePickerButton.Text = selectedTime;
-                            _model.CasNastupuD = timePicker.SelectedTime;
+                            _model.CasNastupu = timePicker.SelectedTime;
                             timePickerPopup.IsOpen = false; 
                         })
                     },
@@ -78,47 +78,10 @@ namespace TaxiDC2
 
             await Task.CompletedTask;
         }
-
-        //private void OnAddRideClicked(object sender, EventArgs e)
-        //{
-        //    string phoneNumber = PhoneEntry.Text;
-        //    string customerName = NameEntry.Text;
-        //    string fromLocation = FromEntry.Text;
-        //    string toLocation = ToEntry.Text;
-        //    double rating = CustomerRating.Value;
-        //    string note = NoteEntry.Text;
-
-        //    if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(fromLocation) || string.IsNullOrEmpty(toLocation))
-        //    {
-        //        DisplayAlert("Chyba", "Vyplòte všechna povinná pole.", "OK");
-        //        return;
-        //    }
-
-        //    Trip newRide = new Trip
-        //    {
-               
-        //        AddressBoarding = fromLocation,
-        //        AddressExit = toLocation,             
-              
-        //    };
-
-        //    App.Rides.Add(newRide);
-        //    DisplayAlert("Úspìch", "Jízda byla úspìšnì pøidána.", "OK");
-        //    Navigation.PopAsync();
-        //}
-
-
+        
         private async void OnBackButtonPressed(object sender, EventArgs e)
         {
-
-	        Shell.Current.GoToAsync($"{nameof(SeznamJizd)}");
-
-        }
-
-        private async void CallLog_OnClicked(object sender, EventArgs e)
-        {
-	        await _model.NactiKontakty();
-
+	        Shell.Current.GoToAsync($"///{nameof(SeznamJizd)}");
         }
     }
 }

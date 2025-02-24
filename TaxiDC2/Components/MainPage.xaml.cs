@@ -4,21 +4,18 @@ namespace TaxiDC2
 {
 	public partial class MainPage : ContentPage
 	{
-		private readonly OidcClient _client = default!;
 		private readonly IIdentityHelper _identityHelper;
 		private readonly IBussinessState _bussinessState;
 		private readonly IApiProxy _proxy;
 		private string? _currentAccessToken;
 
 		public MainPage(
-			OidcClient client,
 			IIdentityHelper identityHelper,
 			IBussinessState bussinessState,
 			IApiProxy proxy)
 		{
 			InitializeComponent();
 
-			_client = client;
 			_identityHelper = identityHelper;
 			_bussinessState = bussinessState;
 			_proxy = proxy;

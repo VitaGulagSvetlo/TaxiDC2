@@ -4,13 +4,12 @@
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
              xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
-             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.NovaJizda"
              Title="Nová jízda"
              BackgroundColor="{StaticResource GridBG}"
              x:DataType="vm:TripNewViewModel">
+
     <StackLayout>
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>
@@ -40,14 +39,14 @@
                                    PlaceholderColor="{StaticResource NRph}"
                                    TextColor="{StaticResource Bila}"
                                    FontSize="18"
-                                   Text="{Binding TelCislo}"
+                                   Text="{Binding Phone}"
                                    HorizontalOptions="FillAndExpand"
                                    Grid.Column="0" />
 
                                 <Button Style="{StaticResource CallLogBtn}"
                                     CornerRadius="5"
                                     ImageSource="{FontImageSource Glyph={StaticResource list}, FontFamily=FAPro, Size=18, Color={StaticResource Bila}}"
-                                    Grid.Column="1" HorizontalOptions="End" Clicked="CallLog_OnClicked" />
+                                    Grid.Column="1" HorizontalOptions="End" Command="{Binding CallLogOpenCommand}" />
                             </Grid>
 
 
@@ -58,7 +57,7 @@
                                 </HorizontalStackLayout>
                                 <inputs:SfRating x:Name="CustomerRating"
                                              ItemCount="5"
-                                             Value="{Binding Customer.VIP2}"
+                                             Value="{Binding Trip.Customer.VIP2,FallbackValue=0}"
                                              Margin="5"
                                              ItemSize="20">
                                     <inputs:SfRating.RatingSettings>
@@ -71,7 +70,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
-                               Text="{Binding Customer.Name}"
+                               Text="{Binding Trip.Customer.Name,FallbackValue=''}"
                                />
 
                         </VerticalStackLayout>
@@ -90,7 +89,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource TCwhite}"
                                FontSize="18"
-                               Text="{Binding AdresaStart}"
+                               Text="{Binding Trip.AddressBoarding}"
                                 />
 
                             <HorizontalStackLayout Spacing="5">
@@ -102,7 +101,7 @@
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource Bila}"
                                FontSize="18"
-                               Text="{Binding AdresaCil}"
+                               Text="{Binding Trip.AddressExit}"
                               />
 
                             <!-- Time Selection -->
@@ -136,7 +135,7 @@
                            PlaceholderColor="{StaticResource NRph}"
                            TextColor="{StaticResource TCwhite}"
                            FontSize="18" 
-                            Text="{Binding Memo}"
+                            Text="{Binding Trip.Memo}"
                     />
                     </Frame>
 

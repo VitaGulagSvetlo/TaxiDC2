@@ -9,6 +9,7 @@
              BindingContext="vm"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource GridBG}"
              >
 
     <ContentPage.Resources>
