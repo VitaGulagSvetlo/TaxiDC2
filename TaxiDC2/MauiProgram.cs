@@ -3,7 +3,6 @@ using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
 using IdentityModel.OidcClient;
-using MauiApp1;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Biometric;
 using Syncfusion.Maui.Core.Hosting;
@@ -45,18 +44,6 @@ namespace TaxiDC2
 
             builder.Services.AddLogging();
             builder.Services.AddScoped<IDataService, DataService>();
-
-            // setup OidcClient
-            builder.Services.AddSingleton(new OidcClient(new()
-            {
-	            Authority = "https://demo.duendesoftware.com",
-
-	            ClientId = "interactive.public",
-	            Scope = "openid profile api",
-	            RedirectUri = "taxidc://callback",
-                LoadProfile = true,
-                Browser = new MauiAuthenticationBrowser()
-            }));
 
 			builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
 				{

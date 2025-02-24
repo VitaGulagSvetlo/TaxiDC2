@@ -9,9 +9,8 @@ namespace TaxiDC2.ViewModels
 {
 	public partial class TripNewViewModel : BaseViewModel
 	{
-		private IApiProxy _proxy;
+
 		private readonly ICallLogService _callLogService;
-		private IBussinessState _bs;
 
 		private string _phone;
 		private string _adresaStart;
@@ -22,8 +21,6 @@ namespace TaxiDC2.ViewModels
 		private Customer _customer;
 		private string custId;
 
-		private ObservableCollection<CallListItem> _listCisel = new();
-		private ObservableCollection<Lokace> _listLokaci = new();
 		private bool _telPickerVisible = false;
 		private bool _scPickerVisible = true;
 		private TimeSpan? _casNastupuD;
@@ -38,36 +35,13 @@ namespace TaxiDC2.ViewModels
 		private string kontakt;
 		private string custMemo;
 
-		public ObservableCollection<int> MinutesList => new ObservableCollection<int> { 5, 10, 15, 20, 25, 30 };
+		public ObservableCollection<CallListItem> ListCisel { get; } = new();
 
-		public ICommand DeadlineClick { get; set; }
-		public ICommand SaveCmd { get; }
-		public ICommand SendSMS { get; }
-		public ICommand NactiCislo { get; }
-		public ICommand ValidujAdr1 { get; }
-		public ICommand ValidujAdr2 { get; }
+		public ObservableCollection<Lokace> ListLokaci { get; } = new();
 
-
-		public ObservableCollection<CallListItem> ListCisel => _listCisel;
-		public ObservableCollection<Lokace> ListLokaci => _listLokaci;
-
-		public TripNewViewModel(IDataService dataService, IBussinessState bs, IApiProxy proxy, ICallLogService callLogService) : base(dataService)
+		public TripNewViewModel(IDataService dataService, ICallLogService callLogService) : base(dataService)
 		{
-			_bs = bs;
-			_proxy = proxy;
 			_callLogService = callLogService;
-			SendSMS = new Command(async () => await PosliSms("test zprava", _phone));
-			NactiCislo = new Command(async () => await NactiKontakty());
-			ValidujAdr1 = new Command(async () => await ValidujAdresu(1));
-			ValidujAdr2 = new Command(async () => await ValidujAdresu(2));
-			DeadlineClick = new Command<string>(DeadlineSet);
-			SaveCmd = new Command(async () => await SaveData());
-		}
-
-		private void DeadlineSet(string v)
-		{
-			if (int.TryParse(v, out int i))
-				Deadline = i;
 		}
 
 		internal void NastavAdresu(Lokace sel)
@@ -88,50 +62,84 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Nastavuje cas nastupu jizdy podle rychlych tlacitek
+		/// </summary>
+		/// <param name="v"></param>
+		[RelayCommand]
+		private void DeadlineSet(string v)
+		{
+			if (int.TryParse(v, out int i))
+				Deadline = i;
+		}
+
+		/// <summary>
+		/// Uklada zadost o jizdu
+		/// </summary>
+		/// <returns></returns>
+		[RelayCommand]
 		public async Task SaveData()
 		{
-			if (_customer == null)
-				SetContactFromPhone(_phone);
-
-			_customer.LastAddressBoarding = _adresaStart;
-			_customer.LastAddressExit = _adresaCil;
-
-			Trip drv = new()
+			IsBusy = true;
+			try
 			{
-				OrderTime = DateTime.Now,
-				AddressBoarding = string.IsNullOrWhiteSpace(_adresaStart) ? "Nezadána" : _adresaStart,
-				AddressExit = string.IsNullOrWhiteSpace(_adresaCil) ? "Nezadána" : _adresaCil,
-				AddressBoardingIsValid = adresaStartValid,
-				AddressBoardingLocX = adresaStartX,
-				AddressBoardingLocY = adresaStartY,
-				AddressExitIsValid = adresacilValid,
-				AddressExitLocX = adresaCilX,
-				AddressExitLocY = adresaCilY,
+				if (_customer == null)
+					await SetContactFromPhone(_phone);
+				if (_customer != null)
+				{
+					_customer.LastAddressBoarding = _adresaStart;
+					_customer.LastAddressExit = _adresaCil;
+				}
 
-				BoardingTime = VypoctiCas(),
-				Driver = null,
-				DeadLine = TimeSpan.FromMinutes(_deadLine),
-				TripState = TripState.NewOrder,
-				Complete = false,
-				Memo = _memo,
-				Customer = _customer
-			};
+				Trip drv = new()
+				{
+					OrderTime = DateTime.Now,
+					AddressBoarding = string.IsNullOrWhiteSpace(_adresaStart) ? "Nezadána" : _adresaStart,
+					AddressExit = string.IsNullOrWhiteSpace(_adresaCil) ? "Nezadána" : _adresaCil,
+					AddressBoardingIsValid = adresaStartValid,
+					AddressBoardingLocX = adresaStartX,
+					AddressBoardingLocY = adresaStartY,
+					AddressExitIsValid = adresacilValid,
+					AddressExitLocX = adresaCilX,
+					AddressExitLocY = adresaCilY,
 
-			ServiceResult<Trip> ret = await _proxy.SaveTrip(drv);
-			Message = ret.Message;
-			await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
+					BoardingTime = VypoctiCas(),
+					Driver = null,
+					DeadLine = TimeSpan.FromMinutes(_deadLine),
+					TripState = TripState.NewOrder,
+					Complete = false,
+					Memo = _memo,
+					Customer = _customer
+				};
 
-			if (ret.State == ResultCode.OK)
-			{
-				// OK prechazim na detailni stranku
-				await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={ret.Data.IdTrip}");
+				var ret = await DataService.SaveTripAsync(drv);
+
+				if (ret != null)
+				{
+					// OK prechazim na detailni stranku
+					await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={ret.IdTrip}");
+				}
+				else
+				{
+					//await Shell.Current.DisplayAlert("Ukládání", ret.Message, "OK");
+					//ERR
+				}
 			}
-			else
+			catch (Exception es)
 			{
-				//ERR
+				Debug.WriteLine("Chyba ukladani jizdy : " + es.Message);
+			}
+			finally
+			{
+				IsBusy = false;
 			}
 		}
 
+		/// <summary>
+		/// vypocita cas startu jizdy
+		/// bud podle minut do startu nebo vybraneho specifikovaneho casu
+		/// </summary>
+		/// <returns></returns>
 		private DateTime? VypoctiCas()
 		{
 			if (_casNastupuD == null)
@@ -152,20 +160,21 @@ namespace TaxiDC2.ViewModels
 		/// <returns></returns>
 		public async Task NactiKontakty()
 		{
+			IsBusy = true;
 			try
 			{
 				List<CallLogEntry> log = await _callLogService.GetCallLogEntriesAsync();
 
-				_listCisel.Clear();
+				ListCisel.Clear();
 
-				foreach (CallListItem item in _listCisel)
-					_listCisel.Add(new CallListItem() { Cislo = item.Cislo, Jmeno = item.Jmeno });
+				foreach (CallListItem item in ListCisel)
+					ListCisel.Add(new CallListItem() { Cislo = item.Cislo, Jmeno = item.Jmeno });
 
 #if DEBUG
-				_listCisel.Add(new CallListItem() { Cislo = "111 111 111", Jmeno = "Clovek 1" });
-				_listCisel.Add(new CallListItem() { Cislo = "222 222 222", Jmeno = "Clovek 2" });
-				_listCisel.Add(new CallListItem() { Cislo = "333 333 333", Jmeno = "Clovek 3" });
-				_listCisel.Add(new CallListItem() { Cislo = "444 444 444", Jmeno = "Clovek 4" });
+				ListCisel.Add(new CallListItem() { Cislo = "111 111 111", Jmeno = "Clovek 1" });
+				ListCisel.Add(new CallListItem() { Cislo = "222 222 222", Jmeno = "Clovek 2" });
+				ListCisel.Add(new CallListItem() { Cislo = "333 333 333", Jmeno = "Clovek 3" });
+				ListCisel.Add(new CallListItem() { Cislo = "444 444 444", Jmeno = "Clovek 4" });
 #endif
 
 				OnPropertyChanged(nameof(ListCisel));
@@ -176,8 +185,9 @@ namespace TaxiDC2.ViewModels
 			}
 			finally
 			{
-				PhoneSelected = _listCisel.First().Cislo;
+				PhoneSelected = ListCisel.First().Cislo;
 				TelPickerVisible = true;
+				IsBusy = false;
 			}
 		}
 
@@ -186,23 +196,24 @@ namespace TaxiDC2.ViewModels
 		/// </summary>
 		/// <param name="v"></param>
 		/// <returns></returns>
+		[RelayCommand]
 		private async Task ValidujAdresu(int v)
 		{
 			_locSelector = v;
 			try
 			{
 				{
-					ServiceResult<Lokace[]> lo = await _proxy.Geocode(v == 1 ? AdresaStart : AdresaCil);
-					if (lo.State == ResultCode.ERROR)
+					var lo = await DataService.GeocodeAsync(v == 1 ? AdresaStart : AdresaCil);
+					if (lo == null || !lo.Any())
 						return;
 
-					_listLokaci.Clear();
-					lo.Data.ToList().ForEach(p => _listLokaci.Add(p));
+					ListLokaci.Clear();
+					lo.ToList().ForEach(p => ListLokaci.Add(p));
 					OnPropertyChanged(nameof(ListLokaci));
 
-					if (lo.Data.Count() == 1) // pokud je jen jedna adresa tak hned nastav
+					if (lo.Count() == 1) // pokud je jen jedna adresa tak hned nastav
 					{
-						NastavAdresu(lo.Data[0]);
+						NastavAdresu(lo[0]);
 					}
 					else
 						AdrPickerVisible = true;
@@ -214,33 +225,9 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
-		public async Task PosliSms(string messageText, string recipient)
-		{
-			if (string.IsNullOrEmpty(_phone))
-			{
-				Debug.WriteLine("Není vyplneno telefoni cislo");
-				return;
-			}
-
-			try
-			{
-				SmsMessage message = new(messageText, new[] { recipient });
-				await Sms.ComposeAsync(message);
-			}
-			catch (FeatureNotSupportedException)
-			{
-				// Sms is not supported on this device.
-				//await DisplayAlert("", $"Chyba \n{ex.Message}", "Aha");
-			}
-			catch (Exception)
-			{
-				// Other error has occurred.
-			}
-		}
-
 		public void OnAppearing()
 		{
-			IsBusy = true;
+			//IsBusy = true;
 		}
 
 		public string CustId
@@ -362,39 +349,63 @@ namespace TaxiDC2.ViewModels
 			public event PropertyChangedEventHandler PropertyChanged;
 
 			public string Cislo { get; set; }
-
 			public string Jmeno { get; set; }
 			public bool Missed { get; set; }
 			public Color CallColor => Missed ? Color.Parse("DarkRed") : Color.FromHex("#ffbd00");
 		}
 
+		/// <summary>
+		/// Pokusi se nacist zakaznika podle telefonniho cisla
+		/// </summary>
+		/// <param name="cislo"></param>
+		/// <param name="jmeno"></param>
+		/// <returns></returns>
 		public async Task SetContactFromPhone(string cislo, string jmeno = "")
 		{
-			ServiceResult<Customer> res = await _proxy.GetCustomerByPhone(cislo);
-			if (res.State == ResultCode.OK && res.Data != null)
+			IsBusy = true;
+			try
 			{
-				Customer = res.Data;
-				TelCislo = res.Data.PhoneNumber;
-			}
-			else
-			{
-				Customer = new Customer()
+				var res = await DataService.GetCustomerByPhoneAsync(cislo);
+				if (res != null)
 				{
-					IdCustomer = Guid.Empty,
-					Name = jmeno ?? "",
-					PhoneNumber = cislo
-				};
-				TelCislo = cislo;
+					Customer = res;
+					TelCislo = res.PhoneNumber;
+					PhoneSelected = TelCislo;
+				}
+				else
+				{
+					Customer = new Customer()
+					{
+						IdCustomer = Guid.Empty,
+						Name = jmeno ?? "",
+						PhoneNumber = cislo
+					};
+					TelCislo = cislo;
+					PhoneSelected = TelCislo;
+				}
+			}
+			catch (Exception es)
+			{
+				Debug.WriteLine("Chyba nacteni kontaktu : " + es.Message);
+			}
+			finally
+			{
+				IsBusy = false;
 			}
 		}
 
 		public string CasTxt => VypoctiCas()?.ToShortTimeString();
 
 		public bool CasVisible => _casNastupuD != null || Deadline > 0;
+
 		public string[] ListCisel2 => ListCisel.Select(s => s.Cislo).ToArray();
 
 		public string PhoneSelected { get; set; }
 
+		/// <summary>
+		/// Akceptuje telefoni cislo z Pickeru
+		/// </summary>
+		/// <returns></returns>
 		[RelayCommand]
 		public async Task PhoneAccept()
 		{
@@ -402,6 +413,10 @@ namespace TaxiDC2.ViewModels
 			TelPickerVisible = false;
 		}
 
+		/// <summary>
+		/// Storno Pickeru
+		/// </summary>
+		/// <returns></returns>
 		[RelayCommand]
 		public async Task PhoneCancel()
 		{

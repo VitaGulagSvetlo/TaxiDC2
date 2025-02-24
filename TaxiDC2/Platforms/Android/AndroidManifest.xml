@@ -8,3 +8,5 @@
 	<uses-permission android:name="android.permission.READ_CALL_LOG" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 </manifest>
+
+<!--com.advisorsoft.taxidc2-->
