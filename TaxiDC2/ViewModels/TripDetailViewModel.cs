@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
@@ -16,33 +17,7 @@ namespace TaxiDC2.ViewModels
 		public TripDetailViewModel(IDataService dataService,IBussinessState bs):base(dataService)
 		{
 			_bs = bs;
-			//Task.Run(async () => await LoadData()).Wait();
 		}
-
-		//internal static TripDetailViewModel FromTrip(Trip data)
-		//{
-		//	return new TripDetailViewModel()
-		//	{
-		//		AddressBoarding = data.AddressBoarding,
-		//		AddressBoardingIsValid = data.AddressBoardingIsValid,
-		//		AddressBoardingLocX = data.AddressBoardingLocX,
-		//		AddressBoardingLocY = data.AddressBoardingLocY,
-		//		AddressExit = data.AddressExit,
-		//		AddressExitIsValid = data.AddressExitIsValid,
-		//		AddressExitLocX = data.AddressExitLocX,
-		//		AddressExitLocY = data.AddressExitLocY,
-		//		BoardingTime = data.BoardingTime,
-		//		Complete = data.Complete,
-		//		Customer = data.Customer,
-		//		DeadLine = data.DeadLine,
-		//		Driver = data.Driver,
-		//		ExitTime = data.ExitTime,
-		//		IdTrip = data.IdTrip,
-		//		Memo = data.Memo,
-		//		OrderTime = data.OrderTime,
-		//		TripState = data.TripState
-		//	};
-		//}
 		
 		[DependsOn("TripState")]
 		public bool BtnConVisibility => Trip.TripState is (TripState.NewWWW);
@@ -237,7 +212,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void PhoneNumberTapped()
+		private async Task PhoneNumberTapped()
 		{
 			if (Trip.Customer != null)
 				await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={Trip.Customer.IdCustomer}");
@@ -293,7 +268,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void SmsOpen()
+		private async Task SmsOpen()
 		{
 			await Shell.Current.GoToAsync($"{nameof(SmsSendView)}?IdTrip={Trip.IdTrip}&Phone={Uri.EscapeDataString(Trip.Customer.PhoneNumber)}");
 
@@ -312,7 +287,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void Call()
+		private async Task Call()
 		{
 			await PlacePhoneCall(Trip.Customer.PhoneNumber);
 			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Call);
@@ -321,7 +296,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void Acc()
+		private async Task Acc()
 		{
 			if (_bs.DriverId == null)
 			{
@@ -342,7 +317,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void Con()
+		private async Task Con()
 		{
 			if (_bs.DriverId == null)
 			{
@@ -378,7 +353,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void Rej()
+		private async Task Rej()
 
 		{
 			if (_bs.DriverId == null)
@@ -400,7 +375,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void Run()
+		private async Task Run()
 		{
 			if (_bs.DriverId == null)
 			{
@@ -421,7 +396,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void Storno()
+		private async Task Storno()
 		{
 			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Canceled);
 			if (ret)
@@ -437,7 +412,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void Completed()
+		private async Task Completed()
 		{
 			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Comleted);
 			if (ret)
@@ -448,7 +423,7 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
-		private async void Forward()
+		private async Task Forward()
 		{
 			PickerVisible = true;
 		}

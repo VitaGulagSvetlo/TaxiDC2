@@ -43,13 +43,13 @@ namespace TaxiDC2.ViewModels
         public string SearchText { get; set; } = " ";
 
         [RelayCommand]
-        private async void AddItem(object obj)
+        private async Task AddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(DetailZakaznik));
         }
 
 		[RelayCommand]
-		async void ItemSelected(Guid? id)
+		async Task ItemSelected(Guid? id)
         {
             if (id == null)
                 return;
@@ -87,7 +87,7 @@ namespace TaxiDC2.ViewModels
         {
 	        try
 	        {
-		        bool ret = await DataService.UpdateCustomerSettingsAsync(customer);
+		        await DataService.UpdateCustomerSettingsAsync(customer);
 	        }
 	        catch (Exception ex)
 	        {

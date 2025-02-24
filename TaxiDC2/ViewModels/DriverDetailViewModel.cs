@@ -26,7 +26,7 @@ namespace TaxiDC2.ViewModels
 			foreach (Car car in cars)
 			{
 				CarsList.Add(car);
-				if (car.IdCar == _driver.AssignedCar)
+				if (car.IdCar == Driver.AssignedCar)
 					SelectedCar = car;
 			}
 		}
@@ -36,7 +36,7 @@ namespace TaxiDC2.ViewModels
 		{
 			
 			bool ret;
-			if (_driver.IdDriver == Guid.Empty)
+			if (Driver.IdDriver == Guid.Empty)
 				ret = await DataService.RegisterDriverAsync(Driver);
 			else
 				ret = await DataService.SaveDriverAsync(Driver);

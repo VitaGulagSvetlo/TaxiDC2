@@ -7,6 +7,7 @@ namespace TaxiDC2.ViewModels
 	{
 
 		[ObservableProperty] private Trip _data = new();
+		[ObservableProperty] public bool _minLabelVisible;
 
 		public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Data.Memo);
 		public bool CustomerMemoVisible => !string.IsNullOrWhiteSpace(Data.Customer?.Memo);
@@ -29,8 +30,6 @@ namespace TaxiDC2.ViewModels
 				}
 			}
 		}
-
-		[ObservableProperty] public bool _minLabelVisible;
 
 		[DependsOn("MinToDeadLine")]
 		public string MinToDeadLineTxt

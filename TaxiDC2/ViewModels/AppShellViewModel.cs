@@ -24,7 +24,7 @@ namespace TaxiDC2.ViewModels
 		public Color ServerColor => IsServerOk ? Color.FromArgb("#ff141414"):Colors.DarkRed;
 
 		[RelayCommand]
-		async void Logout()
+		async Task Logout()
 		{
 			bool ansver = await Shell.Current.DisplayAlert("Logout", "Are you sure you want to logout?", "Yes", "No");
 			if(ansver)

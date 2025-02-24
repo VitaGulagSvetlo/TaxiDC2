@@ -1,22 +1,20 @@
 ﻿using IdentityModel.OidcClient;
+using TaxiDC2.Interfaces;
 
 namespace TaxiDC2
 {
 	public partial class MainPage : ContentPage
 	{
-		private readonly IIdentityHelper _identityHelper;
 		private readonly IBussinessState _bussinessState;
 		private readonly IApiProxy _proxy;
 		private string? _currentAccessToken;
 
 		public MainPage(
-			IIdentityHelper identityHelper,
 			IBussinessState bussinessState,
 			IApiProxy proxy)
 		{
 			InitializeComponent();
 
-			_identityHelper = identityHelper;
 			_bussinessState = bussinessState;
 			_proxy = proxy;
 		}

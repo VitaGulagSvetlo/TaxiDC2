@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using TaxiDC2.Components;
+using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {

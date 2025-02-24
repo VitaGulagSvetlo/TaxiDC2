@@ -42,13 +42,13 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async void AddItem(object obj)
+		private async Task AddItem(object obj)
 		{
 			await Shell.Current.GoToAsync(nameof(DetailAuto));
 		}
 
 		[RelayCommand]
-		private async void ItemSelected(Guid id)
+		private async Task ItemSelected(Guid? id)
 		{
 			if (id == null)
 				return;

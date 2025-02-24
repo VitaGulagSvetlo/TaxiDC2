@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Newtonsoft.Json;
 using System.Text;
+using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.Services
 {

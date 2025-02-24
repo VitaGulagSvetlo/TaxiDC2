@@ -34,7 +34,7 @@ namespace TaxiDC2.ViewModels
 
 		internal void NastavAdresu(Lokace sel)
 		{
-			if (_locSelector == 1)
+			if (LocSelector == 1)
 			{
 				Trip.AddressBoarding = sel.Title;
 				Trip.AddressBoardingLocX = sel.X;
@@ -69,7 +69,7 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private async Task ValidujAdresu(int v)
 		{
-			_locSelector = v;
+			LocSelector = v;
 			try
 			{
 				{
@@ -106,7 +106,7 @@ namespace TaxiDC2.ViewModels
 			try
 			{
 				if (Trip.Customer == null)
-					await SetContactFromPhone(_phone);
+					await SetContactFromPhone(Phone);
 				if (Trip.Customer != null)
 				{
 					Trip.Customer.LastAddressBoarding = Trip.AddressBoarding;
@@ -127,7 +127,7 @@ namespace TaxiDC2.ViewModels
 
 					BoardingTime = VypoctiCas(),
 					Driver = null,
-					DeadLine = TimeSpan.FromMinutes(_deadLine),
+					DeadLine = TimeSpan.FromMinutes(DeadLine),
 					TripState = TripState.NewOrder,
 					Complete = false,
 					Memo = Trip.Memo,

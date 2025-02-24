@@ -1,12 +1,12 @@
 ﻿using Firebase.Auth;
 using TaxiDC2.Code;
+using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.Services
 {
     public class BussinessState : IBussinessState
     {
 	    private readonly FirebaseAuthClient _authClient;
-	    private readonly IDataService _dataService;
 
 	    public BussinessState(FirebaseAuthClient authClient)
 	    {
@@ -18,7 +18,7 @@ namespace TaxiDC2.Services
 
 	    private static string _deviceKey;
 
-        private Driver _driver = null;
+        
 
         /// <summary>
         /// Klic zarizeni
@@ -31,14 +31,14 @@ namespace TaxiDC2.Services
         public bool IsLogged => Driver != null;
         
         // je uzivatel povolen ?
-        public bool IsActive => _driver?.Active??false;
+        public bool IsActive => Driver?.Active??false;
 
         public Driver Driver { get;  set; }
 
         /// <summary>
         /// ID aktualniho usera
         /// </summary>
-        public Guid? DriverId => _driver?.IdDriver;
+        public Guid? DriverId => Driver?.IdDriver;
         
         /// <summary>
         /// je aktualni user adminem ?
@@ -75,7 +75,7 @@ namespace TaxiDC2.Services
             if (proxy == null) return;
             ServiceResult<Driver> drv = Task.Run(async () => await proxy.GetDriverByDeviceKeyAsync(DeviceKey, DeviceHash)).Result;
             if (drv.State == ResultCode.OK)
-                _driver = drv.Data;
+	            Driver = drv.Data;
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace TaxiDC2.Services
         /// <param name="eToken"></param>
         public void UpdateDeviceKey(string eToken)
         {
-            if (_driver != null && _driver.MobileDeviceKey != eToken)
+            if (Driver != null && Driver.MobileDeviceKey != eToken)
             {
                 // todo: musi se updatovat klic v DB u uzivatele
             }

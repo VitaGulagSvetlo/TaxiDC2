@@ -152,7 +152,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	}
 
 	[RelayCommand]
-	private async void Storno(Guid idTrip)
+	private async Task Storno(Guid idTrip)
 	{
 		var ret = await DataService.ChangeTripStateAsync(idTrip, TripState.Canceled);
 		if (ret)
@@ -166,7 +166,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	}
 
 	[RelayCommand]
-	private async void Acc(Guid idTrip)
+	private async Task Acc(Guid idTrip)
 	{
 		if (_bs.DriverId == null)
 		{

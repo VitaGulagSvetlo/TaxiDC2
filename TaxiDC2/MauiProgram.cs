@@ -94,7 +94,6 @@ namespace TaxiDC2
 			builder.Services.AddSingleton<AppShell>();
 
 			// add services
-			builder.Services.AddSingleton<IIdentityHelper,IdentityHelper>();
             builder.Services.AddSingleton<IBussinessState,BussinessState>();
             builder.Services.AddSingleton<IDataService, DataService>();
 			builder.Services.AddSingleton<IApiProxy, ApiProxy>();

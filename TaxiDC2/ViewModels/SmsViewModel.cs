@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
+using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {

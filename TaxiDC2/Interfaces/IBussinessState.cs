@@ -1,4 +1,4 @@
-﻿namespace TaxiDC2.Services
+﻿namespace TaxiDC2.Interfaces
 {
     public interface IBussinessState
     {
