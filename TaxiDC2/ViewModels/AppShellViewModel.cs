@@ -1,7 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
-using System.Threading;
 using TaxiDC2.Components.Login;
 
 namespace TaxiDC2.ViewModels

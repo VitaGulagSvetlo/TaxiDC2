@@ -1,9 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {

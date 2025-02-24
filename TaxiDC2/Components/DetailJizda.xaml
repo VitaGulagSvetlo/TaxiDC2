@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Class="TaxiDC2.DetailJizda"
              Title="Detail jízdy"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             xmlns:inputs="http://schemas.syncfusion.com/maui"
              BackgroundColor="{StaticResource GridBG}"
              x:DataType="vm:TripDetailViewModel"
              >
@@ -27,7 +27,7 @@
                     <GradientStop Color="{Binding StateColor}" Offset="1.1" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <Label HorizontalOptions="Center" Text="{Binding TripState}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Bila}" VerticalOptions="Center" />
+            <Label HorizontalOptions="Center" Text="{Binding Trip.TripState}" FontSize="20" FontAttributes="Bold" TextColor="{Binding StateTextColor}" VerticalOptions="Center" />
         </Grid>
 
         <!-- HLAVNÍ OBSAH (SCROLL) -->
@@ -62,15 +62,27 @@
                         </Button>
 
                         <!-- Obsah pod nadpisem -->
-                        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2">
+                        <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                                <Label Text="{Binding Customer.PhoneNumber}" FontSize="18" TextColor="{StaticResource Bila}" />
+                                <Label Text="{Binding Trip.Customer.PhoneNumber,FallbackValue=''}" FontSize="18" TextColor="{StaticResource Bila}" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                                <Label Text="{Binding Customer.Name}" FontSize="18" TextColor="{StaticResource Bila}" />
+                                <Label Text="{Binding Trip.Customer.Name,FallbackValue=''}" FontSize="18" TextColor="{StaticResource Bila}" />
                             </HorizontalStackLayout>
+                            <inputs:SfRating
+                                ItemCount="5"
+                                             Value="{Binding Trip.Customer.VIP2,FallbackValue=0}"
+                                             Margin="5"
+                                             ItemSize="10"
+                                             IsReadOnly="True">
+                                <inputs:SfRating.RatingSettings>
+                                    <inputs:RatingSettings RatedFill="{StaticResource Oranzova}" RatedStroke="{StaticResource TP}" />
+                                </inputs:SfRating.RatingSettings>
+                            </inputs:SfRating>
+                            <Label Text="{Binding Trip.Customer.Memo,FallbackValue=''}" FontSize="10" TextColor="{StaticResource Bila}" IsVisible="{Binding CustomerMemoVisible}"/>
+
                         </VerticalStackLayout>
                     </Grid>
                 </Frame>
@@ -80,7 +92,7 @@
                             <Label Text="Start" Style="{StaticResource CustomLblO}"  />
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                                <Label Text="{Binding AddressBoarding}" FontSize="18" TextColor="{StaticResource Bila}" />
+                                <Label Text="{Binding Trip.AddressBoarding}" FontSize="18" TextColor="{StaticResource Bila}" />
                             </HorizontalStackLayout>
                         </StackLayout>
 
@@ -88,7 +100,7 @@
                             <Label Text="Cíl" Style="{StaticResource CustomLblO}" />
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                                <Label Text="{Binding AddressExit}" FontSize="18" TextColor="{StaticResource Bila}" />
+                                <Label Text="{Binding Trip.AddressExit}" FontSize="18" TextColor="{StaticResource Bila}" />
                             </HorizontalStackLayout>
                         </StackLayout>
 
@@ -96,7 +108,7 @@
                             <Label Text="Čas nástupu:" Style="{StaticResource CustomLblO}" />
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                                <Label Text="{Binding BoardingTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" FontSize="18" TextColor="{StaticResource Bila}" />
+                                <Label Text="{Binding Trip.BoardingTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" FontSize="18" TextColor="{StaticResource Bila}" />
                             </HorizontalStackLayout>
                         </StackLayout>
                     </StackLayout>
@@ -107,7 +119,7 @@
                         <Label Text="Řidič" Style="{StaticResource CustomLblO}" />
                         <HorizontalStackLayout Spacing="5">
                             <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                            <Label Text="{Binding Driver.FullName}" FontSize="18" TextColor="{StaticResource Bila}" />
+                            <Label Text="{Binding Trip.Driver.FullName,FallbackValue='nepřiřazen'}" FontSize="18" TextColor="{StaticResource Bila}" />
                         </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>
@@ -122,17 +134,17 @@
             </Grid.RowDefinitions>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Style="{StaticResource RideDetailBtn}" Text="Potvrdit WWW" Clicked="Con_OnClicked" IsVisible="{Binding BtnConVisibility}" />
-                <Button Style="{StaticResource RideDetailBtn}" Text="Převzít" Clicked="Acc_OnClicked" IsVisible="{Binding BtnAccVisibility}" />
-                <Button Style="{StaticResource RideDetailBtn}" Text="Odmítnout" Clicked="Rej_OnClicked" IsVisible="{Binding BtnRejectVisibility}" />
-                <Button Style="{StaticResource RideDetailBtn}" Text="SMS" Clicked="Sms_OnClicked" IsVisible="{Binding BtnSmsVisibility}" />
-                <Button Style="{StaticResource RideDetailBtn}" Text="Zavolat" Clicked="Call_OnClicked" IsVisible="{Binding BtnCallVisibility}" />
-                <Button Style="{StaticResource RideDetailBtn}" Text="Na cestě" Clicked="Run_OnClicked" IsVisible="{Binding BtnRunningVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Potvrdit WWW" Command="{Binding ConCommand}" IsVisible="{Binding BtnConVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Převzít" Command="{Binding AccCommand}" IsVisible="{Binding BtnAccVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Odmítnout" Command="{Binding RejCommand}" IsVisible="{Binding BtnRejectVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="SMS" Command="{Binding SmsOpenCommand}" IsVisible="{Binding BtnSmsVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Zavolat" Command="{Binding CallCommand}" IsVisible="{Binding BtnCallVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Na cestě" Command="{Binding RunCommand}" IsVisible="{Binding BtnRunningVisibility}" />
             </StackLayout>
 
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Style="{StaticResource RideCancelBtn}" Text="Zrušit" Clicked="Storno_OnClicked" IsVisible="{Binding BtnCancelVisibility}" />
-                <Button Style="{StaticResource RideCompleteBtn}" Text="Hotovo" Clicked="Complete_OnClicked" IsVisible="{Binding BtnCompleteVisibility}"/>
+                <Button Style="{StaticResource RideCancelBtn}" Text="Zrušit" Command="{Binding StornoCommand}" IsVisible="{Binding BtnCancelVisibility}" />
+                <Button Style="{StaticResource RideCompleteBtn}" Text="Hotovo" Command="{Binding CompletedCommand}" IsVisible="{Binding BtnCompleteVisibility}"/>
             </StackLayout>
         </Grid>
     </Grid>

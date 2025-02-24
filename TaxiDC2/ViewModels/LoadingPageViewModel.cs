@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Firebase.Auth;
+﻿using Firebase.Auth;
 using Plugin.Maui.Biometric;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
@@ -13,15 +7,21 @@ namespace TaxiDC2.ViewModels
 {
 	public partial class LoadingPageViewModel : BaseViewModel
 	{
+		private readonly IDataService _dataService;
 		private readonly FirebaseAuthClient _authClient;
-		private readonly IServiceProvider _serviceProvider;
 		private readonly IBiometric _biometricService;
+		private readonly IBussinessState _bs;
 
-		public LoadingPageViewModel(IDataService dataService, FirebaseAuthClient authClient, IServiceProvider serviceProvider, IBiometric biometricService) : base(dataService)
+		public LoadingPageViewModel(IDataService dataService,
+			FirebaseAuthClient authClient,
+			IBiometric biometricService,
+			IBussinessState bs
+			) : base(dataService)
 		{
+			_dataService = dataService;
 			_authClient = authClient;
-			_serviceProvider = serviceProvider;
 			_biometricService = biometricService;
+			_bs = bs;
 			CheckUser();
 		}
 
@@ -33,18 +33,19 @@ namespace TaxiDC2.ViewModels
 				{
 					Shell.Current.Dispatcher.Dispatch(async () =>
 					{
-						await Shell.Current.GoToAsync(nameof(SignInPage));
+						await Shell.Current.GoToAsync($"///{nameof(SignInPage)}");
 					});
 				}
 				else
 				{
-					await Shell.Current.GoToAsync(nameof(SignInPage));
+					await Shell.Current.GoToAsync($"///{nameof(SignInPage)}");
 				}
 			}
 			else
 			{
 				//todo: debug
 				Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
+				await LoadDriver();
 				await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
 				return;
 				//todo: debug
@@ -83,10 +84,25 @@ namespace TaxiDC2.ViewModels
 					else
 					{
 						Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
+						await LoadDriver();
 						await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
 					}
 				});
 
+			}
+		}
+
+		private async Task LoadDriver()
+		{
+			Driver[] drl = await _dataService.GetDriversAsync(true);
+			Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
+			if (driver != null)
+			{
+				_bs.Driver = driver;
+			}
+			else
+			{
+				_bs.Driver = null;
 			}
 		}
 	}

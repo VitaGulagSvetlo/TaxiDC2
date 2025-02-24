@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using TaxiDC2.Interfaces;
@@ -10,21 +11,16 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 {
 	private IBussinessState _bs;
 	private readonly IPlaySoundService _soundService;
-	private IApiProxy _proxy;
-	private TripDetailViewModel _selectedItem;
+
+	public ObservableCollection<TripListItemViewModel> Items { get; } =
+		new ObservableCollection<TripListItemViewModel>();
 
 	private Timer timer = null;
 
-	public TripListViewModel(IApiProxy proxy, IBussinessState bs, IPlaySoundService soundService, IDataService dataService) : base(dataService)
+	public TripListViewModel(IBussinessState bs, IPlaySoundService soundService, IDataService dataService) : base(dataService)
 	{
-		_proxy = proxy;
 		_bs = bs;
 		_soundService = soundService;
-		Items = new ObservableCollection<TripDetailViewModel>();
-		ItemTapped = new Command<TripDetailViewModel>(OnItemSelected);
-		ItemSwipedR = new Command<TripDetailViewModel>(OnItemSwipedRight);
-		ItemSwipedL = new Command<TripDetailViewModel>(OnItemSwipedLeft);
-		ResetTime = new Command<TripDetailViewModel>(OnReset); // jen pro ladeni
 
 		timer = new Timer(OnTimer, null, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(15));
 
@@ -54,30 +50,6 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		}
 	}
 
-	/// <summary>
-	/// Nastavuje list na vsechno 0 nebo privatni { jen moje} 1
-	/// </summary>
-	public int ListMode { get; set; } = 0;
-
-
-	public string DriverName => $"{_bs?.Driver?.Inicials ?? "XX"}";
-	public ObservableCollection<TripDetailViewModel> Items { get; }
-	public Command<TripDetailViewModel> ItemSwipedL { get; }
-	public Command<TripDetailViewModel> ItemSwipedR { get; }
-	public Command<TripDetailViewModel> ItemTapped { get; }
-
-	public Command ResetTime { get; }
-
-	public TripDetailViewModel SelectedItem
-	{
-		get => _selectedItem;
-		set
-		{
-			SetProperty(ref _selectedItem, value);
-			OnItemSelected(value);
-		}
-	}
-
 	public void Dispose()
 	{
 		//unsubscribe Messages
@@ -86,10 +58,17 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		timer?.Dispose();
 	}
 
+	/// <summary>
+	/// Nastavuje list na vsechno 0 nebo privatni { jen moje} 1
+	/// </summary>
+	[ObservableProperty]
+	private int _listMode = 0;
+
+	public string DriverName => $"{_bs?.Driver?.Inicials ?? "XX"}";
+
 	public void OnAppearing()
 	{
 		IsBusy = true;
-		SelectedItem = null;
 	}
 
 	internal async Task RefreshData()
@@ -97,24 +76,17 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		try
 		{
 			Items.Clear();
-			//ServiceResult<Trip[]> result = await _proxy.GetTripsAsync(true);
-			//if (result.State == ResultCode.OK)
-			Trip[] result = await DataService.GetTripAsync(true);
-			{
-				//var l = result.Data.Select(TripDetailViewModel.FromTrip);
-				IEnumerable<TripDetailViewModel> l = result.Select(TripDetailViewModel.FromTrip);
+			IEnumerable<TripListItemViewModel> l = (await DataService.GetTripAsync(true)).Select(TripListItemViewModel.FromTrip);
+			if (ListMode != 0) // jen moje
+				l = l.Where(w =>
+					w.Data.TripState is (TripState.NewOrder or TripState.RejectedByDiver) ||
+					w.Data.Driver?.IdDriver == _bs.DriverId);
 
-				if (ListMode != 0) // jen moje
-					l = l.Where(w =>
-						w.TripState is (TripState.NewOrder or TripState.RejectedByDiver) ||
-						w.Driver?.IdDriver == _bs.DriverId);
-
-				foreach (TripDetailViewModel item in l
-							 .OrderBy(o => o.TripState != TripState.NewWWW)
-							 .ThenBy(o => (int)o.TripState > 99)
-							 .ThenBy(o => o.MinToDeadLine))
-					Items.Add(item);
-			}
+			foreach (var item in l
+						 .OrderBy(o => o.Data.TripState != TripState.NewWWW)
+						 .ThenBy(o => (int)o.Data.TripState > 99)
+						 .ThenBy(o => o.MinToDeadLine))
+				Items.Add(item);
 		}
 		catch (Exception ex)
 		{
@@ -133,41 +105,33 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		await RefreshData();
 	}
 
-	async void OnItemSelected(TripDetailViewModel item)
+	private async void OnItemSwipedLeft(TripListItemViewModel item)
 	{
 		if (item == null)
 			return;
-		// This will push the ItemDetailPage onto the navigation stack
-		await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={item.IdTrip}");
+		await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={item.Data.IdTrip}");
 	}
 
-	private async void OnItemSwipedLeft(TripDetailViewModel item)
+	private async void OnItemSwipedRight(TripListItemViewModel item)
 	{
 		if (item == null)
 			return;
-		await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={item.IdTrip}");
-	}
-
-	private async void OnItemSwipedRight(TripDetailViewModel item)
-	{
-		if (item == null)
-			return;
-		TripDetailViewModel i = Items.First(f => f.IdTrip == item.IdTrip);
+		TripListItemViewModel i = Items.First(f => f.Data.IdTrip == item.Data.IdTrip);
 		if (i != null)
 			Items.Remove(i);
 	}
 
-	private void OnReset(TripDetailViewModel obj)
+	private void OnReset(TripListItemViewModel obj)
 	{
-		foreach (TripDetailViewModel it in Items)
+		foreach (TripListItemViewModel it in Items)
 		{
-			it.OrderTime = DateTime.Now.AddMinutes(-1);
+			it.Data.OrderTime = DateTime.Now.AddMinutes(-1);
 		}
 	}
 
 	private void OnTimer(object state)
 	{
-		foreach (TripDetailViewModel item in Items)
+		foreach (TripListItemViewModel item in Items)
 		{
 			item.RefreshTime();
 		}
@@ -187,4 +151,37 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 			await Shell.Current.GoToAsync($"{nameof(DriverName)}?Id={_bs.DriverId}");
 	}
 
+	[RelayCommand]
+	private async void Storno(Guid idTrip)
+	{
+		var ret = await DataService.ChangeTripStateAsync(idTrip, TripState.Canceled);
+		if (ret)
+		{
+			await RefreshData();
+		}
+		else
+		{
+			await Shell.Current.DisplayAlert("POZOR", "Jízda nebyla stornována", "OK");
+		}
+	}
+
+	[RelayCommand]
+	private async void Acc(Guid idTrip)
+	{
+		if (_bs.DriverId == null)
+		{
+			await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
+			return;
+		}
+
+		var ret = await DataService.AcceptTripByDriverAsync(idTrip, _bs.DriverId.Value);
+		if (ret)
+		{
+			await RefreshData();
+		}
+		else
+		{
+			await Shell.Current.DisplayAlert("POZOR", "Jízda nebyla akceptována", "OK");
+		}
+	}
 }

@@ -1,143 +1,107 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace TaxiDC2.ViewModels
 {
-	public class TripDetailViewModel : INotifyPropertyChanged
+	public partial class TripDetailViewModel : BaseViewModel
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
+		private readonly IBussinessState _bs;
+		//public ObservableCollection<Driver> ListRidicu { get; } = new();
 
-		private ObservableCollection<Driver> _listRidicu = new();
+		[ObservableProperty] private Trip _trip = new();
 
-		public ObservableCollection<Driver> ListRidicu => _listRidicu;
+		[ObservableProperty] public bool _pickerVisible = false;
+		[ObservableProperty] private bool _complete = false;
 
-		public TripDetailViewModel()
+		public TripDetailViewModel(IDataService dataService,IBussinessState bs):base(dataService)
 		{
-			IsAdmin = true /*_bs.IsAdmin*/;
-			PhoneNumberTapped = new Command(PerformPhoneNumberTapped);
+			_bs = bs;
+			//Task.Run(async () => await LoadData()).Wait();
 		}
 
-		internal static TripDetailViewModel FromTrip(Trip data)
-		{
-			return new TripDetailViewModel()
-			{
-				AddressBoarding = data.AddressBoarding,
-				AddressBoardingIsValid = data.AddressBoardingIsValid,
-				AddressBoardingLocX = data.AddressBoardingLocX,
-				AddressBoardingLocY = data.AddressBoardingLocY,
-				AddressExit = data.AddressExit,
-				AddressExitIsValid = data.AddressExitIsValid,
-				AddressExitLocX = data.AddressExitLocX,
-				AddressExitLocY = data.AddressExitLocY,
-				BoardingTime = data.BoardingTime,
-				Complete = data.Complete,
-				Customer = data.Customer,
-				DeadLine = data.DeadLine,
-				Driver = data.Driver,
-				ExitTime = data.ExitTime,
-				IdTrip = data.IdTrip,
-				Memo = data.Memo,
-				OrderTime = data.OrderTime,
-				TripState = data.TripState
-			};
-		}
-
-		public string AddressBoarding { get; set; } = string.Empty;
-		public string AddressExit { get; set; } = string.Empty;
-
-		public string Title { get; set; } = "Detail jízdy";
-
-		public DateTime? BoardingTime { get; set; }
+		//internal static TripDetailViewModel FromTrip(Trip data)
+		//{
+		//	return new TripDetailViewModel()
+		//	{
+		//		AddressBoarding = data.AddressBoarding,
+		//		AddressBoardingIsValid = data.AddressBoardingIsValid,
+		//		AddressBoardingLocX = data.AddressBoardingLocX,
+		//		AddressBoardingLocY = data.AddressBoardingLocY,
+		//		AddressExit = data.AddressExit,
+		//		AddressExitIsValid = data.AddressExitIsValid,
+		//		AddressExitLocX = data.AddressExitLocX,
+		//		AddressExitLocY = data.AddressExitLocY,
+		//		BoardingTime = data.BoardingTime,
+		//		Complete = data.Complete,
+		//		Customer = data.Customer,
+		//		DeadLine = data.DeadLine,
+		//		Driver = data.Driver,
+		//		ExitTime = data.ExitTime,
+		//		IdTrip = data.IdTrip,
+		//		Memo = data.Memo,
+		//		OrderTime = data.OrderTime,
+		//		TripState = data.TripState
+		//	};
+		//}
+		
+		[DependsOn("TripState")]
+		public bool BtnConVisibility => Trip.TripState is (TripState.NewWWW);
 
 		[DependsOn("TripState")]
-		public bool BtnConVisibility => TripState is (TripState.NewWWW);
+		public bool BtnAccVisibility => IsOwner && Trip.TripState == TripState.ForwardToDiver || Trip.TripState is (TripState.NewOrder or TripState.RejectedByDiver);
 
 		[DependsOn("TripState")]
-		public bool BtnAccVisibility => IsOwner && TripState == TripState.ForwardToDiver || TripState is (TripState.NewOrder or TripState.RejectedByDiver);
-
-		[DependsOn("TripState")]
-		public bool BtnCancelVisibility => TripState is not (TripState.Comleted or TripState.Canceled);
+		public bool BtnCancelVisibility => Trip.TripState is not (TripState.Comleted or TripState.Canceled);
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnRejectVisibility => IsOwner && TripState == TripState.ForwardToDiver;
+		public bool BtnRejectVisibility => IsOwner && Trip.TripState == TripState.ForwardToDiver;
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnForwardVisibility => TripState is (TripState.NewOrder or TripState.RejectedByDiver);
+		public bool BtnForwardVisibility => Trip.TripState is (TripState.NewOrder or TripState.RejectedByDiver);
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnSmsVisibility => IsOwner && TripState is (TripState.AcceptedDiver or TripState.SMS1sended);
+		public bool BtnSmsVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.SMS1sended);
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnCallVisibility => IsOwner && TripState is (TripState.AcceptedDiver or TripState.SMS1sended or TripState.SMS2sended);
-
-
-		[DependsOn("TripState", "Driver")]
-		public bool BtnRunningVisibility => IsOwner && TripState is (TripState.AcceptedDiver or TripState.Call or TripState.SMS1sended or TripState.SMS2sended);
+		public bool BtnCallVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.SMS1sended or TripState.SMS2sended);
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnCompleteVisibility => IsOwner && TripState is (TripState.AcceptedDiver or TripState.Running or TripState.SMS1sended or TripState.SMS2sended or TripState.Call);
+		public bool BtnRunningVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Call or TripState.SMS1sended or TripState.SMS2sended);
 
-		public bool Complete { get; set; } = false;
-
-		public bool IsAdmin { get; }
-
-		// Musi mit Ignore v konfiguraci AUTOMAPPERU
-		public int Counter1 { get; set; }
-
-		public Customer Customer { get; set; } = null;
-
-		public short CustomerVIP => Customer?.VIP2 ?? 0;
-
-		public TimeSpan? DeadLine { get; set; }
-		public Driver Driver { get; set; } = null;
-		public DateTime? ExitTime { get; set; }
-		public Guid IdTrip { get; set; } = Guid.Empty;
+		[DependsOn("TripState", "Driver")]
+		public bool BtnCompleteVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Running or TripState.SMS1sended or TripState.SMS2sended or TripState.Call);
 
 		[DependsOn("Memo")]
-		public Boolean IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Memo);
+		public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Trip.Memo);
+		public bool CustomerMemoVisible => !string.IsNullOrWhiteSpace(Trip.Customer?.Memo);
 
-		[DependsOn("Memo")] public Boolean IsOwner => true;//Driver != null && Driver.IdDriver == _bs.DriverId;
-
-		public bool AddressBoardingIsValid { get; set; }
-
-		public bool AddressExitIsValid { get; set; }
-
-		public string AddressBoardingLocX { get; set; }
-
-		public string AddressBoardingLocY { get; set; }
-
-		public string AddressExitLocX { get; set; }
-
-		public string AddressExitLocY { get; set; }
+		public Boolean IsOwner => Trip.Driver != null && Trip.Driver.IdDriver == _bs.DriverId;
 
 		/// <summary>
 		/// Adresy jsou validni pro hledani trasy
 		/// </summary>
 		[DependsOn("AddressBoardingIsValid,AddressExitIsValid")]
-		public bool IsValidForRoute => AddressExitIsValid || AddressBoardingIsValid;
-
-		[Display(Description = "Poznámka k jízdě")]
-		public string Memo { get; set; } = string.Empty;
+		public bool IsValidForRoute => Trip.AddressExitIsValid || Trip.AddressBoardingIsValid;
 
 		[DependsOn("DeadLine,Counter1")]
 		public int MinToDeadLine
 		{
 			get
 			{
-				if (BoardingTime != null) return (int)(BoardingTime.Value - DateTime.Now).TotalMinutes;
+				if (Trip.BoardingTime != null) return (int)(Trip.BoardingTime.Value - DateTime.Now).TotalMinutes;
 				else
 				{
 					return
-						DeadLine.HasValue
-						 ? ((OrderTime + DeadLine.Value - DateTime.Now).TotalMinutes > 0
-							 ? (int)(OrderTime + DeadLine.Value - DateTime.Now).TotalMinutes
+						Trip.DeadLine.HasValue
+						 ? ((Trip.OrderTime + Trip.DeadLine.Value - DateTime.Now).TotalMinutes > 0
+							 ? (int)(Trip.OrderTime + Trip.DeadLine.Value - DateTime.Now).TotalMinutes
 							 : 0)
 						 : 0;
 
 				}
 			}
 		}
+
 		public bool MinLabelVisible { get; set; }
 
 		[DependsOn("MinToDeadLine")]
@@ -148,22 +112,20 @@ namespace TaxiDC2.ViewModels
 				if (MinToDeadLine > 60 * 24)
 				{
 					MinLabelVisible = false;
-					return $"{BoardingTime:dd.MM. HH:mm}";
+					return $"{Trip.BoardingTime:dd.MM. HH:mm}";
 				}
 				MinLabelVisible = true;
 				return MinToDeadLine < 0 ? "0" : MinToDeadLine.ToString();
 			}
 		}
-
-
-		public DateTime OrderTime { get; set; } = DateTime.Now;
+		
 
 		[DependsOn("TripState")]
 		public Color StateColor
 		{
 			get
 			{
-				Color c = (Color)Application.Current.Resources[$"STC_{TripState.ToString()}"];     //nova neprevzata
+				Color c = (Color)Application.Current.Resources[$"STC_{Trip.TripState.ToString()}"];     //nova neprevzata
 				return c;
 			}
 		}
@@ -198,7 +160,7 @@ namespace TaxiDC2.ViewModels
 			{
 				FileImageSource i = new();
 
-				switch (TripState)
+				switch (Trip.TripState)
 				{
 					case TripState.NewOrder:
 						i = (FileImageSource)ImageSource.FromFile("ico_star_black.png");        // hvezdicka
@@ -254,7 +216,7 @@ namespace TaxiDC2.ViewModels
 
 		[DependsOn("DeadLine,Counter1")]
 		public Color TimeColor =>
-			TripState == TripState.Canceled || TripState == TripState.Comleted
+			Trip.TripState == TripState.Canceled || Trip.TripState == TripState.Comleted
 				? (Color)Application.Current.Resources["PozadiTmava"]
 				: MinToDeadLine < 2
 					? (Color)Application.Current.Resources["Cervena"]
@@ -263,82 +225,243 @@ namespace TaxiDC2.ViewModels
 						: MinToDeadLine < 60
 							? (Color)Application.Current.Resources["Zelena"]
 							: (Color)Application.Current.Resources["Zluta2"];
-
-
-		public TripState TripState { get; set; } = TripState.NewOrder;
-
-		public string Message { get; set; }
-
+		
 		[DependsOn("TripState")]
-		public bool TimeVisible => TripState != TripState.Canceled && TripState != TripState.Comleted;
-
-		public bool PickerVisible { get; set; } = false;
-
+		public bool TimeVisible => Trip.TripState != TripState.Canceled && Trip.TripState != TripState.Comleted;
+		
 		public void RefreshTime()
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLine)));
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLineTxt)));
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeColor)));
+			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLine)));
+			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLineTxt)));
+			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeColor)));
 		}
 
-
-		public Command<Customer> ItemTapped { get; }
-
-		public Command PhoneNumberTapped { get; }
-		
-
-		private async void PerformPhoneNumberTapped()
+		[RelayCommand]
+		private async void PhoneNumberTapped()
 		{
-			await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={Customer.IdCustomer}");
+			if (Trip.Customer != null)
+				await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={Trip.Customer.IdCustomer}");
 		}
 
-		public async Task LoadData(Guid id, IApiProxy proxy)
+		public async Task LoadData(Guid id)
 		{
-			if (proxy == null) throw new ArgumentNullException(nameof(proxy));
-			ServiceResult<Trip> trip = await proxy.GetTripByIdAsync(id);
-			if (trip.State == ResultCode.OK && trip.Data != null)
+			var trip = await DataService.GetTripByIdAsync(id);
+			if ( trip != null)
 			{
-				AddressBoarding = trip.Data.AddressBoarding;
-				AddressBoardingIsValid = trip.Data.AddressBoardingIsValid;
-				AddressBoardingLocX = trip.Data.AddressBoardingLocX;
-				AddressBoardingLocY = trip.Data.AddressBoardingLocY;
-				AddressExit = trip.Data.AddressExit;
-				AddressExitIsValid = trip.Data.AddressExitIsValid;
-				AddressExitLocX = trip.Data.AddressExitLocX;
-				AddressExitLocY = trip.Data.AddressExitLocY;
-				BoardingTime = trip.Data.BoardingTime;
-				Complete = trip.Data.Complete;
-				Customer = trip.Data.Customer;
-				DeadLine = trip.Data.DeadLine;
-				Driver = trip.Data.Driver;
-				ExitTime = trip.Data.ExitTime;
-				IdTrip = trip.Data.IdTrip;
-				Memo = trip.Data.Memo;
-				OrderTime = trip.Data.OrderTime;
-				TripState = trip.Data.TripState;
+				Trip.AddressBoarding = trip.AddressBoarding;
+				Trip.AddressBoardingIsValid = trip.AddressBoardingIsValid;
+				Trip.AddressBoardingLocX = trip.AddressBoardingLocX;
+				Trip.AddressBoardingLocY = trip.AddressBoardingLocY;
+				Trip.AddressExit = trip.AddressExit;
+				Trip.AddressExitIsValid = trip.AddressExitIsValid;
+				Trip.AddressExitLocX = trip.AddressExitLocX;
+				Trip.AddressExitLocY = trip.AddressExitLocY;
+				Trip.BoardingTime = trip.BoardingTime;
+				Trip.Complete = trip.Complete;
+				Trip.Customer = trip.Customer;
+				Trip.DeadLine = trip.DeadLine;
+				Trip.Driver = trip.Driver;
+				Trip.ExitTime = trip.ExitTime;
+				Trip.IdTrip = trip.IdTrip;
+				Trip.Memo = trip.Memo;
+				Trip.OrderTime = trip.OrderTime;
+				Trip.TripState = trip.TripState;
 			}
 		}
 
-		public async Task<ServiceResult> CancelTrip()
+		private async Task PlacePhoneCall(string number)
 		{
-			throw new NotImplementedException();
+			if (PhoneDialer.Default.IsSupported)
+			{
+				try
+				{
+					PhoneDialer.Open(number);
+				}
+				catch (ArgumentNullException)
+				{
+					await Shell.Current.DisplayAlert("POZOR", "Neznámé tel. číslo", "OK");
+				}
+				catch (Exception ex)
+				{
+					await Shell.Current.DisplayAlert("", $"Chyba \n{ex.Message}", "OK");
+				}
+			}
+			else
+			{
+				await Shell.Current.DisplayAlert("", $"Call not supported", "OK");
+			}
 		}
 
-		public async Task<ServiceResult> AcceptTrip()
+		[RelayCommand]
+		private async void SmsOpen()
 		{
-			throw new NotImplementedException();
+			await Shell.Current.GoToAsync($"{nameof(SmsSendView)}?IdTrip={Trip.IdTrip}&Phone={Uri.EscapeDataString(Trip.Customer.PhoneNumber)}");
+
+			if (Trip.TripState != TripState.SMS1sended)
+			{
+				var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.SMS1sended);
+				if (ret)
+					Trip.TripState = TripState.SMS1sended;
+			}
+			else
+			{
+				var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.SMS2sended);
+				if (ret)
+					Trip.TripState = TripState.SMS2sended;
+			}
 		}
 
-		/*
-		WWW_OnClicked
-		Acc_OnClicked
-		Rej_OnClicked
-		Sms_OnClicked
-		Call_OnClicked
-		Run_OnClicked
-		Storno_OnClicked
-		Complete_OnClicked
-		Forward_OnClicked
-		*/
+		[RelayCommand]
+		private async void Call()
+		{
+			await PlacePhoneCall(Trip.Customer.PhoneNumber);
+			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Call);
+			if (ret)
+				Trip.TripState = TripState.Call;
+		}
+
+		[RelayCommand]
+		private async void Acc()
+		{
+			if (_bs.DriverId == null)
+			{
+				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
+				return;
+			}
+
+			var ret = await DataService.AcceptTripByDriverAsync(Trip.IdTrip, _bs.DriverId.Value);
+			if (ret)
+			{
+				Trip.TripState = TripState.AcceptedDiver;
+				await LoadData(Trip.IdTrip);
+			}
+			else
+			{
+				await Shell.Current.DisplayAlert("POZOR", "Jízda nebyla akceptována", "OK");
+			}
+		}
+
+		[RelayCommand]
+		private async void Con()
+		{
+			if (_bs.DriverId == null)
+			{
+				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
+				return;
+			}
+
+			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.NewOrder);
+			if (ret)
+			{
+				try
+				{
+					string messageText = $"Přijali jsme vaší objednávku z WWW. Děkujeme Taxi-Děčín 777557776 ";
+					SmsMessage message = new(messageText, new[] { Trip.Customer.PhoneNumber });
+					await Sms.ComposeAsync(message);
+				}
+				catch (FeatureNotSupportedException ex)
+				{
+					// Sms is not supported on this device.
+				}
+				catch (Exception ex)
+				{
+					// ignored
+				}
+
+				Trip.TripState = TripState.NewOrder;
+				await LoadData(Trip.IdTrip);
+			}
+			else
+			{
+				await Shell.Current.DisplayAlert("POZOR", "Jízda z WWW nebyla akceptována", "OK");
+			}
+		}
+
+		[RelayCommand]
+		private async void Rej()
+
+		{
+			if (_bs.DriverId == null)
+			{
+				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
+				return;
+			}
+
+			var ret = await DataService.RejectTripAsync(Trip.IdTrip, _bs.DriverId.Value);
+			if (ret)
+			{
+				Trip.TripState = TripState.RejectedByDiver;
+				await LoadData(Trip.IdTrip);
+			}
+			else
+			{
+				await Shell.Current.DisplayAlert("POZOR", "Jízda nebyla odmítnuta", "OK");
+			}
+		}
+
+		[RelayCommand]
+		private async void Run()
+		{
+			if (_bs.DriverId == null)
+			{
+				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
+				return;
+			}
+
+			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Running);
+			if (ret)
+			{
+				Trip.TripState = TripState.Running;
+				await LoadData(Trip.IdTrip);
+			}
+			else
+			{
+				await Shell.Current.DisplayAlert("POZOR", "Jízda nebyla spuštěna", "OK");
+			}
+		}
+
+		[RelayCommand]
+		private async void Storno()
+		{
+			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Canceled);
+			if (ret)
+			{
+				//Trip.TripState = TripState.Canceled;
+				//BindingContext = _viewModel = Task.Run(async () => await LoadData()).Result;
+				await Shell.Current.GoToAsync("..");
+			}
+			else
+			{
+				await Shell.Current.DisplayAlert("POZOR", "Jízda nebyla stornována", "OK");
+			}
+		}
+
+		[RelayCommand]
+		private async void Completed()
+		{
+			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Comleted);
+			if (ret)
+			{
+				//Trip.TripState = TripState.Comleted;
+				//await Shell.Current.GoToAsync($"///{nameof(TripListPage)}");
+				await Shell.Current.GoToAsync("..");
+			}
+		}
+
+		private async void Forward()
+		{
+			PickerVisible = true;
+		}
+
+		public async Task ForwardTripToDriver(Driver drv)
+		{
+			var res = await DataService.ForwardTripAsync(Trip.IdTrip, drv.IdDriver);
+			if (res)
+			{
+				await LoadData(Trip.IdTrip);
+				await Shell.Current.DisplayAlert("POZOR", $"Jízda předána {drv.FullName}", "OK");
+			}
+		}
+
 	}
 }

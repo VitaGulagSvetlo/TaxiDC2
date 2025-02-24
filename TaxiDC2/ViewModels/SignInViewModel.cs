@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using TaxiDC2.Components;
 
@@ -48,14 +47,14 @@ namespace TaxiDC2.ViewModels
 			{
 				await LoadDriver();
 				Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
-				Shell.Current.GoToAsync($"///{nameof(MainPage)}",false);
+				await Shell.Current.GoToAsync($"///{nameof(MainPage)}",false);
 			}
 		}
 
 		private async Task LoadDriver()
 		{
 			Driver[] drl = await _dataService.GetDriversAsync(true);
-			Driver driver = drl.FirstOrDefault(f => f.MobileDeviceHash == _authClient.User.Uid);
+			Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
 			if (driver != null)
 			{
 				_bs.Driver = driver;

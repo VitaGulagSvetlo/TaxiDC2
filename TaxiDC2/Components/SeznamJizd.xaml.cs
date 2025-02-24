@@ -33,29 +33,25 @@ namespace TaxiDC2
 	        await Shell.Current.GoToAsync($"{nameof(MainPage)}");
         }
 
-		private async void OnSwipeLeftCancel(object sender, EventArgs e)
+        private async void OnSwipeLeftCancel(object sender, EventArgs e)
         {
-	        SwipeItem swipeItem = (SwipeItem)sender;
-	        object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
-	        TripDetailViewModel m = _viewModel.Items.FirstOrDefault(f => f.IdTrip.ToString() == id.ToString());
-	        if (m != null)
-	        {
-		        _viewModel.Items.Remove(m);
-
-				//await m.CancelTrip();
-			}
-		}
+            SwipeItem swipeItem = (SwipeItem)sender;
+            object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
+            if (Guid.TryParse(id.ToString(), out Guid g))
+            {
+	            _viewModel.StornoCommand.Execute(g);
+            }
+        }
 
 		private async void OnSwipeLeftAccept(object sender, EventArgs e)
         {
-	        SwipeItem swipeItem = (SwipeItem)sender;
-	        object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
-	        TripDetailViewModel m = _viewModel.Items.FirstOrDefault(f => f.IdTrip.ToString() == id.ToString());
-	        if (m != null)
-	        {
-		        await m.AcceptTrip();
-	        }
-        }
+            SwipeItem swipeItem = (SwipeItem)sender;
+            object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
+            if(Guid.TryParse(id.ToString(),out Guid g))
+			{
+				_viewModel.AccCommand.Execute(g);
+			}
+		}
 
         private async void SfSwitch_OnStateChanged(object sender, SwitchStateChangedEventArgs e)
         {
