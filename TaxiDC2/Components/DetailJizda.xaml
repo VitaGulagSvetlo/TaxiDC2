@@ -90,6 +90,8 @@
                                 BackgroundColor="Transparent"
                                 HorizontalOptions="End"
                                 VerticalOptions="End"
+                                IsVisible="{Binding CustomerInfoAvailable}"
+                                Command="{Binding CustomerInfoCommand}"
                                 >
                             <Button.ImageSource>
                                 <FontImageSource Glyph="{StaticResource info}"
@@ -134,8 +136,12 @@
                     <StackLayout Spacing="10">
                         <Label Text="Řidič" Style="{StaticResource CustomLblO}" />
                         <HorizontalStackLayout Spacing="5">
-                            <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                            <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
                             <Label Text="{Binding Trip.Driver.FullName,FallbackValue='nepřiřazen'}" FontSize="18" TextColor="{StaticResource Bila}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="5">
+                            <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                            <Label Text="{Binding Trip.Driver.Car.FullName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}" />
                         </HorizontalStackLayout>
                     </StackLayout>
                 </Frame>

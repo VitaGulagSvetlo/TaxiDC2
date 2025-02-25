@@ -14,6 +14,8 @@ namespace TaxiDC2.ViewModels
 		[ObservableProperty] public bool _pickerVisible = false;
 		[ObservableProperty] private bool _complete = false;
 
+		public bool CustomerInfoAvailable => !string.IsNullOrWhiteSpace( Trip.Customer?.Memo);
+
 		public TripDetailViewModel(IDataService dataService, IBussinessState bs) : base(dataService)
 		{
 			_bs = bs;
@@ -213,13 +215,6 @@ namespace TaxiDC2.ViewModels
 			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLine)));
 			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLineTxt)));
 			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeColor)));
-		}
-
-		[RelayCommand]
-		private async Task PhoneNumberTapped()
-		{
-			if (Trip.Customer != null)
-				await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={Trip.Customer.IdCustomer}");
 		}
 
 		public async Task LoadData(Guid id)
@@ -449,5 +444,13 @@ namespace TaxiDC2.ViewModels
 			if (Trip.Customer != null)
 				await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={Trip.Customer.IdCustomer}");
 		}
+
+		[RelayCommand]
+		private async Task CustomerInfo()
+		{
+			if (Trip.Customer != null)
+				await Shell.Current.DisplayAlert("Poznámka", Trip.Customer.Memo, "OK");
+		}
+
 	}
 }
