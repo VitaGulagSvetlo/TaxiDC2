@@ -44,27 +44,40 @@
                                    Grid.Column="0" />
 
                                 <Button Style="{StaticResource CallLogBtn}"
+                                    Margin=" 0,0,0,15"    
                                     CornerRadius="5"
                                     ImageSource="{FontImageSource Glyph={StaticResource list}, FontFamily=FAPro, Size=18, Color={StaticResource Bila}}"
-                                    Grid.Column="1" HorizontalOptions="End" Command="{Binding CallLogOpenCommand}" />
+                                    Grid.Column="1" HorizontalOptions="End"  Command="{Binding CallLogOpenCommand}" />
                             </Grid>
 
 
-                            <HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="5">
+                            <Grid HorizontalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                  
+                                </Grid.ColumnDefinitions>
+
+                               
+                                <HorizontalStackLayout Grid.Column="0" Spacing="5">
                                     <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
                                     <Label Text="Jméno"  Style="{StaticResource CustomLblO}" />
                                 </HorizontalStackLayout>
-                                <inputs:SfRating x:Name="CustomerRating"
-                                             ItemCount="5"
-                                             Value="{Binding Trip.Customer.VIP2,FallbackValue=0}"
-                                             Margin="5"
-                                             ItemSize="20">
+
+                               
+                                <inputs:SfRating Grid.Column="1"
+                     ItemCount="5"
+                     Value="{Binding Trip.Customer.VIP2,FallbackValue=0}"
+                     Margin="5"
+                     ItemSize="20">
                                     <inputs:SfRating.RatingSettings>
                                         <inputs:RatingSettings RatedFill="{StaticResource Oranzova}" RatedStroke="{StaticResource TP}" />
                                     </inputs:SfRating.RatingSettings>
                                 </inputs:SfRating>
-                            </HorizontalStackLayout>
+                            </Grid>
                             <Entry x:Name="NameEntry"
                                Placeholder="Jan Petr"
                                PlaceholderColor="{StaticResource NRph}"
@@ -77,7 +90,7 @@
 
                     </Frame>
 
-                    <!-- From and To Location -->
+                  
                     <Frame Style="{StaticResource CustomFrame}">
                         <VerticalStackLayout Spacing="10">
                             <HorizontalStackLayout Spacing="5">
@@ -104,7 +117,7 @@
                                Text="{Binding Trip.AddressExit}"
                               />
 
-                            <!-- Time Selection -->
+                            <!-- Čas -->
                             <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
                                 <HorizontalStackLayout Spacing="5">
                                     <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
@@ -128,7 +141,7 @@
                         </VerticalStackLayout>
                     </Frame>
 
-                    <!-- Note -->
+                    <!-- Poznámka -->
                     <Frame Style="{StaticResource CustomFrame}">
                         <Entry x:Name="NoteEntry"
                            Placeholder="Poznámka"
@@ -143,7 +156,7 @@
 
             </ScrollView>
 
-            <!-- Fixované tlačítko na spodku -->
+            <!-- ULOŽIT ZMĚNY -->
             <Grid Grid.Row="1" Padding="15">
                 <Button Text="ULOŽIT ZMĚNY"
                     BackgroundColor="{StaticResource CustomOrangeBG}"
