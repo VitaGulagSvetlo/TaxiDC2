@@ -33,7 +33,14 @@
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label Text="Poznámka:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding Customer.Memo}" FontSize="10" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                            <ScrollView>
+                                <Editor Text="{Binding Customer.Memo}"
+            
+            AutoSize="TextChanges"
+           MinimumHeightRequest="100"
+                                       
+             />
+                            </ScrollView>
                         </VerticalStackLayout>
                     </StackLayout>
                 </Frame>
@@ -53,11 +60,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <!-- VIP Switch -->
-                        <Label Grid.Row="0" Grid.Column="0" Text="VIP:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
-                        <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding Customer.VIP}" HorizontalOptions="Start" />
-
-                        <!-- Rejected Switch -->
+                          <!-- Rejected Switch -->
                         <Label Grid.Row="1" Grid.Column="0" Text="Nevozit!:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
                         <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding Customer.Rejected}" HorizontalOptions="Start" />
 
