@@ -32,7 +32,7 @@
 
         <!-- HLAVNÍ OBSAH (SCROLL) -->
         <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand">
-            <VerticalStackLayout Spacing="15" Padding="10">
+            <VerticalStackLayout Spacing="10" Padding="10">
                 <Frame Style="{StaticResource CustomFrame}">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -48,7 +48,7 @@
                         <!-- Nadpis -->
                         <Label Grid.Row="0" Grid.Column="0"
                Text="Zákazník:" 
-              Style="{StaticResource CustomLblO}" />
+               Style="{StaticResource CustomLblO}" />
 
                         <!-- Ikona tužky -->
                         <Button Grid.Row="0" Grid.Column="1"            
@@ -58,8 +58,7 @@
                                 <FontImageSource Glyph="{StaticResource edit}"
                                  FontFamily="FAPro" 
                                  Size="18"
-                                 Color="{StaticResource Oranzova}" 
-                                 />
+                                 Color="{StaticResource Oranzova}" />
                             </Button.ImageSource>
                         </Button>
 
@@ -74,18 +73,33 @@
                                 <Label Text="{Binding Trip.Customer.Name,FallbackValue=''}" FontSize="18" TextColor="{StaticResource Bila}" />
                             </HorizontalStackLayout>
                             <inputs:SfRating
-                                ItemCount="5"
-                                             Value="{Binding Trip.Customer.VIP2,FallbackValue=0}"
-                                             Margin="5"
-                                             ItemSize="10"
-                                             IsReadOnly="True">
+                ItemCount="5"
+                Value="{Binding Trip.Customer.VIP2,FallbackValue=0}"
+                Margin="5"
+                ItemSize="10"
+                IsReadOnly="True">
                                 <inputs:SfRating.RatingSettings>
                                     <inputs:RatingSettings RatedFill="{StaticResource Oranzova}" RatedStroke="{StaticResource TP}" />
                                 </inputs:SfRating.RatingSettings>
                             </inputs:SfRating>
                             <Label Text="{Binding Trip.Customer.Memo,FallbackValue=''}" FontSize="10" TextColor="{StaticResource Bila}" IsVisible="{Binding CustomerMemoVisible}"/>
-
                         </VerticalStackLayout>
+
+                        <!-- Label s písmenem X v pravém dolním rohu -->
+                        <Button Grid.Row="1" Grid.Column="1"            
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="End"
+                                VerticalOptions="End"
+                                >
+                            <Button.ImageSource>
+                                <FontImageSource Glyph="{StaticResource info}"
+
+                 FontFamily="FAPro" 
+                 Size="18"
+                 Color="{StaticResource Oranzova}" />
+                            </Button.ImageSource>
+                        </Button>
+
                     </Grid>
                 </Frame>
                 <Frame Style="{StaticResource CustomFrame}">
