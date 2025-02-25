@@ -14,12 +14,9 @@ namespace TaxiDC2.Services
 	    }
 
 	    public string AuthClient => _authClient?.User?.Info?.DisplayName;
-
-
-	    private static string _deviceKey;
-
         
-
+	    private static string _deviceKey;
+        
         /// <summary>
         /// Klic zarizeni
         /// </summary>

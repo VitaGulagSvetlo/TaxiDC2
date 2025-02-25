@@ -2,7 +2,6 @@
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
-using IdentityModel.OidcClient;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Biometric;
 using Syncfusion.Maui.Core.Hosting;
