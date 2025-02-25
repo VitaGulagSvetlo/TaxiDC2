@@ -1,18 +1,41 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TaxiDC2.ViewModels
 {
-	[ObservableObject]
-	public partial class BaseViewModel(IDataService dataService)
+	public partial class BaseViewModel : ObservableValidator
 	{
-		protected IDataService DataService { get; } = dataService ?? throw new ArgumentNullException(nameof(dataService));
+		protected IDataService DataService { get; }
 
 		[ObservableProperty]
-		private bool isBusy = false;
+		private bool _isBusy = false;
 		[ObservableProperty]
-		private string title = string.Empty;
+		private string _title = string.Empty;
 		[ObservableProperty]
-		private string message = string.Empty;
+		private string _message = string.Empty;
+
+		/// <inheritdoc/>
+		public BaseViewModel(IDataService dataService)
+		{
+			DataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
+			ErrorsChanged += (s, e) =>
+			{
+				OnPropertyChanged(string.Empty); // notifikuje UI ze se zmenily validacni chyby
+			};
+		}
+
+		public bool IsMessageVisible => !string.IsNullOrWhiteSpace(Message);
+
+		// Výchozí indexer pro binding chyb validace
+		public IEnumerable<string> this[string propertyName]
+		{
+			get
+			{
+				return GetErrors(propertyName).Select(s => s.ErrorMessage).ToList();
+			}
+		}
 
 	}
 }

@@ -62,6 +62,8 @@ namespace TaxiDC2.Models
                 _admin = value;
             }
         }
+
+        public string Email { get; set; }
     }
 
 }

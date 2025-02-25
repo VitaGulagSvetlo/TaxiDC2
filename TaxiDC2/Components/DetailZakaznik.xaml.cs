@@ -25,9 +25,9 @@ namespace TaxiDC2
 			}
 		}
 
-		private async void OnBackButtonPressed(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync($"{nameof(SeznamZakazniku)}");
-        }
+		//private async void OnBackButtonPressed(object sender, EventArgs e)
+  //      {
+  //          Shell.Current.GoToAsync($"{nameof(SeznamZakazniku)}");
+  //      }
     }
 }

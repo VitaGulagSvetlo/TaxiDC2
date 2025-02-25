@@ -1,4 +1,6 @@
-﻿using Firebase.Auth;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth;
 using Plugin.Maui.Biometric;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
@@ -24,29 +26,44 @@ namespace TaxiDC2.ViewModels
 			_biometricService = biometricService;
 			_bs = bs;
 			CheckUser();
+			
 		}
 
 		private async void CheckUser()
 		{
+			IsBusy= true;
+			Message = "";
 			if (string.IsNullOrWhiteSpace(_authClient?.User?.Info?.Email))
 			{
 				if (DeviceInfo.Platform == DevicePlatform.WinUI)
 				{
 					Shell.Current.Dispatcher.Dispatch(async () =>
 					{
-						await Shell.Current.GoToAsync($"///{nameof(SignInPage)}");
+						await Shell.Current.GoToAsync($"/{nameof(SignInPage)}");
 					});
 				}
 				else
 				{
-					await Shell.Current.GoToAsync($"///{nameof(SignInPage)}");
+					await Shell.Current.GoToAsync($"/{nameof(SignInPage)}");
 				}
 			}
 			else
 			{
 				//todo: debug
-				Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
 				await LoadDriver();
+				if (!_bs.IsLogged)
+				{
+					Message = "Uživatel nenalezen v DB nebo problém s připojením k serveru! Kontaktujte admina.";
+					IsBusy = false;
+					return;
+				}
+				if (!_bs.IsActive)
+				{
+					Message = "Uživatel je neaktivní! Kontaktujte admina.";
+					IsBusy = false;
+					return;
+				}
+				Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
 				await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
 				return;
 				//todo: debug
@@ -57,7 +74,8 @@ namespace TaxiDC2.ViewModels
 				if (biometricStatus != BiometricHwStatus.Success)
 				{
 					await Shell.Current.DisplayAlert("Error", "biometricStatus is false", "Close");
-					
+					Message = "Biometric authentication is not available on this device";
+					IsBusy = false;
 					return;
 				}
 
@@ -80,12 +98,27 @@ namespace TaxiDC2.ViewModels
 					if (authenticationResponse.Status != BiometricResponseStatus.Success)
 					{
 						await Shell.Current.DisplayAlert("Error", authenticationResponse.ErrorMsg, "Close");
+						Message = $"Biometric authentication failed. {authenticationResponse.ErrorMsg}";
+						IsBusy = false;
 						return;
 					}
 					else
 					{
-						Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
 						await LoadDriver();
+						if (!_bs.IsLogged)
+						{
+							Message = "Uživatel nenalezen v DB nebo problém s připojením k serveru! Kontaktujte admina.";
+							IsBusy = false;
+							return;
+						}
+
+						if (!_bs.IsActive)
+						{
+							Message = "Uživatel je neaktivní! Kontaktujte admina.";
+							IsBusy = false;
+							return;
+						}
+						Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
 						await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
 					}
 				});
@@ -96,15 +129,21 @@ namespace TaxiDC2.ViewModels
 		private async Task LoadDriver()
 		{
 			Driver[] drl = await _dataService.GetDriversAsync(true);
-			Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
-			if (driver != null)
+			if (drl != null)
 			{
-				_bs.Driver = driver;
+				Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
+				if (driver != null)
+				{
+					_bs.Driver = driver;
+					return;
+				}
 			}
-			else
-			{
-				_bs.Driver = null;
-			}
+		}
+
+		[RelayCommand]
+		private async Task SignIn()
+		{
+			await Shell.Current.GoToAsync($"/{nameof(SignInPage)}");
 		}
 	}
 }

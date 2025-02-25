@@ -113,6 +113,9 @@
 	   <Compile Update="Components\DetailAuto.xaml.cs">
 	     <DependentUpon>DetailAuto.xaml</DependentUpon>
 	   </Compile>
+	   <Compile Update="Components\Login\SignUpPage.xaml.cs">
+	     <DependentUpon>SignUpPage.xaml</DependentUpon>
+	   </Compile>
 	   <Compile Update="Components\Login\SignInPage.xaml.cs">
 	     <DependentUpon>SignInPage.xaml</DependentUpon>
 	   </Compile>
@@ -144,6 +147,9 @@
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Components\LoadingPage.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="Components\Login\SignUpPage.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Components\Login\SignInPage.xaml">
