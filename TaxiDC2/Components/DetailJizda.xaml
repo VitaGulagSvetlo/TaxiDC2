@@ -52,12 +52,14 @@
 
                         <!-- Ikona tužky -->
                         <Button Grid.Row="0" Grid.Column="1"            
-                BackgroundColor="Transparent">
+                BackgroundColor="Transparent"
+                Command="{Binding CustomerEditCommand}">
                             <Button.ImageSource>
                                 <FontImageSource Glyph="{StaticResource edit}"
                                  FontFamily="FAPro" 
                                  Size="18"
-                                 Color="{StaticResource Oranzova}" />
+                                 Color="{StaticResource Oranzova}" 
+                                 />
                             </Button.ImageSource>
                         </Button>
 

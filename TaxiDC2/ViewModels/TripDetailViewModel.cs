@@ -14,16 +14,16 @@ namespace TaxiDC2.ViewModels
 		[ObservableProperty] public bool _pickerVisible = false;
 		[ObservableProperty] private bool _complete = false;
 
-		public TripDetailViewModel(IDataService dataService,IBussinessState bs):base(dataService)
+		public TripDetailViewModel(IDataService dataService, IBussinessState bs) : base(dataService)
 		{
 			_bs = bs;
 		}
-		
-		[DependsOn("TripState")]
-		public bool BtnConVisibility => Trip.TripState is (TripState.NewWWW);
+
+		[DependsOn("TripState")] public bool BtnConVisibility => Trip.TripState is (TripState.NewWWW);
 
 		[DependsOn("TripState")]
-		public bool BtnAccVisibility => IsOwner && Trip.TripState == TripState.ForwardToDiver || Trip.TripState is (TripState.NewOrder or TripState.RejectedByDiver);
+		public bool BtnAccVisibility => IsOwner && Trip.TripState == TripState.ForwardToDiver ||
+		                                Trip.TripState is (TripState.NewOrder or TripState.RejectedByDiver);
 
 		[DependsOn("TripState")]
 		public bool BtnCancelVisibility => Trip.TripState is not (TripState.Comleted or TripState.Canceled);
@@ -38,16 +38,19 @@ namespace TaxiDC2.ViewModels
 		public bool BtnSmsVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.SMS1sended);
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnCallVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.SMS1sended or TripState.SMS2sended);
+		public bool BtnCallVisibility => IsOwner &&
+		                                 Trip.TripState is (TripState.AcceptedDiver or TripState.SMS1sended
+			                                 or TripState.SMS2sended);
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnRunningVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Call or TripState.SMS1sended or TripState.SMS2sended);
+		public bool BtnRunningVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Call
+			or TripState.SMS1sended or TripState.SMS2sended);
 
 		[DependsOn("TripState", "Driver")]
-		public bool BtnCompleteVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Running or TripState.SMS1sended or TripState.SMS2sended or TripState.Call);
+		public bool BtnCompleteVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Running
+			or TripState.SMS1sended or TripState.SMS2sended or TripState.Call);
 
-		[DependsOn("Memo")]
-		public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Trip.Memo);
+		[DependsOn("Memo")] public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Trip.Memo);
 		public bool CustomerMemoVisible => !string.IsNullOrWhiteSpace(Trip.Customer?.Memo);
 
 		public Boolean IsOwner => Trip.Driver != null && Trip.Driver.IdDriver == _bs.DriverId;
@@ -68,10 +71,10 @@ namespace TaxiDC2.ViewModels
 				{
 					return
 						Trip.DeadLine.HasValue
-						 ? ((Trip.OrderTime + Trip.DeadLine.Value - DateTime.Now).TotalMinutes > 0
-							 ? (int)(Trip.OrderTime + Trip.DeadLine.Value - DateTime.Now).TotalMinutes
-							 : 0)
-						 : 0;
+							? ((Trip.OrderTime + Trip.DeadLine.Value - DateTime.Now).TotalMinutes > 0
+								? (int)(Trip.OrderTime + Trip.DeadLine.Value - DateTime.Now).TotalMinutes
+								: 0)
+							: 0;
 
 				}
 			}
@@ -89,18 +92,19 @@ namespace TaxiDC2.ViewModels
 					MinLabelVisible = false;
 					return $"{Trip.BoardingTime:dd.MM. HH:mm}";
 				}
+
 				MinLabelVisible = true;
 				return MinToDeadLine < 0 ? "0" : MinToDeadLine.ToString();
 			}
 		}
-		
+
 
 		[DependsOn("TripState")]
 		public Color StateColor
 		{
 			get
 			{
-				Color c = (Color)Application.Current.Resources[$"STC_{Trip.TripState.ToString()}"];     //nova neprevzata
+				Color c = (Color)Application.Current.Resources[$"STC_{Trip.TripState.ToString()}"]; //nova neprevzata
 				return c;
 			}
 		}
@@ -138,47 +142,47 @@ namespace TaxiDC2.ViewModels
 				switch (Trip.TripState)
 				{
 					case TripState.NewOrder:
-						i = (FileImageSource)ImageSource.FromFile("ico_star_black.png");        // hvezdicka
+						i = (FileImageSource)ImageSource.FromFile("ico_star_black.png"); // hvezdicka
 						break;
 
 					case TripState.RejectedByDiver:
-						i = (FileImageSource)ImageSource.FromFile("ico_star_black.png");        // hvezdicka
+						i = (FileImageSource)ImageSource.FromFile("ico_star_black.png"); // hvezdicka
 						break;
 
 					case TripState.ForwardToDiver:
-						i = (FileImageSource)ImageSource.FromFile("ico_user_black.png");        // user
+						i = (FileImageSource)ImageSource.FromFile("ico_user_black.png"); // user
 						break;
 
 					case TripState.AcceptedDiver:
-						i = (FileImageSource)ImageSource.FromFile("ico_user_black.png");        // user
+						i = (FileImageSource)ImageSource.FromFile("ico_user_black.png"); // user
 						break;
 
 					case TripState.Running:
-						i = (FileImageSource)ImageSource.FromFile("ico_car_black.png");         // auticko
+						i = (FileImageSource)ImageSource.FromFile("ico_car_black.png"); // auticko
 						break;
 
 					case TripState.SMS1sended:
-						i = (FileImageSource)ImageSource.FromFile("ico_sms1_black.png");         // smska
+						i = (FileImageSource)ImageSource.FromFile("ico_sms1_black.png"); // smska
 						break;
 
 					case TripState.SMS2sended:
-						i = (FileImageSource)ImageSource.FromFile("ico_sms2_black.png");         // smska
+						i = (FileImageSource)ImageSource.FromFile("ico_sms2_black.png"); // smska
 						break;
 
 					case TripState.Call:
-						i = (FileImageSource)ImageSource.FromFile("ico_phone_black.png");       // sluchatko
+						i = (FileImageSource)ImageSource.FromFile("ico_phone_black.png"); // sluchatko
 						break;
 
 					case TripState.Comleted:
-						i = (FileImageSource)ImageSource.FromFile("ico_thumbsup_black.png");    // palec nahoru
+						i = (FileImageSource)ImageSource.FromFile("ico_thumbsup_black.png"); // palec nahoru
 						break;
 
 					case TripState.Canceled:
-						i = (FileImageSource)ImageSource.FromFile("ico_cross_black.png");       // krizek
+						i = (FileImageSource)ImageSource.FromFile("ico_cross_black.png"); // krizek
 						break;
 
 					case TripState.NewWWW:
-						i = (FileImageSource)ImageSource.FromFile("ico_globe_black.png");       // globus
+						i = (FileImageSource)ImageSource.FromFile("ico_globe_black.png"); // globus
 						break;
 
 					default:
@@ -200,10 +204,10 @@ namespace TaxiDC2.ViewModels
 						: MinToDeadLine < 60
 							? (Color)Application.Current.Resources["Zelena"]
 							: (Color)Application.Current.Resources["Zluta2"];
-		
+
 		[DependsOn("TripState")]
 		public bool TimeVisible => Trip.TripState != TripState.Canceled && Trip.TripState != TripState.Comleted;
-		
+
 		public void RefreshTime()
 		{
 			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLine)));
@@ -221,7 +225,7 @@ namespace TaxiDC2.ViewModels
 		public async Task LoadData(Guid id)
 		{
 			var trip = await DataService.GetTripByIdAsync(id);
-			if ( trip != null)
+			if (trip != null)
 			{
 				Trip.AddressBoarding = trip.AddressBoarding;
 				Trip.AddressBoardingIsValid = trip.AddressBoardingIsValid;
@@ -270,7 +274,8 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private async Task SmsOpen()
 		{
-			await Shell.Current.GoToAsync($"{nameof(SmsSendView)}?IdTrip={Trip.IdTrip}&Phone={Uri.EscapeDataString(Trip.Customer.PhoneNumber)}");
+			await Shell.Current.GoToAsync(
+				$"{nameof(SmsSendView)}?IdTrip={Trip.IdTrip}&Phone={Uri.EscapeDataString(Trip.Customer.PhoneNumber)}");
 
 			if (Trip.TripState != TripState.SMS1sended)
 			{
@@ -438,5 +443,11 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		[RelayCommand]
+		private async Task CustomerEdit()
+		{
+			if (Trip.Customer != null)
+				await Shell.Current.GoToAsync($"{nameof(DetailZakaznik)}?id={Trip.Customer.IdCustomer}");
+		}
 	}
 }

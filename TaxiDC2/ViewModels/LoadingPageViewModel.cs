@@ -39,7 +39,8 @@ namespace TaxiDC2.ViewModels
 				}
 				else
 				{
-					await Shell.Current.GoToAsync($"///{nameof(SignInPage)}");
+					//await Shell.Current.GoToAsync($"///{nameof(SignInPage)}");
+					await Shell.Current.GoToAsync($"/{nameof(SignInPage)}");
 				}
 			}
 			else

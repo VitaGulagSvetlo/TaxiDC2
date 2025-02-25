@@ -56,14 +56,7 @@ namespace TaxiDC2.ViewModels
 		{
 			Driver[] drl = await _dataService.GetDriversAsync(true);
 			Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
-			if (driver != null)
-			{
-				_bs.Driver = driver;
-			}
-			else
-			{
-				_bs.Driver = null;
-			}
+			_bs.Driver = driver;
 		}
 
 	}

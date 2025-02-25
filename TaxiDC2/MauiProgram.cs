@@ -86,8 +86,8 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SignInViewModel>();
 			builder.Services.AddTransient<SignInPage>();
 
-			builder.Services.AddSingleton<LoadingPageViewModel>();
-			builder.Services.AddSingleton<LoadingPage>();
+			builder.Services.AddTransient<LoadingPageViewModel>();
+			builder.Services.AddTransient<LoadingPage>();
 
 			builder.Services.AddSingleton<AppShellViewModel>();
 			builder.Services.AddSingleton<AppShell>();
@@ -96,7 +96,6 @@ namespace TaxiDC2
             builder.Services.AddSingleton<IBussinessState,BussinessState>();
             builder.Services.AddSingleton<IDataService, DataService>();
 			builder.Services.AddSingleton<IApiProxy, ApiProxy>();
-
             builder.Services.AddSingleton<IBiometric>(BiometricAuthenticationService.Default);
 
 #if ANDROID
