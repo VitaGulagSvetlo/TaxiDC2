@@ -26,4 +26,5 @@
     <x:String x:Key="plus">&#x2b;</x:String>
     <x:String x:Key="bell">&#xf0f3;</x:String>
     <x:String x:Key="lightbulb">&#xf0eb;</x:String>
+    <x:String x:Key="shield">&#xf3ed;</x:String>
 </ResourceDictionary>

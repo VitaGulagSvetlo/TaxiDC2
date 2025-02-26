@@ -68,9 +68,10 @@
                                     </HorizontalStackLayout>
 
                                     <!-- Icons -->
-                                    <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalOptions="Center" HorizontalOptions="End">
-                                        <Image Source="{FontImageSource Glyph={StaticResource bell}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
-                                        <Image Source="{FontImageSource Glyph={StaticResource lightbulb}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
+                                    <StackLayout Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Orientation="Vertical" Spacing="10" VerticalOptions="Center" HorizontalOptions="End">
+                                        <Image Source="{FontImageSource Glyph={StaticResource lightbulb}, FontFamily=FAPro, Size=20, Color={Binding LightColor}}" />
+                                        <Image Source="{FontImageSource Glyph={StaticResource bell}, FontFamily=FAPro, Size=20, Color={Binding BellColor}}" />
+                                        <Image Source="{FontImageSource Glyph={StaticResource shield}, FontFamily=FAPro, Size=20, Color={Binding ShieldColor}}" />
                                     </StackLayout>
                                 </Grid>
                             </Frame>

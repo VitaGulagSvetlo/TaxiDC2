@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TaxiDC2.Models
 {
@@ -8,7 +9,7 @@ namespace TaxiDC2.Models
         private bool _admin;
         private bool _notificationEnable;
 
-        public Guid IdDriver { get; set; }
+		public Guid IdDriver { get; set; }
         [StringLength(50)]
         [Required]
         public string? FirstName { get; set; }
@@ -64,6 +65,15 @@ namespace TaxiDC2.Models
         }
 
         public string Email { get; set; }
-    }
+
+
+        
+        public Color LightColor => Active ? Colors.Green : Colors.SlateGrey;
+
+		public Color ShieldColor => IsAdmin ? Colors.Green : Colors.SlateGrey;
+
+		public Color BellColor => NotificationEnable?Colors.Green:Colors.SlateGrey;
+
+	}
 
 }
