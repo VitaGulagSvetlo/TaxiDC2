@@ -115,8 +115,14 @@
                         <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Start" AlignItems="Center">
                             <Button Text="5" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineSetCommand}" CommandParameter="5"/>
                             <Button Text="10" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineSetCommand}" CommandParameter="10"/>
+                            
                             <Button Text="15" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineSetCommand}" CommandParameter="15"/>
+                            <Button Text="20" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineSetCommand}" CommandParameter="20"/>
+                            <Button Text="25" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineSetCommand}" CommandParameter="25"/>
                             <Button Text="30" Style="{StaticResource TimeBtn}" Command="{Binding DeadlineSetCommand}" CommandParameter="30"/>
+                            <Button Style="{StaticResource TimeBtn}" x:Name="TimePickerButton" Clicked="OnTimePickerButtonClicked"
+                                    CornerRadius="5" FontSize="17" 
+                                    ImageSource="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=15, Color={StaticResource Bila}}"/>
                         </FlexLayout>
                     </VerticalStackLayout>
                 </Frame>
