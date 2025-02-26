@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header Section -->
-       
+
 
         <!-- Content Section -->
         <ScrollView Grid.Row="1">
@@ -42,6 +42,14 @@
                     <StackLayout Spacing="10">
                         <Label Text="SPZ:" Style="{StaticResource CustomLblO}"  />
                         <Entry  Placeholder="1AX 1234" Text="{Binding Car.Rz}" PlaceholderColor="{StaticResource NRph}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Active Switch -->
+                <Frame Style="{StaticResource CustomFrame}">
+                    <StackLayout Spacing="10">
+                        <Label Text="Aktivní:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
+                        <Switch IsToggled="{Binding Car.Active}" HorizontalOptions="Start" />
                     </StackLayout>
                 </Frame>
 

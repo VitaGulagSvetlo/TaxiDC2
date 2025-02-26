@@ -17,7 +17,10 @@ namespace TaxiDC2
 
 			_bussinessState = bussinessState;
 			_proxy = proxy;
+			BindingContext = Driver;
 		}
+
+		public Driver Driver => _bussinessState.Driver;
 
 		private void OnNewClicked(object sender, EventArgs e)
 		{

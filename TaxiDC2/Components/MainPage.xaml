@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:TaxiDC2.Models"
              x:Class="TaxiDC2.MainPage"
+             x:DataType="models:Driver"
              Title="TAXI DC 2">
 
     <ContentPage.Resources>
@@ -23,47 +25,49 @@
     </ContentPage.Resources>
 
     <Grid BackgroundColor="{StaticResource GridBG}">
-        <Grid.RowDefinitions>
-            <!-- První řádek zabere veškeré dostupné místo -->
-            <RowDefinition Height="*" />
-            <!-- Druhý řádek je pro status Label -->
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <!-- Kontejner pro tlačítka -->
-        <ScrollView>
-            <VerticalStackLayout
-            Grid.Row="0"
-            Spacing="10"
-            Padding="20"
-            HorizontalOptions="Fill"
-            VerticalOptions="Fill">
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Grid.Row="0" Spacing="10" Padding="20">
 
-            <Label
-                Text="TAXI DC"
-                SemanticProperties.HeadingLevel="Level1" 
-                FontSize="30"
-                Style="{StaticResource CustomLblO}"/>
-
-                <Button Text="Nová jízda" Clicked="OnNewClicked"   
+                    <Label
+                            Text="TAXI DC"
+                            SemanticProperties.HeadingLevel="Level1" 
+                            FontSize="30"
+                            Style="{StaticResource CustomLblO}"/>
+                    <Button Text="Nová jízda" Clicked="OnNewClicked"   
                   Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
-            <Button Text="Přehled jízd" Clicked="OnListClicked"   
+                    <Button Text="Přehled jízd" Clicked="OnListClicked"   
                    Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
-            <Button Text="Settings" Clicked="OnSetClicked"   
+                    <Button Text="Settings" Clicked="OnSetClicked"   
                    Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
-            <!--<Button Text="Login (dev test)" Clicked="OnLoginClicked"  
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource login}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
-            <Button Text="User info  (dev test)" Clicked="OnInfoClicked"  
-                   BorderColor="{StaticResource Oranzova}" ImageSource="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=24, Color={StaticResource ZlutaTmava}}"/>
-<Label x:Name="l1"></Label>
-            <Editor x:Name="editor" HorizontalOptions="Fill" MinimumHeightRequest="100" />-->
 
-        </VerticalStackLayout>
-        </ScrollView>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Frame Style="{StaticResource CustomFrame}" VerticalOptions="End" Grid.Row="1"  Margin="20">
+                <StackLayout Spacing="5">
+                    <Label Text="Aktivní řidič" Style="{StaticResource CustomLblO}" />
+                    <HorizontalStackLayout Spacing="5">
+                        <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                        <Label Text="{Binding FullName,FallbackValue='nepřiřazen'}" FontSize="18" TextColor="{StaticResource Bila}" Padding="5,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                        <Label Text="{Binding Car.FullName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0"/>
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </Frame>
+
         <!-- Label na spodku obrazovky -->
         <Label
-            Grid.Row="1"
-            Text="ver. 0.2 alfa"
+            Grid.Row="2"
+            Text="ver. 0.3 alfa"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="End"
             Padding="5"

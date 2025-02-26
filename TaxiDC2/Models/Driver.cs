@@ -66,14 +66,6 @@ namespace TaxiDC2.Models
 
         public string Email { get; set; }
 
-
-        
-        public Color LightColor => Active ? Colors.Green : Colors.SlateGrey;
-
-		public Color ShieldColor => IsAdmin ? Colors.Green : Colors.SlateGrey;
-
-		public Color BellColor => NotificationEnable?Colors.Green:Colors.SlateGrey;
-
 	}
 
 }

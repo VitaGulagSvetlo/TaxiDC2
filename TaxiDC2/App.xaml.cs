@@ -3,7 +3,6 @@ namespace TaxiDC2
 {
     public partial class App : Application
     {
-        public static List<Trip> Rides { get; set; } = new List<Trip>();
         public App( IServiceProvider serviceProvider)
         {
             //Register Syncfusion license https://help.syncfusion.com/common/essential-studio/licensing/how-to-generate
