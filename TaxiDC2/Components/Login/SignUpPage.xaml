@@ -29,7 +29,7 @@
 
         <Image Source="taxi.png" WidthRequest="100" HeightRequest="100"  VerticalOptions="Center" Margin="0,10,0,0"/>
         <Label 
-            Text="Prosíme, registrujte se"
+            Text="Registrujte se"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             FontSize="14"
@@ -82,7 +82,7 @@
                 </VerticalStackLayout>
             </StackLayout>
         </Frame>
-        <Button Command="{Binding SignUpCommand}" Style="{StaticResource CustomSettingsBtn}" Text="Přihlásit se" Margin="0,10"></Button>
+        <Button Command="{Binding SignUpCommand}" Style="{StaticResource CustomSettingsBtn}" Text="Registrovat se" Margin="0,10"></Button>
         <ActivityIndicator IsRunning="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
         <Label Text="{Binding Message}" IsVisible="{Binding IsMessageVisible}" TextColor="Red" HorizontalTextAlignment="Center" />
         <!--<Button Command="{Binding SignInGoogleCommand}" HorizontalOptions="Center" Text="G"></Button>-->

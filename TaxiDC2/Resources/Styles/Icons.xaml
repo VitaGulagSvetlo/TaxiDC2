@@ -24,4 +24,6 @@
     <x:String x:Key="edit">&#xf304;</x:String>
     <x:String x:Key="list">&#xf03a;</x:String>
     <x:String x:Key="plus">&#x2b;</x:String>
+    <x:String x:Key="bell">&#xf0f3;</x:String>
+    <x:String x:Key="lightbulb">&#xf0eb;</x:String>
 </ResourceDictionary>

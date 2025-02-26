@@ -34,10 +34,6 @@
                             <Entry Text="{Binding Driver.LastName}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
-                            <Label Text="Mobilní zařízení:" Style="{StaticResource CustomLblO}" />
-                            <Entry Text="{Binding Driver.MobileDeviceKey}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
-                        </VerticalStackLayout>
-                        <VerticalStackLayout>
                             <Label Text="Telefonní číslo:" Style="{StaticResource CustomLblO}" />
                             <Entry Text="{Binding Driver.PhoneNumber}" FontSize="16" TextColor="{StaticResource Bila}" HorizontalOptions="FillAndExpand" />
                         </VerticalStackLayout>
