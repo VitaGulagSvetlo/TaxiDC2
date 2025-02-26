@@ -104,31 +104,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	{
 		await RefreshData();
 	}
-
-	private async void OnItemSwipedLeft(TripListItemViewModel item)
-	{
-		if (item == null)
-			return;
-		await Shell.Current.GoToAsync($"{nameof(DetailJizda)}?id={item.Data.IdTrip}");
-	}
-
-	private async void OnItemSwipedRight(TripListItemViewModel item)
-	{
-		if (item == null)
-			return;
-		TripListItemViewModel i = Items.First(f => f.Data.IdTrip == item.Data.IdTrip);
-		if (i != null)
-			Items.Remove(i);
-	}
-
-	private void OnReset(TripListItemViewModel obj)
-	{
-		foreach (TripListItemViewModel it in Items)
-		{
-			it.Data.OrderTime = DateTime.Now.AddMinutes(-1);
-		}
-	}
-
+	
 	private void OnTimer(object state)
 	{
 		foreach (TripListItemViewModel item in Items)
@@ -154,6 +130,11 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	[RelayCommand]
 	private async Task Storno(Guid idTrip)
 	{
+		if (!await Shell.Current.DisplayAlert("STORNO", "Opravdu zrušit jízdu ?", "ANO","NE"))
+		{
+			return;
+		};
+
 		var ret = await DataService.ChangeTripStateAsync(idTrip, TripState.Canceled);
 		if (ret)
 		{

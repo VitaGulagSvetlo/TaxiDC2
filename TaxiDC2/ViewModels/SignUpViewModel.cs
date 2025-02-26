@@ -83,7 +83,7 @@ namespace TaxiDC2.ViewModels
 						{
 							await LoadDriver();
 							Shell.Current.FlyoutHeader = new FlyoutHeaderControl(_authClient);
-							await Shell.Current.GoToAsync($"///{nameof(SignInPage)}", false);
+							await Shell.Current.GoToAsync($"/{nameof(SignInPage)}", false);
 						}
 					}
 				}

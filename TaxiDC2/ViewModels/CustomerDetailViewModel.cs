@@ -28,7 +28,7 @@ namespace TaxiDC2.ViewModels
             bool ret = await DataService.SaveCustomerAsync(Customer);
             if (ret)
             {
-	            await Shell.Current.DisplayAlert("Zákazníci", "Zákazník uložen", "OK");
+	            //await Shell.Current.DisplayAlert("Zákazníci", "Zákazník uložen", "OK");
                 // OK
 				await Shell.Current.GoToAsync("..");
             }

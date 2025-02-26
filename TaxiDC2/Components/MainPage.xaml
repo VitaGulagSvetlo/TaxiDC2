@@ -52,14 +52,14 @@
 
             <Frame Style="{StaticResource CustomFrame}" VerticalOptions="End" Grid.Row="1"  Margin="20">
                 <StackLayout Spacing="5">
-                    <Label Text="Aktivní řidič" Style="{StaticResource CustomLblO}" />
+                    <Label Text="Aktivní řidič / auto" Style="{StaticResource CustomLblO}" />
                     <HorizontalStackLayout Spacing="5">
                         <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
                         <Label Text="{Binding FullName,FallbackValue='nepřiřazen'}" FontSize="18" TextColor="{StaticResource Bila}" Padding="5,0"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
                         <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                        <Label Text="{Binding Car.FullName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0"/>
+                        <Label Text="{Binding CarName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0"/>
                     </HorizontalStackLayout>
                 </StackLayout>
             </Frame>

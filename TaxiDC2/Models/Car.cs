@@ -19,7 +19,7 @@ namespace TaxiDC2.Models
         [Required]
         public string Color { get; set; }
 
-        public string FullName => $"{CarType} barva {Color} RZ : {Rz}";
+        public string FullName => $"{CarType} / {Color} / RZ: {Rz}";
 
         public bool Active { get; set; } = true;
     }

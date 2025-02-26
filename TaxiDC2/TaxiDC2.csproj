@@ -143,6 +143,12 @@
 	 </ItemGroup>
 	
 	 <ItemGroup>
+	   <MauiXaml Update="Components\AboutPage.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="Components\DetailZakaznik.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="Components\FlyoutHeaderControl.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
@@ -155,7 +161,13 @@
 	   <MauiXaml Update="Components\Login\SignInPage.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
+	   <MauiXaml Update="Components\MainPage.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="Components\SmsSendView.xaml">
+		   <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="Components\TripAlert.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="DetailZakaznik.xaml">
@@ -179,11 +191,14 @@
 	   <MauiXaml Update="Components\DetailRidic.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
+	   <MauiXaml Update="Resources\Styles\Colors.xaml">
+	     <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
 	   <MauiXaml Update="Resources\Styles\CustomColors.xaml">
-	     <Generator></Generator>
+		   <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Resources\Styles\CustomStyles.xaml">
-	     <Generator></Generator>
+		   <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Components\SeznamJizd.xaml">
 	     <Generator>MSBuild:Compile</Generator>
@@ -192,7 +207,10 @@
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Resources\Styles\Icons.xaml">
-	     <Generator></Generator>
+		   <Generator>MSBuild:Compile</Generator>
+	   </MauiXaml>
+	   <MauiXaml Update="Resources\Styles\Styles.xaml">
+	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	 </ItemGroup>
 	<!-- Build Properties must be defined within these property groups to ensure successful publishing

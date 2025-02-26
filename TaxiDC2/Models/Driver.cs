@@ -65,7 +65,7 @@ namespace TaxiDC2.Models
         }
 
         public string Email { get; set; }
-
+        public string CarName => Car?.FullName ?? "Není přiřazeno";
 	}
 
 }

@@ -57,6 +57,7 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private void DeadlineSet(string v)
 		{
+			CasNastupu = null;
 			if (int.TryParse(v, out int i))
 				DeadLine = i;
 		}

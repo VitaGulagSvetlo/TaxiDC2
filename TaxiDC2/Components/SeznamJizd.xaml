@@ -33,7 +33,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Avatar -->
-                <Frame Grid.Column="0" BackgroundColor="Purple" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent">
+                <Frame Grid.Column="0" BackgroundColor="{StaticResource GridBG}" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent">
                     <Label Text="{Binding DriverName}" Style="{StaticResource FS-14}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ProfileOpenCommand}" />
@@ -48,7 +48,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" VerticalOptions="Center" FontSize="16" Text="Zobrazit pouze mé jízdy" />
+                    <Label Grid.Column="0" VerticalOptions="Center" FontSize="16" Text="Skrýt cizí jízdy" Margin="5,0"/>
                     <buttons:SfSwitch Grid.Column="1" VerticalOptions="Center" StateChanged="SfSwitch_OnStateChanged"/>
                 </Grid>
             </Grid>
@@ -121,7 +121,7 @@
 
                                     <!-- Bottom Section (Addresses) -->
                                     <StackLayout Grid.Row="2" Grid.Column="0" Padding="5">
-                                        <Frame BackgroundColor="Purple" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent">
+                                        <Frame BackgroundColor="{StaticResource GridBG}" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent" Margin="0,2">
                                             <Label Style="{StaticResource FS-14}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Data.Driver.Inicials,FallbackValue=''}" />
                                         </Frame>
                                     </StackLayout>
@@ -174,6 +174,7 @@
                     </DataTemplate>
                 </syncfusionList:SfListView.ItemTemplate>
             </syncfusionList:SfListView>
+
             <Frame Grid.RowSpan="2"
                    Style="{StaticResource FloatingAdd}"
                    >
