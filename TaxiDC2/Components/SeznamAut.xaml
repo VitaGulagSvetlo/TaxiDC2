@@ -17,13 +17,13 @@
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-        
+
             <RowDefinition Height="*" />
-            
+
         </Grid.RowDefinitions>
 
-       
-        
+
+
 
         <!-- Content Section -->
         <RefreshView Grid.Row="1" Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
@@ -42,9 +42,8 @@
                             </SwipeView.RightItems>
                             <!-- Item content -->
                             <Frame Style="{StaticResource CustomFrame}">
-                                <Grid ColumnSpacing="5">
+                                <Grid >
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
@@ -52,22 +51,44 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                   
-                                    <!-- Car Type -->
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Typ:" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding CarType}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
+                                    <!-- Ikona v pravém horním rohu -->
+                                    <Image Grid.Row="0" Grid.Column="2"
+               Source="{FontImageSource Glyph={StaticResource lightbulb}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}"
+               HorizontalOptions="End" VerticalOptions="Start" />
 
-                                    <!-- Color -->
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Barva:" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Color}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
+                                    <!-- Typ vozidla -->
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Typ:" 
+               Style="{StaticResource FS-16}" FontAttributes="Bold" 
+               TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center"/>
 
-                                    <!-- RZ -->
-                                    <Label Grid.Row="2" Grid.Column="0" Text="SPZ:" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
-                                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Rz}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding CarType}" 
+               Style="{StaticResource FS-16}" FontAttributes="Bold" 
+               TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center"/>
+
+                                    <!-- Barva -->
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Barva:" 
+               Style="{StaticResource FS-16}" FontAttributes="Bold" 
+               TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Color}" 
+               Style="{StaticResource FS-16}" FontAttributes="Bold" 
+               TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center"/>
+
+                                    <!-- SPZ -->
+                                    <Label Grid.Row="2" Grid.Column="0" Text="SPZ:" 
+               Style="{StaticResource FS-16}" FontAttributes="Bold" 
+               TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Rz}" 
+               Style="{StaticResource FS-16}" FontAttributes="Bold" 
+               TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center"/>
                                 </Grid>
                             </Frame>
+
+
                         </SwipeView>
                     </DataTemplate>
                 </syncfusionList:SfListView.ItemTemplate>

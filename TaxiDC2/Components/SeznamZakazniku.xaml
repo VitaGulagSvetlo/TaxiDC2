@@ -19,11 +19,8 @@
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <!-- Gradient Strip -->
                 <RowDefinition Height="Auto" />
-                <!-- Search Bar -->
                 <RowDefinition Height="*" />
-                <!-- List -->
             </Grid.RowDefinitions>
 
             <!-- Search Bar Strip -->
@@ -44,11 +41,10 @@
             </Grid>
 
             <!-- List -->
-            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="2" ItemSize="120" ItemSpacing="5" ItemsSource="{Binding Items}">
+            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="2" ItemSize="100" ItemSpacing="5" ItemsSource="{Binding Items}">
                 <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Customer">
                         <SwipeView>
-                            <!-- Define swipe actions -->
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Execute">
                                     <SwipeItem    IconImageSource="{FontImageSource Glyph={StaticResource info}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
@@ -56,7 +52,6 @@
                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CustomerListViewModel}}, Path=ItemSelectedCommand}" CommandParameter="{Binding IdCustomer}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <!-- Item content -->
                             <Frame Style="{StaticResource CustomFrame}">
                                 <Grid HorizontalOptions="FillAndExpand">
                                     <Grid.RowDefinitions>
@@ -65,21 +60,21 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
-                                        <!-- Pravá strana pro ikonu a SfCheckBox -->
                                     </Grid.ColumnDefinitions>
-
-                                    <!-- Hlavní obsah na levé straně -->
                                     <StackLayout Grid.Column="0" Spacing="5" Padding="0">
                                         <HorizontalStackLayout HorizontalOptions="Start" Spacing="5">
-                                            <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                                            <Label Text="{Binding PhoneNumber}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+                                            <Label Text="Telefonní číslo" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Oranzova}" VerticalOptions="Center" />
+                                            <HorizontalStackLayout>
+                                                <Label Text="{Binding PhoneNumber}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
+
+                                            </HorizontalStackLayout>
                                         </HorizontalStackLayout>
                                         <HorizontalStackLayout HorizontalOptions="Start" Spacing="5">
-                                            <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                                            <Label Text="Jméno" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Oranzova}" VerticalOptions="Center" />
                                             <Label Text="{Binding Name}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
                                         </HorizontalStackLayout>
-                                        <HorizontalStackLayout HorizontalOptions="Start" Spacing="5">
-                                            <inputs:SfRating x:Name="CustomerRating" IsReadOnly="True" ItemCount="5" Value="3" Margin="5" ItemSize="25">
+                                        <HorizontalStackLayout HorizontalOptions="Start">
+                                            <inputs:SfRating x:Name="CustomerRating" IsReadOnly="True" ItemCount="5" Value="3"  ItemSize="20">
                                                 <inputs:SfRating.RatingSettings>
                                                     <inputs:RatingSettings RatedFill="{StaticResource CustomOrangeText}" RatedStroke="{StaticResource TP}" />
                                                 </inputs:SfRating.RatingSettings>
@@ -87,11 +82,11 @@
                                         </HorizontalStackLayout>
                                     </StackLayout>
 
-                                    <!-- Ikona a SfCheckBox na pravé straně -->
-                                    <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Margin="10">
-                                        <Image Source="{FontImageSource Glyph={StaticResource banned}, FontFamily=FAPro, Size=20, Color={StaticResource Cervena}}" />
+                                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" Margin="10">
+                                        <Image HorizontalOptions="End" Source="{FontImageSource Glyph={StaticResource banned}, FontFamily=FAPro, Size=20, Color={StaticResource Cervena}}" />
+
                                         <!--<buttons:SfCheckBox IsChecked="{Binding Rejected}" CornerRadius="5.0" IsEnabled="False" />-->
-                                    </HorizontalStackLayout>
+                                    </VerticalStackLayout>
                                 </Grid>
                             </Frame>
                         </SwipeView>
