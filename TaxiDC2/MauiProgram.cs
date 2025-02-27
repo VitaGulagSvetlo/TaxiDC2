@@ -70,6 +70,7 @@ namespace TaxiDC2
 			builder.Services.AddTransient<LoadingPageViewModel>();
 
 			// viewmodels
+			builder.Services.AddTransient<MainViewModel>(); 
 			builder.Services.AddTransient<ConfigViewModel>();
 			builder.Services.AddTransient<TripDetailViewModel>();
 			builder.Services.AddTransient<DriverDetailViewModel>();

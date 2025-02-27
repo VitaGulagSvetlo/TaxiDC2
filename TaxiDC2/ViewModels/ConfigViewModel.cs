@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace TaxiDC2.ViewModels
 {
-    public class ConfigViewModel : INotifyPropertyChanged
+	public class ConfigViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private IBussinessState _bs;

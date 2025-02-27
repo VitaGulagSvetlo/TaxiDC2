@@ -6,9 +6,11 @@ namespace TaxiDC2.ViewModels
 {
 	public partial class DriverDetailViewModel : BaseViewModel
 	{
+		private readonly IBussinessState _bs;
 
-		public DriverDetailViewModel(IDataService dataService) : base(dataService)
+		public DriverDetailViewModel(IDataService dataService, IBussinessState _bs) : base(dataService)
 		{
+			this._bs = _bs;
 			Task.Run(async () => await LoadData()).Wait(); // naceni dat do listu aut
 		}
 
@@ -37,6 +39,15 @@ namespace TaxiDC2.ViewModels
 			if (ret)
 			{
 				//await Shell.Current.DisplayAlert("Řidiči", "Řidič uložen", "OK");
+
+				if (Driver.IdDriver == _bs.ActiveUserId) // updatuji sam sebe ?
+				{
+					//v tom pripade reloadnu data
+					_bs.ActiveUser = Driver;
+					await Shell.Current.GoToAsync($"..");
+					return;
+				}
+
 				await Shell.Current.GoToAsync($"//{nameof(SeznamRidicu)}");
 			}
 			else

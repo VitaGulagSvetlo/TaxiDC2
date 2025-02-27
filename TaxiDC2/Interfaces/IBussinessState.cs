@@ -7,7 +7,7 @@ public interface IBussinessState
 {
 	string DeviceHash { get; }
 	string DeviceKey { get; set; }
-	Driver ActiveUser { get; set; }
+	Driver? ActiveUser { get; set; }
 	Guid? ActiveUserId { get; }
 	public bool IsLogged { get; }
 	public bool IsActive { get; }
@@ -15,6 +15,7 @@ public interface IBussinessState
 	string ServerUrl { get; set; }
 	public bool TripFilter { get; set; }
 	public string AuthClient { get; }
+	public bool IsCarAssigned { get; }
 
 	void UpdateDeviceKey(string eToken);
 }

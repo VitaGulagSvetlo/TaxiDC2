@@ -69,9 +69,7 @@
 
                                     <Label Grid.Row="3" Grid.Column="0" Text="Vozidlo:" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource CustomOrangeText}" VerticalTextAlignment="Center" />
                                     <HorizontalStackLayout Grid.Row="3" Grid.Column="1" Spacing="5">
-                                        <Label Text="{Binding Car.Rz,FallbackValue=''}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Bila}" />
-                                        <Label Text="{Binding Car.Color,FallbackValue=''}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Bila}" />
-                                        <Label Text="{Binding Car.CarType,FallbackValue=''}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Bila}" />
+                                        <Label Text="{Binding CarName,FallbackValue=''}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Bila}" />
                                     </HorizontalStackLayout>
 
                                     <!-- Icons -->

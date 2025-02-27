@@ -35,6 +35,7 @@ namespace TaxiDC2.Models
 
 		public string Inicials => $"{FirstName?.Substring(0, 1)}{LastName?.Substring(0, 1)}".ToUpper();
 
+		public string CarName => Car?.FullName ?? String.Empty;
     }
 
 }

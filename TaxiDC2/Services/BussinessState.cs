@@ -13,6 +13,7 @@ namespace TaxiDC2.Services
 		}
 
 		public string AuthClient => _authClient?.User?.Info?.DisplayName;
+		public bool IsCarAssigned => ActiveUser?.Car != null;
 
 		private static string _deviceKey;
 
@@ -29,7 +30,7 @@ namespace TaxiDC2.Services
 		// je uzivatel povolen ?
 		public bool IsActive => ActiveUser?.Active ?? false;
 
-		public Driver ActiveUser { get; set; }
+		public Driver? ActiveUser { get; set; }
 
 		/// <summary>
 		/// ID aktualniho usera
