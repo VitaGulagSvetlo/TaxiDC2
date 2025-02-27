@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TaxiDC2.ViewModels
 {

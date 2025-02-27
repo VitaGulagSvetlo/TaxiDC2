@@ -1,4 +1,5 @@
-﻿global using PropertyChanged;
+﻿// Globalni usingy pro vsechny soubory v projektu
+
 global using TaxiDC2.Models;
 global using TaxiDC2.Models.Enums;
 global using TaxiDC2.Services;

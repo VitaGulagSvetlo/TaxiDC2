@@ -2,6 +2,9 @@
 
 namespace TaxiDC2.Converters;
 
+/// <summary>
+/// Konvertuje bool hodnotu na barvu podle stavu
+/// </summary>
 public class BoolToColorConverter : IValueConverter
 {
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

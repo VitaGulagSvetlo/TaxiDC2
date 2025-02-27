@@ -1,7 +1,9 @@
-﻿namespace TaxiDC2.Interfaces
+﻿namespace TaxiDC2.Interfaces;
+
+/// <summary>
+/// Prace s logem hovoru v telefonu
+/// </summary>
+public interface ICallLogService
 {
-    public interface ICallLogService
-    {
-	    Task<List<CallLogEntry>> GetCallLogEntriesAsync();
-    }
+	Task<List<CallLogEntry>> GetCallLogEntriesAsync();
 }

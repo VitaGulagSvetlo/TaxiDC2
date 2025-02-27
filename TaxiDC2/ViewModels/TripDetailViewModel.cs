@@ -57,7 +57,7 @@ namespace TaxiDC2.ViewModels
 		//[DependsOn("Memo")] public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Trip.Memo);
 		public bool CustomerMemoVisible => !string.IsNullOrWhiteSpace(Trip.Customer?.Memo);
 
-		public Boolean IsOwner => Trip.Driver != null && Trip.Driver.IdDriver == _bs.ActiveUserId;
+		public bool IsOwner => Trip.Driver != null && Trip.Driver.IdDriver == _bs.ActiveUserId;
 
 		/// <summary>
 		/// Adresy jsou validni pro hledani trasy

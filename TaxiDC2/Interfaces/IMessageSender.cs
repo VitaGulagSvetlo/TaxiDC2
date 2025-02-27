@@ -1,6 +1,5 @@
-﻿namespace TaxiDC2.Interfaces
+﻿namespace TaxiDC2.Interfaces;
+
+public interface IMessageSender
 {
-    public interface IMessageSender
-    {
-    }
 }

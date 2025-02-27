@@ -2,6 +2,9 @@
 
 namespace TaxiDC2.Converters;
 
+/// <summary>
+/// Konvertuje stav jizdy na textovou reprezentaci
+/// </summary>
 public class StateToTextConverter : IValueConverter
 {
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

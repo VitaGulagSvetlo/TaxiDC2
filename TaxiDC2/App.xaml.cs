@@ -1,5 +1,4 @@
-﻿using TaxiDC2.Models;
-namespace TaxiDC2
+﻿namespace TaxiDC2
 {
     public partial class App : Application
     {

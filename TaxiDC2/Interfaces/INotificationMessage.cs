@@ -1,7 +1,6 @@
-﻿namespace TaxiDC2.Interfaces
+﻿namespace TaxiDC2.Interfaces;
+
+public interface INotificationMessage
 {
-    public interface INotificationMessage
-    {
-        string MessageData { get; set; }
-    }
+	string MessageData { get; set; }
 }

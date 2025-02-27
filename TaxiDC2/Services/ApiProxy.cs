@@ -2,7 +2,7 @@
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using TaxiDC2.Interfaces;
+
 // ReSharper disable UnusedParameter.Local
 
 namespace TaxiDC2.Services
@@ -825,7 +825,7 @@ namespace TaxiDC2.Services
             }
         }
 
-        public async Task<ServiceState<Lokace[]>> Geocode(String text)
+        public async Task<ServiceState<Lokace[]>> Geocode(string text)
         {
             try
             {

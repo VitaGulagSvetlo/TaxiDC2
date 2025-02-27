@@ -59,7 +59,7 @@
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="5">
                         <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                        <Label Text="{Binding CarName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0"/>
+                        <Label Text="{Binding FullName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0"/>
                     </HorizontalStackLayout>
                 </StackLayout>
             </Frame>

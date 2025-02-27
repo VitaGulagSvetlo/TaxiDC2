@@ -1,6 +1,4 @@
-﻿using Android.Content.PM;
-using Android.Provider;
-using TaxiDC2.Interfaces;
+﻿using Android.Provider;
 using Application = Android.App.Application;
 
 namespace TaxiDC2.Platforms.Android;

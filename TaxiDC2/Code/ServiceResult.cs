@@ -1,9 +1,5 @@
-﻿// ------------------------------------------
-// Project : AUREL AIS
-// Module : Core
-// ------------------------------------------
-// Copyright (c) 2020 Advisor Software s.r.o
-// ------------------------------------------
+﻿// Service state class for returning state of service operations
+// Factory methods for creating state objects
 
 using System.Diagnostics;
 

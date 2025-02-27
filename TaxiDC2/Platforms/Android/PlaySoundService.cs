@@ -1,7 +1,4 @@
-﻿using Android.App;
-using Android.Media;
-using Android.Content;
-using TaxiDC2.Interfaces;
+﻿using Android.Media;
 using Application = Android.App.Application;
 
 

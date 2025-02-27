@@ -1,10 +1,10 @@
-﻿
+﻿namespace TaxiDC2.Interfaces;
 
-namespace TaxiDC2.Interfaces
+/// <summary>
+/// Interface pro prehravani zvuku
+/// </summary>
+public interface IPlaySoundService
 {
-    public interface IPlaySoundService
-    {
-        void PlaySystemSound(string soundName);
+	void PlaySystemSound(string soundName);
 
-}
 }

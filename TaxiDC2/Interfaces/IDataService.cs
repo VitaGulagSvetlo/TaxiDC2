@@ -1,5 +1,8 @@
 ﻿namespace TaxiDC2.Interfaces;
 
+/// <summary>
+/// Rozhrani pro praci s daty
+/// </summary>
 public interface IDataService
 {
 	Task<Car> GetCarByIdAsync(Guid carId);

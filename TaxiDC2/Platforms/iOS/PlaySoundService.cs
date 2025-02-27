@@ -1,7 +1,5 @@
 ﻿
 using AudioToolbox;
-using Foundation;
-using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.Platforms.iOS;
 

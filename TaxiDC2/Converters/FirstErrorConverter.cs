@@ -1,28 +1,30 @@
 ﻿using System.Collections;
 using System.Globalization;
 
-namespace TaxiDC2.Converters
+namespace TaxiDC2.Converters;
+
+/// <summary>
+/// Vraci prvni chybu z kolekce chyb
+/// </summary>
+public class FirstErrorConverter : IValueConverter
 {
-	public class FirstErrorConverter : IValueConverter
+	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 	{
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		if (value is IEnumerable errors)
 		{
-			if (value is IEnumerable errors)
+			foreach (var error in errors)
 			{
-				foreach (var error in errors)
+				if (error != null)
 				{
-					if (error != null)
-					{
-						return error.ToString();
-					}
+					return error.ToString();
 				}
 			}
-			return string.Empty;
 		}
+		return string.Empty;
+	}
 
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			throw new NotImplementedException();
-		}
+	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+	{
+		throw new NotImplementedException();
 	}
 }

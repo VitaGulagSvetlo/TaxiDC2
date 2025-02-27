@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
 
@@ -58,7 +57,7 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private async Task SignUp()
 		{
-			Message = String.Empty;
+			Message = string.Empty;
 
 			ValidateAllProperties();
 			if (!HasErrors)

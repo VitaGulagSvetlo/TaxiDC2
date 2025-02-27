@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TaxiDC2.Models
 {
-    public partial class Car : BaseModel
+    public class Car : BaseModel
     {
         public Guid IdCar { get; set; }
 

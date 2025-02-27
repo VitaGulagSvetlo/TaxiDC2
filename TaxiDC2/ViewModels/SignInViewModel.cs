@@ -46,7 +46,7 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private async Task SignIn()
 		{
-			Message = String.Empty;
+			Message = string.Empty;
 
 			if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
 			{

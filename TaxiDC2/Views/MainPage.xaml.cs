@@ -1,6 +1,4 @@
 ﻿
-using TaxiDC2.Interfaces;
-
 namespace TaxiDC2
 {
 	public partial class MainPage : ContentPage

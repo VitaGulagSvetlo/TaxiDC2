@@ -3,9 +3,6 @@
 	public class CallLogEntry
 	{
 		public string PhoneNumber { get; set; }
-		/// <summary>
-		/// Android.Provider.CallLog.Calls
-		/// </summary>
 		public int CallType { get; set; } 
 		public DateTime CallDate { get; set; }
 		public int Duration { get; set; }

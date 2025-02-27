@@ -149,7 +149,7 @@
 	   <MauiXaml Update="Views\DetailZakaznik.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
-	   <MauiXaml Update="Views\FlyoutHeaderControl.xaml">
+	   <MauiXaml Update="Views\Controls\FlyoutHeaderControl.xaml">
 	     <Generator>MSBuild:Compile</Generator>
 	   </MauiXaml>
 	   <MauiXaml Update="Views\Login\LoadingPage.xaml">

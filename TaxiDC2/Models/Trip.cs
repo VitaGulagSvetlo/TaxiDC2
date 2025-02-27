@@ -29,16 +29,16 @@ namespace TaxiDC2.Models
         public bool AddressExitIsValid { get; set; }
 
         [StringLength(20)]
-        public string AddressBoardingLocX { get; set; } = String.Empty;
+        public string AddressBoardingLocX { get; set; } = string.Empty;
 
         [StringLength(20)]
-        public string AddressBoardingLocY { get; set; } = String.Empty;
+        public string AddressBoardingLocY { get; set; } = string.Empty;
 
         [StringLength(20)]
-        public string AddressExitLocX { get; set; } = String.Empty;
+        public string AddressExitLocX { get; set; } = string.Empty;
 
         [StringLength(20)]
-        public string AddressExitLocY { get; set; } = String.Empty;
+        public string AddressExitLocY { get; set; } = string.Empty;
 
         public List<Log> Logs { get; set; } = new List<Log>();
     }

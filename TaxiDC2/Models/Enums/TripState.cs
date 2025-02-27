@@ -14,13 +14,4 @@
         NewWWW = 201,
         Canceled = 999
     }
-
-    public enum MessageType
-    {
-        CHT,
-        NEW,
-        ACC,
-        FWD,
-        REJ
-    }
 }

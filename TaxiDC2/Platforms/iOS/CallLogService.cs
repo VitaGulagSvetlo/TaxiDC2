@@ -1,7 +1,5 @@
 ﻿
 
-using TaxiDC2.Interfaces;
-
 namespace TaxiDC2.Platforms.iOS;
 
 public class CallLogService : ICallLogService
