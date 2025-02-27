@@ -181,9 +181,9 @@
                 </syncfusionList:SfListView.ItemTemplate>
             </syncfusionList:SfListView>
 
-            <Frame Grid.RowSpan="2"
+            <!--<Frame Grid.Row="0" Grid.RowSpan="2"
                    Style="{StaticResource FloatingAdd}"
-                   >
+            >
                 <Image Source="{FontImageSource Glyph={StaticResource plus}, FontFamily=FAPro, Size=35, Color=White}"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
@@ -191,7 +191,7 @@
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding TripAddCommand}" />
                 </Frame.GestureRecognizers>
-            </Frame>
+            </Frame>-->
         </Grid>
     </RefreshView>
 </ContentPage>
