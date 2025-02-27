@@ -5,30 +5,30 @@
     [QueryProperty(nameof(Phone), nameof(Phone))]
     public partial class SmsSendView : ContentPage
     {
-		public SmsSendView(ViewModels.SmsViewModel vm)
+		public SmsSendView(ViewModels.SmsViewModel model)
 		{
 			InitializeComponent();
-			BindingContext = _viewModel = vm;
+			BindingContext = _model = model;
 		}
         
-		readonly ViewModels.SmsViewModel _viewModel;
+		readonly ViewModels.SmsViewModel _model;
 
         public string IdTrip
         {
-            get => _viewModel.IdTrip;
+            get => _model.IdTrip;
             set
             {
-                _viewModel.IdTrip = _viewModel.IdTrip;
+                _model.IdTrip = _model.IdTrip;
                 OnPropertyChanged();
             }
         }
 
         public string Phone
         {
-            get => _viewModel.PhoneNumber;
+            get => _model.PhoneNumber;
             set
             {
-                _viewModel.PhoneNumber = Uri.UnescapeDataString(value ?? string.Empty); 
+                _model.PhoneNumber = Uri.UnescapeDataString(value ?? string.Empty); 
                 OnPropertyChanged();
             }
         }
@@ -36,19 +36,18 @@
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _viewModel.OnAppearing();
+            _model.OnAppearing();
         }
 
         private async void OnSwipe(object sender, SwipedEventArgs e)
         {
-            await Shell.Current.GoToAsync($"///{nameof(DetailJizda)}?id={IdTrip}");
+            await Shell.Current.GoToAsync($"..");
         }
 
         protected override bool OnBackButtonPressed()
         {
             Shell.Current.GoToAsync($"..");
             return true;
-            //            return base.OnBackButtonPressed();
         }
     }
 }

@@ -6,7 +6,6 @@ namespace TaxiDC2
 	public partial class MainPage : ContentPage
 	{
 		private readonly IBussinessState _bussinessState;
-		private readonly IApiProxy _proxy;
 		private string? _currentAccessToken;
 
 		public MainPage(
@@ -16,11 +15,10 @@ namespace TaxiDC2
 			InitializeComponent();
 
 			_bussinessState = bussinessState;
-			_proxy = proxy;
 			BindingContext = Driver;
 		}
 
-		public Driver Driver => _bussinessState.Driver;
+		public Driver Driver => _bussinessState.ActiveUser;
 
 		private void OnNewClicked(object sender, EventArgs e)
 		{

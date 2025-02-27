@@ -77,7 +77,7 @@
                         <Label Text="Vyberte aktivní auto:" Style="{StaticResource CustomLblO}" />
                         <inputs:SfComboBox x:Name="CarSelector" HorizontalOptions="CenterAndExpand"
                                            DisplayMemberPath="FullName"
-                                           SelectedItem="{Binding SelectedCar,Mode=TwoWay}"
+                                           SelectedItem="{Binding Driver.Car,Mode=TwoWay}"
                                            ItemsSource="{Binding CarsList}">
                             <inputs:SfComboBox.ItemTemplate>
                                 <DataTemplate x:DataType="models:Car">

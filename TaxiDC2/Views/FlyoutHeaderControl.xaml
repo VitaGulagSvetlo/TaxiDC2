@@ -4,9 +4,15 @@
              x:Class="TaxiDC2.Components.FlyoutHeaderControl"
              Padding="20">
     <Frame BackgroundColor="{StaticResource Gray300}" Padding="2">
+        <VerticalStackLayout>
+            <HorizontalStackLayout IsVisible="False">
+                <Image Source="ico_user_yellow.png" WidthRequest="30" HeightRequest="30"  VerticalOptions="Center"/>
+                <Label x:Name="lblUser" FontSize="14" TextColor="{StaticResource Oranzova}" VerticalOptions="Center"></Label>
+            </HorizontalStackLayout>
         <HorizontalStackLayout>
             <Image Source="phone_icon.png" WidthRequest="30" HeightRequest="30"  VerticalOptions="Center"/>
-            <Label x:Name="lblUserEmail" FontSize="14" TextColor="BlueViolet" VerticalOptions="Center"></Label>
+                <Label x:Name="lblUserEmail" FontSize="14" TextColor="{StaticResource C1Color}" VerticalOptions="Center"></Label>
         </HorizontalStackLayout>
+        </VerticalStackLayout>
     </Frame>
 </StackLayout>

@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {

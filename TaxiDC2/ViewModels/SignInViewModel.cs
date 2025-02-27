@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
-using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
@@ -94,7 +93,7 @@ namespace TaxiDC2.ViewModels
 		{
 			Driver[] drl = await DataService.GetDriversAsync(true);
 			Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
-			_bs.Driver = driver;
+			_bs.ActiveUser = driver;
 		}
 
 	}

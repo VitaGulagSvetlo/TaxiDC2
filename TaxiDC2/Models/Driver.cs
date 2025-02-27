@@ -45,9 +45,7 @@ namespace TaxiDC2.Models
                 _notificationEnable = value;
             }
         }
-
-        public Guid? AssignedCar { get; set; }
-
+        
         public Car? Car { get; set; }
 
         public string FullName => $"{LastName} {FirstName}";

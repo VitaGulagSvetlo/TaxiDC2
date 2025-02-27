@@ -44,7 +44,7 @@
                   Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
                     <Button Text="Přehled jízd" Clicked="OnListClicked"   
                    Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
-                    <Button Text="Settings" Clicked="OnSetClicked"   
+                    <Button Text="Nastavení" Clicked="OnSetClicked"   
                    Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
 
                 </VerticalStackLayout>

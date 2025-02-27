@@ -2,12 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaxiDC2.DetailJizda"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
+             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              Title="Detail jízdy"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
-             xmlns:inputs="http://schemas.syncfusion.com/maui"
+             xmlns:converters="clr-namespace:TaxiDC2.Converters"
              BackgroundColor="{StaticResource GridBG}"
              x:DataType="vm:TripDetailViewModel"
              >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StateToTextConverter x:Key="StateToTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+<VerticalStackLayout>
 
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
@@ -27,7 +36,10 @@
                     <GradientStop Color="{Binding StateColor}" Offset="1.1" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <Label HorizontalOptions="Center" Text="{Binding Trip.TripState}" FontSize="20" FontAttributes="Bold" TextColor="{Binding StateTextColor}" VerticalOptions="Center" />
+            <HorizontalStackLayout>
+                <Image Source="{Binding StateImage}" Margin="10,0" WidthRequest="20" HeightRequest="20"></Image>
+                <Label HorizontalOptions="Center" Text="{Binding Trip.TripState,Converter={StaticResource StateToTextConverter}}" FontSize="20" FontAttributes="Bold" TextColor="{Binding StateTextColor}" VerticalOptions="Center" />
+            </HorizontalStackLayout>
         </Grid>
 
         <!-- HLAVNÍ OBSAH (SCROLL) -->
@@ -156,8 +168,9 @@
             </Grid.RowDefinitions>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Style="{StaticResource RideDetailBtn}" Text="Potvrdit WWW" Command="{Binding ConCommand}" IsVisible="{Binding BtnConVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Potvrdit WWW" Command="{Binding AcceptWWWCommand}" IsVisible="{Binding BtnConVisibility}" />
                 <Button Style="{StaticResource RideDetailBtn}" Text="Převzít" Command="{Binding AccCommand}" IsVisible="{Binding BtnAccVisibility}" />
+                <Button Style="{StaticResource RideDetailBtn}" Text="Předat >" Command="{Binding ForwardCommand}" IsVisible="{Binding BtnForwardVisibility}" />
                 <Button Style="{StaticResource RideDetailBtn}" Text="Odmítnout" Command="{Binding RejCommand}" IsVisible="{Binding BtnRejectVisibility}" />
                 <Button Style="{StaticResource RideDetailBtn}" Text="SMS" Command="{Binding SmsOpenCommand}" IsVisible="{Binding BtnSmsVisibility}" />
                 <Button Style="{StaticResource RideDetailBtn}" Text="Zavolat" Command="{Binding CallCommand}" IsVisible="{Binding BtnCallVisibility}" />
@@ -169,5 +182,26 @@
                 <Button Style="{StaticResource RideCompleteBtn}" Text="Hotovo" Command="{Binding CompletedCommand}" IsVisible="{Binding BtnCompleteVisibility}"/>
             </StackLayout>
         </Grid>
+
     </Grid>
+    <!-- POPUP pro výběr ridice -->
+    <popup:SfPopup IsOpen="{Binding PickerVisible}" HeaderTitle="Vyber řidiče" HeightRequest="400">
+        <popup:SfPopup.ContentTemplate>
+            <DataTemplate>
+                <picker:SfPicker x:Name="picker"
+                                 TextDisplayMode="FadeAndShrink"
+                                 AcceptCommand="{Binding PickerAcceptCommand}"
+                                 DeclineCommand="{Binding PickerCancelCommand}">
+                    <picker:SfPicker.Columns>
+                        <picker:PickerColumn ItemsSource="{Binding ListRidicu}" SelectedItem="{Binding SelectedDriver ,Mode=TwoWay}" DisplayMemberPath="FullName" />
+                    </picker:SfPicker.Columns>
+                    <picker:SfPicker.FooterView>
+                        <picker:PickerFooterView ShowOkButton="True" Height="40" />
+                    </picker:SfPicker.FooterView>
+                </picker:SfPicker>
+            </DataTemplate>
+        </popup:SfPopup.ContentTemplate>
+    </popup:SfPopup>
+    <!-- POPUP pro výběr ridice -->
+</VerticalStackLayout>
 </ContentPage>

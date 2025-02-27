@@ -3,7 +3,6 @@ using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
-using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels;
 
@@ -21,6 +20,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	{
 		_bs = bs;
 		_soundService = soundService;
+		ListMode = _bs.TripFilter;
 
 		timer = new Timer(OnTimer, null, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(15));
 
@@ -37,7 +37,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		{
 			// Predani jizdy na ridice
 			IDictionary<string, Guid> dd = JsonConvert.DeserializeObject<IDictionary<string, Guid>>(md.data);
-			if (dd != null && dd["driver"] == _bs.DriverId)
+			if (dd != null && dd["driver"] == _bs.ActiveUserId)
 			{
 				string t = dd["trip"].ToString();
 				// jsem prijemce 
@@ -62,9 +62,9 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	/// Nastavuje list na vsechno 0 nebo privatni { jen moje} 1
 	/// </summary>
 	[ObservableProperty]
-	private int _listMode = 0;
+	private bool _listMode ;
 
-	public string DriverName => $"{_bs?.Driver?.Inicials ?? "XX"}";
+	public string DriverName => $"{_bs?.ActiveUser?.Inicials ?? "##"}";
 
 	public void OnAppearing()
 	{
@@ -77,10 +77,10 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		{
 			Items.Clear();
 			IEnumerable<TripListItemViewModel> l = (await DataService.GetTripAsync(true)).Select(TripListItemViewModel.FromTrip);
-			if (ListMode != 0) // jen moje
+			if (ListMode) // jen moje
 				l = l.Where(w =>
 					w.Data.TripState is (TripState.NewOrder or TripState.RejectedByDiver) ||
-					w.Data.Driver?.IdDriver == _bs.DriverId);
+					w.Data.Driver?.IdDriver == _bs.ActiveUserId);
 
 			foreach (var item in l
 						 .OrderBy(o => o.Data.TripState != TripState.NewWWW)
@@ -117,14 +117,13 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	public async Task TripAdd()
 	{
 		await Shell.Current.GoToAsync(nameof(NovaJizda));
-
 	}
 
 	[RelayCommand]
 	public async Task ProfileOpen()
 	{
-		if (_bs?.DriverId != null)
-			await Shell.Current.GoToAsync($"{nameof(DriverName)}?Id={_bs.DriverId}");
+		if (_bs.IsLogged)
+			await Shell.Current.GoToAsync($"{nameof(DriverName)}?Id={_bs.ActiveUserId}");
 	}
 
 	[RelayCommand]
@@ -149,13 +148,13 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	[RelayCommand]
 	private async Task Acc(Guid idTrip)
 	{
-		if (_bs.DriverId == null)
+		if (_bs.ActiveUserId == null)
 		{
 			await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
 			return;
 		}
 
-		var ret = await DataService.AcceptTripByDriverAsync(idTrip, _bs.DriverId.Value);
+		var ret = await DataService.AcceptTripByDriverAsync(idTrip, _bs.ActiveUserId.Value);
 		if (ret)
 		{
 			await RefreshData();
@@ -163,6 +162,15 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		else
 		{
 			await Shell.Current.DisplayAlert("POZOR", "Jízda nebyla akceptována", "OK");
+		}
+	}
+
+	public void SetListMode(bool? b)
+	{
+		if (b.HasValue)
+		{
+			ListMode = b.Value;
+			_bs.TripFilter = ListMode;
 		}
 	}
 }

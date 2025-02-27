@@ -25,7 +25,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
     <VerticalStackLayout>
         <Image Source="taxi.png" WidthRequest="200" HeightRequest="300"  VerticalOptions="Center"/>
         

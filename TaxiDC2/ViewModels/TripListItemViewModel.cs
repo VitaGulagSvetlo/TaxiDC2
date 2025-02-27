@@ -12,7 +12,7 @@ namespace TaxiDC2.ViewModels
 		public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Data.Memo);
 		public bool CustomerMemoVisible => !string.IsNullOrWhiteSpace(Data.Customer?.Memo);
 
-		[DependsOn("DeadLine,Counter1")]
+		//[DependsOn("DeadLine,Counter1")]
 		public int MinToDeadLine
 		{
 			get
@@ -31,7 +31,7 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
-		[DependsOn("MinToDeadLine")]
+		//[DependsOn("MinToDeadLine")]
 		public string MinToDeadLineTxt
 		{
 			get
@@ -46,7 +46,7 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 		
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public Color StateColor
 		{
 			get
@@ -56,7 +56,7 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public Color StateTextColor
 		{
 			get
@@ -79,7 +79,7 @@ namespace TaxiDC2.ViewModels
 			return Color.FromRgb(d, d, d);
 		}
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public FileImageSource StateImage
 		{
 			get
@@ -140,7 +140,7 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
-		[DependsOn("DeadLine,Counter1")]
+		//[DependsOn("DeadLine,Counter1")]
 		public Color TimeColor =>
 			Data.TripState == TripState.Canceled || Data.TripState == TripState.Comleted
 				? (Color)Application.Current.Resources["PozadiTmava"]
@@ -153,14 +153,14 @@ namespace TaxiDC2.ViewModels
 							: (Color)Application.Current.Resources["Zluta2"];
 		
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public bool TimeVisible => Data.TripState != TripState.Canceled && Data.TripState != TripState.Comleted;
 		
 		public void RefreshTime()
 		{
-			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLine)));
-			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLineTxt)));
-			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeColor)));
+			OnPropertyChanged(nameof(MinToDeadLine));
+			OnPropertyChanged(nameof(MinToDeadLineTxt));
+			OnPropertyChanged(nameof(TimeColor));
 		}
 
 		public static TripListItemViewModel FromTrip(Trip trip)

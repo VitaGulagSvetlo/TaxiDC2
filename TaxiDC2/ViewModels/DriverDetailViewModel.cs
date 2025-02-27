@@ -17,24 +17,17 @@ namespace TaxiDC2.ViewModels
 
 		public ObservableCollection<Car> CarsList { get; set; } = new();
 
-		public Car SelectedCar { get; set; }
-
 		public async Task LoadData()
 		{
-			Car[] cars = await DataService.GetCarsAsync();
+			Car[] cars = await DataService.GetCarsAsync(true);
 			CarsList.Clear();
-			foreach (Car car in cars)
-			{
-				CarsList.Add(car);
-				if (car.IdCar == Driver.AssignedCar)
-					SelectedCar = car;
-			}
+			foreach (Car car in cars.OrderBy(o=>o.FullName)) CarsList.Add(car);
 		}
 
 		[RelayCommand]
 		public async Task SaveData()
 		{
-			
+			IsBusy = true;
 			bool ret;
 			if (Driver.IdDriver == Guid.Empty)
 				ret = await DataService.RegisterDriverAsync(Driver);
@@ -43,29 +36,23 @@ namespace TaxiDC2.ViewModels
 
 			if (ret)
 			{
-				await Shell.Current.DisplayAlert("Řidiči", "Řidič uložen", "OK");
+				//await Shell.Current.DisplayAlert("Řidiči", "Řidič uložen", "OK");
 				await Shell.Current.GoToAsync($"//{nameof(SeznamRidicu)}");
 			}
 			else
 			{
 				//ERR
 			}
+			IsBusy = false;
 		}
 		
-		public void OnAppearing()
-		{
-			IsBusy = true;
-		}
-
 		public async Task LoadDataById(Guid parsedId)
 		{
+			IsBusy = true;
 			await LoadData();
 			Driver driver = await DataService.GetDriverByIdAsync(parsedId);
-			if ( driver != null)
-			{
-				Driver = driver??new Driver();
-				SelectedCar = driver.Car;
-			}
+			Driver = driver ?? new Driver();
+			IsBusy = false;
 		}
 	}
 }

@@ -4,18 +4,18 @@ namespace TaxiDC2
 {
     public partial class SeznamAut : ContentPage
     {
-	    readonly CarListViewModel _viewModel;
+	    readonly CarListViewModel _model;
 
 	    public SeznamAut(CarListViewModel model)
 	    {
 		    InitializeComponent();
-		    BindingContext = _viewModel = model;
+		    BindingContext = _model = model;
 	    }
 
 	    protected override void OnAppearing()
 	    {
 		    base.OnAppearing();
-		    _viewModel.OnAppearing();
+		    _model.OnAppearing();
 		}
 
         private async void OnBackButtonPressed(object sender, EventArgs e)

@@ -4,11 +4,13 @@ namespace TaxiDC2
 {
 	public partial class DetailRidic : ContentPage, IQueryAttributable
 	{
-		public DetailRidic(DriverDetailViewModel vm)
+		private readonly DriverDetailViewModel _model;
+
+		public DetailRidic(DriverDetailViewModel model)
 		{
 			InitializeComponent();
-			Task.Run(async()=>await vm?.LoadData()!).Wait();
-			BindingContext = vm;
+			Task.Run(async()=>await model?.LoadData()!).Wait();
+			BindingContext = _model = model;
 		}
 
 		public void ApplyQueryAttributes(IDictionary<string, object> query)

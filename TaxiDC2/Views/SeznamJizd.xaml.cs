@@ -6,18 +6,18 @@ namespace TaxiDC2
 {
     public partial class SeznamJizd : ContentPage
     {
-        readonly TripListViewModel _viewModel;
+        readonly TripListViewModel _model;
 
         public SeznamJizd(IBussinessState bs,TripListViewModel model)
         {
             InitializeComponent();
-            BindingContext = _viewModel = model;
+            BindingContext = _model = model;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _viewModel.OnAppearing();
+            _model.OnAppearing();
 
         }
         
@@ -40,7 +40,7 @@ namespace TaxiDC2
             object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
             if (Guid.TryParse(id.ToString(), out Guid g))
             {
-	            _viewModel.StornoCommand.Execute(g);
+	            _model.StornoCommand.Execute(g);
             }
         }
 
@@ -50,14 +50,14 @@ namespace TaxiDC2
             object id = swipeItem.CommandParameter ?? throw new ArgumentNullException("swipeItem.CommandParameter");
             if(Guid.TryParse(id.ToString(),out Guid g))
 			{
-				_viewModel.AccCommand.Execute(g);
+				_model.AccCommand.Execute(g);
 			}
 		}
 
         private async void SfSwitch_OnStateChanged(object sender, SwitchStateChangedEventArgs e)
         {
-	        _viewModel.ListMode = e.NewValue==true ? 1 : 0;
-			await _viewModel.RefreshData();
+	        _model.SetListMode(e.NewValue);
+			await _model.RefreshData();
 		}
     }
 }

@@ -33,8 +33,8 @@ namespace TaxiDC2.ViewModels
                 },
                 canExecute: arg => true);
 
-            Message1 = $"Za ?? min pro vás přijede Taxi {(_bs.Driver?.Car != null ? _bs.Driver.Car.FullName : "####")}. Děkujeme Taxi-Děčín 777557776";
-            Message2 = $"Vaše Taxi {(_bs.Driver?.Car != null ? _bs.Driver.Car.FullName : "####")} je přistaveno. Děkujeme Taxi-Děčín 777557776";
+            Message1 = $"Za ?? min pro vás přijede Taxi {(_bs.ActiveUser?.Car != null ? _bs.ActiveUser.Car.FullName : "####")}. Děkujeme Taxi-Děčín 777557776";
+            Message2 = $"Vaše Taxi {(_bs.ActiveUser?.Car != null ? _bs.ActiveUser.Car.FullName : "####")} je přistaveno. Děkujeme Taxi-Děčín 777557776";
 
             Buttons = new List<string>() { "3", "5", "10", "15", "20" };
             AddItemCommand = new Command(OnAddItem);

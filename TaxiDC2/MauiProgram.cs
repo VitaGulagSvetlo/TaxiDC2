@@ -7,7 +7,6 @@ using Plugin.Maui.Biometric;
 using Syncfusion.Maui.Core.Hosting;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
-using TaxiDC2.Interfaces;
 using TaxiDC2.ViewModels;
 
 namespace TaxiDC2

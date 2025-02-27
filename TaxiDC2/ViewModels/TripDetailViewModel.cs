@@ -1,18 +1,19 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
 	public partial class TripDetailViewModel : BaseViewModel
 	{
 		private readonly IBussinessState _bs;
-		//public ObservableCollection<Driver> ListRidicu { get; } = new();
+		public ObservableCollection<Driver> ListRidicu { get; } = new();
 
 		[ObservableProperty] private Trip _trip = new();
 
-		[ObservableProperty] public bool _pickerVisible = false;
+		[ObservableProperty] private bool _pickerVisible = false;
 		[ObservableProperty] private bool _complete = false;
+		[ObservableProperty] private Driver? _selectedDriver ;
 
 		public bool CustomerInfoAvailable => !string.IsNullOrWhiteSpace( Trip.Customer?.Memo);
 
@@ -21,49 +22,50 @@ namespace TaxiDC2.ViewModels
 			_bs = bs;
 		}
 
-		[DependsOn("TripState")] public bool BtnConVisibility => Trip.TripState is (TripState.NewWWW);
+		//[DependsOn("TripState")]
+		public bool BtnConVisibility => Trip.TripState is (TripState.NewWWW);
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public bool BtnAccVisibility => IsOwner && Trip.TripState == TripState.ForwardToDiver ||
 		                                Trip.TripState is (TripState.NewOrder or TripState.RejectedByDiver);
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public bool BtnCancelVisibility => Trip.TripState is not (TripState.Comleted or TripState.Canceled);
 
-		[DependsOn("TripState", "Driver")]
+		//[DependsOn("TripState", "Driver")]
 		public bool BtnRejectVisibility => IsOwner && Trip.TripState == TripState.ForwardToDiver;
 
-		[DependsOn("TripState", "Driver")]
+		//[DependsOn("TripState", "Driver")]
 		public bool BtnForwardVisibility => Trip.TripState is (TripState.NewOrder or TripState.RejectedByDiver);
 
-		[DependsOn("TripState", "Driver")]
+		//[DependsOn("TripState", "Driver")]
 		public bool BtnSmsVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.SMS1sended);
 
-		[DependsOn("TripState", "Driver")]
+		//[DependsOn("TripState", "Driver")]
 		public bool BtnCallVisibility => IsOwner &&
 		                                 Trip.TripState is (TripState.AcceptedDiver or TripState.SMS1sended
 			                                 or TripState.SMS2sended);
 
-		[DependsOn("TripState", "Driver")]
+		//[DependsOn("TripState", "Driver")]
 		public bool BtnRunningVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Call
 			or TripState.SMS1sended or TripState.SMS2sended);
 
-		[DependsOn("TripState", "Driver")]
+		//[DependsOn("TripState", "Driver")]
 		public bool BtnCompleteVisibility => IsOwner && Trip.TripState is (TripState.AcceptedDiver or TripState.Running
 			or TripState.SMS1sended or TripState.SMS2sended or TripState.Call);
 
-		[DependsOn("Memo")] public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Trip.Memo);
+		//[DependsOn("Memo")] public bool IsMemoNotEmpty => !string.IsNullOrWhiteSpace(Trip.Memo);
 		public bool CustomerMemoVisible => !string.IsNullOrWhiteSpace(Trip.Customer?.Memo);
 
-		public Boolean IsOwner => Trip.Driver != null && Trip.Driver.IdDriver == _bs.DriverId;
+		public Boolean IsOwner => Trip.Driver != null && Trip.Driver.IdDriver == _bs.ActiveUserId;
 
 		/// <summary>
 		/// Adresy jsou validni pro hledani trasy
 		/// </summary>
-		[DependsOn("AddressBoardingIsValid,AddressExitIsValid")]
+		//[DependsOn("AddressBoardingIsValid,AddressExitIsValid")]
 		public bool IsValidForRoute => Trip.AddressExitIsValid || Trip.AddressBoardingIsValid;
 
-		[DependsOn("DeadLine,Counter1")]
+		//[DependsOn("DeadLine,Counter1")]
 		public int MinToDeadLine
 		{
 			get
@@ -84,7 +86,7 @@ namespace TaxiDC2.ViewModels
 
 		public bool MinLabelVisible { get; set; }
 
-		[DependsOn("MinToDeadLine")]
+		//[DependsOn("MinToDeadLine")]
 		public string MinToDeadLineTxt
 		{
 			get
@@ -101,7 +103,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public Color StateColor
 		{
 			get
@@ -111,7 +113,7 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public Color StateTextColor
 		{
 			get
@@ -134,7 +136,7 @@ namespace TaxiDC2.ViewModels
 			return Color.FromRgb(d, d, d);
 		}
 
-		[DependsOn("TripState")]
+		//[DependsOn("TripState")]
 		public FileImageSource StateImage
 		{
 			get
@@ -195,7 +197,7 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
-		[DependsOn("DeadLine,Counter1")]
+		//[DependsOn("DeadLine,Counter1")]
 		public Color TimeColor =>
 			Trip.TripState == TripState.Canceled || Trip.TripState == TripState.Comleted
 				? (Color)Application.Current.Resources["PozadiTmava"]
@@ -207,40 +209,10 @@ namespace TaxiDC2.ViewModels
 							? (Color)Application.Current.Resources["Zelena"]
 							: (Color)Application.Current.Resources["Zluta2"];
 
-		[DependsOn("TripState")]
-		public bool TimeVisible => Trip.TripState != TripState.Canceled && Trip.TripState != TripState.Comleted;
-
-		public void RefreshTime()
-		{
-			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLine)));
-			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinToDeadLineTxt)));
-			//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeColor)));
-		}
-
 		public async Task LoadData(Guid id)
 		{
 			var trip = await DataService.GetTripByIdAsync(id);
-			if (trip != null)
-			{
-				Trip.AddressBoarding = trip.AddressBoarding;
-				Trip.AddressBoardingIsValid = trip.AddressBoardingIsValid;
-				Trip.AddressBoardingLocX = trip.AddressBoardingLocX;
-				Trip.AddressBoardingLocY = trip.AddressBoardingLocY;
-				Trip.AddressExit = trip.AddressExit;
-				Trip.AddressExitIsValid = trip.AddressExitIsValid;
-				Trip.AddressExitLocX = trip.AddressExitLocX;
-				Trip.AddressExitLocY = trip.AddressExitLocY;
-				Trip.BoardingTime = trip.BoardingTime;
-				Trip.Complete = trip.Complete;
-				Trip.Customer = trip.Customer;
-				Trip.DeadLine = trip.DeadLine;
-				Trip.Driver = trip.Driver;
-				Trip.ExitTime = trip.ExitTime;
-				Trip.IdTrip = trip.IdTrip;
-				Trip.Memo = trip.Memo;
-				Trip.OrderTime = trip.OrderTime;
-				Trip.TripState = trip.TripState;
-			}
+			Trip = trip??new Trip();
 		}
 
 		private async Task PlacePhoneCall(string number)
@@ -289,7 +261,7 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private async Task Call()
 		{
-			await PlacePhoneCall(Trip.Customer.PhoneNumber);
+			await PlacePhoneCall(Trip.Customer?.PhoneNumber);
 			var ret = await DataService.ChangeTripStateAsync(Trip.IdTrip, TripState.Call);
 			if (ret)
 				Trip.TripState = TripState.Call;
@@ -298,13 +270,13 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private async Task Acc()
 		{
-			if (_bs.DriverId == null)
+			if (_bs.ActiveUserId == null)
 			{
 				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
 				return;
 			}
 
-			var ret = await DataService.AcceptTripByDriverAsync(Trip.IdTrip, _bs.DriverId.Value);
+			var ret = await DataService.AcceptTripByDriverAsync(Trip.IdTrip, _bs.ActiveUserId.Value);
 			if (ret)
 			{
 				Trip.TripState = TripState.AcceptedDiver;
@@ -317,9 +289,9 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[RelayCommand]
-		private async Task Con()
+		private async Task AcceptWWW()
 		{
-			if (_bs.DriverId == null)
+			if (_bs.ActiveUserId == null)
 			{
 				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
 				return;
@@ -356,13 +328,13 @@ namespace TaxiDC2.ViewModels
 		private async Task Rej()
 
 		{
-			if (_bs.DriverId == null)
+			if (_bs.ActiveUserId == null)
 			{
 				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
 				return;
 			}
 
-			var ret = await DataService.RejectTripAsync(Trip.IdTrip, _bs.DriverId.Value);
+			var ret = await DataService.RejectTripAsync(Trip.IdTrip, _bs.ActiveUserId.Value);
 			if (ret)
 			{
 				Trip.TripState = TripState.RejectedByDiver;
@@ -377,7 +349,7 @@ namespace TaxiDC2.ViewModels
 		[RelayCommand]
 		private async Task Run()
 		{
-			if (_bs.DriverId == null)
+			if (_bs.ActiveUserId == null)
 			{
 				await Shell.Current.DisplayAlert("ERROR", "No active driver", "OK");
 				return;
@@ -423,19 +395,16 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		[RelayCommand]
 		private async Task Forward()
 		{
-			PickerVisible = true;
-		}
+			IsBusy = true;
+			var l = await DataService.GetDriversAsync(true);
+			ListRidicu.Clear();
+			foreach (var driver in l.OrderBy(o => o.FullName)) ListRidicu.Add(driver);
 
-		public async Task ForwardTripToDriver(Driver drv)
-		{
-			var res = await DataService.ForwardTripAsync(Trip.IdTrip, drv.IdDriver);
-			if (res)
-			{
-				await LoadData(Trip.IdTrip);
-				await Shell.Current.DisplayAlert("POZOR", $"Jízda předána {drv.FullName}", "OK");
-			}
+			PickerVisible = true;
+			IsBusy = false;
 		}
 
 		[RelayCommand]
@@ -450,6 +419,25 @@ namespace TaxiDC2.ViewModels
 		{
 			if (Trip.Customer != null)
 				await Shell.Current.DisplayAlert("Poznámka", Trip.Customer.Memo, "OK");
+		}
+
+		[RelayCommand]
+		private async Task PickerAccept()
+		{
+			PickerVisible = false;
+			if (SelectedDriver == null) return;
+			var ret = await DataService.ForwardTripAsync(Trip.IdTrip, SelectedDriver.IdDriver);
+			if (ret)
+			{
+				await LoadData(Trip.IdTrip);
+			}
+		}
+
+		[RelayCommand]
+		private Task PickerCancel()
+		{
+			PickerVisible = false;
+			return Task.CompletedTask;
 		}
 
 	}

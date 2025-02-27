@@ -129,7 +129,7 @@ namespace TaxiDC2.ViewModels
 			if (drl != null)
 			{
 				Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
-				_bs.Driver = driver;
+				_bs.ActiveUser = driver;
 			}
 		}
 

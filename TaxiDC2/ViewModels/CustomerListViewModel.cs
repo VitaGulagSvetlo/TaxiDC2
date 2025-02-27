@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace TaxiDC2.ViewModels
 {
-    public partial class CustomerListViewModel : BaseViewModel
+	public partial class CustomerListViewModel : BaseViewModel
     {
         public ObservableCollection<Customer> Items { get; }= new ObservableCollection<Customer>();
 

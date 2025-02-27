@@ -4,7 +4,6 @@ using Firebase.Auth;
 using Plugin.Maui.Biometric;
 using TaxiDC2.Components;
 using TaxiDC2.Components.Login;
-using TaxiDC2.Interfaces;
 
 namespace TaxiDC2.ViewModels
 {
@@ -134,7 +133,7 @@ namespace TaxiDC2.ViewModels
 				Driver driver = drl.FirstOrDefault(f => f.MobileDeviceKey == _authClient.User.Uid);
 				if (driver != null)
 				{
-					_bs.Driver = driver;
+					_bs.ActiveUser = driver;
 					return;
 				}
 			}

@@ -4,12 +4,14 @@ namespace TaxiDC2
 {
     public partial class DetailZakaznik : ContentPage, IQueryAttributable
 	{
+		private readonly CustomerDetailViewModel _model;
 
-        public DetailZakaznik(CustomerDetailViewModel vm)
+		public DetailZakaznik(CustomerDetailViewModel model)
         {
             InitializeComponent();
-            BindingContext = vm;
-        }
+			BindingContext = _model = model;
+
+		}
 
 		public void ApplyQueryAttributes(IDictionary<string, object> query)
 		{

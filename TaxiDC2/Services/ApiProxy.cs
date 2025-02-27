@@ -40,11 +40,11 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<DateTime?> res = JsonConvert.DeserializeObject<ServiceResult<DateTime?>>(s);
+                    ServiceState<DateTime?> res = JsonConvert.DeserializeObject<ServiceState<DateTime?>>(s);
                     if (res != null)
                     {
-                        Debug.WriteLine($"PING : {res.State == ResultCode.INFO}");
-                        return res.State == ResultCode.INFO;
+                        Debug.WriteLine($"PING : {res.State == StateCode.INFO}");
+                        return res.State == StateCode.INFO;
                     }
                 }
             }
@@ -61,7 +61,7 @@ namespace TaxiDC2.Services
         /// Vraci verzi serveru
         /// </summary>
         /// <returns>verze serveru</returns>
-        public async Task<ServiceResult<string>> ServerVersion()
+        public async Task<ServiceState<string>> ServerVersion()
         {
             try
             {
@@ -71,17 +71,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<string> res = JsonConvert.DeserializeObject<ServiceResult<string>>(s);
+                    ServiceState<string> res = JsonConvert.DeserializeObject<ServiceState<string>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<string>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<string>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<string>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<string>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -89,7 +89,7 @@ namespace TaxiDC2.Services
         /// Minimalni potrebna verze klienta
         /// </summary>
         /// <returns>verze req klienta</returns>
-        public async Task<ServiceResult<string>> ClientMinVersion()
+        public async Task<ServiceState<string>> ClientMinVersion()
         {
             try
             {
@@ -99,21 +99,21 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<string> res = JsonConvert.DeserializeObject<ServiceResult<string>>(s);
+                    ServiceState<string> res = JsonConvert.DeserializeObject<ServiceState<string>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<string>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<string>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<string>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<string>(StateCode.ERROR, null, ex.Message);
             }
         }
 
-        public async Task<ServiceResult> ForwardTrip(Guid trip, Guid driver)
+        public async Task<ServiceState> ForwardTrip(Guid trip, Guid driver)
         {
             try
             {
@@ -121,17 +121,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult res = JsonConvert.DeserializeObject<ServiceResult>(s);
+                    ServiceState res = JsonConvert.DeserializeObject<ServiceState>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
 
         }
@@ -142,7 +142,7 @@ namespace TaxiDC2.Services
         /// <param name="trip"></param>
         /// <param name="driver"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> RejectTrip(Guid trip, Guid driver)
+        public async Task<ServiceState> RejectTrip(Guid trip, Guid driver)
         {
             try
             {
@@ -150,17 +150,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult res = JsonConvert.DeserializeObject<ServiceResult>(s);
+                    ServiceState res = JsonConvert.DeserializeObject<ServiceState>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
 
         }
@@ -171,7 +171,7 @@ namespace TaxiDC2.Services
         /// <param name="trip"></param>
         /// <param name="driver"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> AcceptByDriver(Guid trip, Guid driver)
+        public async Task<ServiceState> AcceptByDriver(Guid trip, Guid driver)
         {
             try
             {
@@ -179,17 +179,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult res = JsonConvert.DeserializeObject<ServiceResult>(s);
+                    ServiceState res = JsonConvert.DeserializeObject<ServiceState>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR,message: response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR,message: response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message: ex.Message);
+                return new ServiceState(StateCode.ERROR, message: ex.Message);
             }
         }
 
@@ -198,7 +198,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Car>> GetCarByIdAsync(Guid id)
+        public async Task<ServiceState<Car>> GetCarByIdAsync(Guid id)
         {
             try
             {
@@ -208,17 +208,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Car> res = JsonConvert.DeserializeObject<ServiceResult<Car>>(s);
+                    ServiceState<Car> res = JsonConvert.DeserializeObject<ServiceState<Car>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Car>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Car>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Car>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Car>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -227,7 +227,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="activeOnly"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Car[]>> GetCarsAsync(bool activeOnly = true)
+        public async Task<ServiceState<Car[]>> GetCarsAsync(bool activeOnly = true)
         {
             try
             {
@@ -237,17 +237,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Car[]> res = JsonConvert.DeserializeObject<ServiceResult<Car[]>>(s);
+                    ServiceState<Car[]> res = JsonConvert.DeserializeObject<ServiceState<Car[]>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Car[]>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Car[]>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Car[]>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Car[]>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -256,7 +256,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Customer>> GetCustomerByIdAsync(Guid id)
+        public async Task<ServiceState<Customer>> GetCustomerByIdAsync(Guid id)
         {
             try
             {
@@ -266,17 +266,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Customer> res = JsonConvert.DeserializeObject<ServiceResult<Customer>>(s);
+                    ServiceState<Customer> res = JsonConvert.DeserializeObject<ServiceState<Customer>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Customer>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Customer>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Customer>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Customer>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -285,7 +285,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="phone"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Customer>> GetCustomerByPhone(string phone)
+        public async Task<ServiceState<Customer>> GetCustomerByPhone(string phone)
         {
             try
             {
@@ -295,16 +295,16 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Customer> res = JsonConvert.DeserializeObject<ServiceResult<Customer>>(s);
+                    ServiceState<Customer> res = JsonConvert.DeserializeObject<ServiceState<Customer>>(s);
                     return res;
                 }
 
-                return new ServiceResult<Customer>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Customer>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Customer>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Customer>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -313,7 +313,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="activeOnly"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Customer[]>> GetCustomersAsync(bool activeOnly = true)
+        public async Task<ServiceState<Customer[]>> GetCustomersAsync(bool activeOnly = true)
         {
             try
             {
@@ -323,17 +323,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Customer[]> res = JsonConvert.DeserializeObject<ServiceResult<Customer[]>>(s);
+                    ServiceState<Customer[]> res = JsonConvert.DeserializeObject<ServiceState<Customer[]>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Customer[]>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Customer[]>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Customer[]>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Customer[]>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -342,7 +342,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Customer[]>> FindCustomersAsync(string filter)
+        public async Task<ServiceState<Customer[]>> FindCustomersAsync(string filter)
         {
             try
             {
@@ -352,17 +352,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Customer[]> res = JsonConvert.DeserializeObject<ServiceResult<Customer[]>>(s);
+                    ServiceState<Customer[]> res = JsonConvert.DeserializeObject<ServiceState<Customer[]>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Customer[]>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Customer[]>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Customer[]>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Customer[]>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -372,7 +372,7 @@ namespace TaxiDC2.Services
         /// <param name="deviceKey"></param>
         /// <param name="deviceHash"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Driver>> GetDriverByDeviceKeyAsync(string deviceKey, string deviceHash)
+        public async Task<ServiceState<Driver>> GetDriverByDeviceKeyAsync(string deviceKey, string deviceHash)
         {
             try
             {
@@ -382,17 +382,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Driver> res = JsonConvert.DeserializeObject<ServiceResult<Driver>>(s);
+                    ServiceState<Driver> res = JsonConvert.DeserializeObject<ServiceState<Driver>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Driver>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Driver>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Driver>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Driver>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -401,7 +401,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Driver>> GetDriverByIdAsync(Guid id)
+        public async Task<ServiceState<Driver>> GetDriverByIdAsync(Guid id)
         {
             try
             {
@@ -411,17 +411,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Driver> res = JsonConvert.DeserializeObject<ServiceResult<Driver>>(s);
+                    ServiceState<Driver> res = JsonConvert.DeserializeObject<ServiceState<Driver>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Driver>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Driver>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Driver>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Driver>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -430,7 +430,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="activeOnly"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Driver[]>> GetDriversAsync(bool activeOnly = true)
+        public async Task<ServiceState<Driver[]>> GetDriversAsync(bool activeOnly = true)
         {
             try
             {
@@ -440,17 +440,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Driver[]> res = JsonConvert.DeserializeObject<ServiceResult<Driver[]>>(s);
+                    ServiceState<Driver[]> res = JsonConvert.DeserializeObject<ServiceState<Driver[]>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Driver[]>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Driver[]>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Driver[]>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Driver[]>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -459,7 +459,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="tripId"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Trip>> GetTripByIdAsync(Guid tripId)
+        public async Task<ServiceState<Trip>> GetTripByIdAsync(Guid tripId)
         {
             try
             {
@@ -469,17 +469,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Trip> res = JsonConvert.DeserializeObject<ServiceResult<Trip>>(s);
+                    ServiceState<Trip> res = JsonConvert.DeserializeObject<ServiceState<Trip>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Trip>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Trip>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Trip>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Trip>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -488,7 +488,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="activeOnly"> jen aktivni</param>
         /// <returns></returns>
-        public async Task<ServiceResult<Trip[]>> GetTripsAsync(bool activeOnly = true)
+        public async Task<ServiceState<Trip[]>> GetTripsAsync(bool activeOnly = true)
         {
             try
             {
@@ -498,17 +498,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Trip[]> res = JsonConvert.DeserializeObject<ServiceResult<Trip[]>>(s);
+                    ServiceState<Trip[]> res = JsonConvert.DeserializeObject<ServiceState<Trip[]>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Trip[]>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Trip[]>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Trip[]>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Trip[]>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -519,7 +519,7 @@ namespace TaxiDC2.Services
         /// <param name="newState"></param>
         /// <param name="paramsStrings"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> ChangeTripState(Guid trip, TripState newState, params string[] paramsStrings)
+        public async Task<ServiceState> ChangeTripState(Guid trip, TripState newState, params string[] paramsStrings)
         {
             try
             {
@@ -527,16 +527,16 @@ namespace TaxiDC2.Services
                     await PostAsync($"trips/changestate/{trip}?ts={(int)newState}", paramsStrings);
                 if (response.IsSuccessStatusCode)
                 {
-                    return new ServiceResult(ResultCode.OK, message:"Zmena ulozena");
+                    return new ServiceState(StateCode.OK, message:"Zmena ulozena");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -545,23 +545,23 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="driver"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> RegisterDriver(Driver driver)
+        public async Task<ServiceState> RegisterDriver(Driver driver)
         {
             try
             {
                 using HttpResponseMessage response = await PostAsync("drivers/save", driver);
                 if (response.IsSuccessStatusCode)
                 {
-                    return new ServiceResult(ResultCode.OK, message:"Data ulozena");
+                    return new ServiceState(StateCode.OK, message:"Data ulozena");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -570,7 +570,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="car"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> SaveCar(Car car)
+        public async Task<ServiceState> SaveCar(Car car)
         {
             try
             {
@@ -578,16 +578,16 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     //string s = await response.Content.ReadAsStringAsync();
-                    return new ServiceResult(ResultCode.OK, message:"Data ulozena");
+                    return new ServiceState(StateCode.OK, message:"Data ulozena");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -596,7 +596,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> SaveCustomer(Customer customer)
+        public async Task<ServiceState> SaveCustomer(Customer customer)
         {
             try
             {
@@ -604,16 +604,16 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     //string s = await response.Content.ReadAsStringAsync();
-                    return new ServiceResult(ResultCode.OK, message:"Data ulozena");
+                    return new ServiceState(StateCode.OK, message:"Data ulozena");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -622,7 +622,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="driver"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> SaveDriver(Driver driver)
+        public async Task<ServiceState> SaveDriver(Driver driver)
         {
             try
             {
@@ -630,16 +630,16 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     //string s = await response.Content.ReadAsStringAsync();
-                    return new ServiceResult(ResultCode.OK, message:"Data ulozena");
+                    return new ServiceState(StateCode.OK, message:"Data ulozena");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -648,7 +648,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="driver"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> UpdateDriverSetings(Driver driver)
+        public async Task<ServiceState> UpdateDriverSetings(Driver driver)
         {
             try
             {
@@ -656,16 +656,16 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     //string s = await response.Content.ReadAsStringAsync();
-                    return new ServiceResult(ResultCode.OK, message:"Data ulozena");
+                    return new ServiceState(StateCode.OK, message:"Data ulozena");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -674,7 +674,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> UpdateCustomerSetings(Customer customer)
+        public async Task<ServiceState> UpdateCustomerSetings(Customer customer)
         {
             try
             {
@@ -682,16 +682,16 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     //string s = await response.Content.ReadAsStringAsync();
-                    return new ServiceResult(ResultCode.OK, message:"Data ulozena");
+                    return new ServiceState(StateCode.OK, message:"Data ulozena");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -700,7 +700,7 @@ namespace TaxiDC2.Services
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        public async Task<ServiceResult<Trip>> SaveTrip(Trip trip)
+        public async Task<ServiceState<Trip>> SaveTrip(Trip trip)
         {
             try
             {
@@ -708,19 +708,19 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Trip> res = JsonConvert.DeserializeObject<ServiceResult<Trip>>(s);
-                    if (res is { State: ResultCode.OK })
-                        return new ServiceResult<Trip>(ResultCode.OK, res.Data, "Data ulozena");
-                    return new ServiceResult<Trip>(ResultCode.ERROR, null, "Nevratil novy objekt");
+                    ServiceState<Trip> res = JsonConvert.DeserializeObject<ServiceState<Trip>>(s);
+                    if (res is { State: StateCode.OK })
+                        return new ServiceState<Trip>(StateCode.OK, res.Data, "Data ulozena");
+                    return new ServiceState<Trip>(StateCode.ERROR, null, "Nevratil novy objekt");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Trip>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Trip>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Trip>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Trip>(StateCode.ERROR, null, ex.Message);
             }
         }
 
@@ -732,7 +732,7 @@ namespace TaxiDC2.Services
 		/// <param name="message"></param>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> SendNotificationToAllDevice(string title, string body, string message,
+		public async Task<ServiceState> SendNotificationToAllDevice(string title, string body, string message,
             string data)
         {
             try
@@ -741,16 +741,16 @@ namespace TaxiDC2.Services
                     $"notification/sendToAllActiveDrivers?title={title}&body={body}&message={message}&data={data}", "");
                 if (response.IsSuccessStatusCode)
                 {
-                    return new ServiceResult(ResultCode.OK, message:"Data odeslana");
+                    return new ServiceState(StateCode.OK, message:"Data odeslana");
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
@@ -768,9 +768,9 @@ namespace TaxiDC2.Services
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             Client.DefaultRequestHeaders.Remove("USER_ID");
-            Client.DefaultRequestHeaders.Add("USER_ID", _bs.DriverId?.ToString() ?? Guid.Empty.ToString());
+            Client.DefaultRequestHeaders.Add("USER_ID", _bs.ActiveUserId?.ToString() ?? Guid.Empty.ToString());
             Client.DefaultRequestHeaders.Remove("USER_NAME");
-            Client.DefaultRequestHeaders.Add("USER_NAME", _bs.Driver?.FullName ?? "NoRegUser");
+            Client.DefaultRequestHeaders.Add("USER_NAME", _bs.ActiveUser?.FullName ?? "NoRegUser");
             Client.DefaultRequestHeaders.Remove("CLIENT_ID");
             Client.DefaultRequestHeaders.Add("CLIENT_ID", DeviceInfo.Name);
             Client.DefaultRequestHeaders.Remove("CLIENT_VER");
@@ -781,27 +781,27 @@ namespace TaxiDC2.Services
             return response;
         }
 
-        public async Task<ServiceResult> DeleteCustomerByIdAsync(Guid id)
+        public async Task<ServiceState> DeleteCustomerByIdAsync(Guid id)
         {
             return await DeleteByIdAsync(id, "customers");
         }
 
-        public async Task<ServiceResult> DeleteTripByIdAsync(Guid id)
+        public async Task<ServiceState> DeleteTripByIdAsync(Guid id)
         {
             return await DeleteByIdAsync(id, "trips");
         }
 
-        public async Task<ServiceResult> DeleteDriverByIdAsync(Guid id)
+        public async Task<ServiceState> DeleteDriverByIdAsync(Guid id)
         {
             return await DeleteByIdAsync(id, "drivers");
         }
 
-        public async Task<ServiceResult> DeleteCarByIdAsync(Guid id)
+        public async Task<ServiceState> DeleteCarByIdAsync(Guid id)
         {
             return await DeleteByIdAsync(id, "cars");
         }
 
-        public async Task<ServiceResult> DeleteByIdAsync(Guid id, string path)
+        public async Task<ServiceState> DeleteByIdAsync(Guid id, string path)
         {
             try
             {
@@ -811,21 +811,21 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult res = JsonConvert.DeserializeObject<ServiceResult>(s);
+                    ServiceState res = JsonConvert.DeserializeObject<ServiceState>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult(ResultCode.ERROR, message:response.ReasonPhrase);
+                return new ServiceState(StateCode.ERROR, message:response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult(ResultCode.ERROR, message:ex.Message);
+                return new ServiceState(StateCode.ERROR, message:ex.Message);
             }
         }
 
-        public async Task<ServiceResult<Lokace[]>> Geocode(String text)
+        public async Task<ServiceState<Lokace[]>> Geocode(String text)
         {
             try
             {
@@ -835,17 +835,17 @@ namespace TaxiDC2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string s = await response.Content.ReadAsStringAsync();
-                    ServiceResult<Lokace[]> res = JsonConvert.DeserializeObject<ServiceResult<Lokace[]>>(s);
+                    ServiceState<Lokace[]> res = JsonConvert.DeserializeObject<ServiceState<Lokace[]>>(s);
                     return res;
                 }
 
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                return new ServiceResult<Lokace[]>(ResultCode.ERROR, null, response.ReasonPhrase);
+                return new ServiceState<Lokace[]>(StateCode.ERROR, null, response.ReasonPhrase);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return new ServiceResult<Lokace[]>(ResultCode.ERROR, null, ex.Message);
+                return new ServiceState<Lokace[]>(StateCode.ERROR, null, ex.Message);
             }
         }
 

@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace TaxiDC2.ViewModels
 {
-    public partial class CustomerDetailViewModel :BaseViewModel
+	public partial class CustomerDetailViewModel :BaseViewModel
     {
 
         public CustomerDetailViewModel(IDataService dataService):base(dataService)
@@ -16,10 +16,7 @@ namespace TaxiDC2.ViewModels
 		public async Task LoadData(Guid id)
 		{
 			Customer customer = await DataService.GetCustomerByIdAsync(id);
-			if (customer != null)
-			{
 				Customer = customer??new Customer();
-			}
 		}
 
 		[RelayCommand]

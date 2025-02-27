@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TaxiDC2.ViewModels
 {
-	
+
 	public partial class CarDetailViewModel : BaseViewModel
     {
         

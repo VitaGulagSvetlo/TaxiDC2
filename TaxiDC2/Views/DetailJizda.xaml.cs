@@ -6,13 +6,13 @@ namespace TaxiDC2
     public partial class DetailJizda : ContentPage, IQueryAttributable
 	{
 		private readonly IBussinessState _bs;
-		private TripDetailViewModel _viewModel;
+		private TripDetailViewModel _model;
 
 		public DetailJizda(TripDetailViewModel vm, IBussinessState bs)
         {
 	        _bs = bs;
 	        InitializeComponent();
-	        BindingContext = _viewModel = vm;
+	        BindingContext = _model = vm;
         }
 		
         public void ApplyQueryAttributes(IDictionary<string, object> query)
