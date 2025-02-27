@@ -53,10 +53,10 @@ namespace TaxiDC2
 			}
 		}
 
-        private async void SfSwitch_OnStateChanged(object sender, SwitchStateChangedEventArgs e)
+        private async void FilterChanged(object sender, ToggledEventArgs e)
         {
-	        _model.SetListMode(e.NewValue);
-			await _model.RefreshData();
-		}
-    }
+	        _model.SetListMode(e.Value);
+	        await _model.RefreshData();
+        }
+	}
 }

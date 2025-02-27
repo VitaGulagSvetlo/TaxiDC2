@@ -11,7 +11,7 @@ namespace TaxiDC2.Models
 		public string LastAddressBoarding { get; set; }
 		[StringLength(500)]
 		public string LastAddressExit { get; set; }
-		public DateTime Time { get; set; }
+		public DateTime? Time { get; set; }
 		public bool Rejected { get; set; } = false;
 		[StringLength(50)]
 		public string Name { get; set; }

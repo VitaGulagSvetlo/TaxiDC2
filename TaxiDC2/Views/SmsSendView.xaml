@@ -8,11 +8,6 @@
     Title="Odeslání SMS"
     >
 
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Text="Nová jízda" Command="{Binding AddItemCommand}" />
-        --><!--<ToolbarItem Text="RST" Command="{Binding ResetTime}" />--><!--
-    </ContentPage.ToolbarItems>-->
-
     <StackLayout Orientation="Vertical" Margin="20,5" >
         <StackLayout.Resources>
             <Style  TargetType="Button">

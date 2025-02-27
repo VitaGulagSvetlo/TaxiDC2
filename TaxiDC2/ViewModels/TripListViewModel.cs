@@ -20,7 +20,6 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	{
 		_bs = bs;
 		_soundService = soundService;
-		ListMode = _bs.TripFilter;
 
 		timer = new Timer(OnTimer, null, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(15));
 
@@ -68,11 +67,13 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 
 	public void OnAppearing()
 	{
+		ListMode = _bs.TripFilter;
 		IsBusy = true;
 	}
 
 	internal async Task RefreshData()
 	{
+		IsBusy = true;
 		try
 		{
 			Items.Clear();
@@ -91,7 +92,6 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		catch (Exception ex)
 		{
 			Debug.WriteLine(ex);
-			IsBusy = false;
 		}
 		finally
 		{

@@ -28,52 +28,54 @@
     </ContentPage.Resources>
 
     <Grid BackgroundColor="{StaticResource GridBG}">
-        
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
 
-            <ScrollView Grid.Row="0">
-                <VerticalStackLayout Grid.Row="0" Spacing="10" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                    <Label
-                            Text="TAXI DC"
-                            SemanticProperties.HeadingLevel="Level1" 
-                            FontSize="30"
-                            Style="{StaticResource CustomLblO}"/>
-                    <Button Text="Nová jízda" Clicked="OnNewClicked"   
-                  Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
-                    <Button Text="Přehled jízd" Clicked="OnListClicked"   
-                   Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
-                    <Button Text="Nastavení" Clicked="OnSetClicked"   
-                   Style="{StaticResource MenuBtn}" ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Grid.Row="0" Spacing="10" Padding="20">
 
-                </VerticalStackLayout>
-            </ScrollView>
+                <Label Text="TAXI DC"
+                    SemanticProperties.HeadingLevel="Level1" 
+                    FontSize="30"
+                    Style="{StaticResource CustomLblO}"/>
+                <Button Text="Nová jízda" Clicked="OnNewClicked"
+                        Style="{StaticResource MenuBtn}" 
+                      ImageSource="{FontImageSource Glyph={StaticResource star}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
+                <Button Text="Přehled jízd" Clicked="OnListClicked"   
+                   Style="{StaticResource MenuBtn}" 
+                   ImageSource="{FontImageSource Glyph={StaticResource route}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
+                <Button Text="Nastavení" Clicked="OnSetClicked"   
+                   Style="{StaticResource MenuBtn}" 
+                   ImageSource="{FontImageSource Glyph={StaticResource gear}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
 
-            <Frame Style="{StaticResource CustomFrame}" VerticalOptions="End" Grid.Row="1"  Margin="20">
-                <StackLayout Spacing="5">
-                    <Label Text="Aktivní řidič / auto" Style="{StaticResource CustomLblO}" />
-                    <HorizontalStackLayout Spacing="5">
-                        <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
-                        <Label Text="{Binding ActiveUser.FullName,FallbackValue='nepřiřazen'}" FontSize="18" TextColor="{StaticResource Bila}" Padding="5,0"/>
-                    </HorizontalStackLayout>
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Frame Style="{StaticResource CustomFrame}" VerticalOptions="End" Grid.Row="1"  Margin="20">
+            <StackLayout Spacing="5">
+                <Label Text="Aktivní řidič / auto" Style="{StaticResource CustomLblO}" />
+                <HorizontalStackLayout Spacing="5">
+                    <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
+                    <Label Text="{Binding ActiveUser.FullName,FallbackValue='nepřiřazen'}" FontSize="18" TextColor="{StaticResource Bila}" Padding="5,0"/>
+                </HorizontalStackLayout>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" />
                     <Label Grid.Column="1" Text="{Binding ActiveUser.CarName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0" 
                            HorizontalOptions="Start"
                            IsVisible="{Binding IsCarAssigned}"/>
                     <Button Grid.Column="1" HorizontalOptions="End" Text="vybrat" HeightRequest="24" Padding="5,2" FontSize="14" BorderColor="Orange"
                             Clicked="Button_OnClicked" IsVisible="{Binding IsCarAssigned,Converter={StaticResource InverseBoolConverter}}"/>
-                    </Grid>
-                </StackLayout>
-            </Frame>
+                </Grid>
+            </StackLayout>
+        </Frame>
 
         <!-- Label na spodku obrazovky -->
         <Label

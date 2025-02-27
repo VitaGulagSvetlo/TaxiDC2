@@ -8,9 +8,8 @@
              Title="Nová jízda"
              BackgroundColor="{StaticResource GridBG}"
              x:DataType="vm:TripNewViewModel">
-    
-    <VerticalStackLayout>
-        <Grid BackgroundColor="{StaticResource GridBG}">
+
+<Grid BackgroundColor="{StaticResource GridBG}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -145,37 +144,37 @@
             </ScrollView>
 
             <!-- Uložit změny tlačítko -->
-            <Grid Grid.Row="1" Padding="15">
-                <Button Text="ULOŽIT ZMĚNY"
+            <Button Text="ULOŽIT ZMĚNY" Grid.Row="1"
                     BackgroundColor="{StaticResource CustomOrangeBG}"
                     TextColor="{StaticResource Cerna}"
                     FontSize="16"
                     VerticalOptions="End"
                     CornerRadius="10"
                     Command="{Binding SaveDataCommand}"
-                    HeightRequest="50"/>
-            </Grid>
+                    HeightRequest="50"
+                    Margin="20,5"/>
 
+            <VerticalStackLayout>
+                <!-- POPUP pro výběr telefonního čísla -->
+                <popup:SfPopup IsOpen="{Binding TelPickerVisible}" HeaderTitle="Vyber telefonní číslo" HeightRequest="500" IsVisible="{Binding TelPickerVisible}">
+                    <popup:SfPopup.ContentTemplate>
+                        <DataTemplate>
+                            <picker:SfPicker x:Name="picker"
+                                             TextDisplayMode="FadeAndShrink"
+                                             AcceptCommand="{Binding PhoneAcceptCommand}"
+                                             DeclineCommand="{Binding PhoneCancelCommand}">
+                                <picker:SfPicker.Columns>
+                                    <picker:PickerColumn ItemsSource="{Binding ListCisel2}" SelectedItem="{Binding PhoneSelected ,Mode=TwoWay}"/>
+                                </picker:SfPicker.Columns>
+                                <picker:SfPicker.FooterView>
+                                    <picker:PickerFooterView ShowOkButton="True" Height="40" />
+                                </picker:SfPicker.FooterView>
+                            </picker:SfPicker>
+                        </DataTemplate>
+                    </popup:SfPopup.ContentTemplate>
+                </popup:SfPopup>
+                <!-- POPUP pro výběr telefonního čísla -->
+            </VerticalStackLayout>
 
-        </Grid>
-        <!-- POPUP pro výběr telefonního čísla -->
-        <popup:SfPopup IsOpen="{Binding TelPickerVisible}" HeaderTitle="Vyber telefonní číslo" HeightRequest="500">
-            <popup:SfPopup.ContentTemplate>
-                <DataTemplate>
-                    <picker:SfPicker x:Name="picker"
-                                 TextDisplayMode="FadeAndShrink"
-                                 AcceptCommand="{Binding PhoneAcceptCommand}"
-                                 DeclineCommand="{Binding PhoneCancelCommand}">
-                        <picker:SfPicker.Columns>
-                            <picker:PickerColumn ItemsSource="{Binding ListCisel2}" SelectedItem="{Binding PhoneSelected ,Mode=TwoWay}"/>
-                        </picker:SfPicker.Columns>
-                        <picker:SfPicker.FooterView>
-                            <picker:PickerFooterView ShowOkButton="True" Height="40" />
-                        </picker:SfPicker.FooterView>
-                    </picker:SfPicker>
-                </DataTemplate>
-            </popup:SfPopup.ContentTemplate>
-        </popup:SfPopup>
-        <!-- POPUP pro výběr telefonního čísla -->
-    </VerticalStackLayout>
+</Grid>
 </ContentPage>

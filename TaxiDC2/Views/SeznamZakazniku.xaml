@@ -12,7 +12,8 @@
              Title="Seznam Zákazníků">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Nový" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Nový" Command="{Binding AddItemCommand}" 
+                     IconImageSource="{FontImageSource Glyph={StaticResource add}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"/>
     </ContentPage.ToolbarItems>
 
     <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
@@ -82,8 +83,9 @@
                                         </HorizontalStackLayout>
                                     </StackLayout>
 
-                                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" Margin="10">
-                                        <Image HorizontalOptions="End" Source="{FontImageSource Glyph={StaticResource banned}, FontFamily=FAPro, Size=20, Color={StaticResource Cervena}}" />
+                                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" Margin="2">
+                                        <Image HorizontalOptions="End" Source="{FontImageSource Glyph={StaticResource banned}, FontFamily=FAPro, Size=20, Color={StaticResource Cervena}}" 
+                                               IsVisible="{Binding Rejected}"/>
 
                                         <!--<buttons:SfCheckBox IsChecked="{Binding Rejected}" CornerRadius="5.0" IsEnabled="False" />-->
                                     </VerticalStackLayout>

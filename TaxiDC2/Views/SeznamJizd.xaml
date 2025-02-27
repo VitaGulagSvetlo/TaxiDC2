@@ -10,6 +10,11 @@
              Title="Aktuální jízdy"
              x:DataType="vm:TripListViewModel"
              >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Nová" Command="{Binding TripAddCommand}" 
+                     IconImageSource="{FontImageSource Glyph={StaticResource add}, FontFamily=FAPro, Size=24, Color={StaticResource Oranzova}}"
+                     />
+    </ContentPage.ToolbarItems>
 
     <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <Grid BackgroundColor="{StaticResource GridBG}" >
@@ -49,7 +54,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" VerticalOptions="Center" FontSize="16" Text="Skrýt cizí jízdy" Margin="5,0"/>
-                    <buttons:SfSwitch Grid.Column="1" VerticalOptions="Center" StateChanged="SfSwitch_OnStateChanged"/>
+                    <Switch Grid.Column="1" VerticalOptions="Center"  Toggled="FilterChanged" IsToggled="{Binding ListMode,Mode=TwoWay}"/>
                 </Grid>
             </Grid>
 
@@ -163,7 +168,8 @@
                                     </StackLayout>
 
                                     <!-- Right Side -->
-                                    <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="{Binding StateColor}" CornerRadius="10" WidthRequest="75" HeightRequest="150" BorderColor="Transparent">
+                                    <Frame Padding="10" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BackgroundColor="{Binding StateColor}" CornerRadius="10" WidthRequest="75" HeightRequest="150" 
+                                           BorderColor="Transparent">
                                         <StackLayout VerticalOptions="Center">
                                             <Image Source="{Binding StateImage}" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" HorizontalOptions="Center" />
                                         </StackLayout>

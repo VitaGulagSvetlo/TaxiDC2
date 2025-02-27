@@ -1,7 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
-             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
              x:Class="TaxiDC2.DetailZakaznik"
              Title="Detail Zákazníka"
@@ -35,11 +34,9 @@
                             <Label Text="Poznámka:" Style="{StaticResource CustomLblO}" />
                             <ScrollView>
                                 <Editor Text="{Binding Customer.Memo}"
-            
-            AutoSize="TextChanges"
-           MinimumHeightRequest="100"
-                                       
-             />
+                                AutoSize="TextChanges"
+                                MinimumHeightRequest="100"
+                                />
                             </ScrollView>
                         </VerticalStackLayout>
                     </StackLayout>
@@ -61,18 +58,17 @@
                         </Grid.ColumnDefinitions>
 
                           <!-- Rejected Switch -->
-                        <Label Grid.Row="1" Grid.Column="0" Text="Nevozit!:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
+                        <Label Grid.Row="1" Grid.Column="0" Text="Nevozit ! :" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
                         <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding Customer.Rejected}" HorizontalOptions="Start" />
 
                     </Grid>
                 </Frame>
 
-
                 <!-- Rating Section -->
                 <Frame Style="{StaticResource CustomFrame}">
                     <StackLayout>
                         <Label Text="Hodnocení zákazníka:" Style="{StaticResource CustomLblO}" />
-                        <inputs:SfRating Value="{Binding Customer.VIP2}">
+                        <inputs:SfRating Value="{Binding Customer.VIP2}" ItemSize="25" Margin="2,5">
                             <inputs:SfRating.RatingSettings>
                                 <inputs:RatingSettings RatedStroke="Transparent" RatedFill="{StaticResource Oranzova}" UnratedFill="{StaticResource GradientGray}" />
                             </inputs:SfRating.RatingSettings>
