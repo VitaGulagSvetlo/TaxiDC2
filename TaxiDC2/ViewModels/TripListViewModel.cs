@@ -16,10 +16,14 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 
 	private Timer timer = null;
 
+	private readonly object _balanceLock = new();
+
 	public TripListViewModel(IBussinessState bs, IPlaySoundService soundService, IDataService dataService) : base(dataService)
 	{
+
 		_bs = bs;
 		_soundService = soundService;
+		ListMode = _bs.TripFilter;
 
 		timer = new Timer(OnTimer, null, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(15));
 
@@ -61,13 +65,12 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	/// Nastavuje list na vsechno 0 nebo privatni { jen moje} 1
 	/// </summary>
 	[ObservableProperty]
-	private bool _listMode ;
+	private bool _listMode;
 
 	public string DriverName => $"{_bs?.ActiveUser?.Inicials ?? "##"}";
 
 	public void OnAppearing()
 	{
-		ListMode = _bs.TripFilter;
 		IsBusy = true;
 	}
 
@@ -76,18 +79,23 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		IsBusy = true;
 		try
 		{
-			Items.Clear();
 			IEnumerable<TripListItemViewModel> l = (await DataService.GetTripAsync(true)).Select(TripListItemViewModel.FromTrip);
 			if (ListMode) // jen moje
 				l = l.Where(w =>
 					w.Data.TripState is (TripState.NewOrder or TripState.RejectedByDiver) ||
 					w.Data.Driver?.IdDriver == _bs.ActiveUserId);
 
-			foreach (var item in l
-						 .OrderBy(o => o.Data.TripState != TripState.NewWWW)
-						 .ThenBy(o => (int)o.Data.TripState > 99)
-						 .ThenBy(o => o.MinToDeadLine))
-				Items.Add(item);
+			// pidan lock, protoze nekdy UI vola refresh vicekrat v ruznejch
+			// taskach tak aby se korektne nacetla data do items jen 1x
+			lock (_balanceLock)
+			{
+				Items.Clear();
+				foreach (var item in l
+							 .OrderBy(o => o.Data.TripState != TripState.NewWWW)
+							 .ThenBy(o => (int)o.Data.TripState > 99)
+							 .ThenBy(o => o.MinToDeadLine))
+					Items.Add(item);
+			}
 		}
 		catch (Exception ex)
 		{
@@ -104,7 +112,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	{
 		await RefreshData();
 	}
-	
+
 	private void OnTimer(object state)
 	{
 		foreach (TripListItemViewModel item in Items)
@@ -129,7 +137,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	[RelayCommand]
 	private async Task Storno(Guid idTrip)
 	{
-		if (!await Shell.Current.DisplayAlert("STORNO", "Opravdu zrušit jízdu ?", "ANO","NE"))
+		if (!await Shell.Current.DisplayAlert("STORNO", "Opravdu zrušit jízdu ?", "ANO", "NE"))
 		{
 			return;
 		};
@@ -165,12 +173,9 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		}
 	}
 
-	public void SetListMode(bool? b)
+	public async void RefreshListMode()
 	{
-		if (b.HasValue)
-		{
-			ListMode = b.Value;
-			_bs.TripFilter = ListMode;
-		}
+		_bs.TripFilter = ListMode;
+		await LoadItems();
 	}
 }

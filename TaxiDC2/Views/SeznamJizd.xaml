@@ -16,7 +16,6 @@
                      />
     </ContentPage.ToolbarItems>
 
-    <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <Grid BackgroundColor="{StaticResource GridBG}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -57,8 +56,8 @@
                     <Switch Grid.Column="1" VerticalOptions="Center"  Toggled="FilterChanged" IsToggled="{Binding ListMode,Mode=TwoWay}"/>
                 </Grid>
             </Grid>
-
             <!-- List -->
+            <RefreshView x:Name="RefreshView" Grid.Row="1" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190" ItemsSource="{Binding Items}" ItemSpacing="0">
 
                 <syncfusionList:SfListView.ItemTemplate>
@@ -180,8 +179,9 @@
                     </DataTemplate>
                 </syncfusionList:SfListView.ItemTemplate>
             </syncfusionList:SfListView>
+            </RefreshView>
 
-            <!--<Frame Grid.Row="0" Grid.RowSpan="2"
+<!--<Frame Grid.Row="0" Grid.RowSpan="2"
                    Style="{StaticResource FloatingAdd}"
             >
                 <Image Source="{FontImageSource Glyph={StaticResource plus}, FontFamily=FAPro, Size=35, Color=White}"
@@ -193,5 +193,4 @@
                 </Frame.GestureRecognizers>
             </Frame>-->
         </Grid>
-    </RefreshView>
 </ContentPage>

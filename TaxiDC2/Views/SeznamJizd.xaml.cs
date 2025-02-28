@@ -5,7 +5,7 @@ namespace TaxiDC2
 {
     public partial class SeznamJizd : ContentPage
     {
-        readonly TripListViewModel _model;
+	    private readonly TripListViewModel _model;
 
         public SeznamJizd(IBussinessState bs,TripListViewModel model)
         {
@@ -55,8 +55,7 @@ namespace TaxiDC2
 
         private async void FilterChanged(object sender, ToggledEventArgs e)
         {
-	        _model.SetListMode(e.Value);
-	        await _model.RefreshData();
+	        _model.RefreshListMode();
         }
 	}
 }
