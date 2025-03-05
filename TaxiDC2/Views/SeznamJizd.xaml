@@ -36,12 +36,14 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"
-                        Style="{StaticResource Avatar}"
-     Text="{Binding DriverName}"
-        Command="{Binding ProfileOpenCommand}">
+            <Button Grid.Row="0"
+        Grid.RowSpan="2"
+        Style="{StaticResource Avatar}"
+        Command="{Binding ProfileOpenCommand}"
+        Text="{Binding DriverName}"         
+                    />
 
-            </Button>
+
 
 
             <!-- Switch and Label -->
