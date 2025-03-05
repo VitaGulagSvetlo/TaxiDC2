@@ -22,9 +22,9 @@ namespace TaxiDC2
         {
             SfPopup timePickerPopup = null;
 
-			var timePicker = new SfTimePicker
+            var timePicker = new SfTimePicker
             {
-                
+               
                 Format = PickerTimeFormat.HH_mm,
                 SelectedTime = TimeSpan.Zero,
                 WidthRequest = 300,
@@ -32,9 +32,12 @@ namespace TaxiDC2
             };
 
             timePicker.SelectedTime = _model.CasNastupu ?? new TimeSpan(0,DateTime.Now.Hour, DateTime.Now.Minute, 0);
-
-			timePickerPopup = new SfPopup
+           timePicker.HeaderView.Background = Color.FromArgb("#404040");
+            timePicker.BackgroundColor = Color.FromArgb("#404040");
+            timePickerPopup = new SfPopup
             {
+                HeaderTitle = "Èas jízdy",
+                BackgroundColor = Color.FromArgb("#404040"),
                 WidthRequest = 350,
                 HeightRequest = 400,
                 ContentTemplate = new DataTemplate(() =>
@@ -50,13 +53,13 @@ namespace TaxiDC2
                         Text = "OK",
                         BackgroundColor = Colors.Orange,
                         TextColor = Colors.White,
-                        WidthRequest = 100, 
+                        WidthRequest = 100,
                         Command = new Command(() =>
                         {
                             string selectedTime = timePicker.SelectedTime?.ToString(@"hh\:mm") ?? "00:00";
                             //TimePickerButton.Text = selectedTime;
                             _model.CasNastupu = timePicker.SelectedTime;
-                            timePickerPopup.IsOpen = false; 
+                            timePickerPopup.IsOpen = false;
                         })
                     },
                     new Button
@@ -67,13 +70,13 @@ namespace TaxiDC2
                         WidthRequest = 100,
                         Command = new Command(() =>
                         {
-                            timePickerPopup.IsOpen = false; 
+                            timePickerPopup.IsOpen = false;
                         })
                     }
                 }
                     };
                 }),
-                IsOpen = true 
+                IsOpen = true
             };
 
             await Task.CompletedTask;
