@@ -20,12 +20,11 @@
         <Grid BackgroundColor="{StaticResource GridBG}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!-- Search Bar Strip -->
-            <Grid Padding="5" Grid.Row="1" >
+            <Grid Padding="5" Grid.Row="0">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
                         <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
@@ -37,58 +36,48 @@
                            TextColor="{StaticResource TCwhite}"
                            PlaceholderColor="{StaticResource Bila}" 
                            CancelButtonColor="{StaticResource Bila}" 
-                           SearchCommand="{Binding SearchCommand}"
-                           />
+                           SearchCommand="{Binding SearchCommand}"/>
             </Grid>
 
             <!-- List -->
-            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="2" ItemSize="100" ItemSpacing="5" ItemsSource="{Binding Items}">
+            <syncfusionList:SfListView x:Name="listZakaznici" Grid.Row="1"  ItemSize="100" ItemSpacing="5" ItemsSource="{Binding Items}">
                 <syncfusionList:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Customer">
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Execute">
-                                    <SwipeItem    IconImageSource="{FontImageSource Glyph={StaticResource info}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
-                                                  BackgroundColor="{StaticResource CustomOrangeBG}"  
-                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CustomerListViewModel}}, Path=ItemSelectedCommand}" CommandParameter="{Binding IdCustomer}"/>
+                                    <SwipeItem IconImageSource="{FontImageSource Glyph={StaticResource info}, FontFamily=FAPro, Size=24, Color={StaticResource Bila}}"
+                                               BackgroundColor="{StaticResource CustomOrangeBG}"  
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CustomerListViewModel}}, Path=ItemSelectedCommand}" CommandParameter="{Binding IdCustomer}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <Frame Style="{StaticResource CustomFrame}">
-                                <Grid HorizontalOptions="FillAndExpand">
+                                <Grid ColumnSpacing="15">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <StackLayout Grid.Column="0" Spacing="5" Padding="0">
-                                        <HorizontalStackLayout HorizontalOptions="Start" Spacing="5">
-                                            <Label Text="Telefonní číslo" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Oranzova}" VerticalOptions="Center" />
-                                            <HorizontalStackLayout>
-                                                <Label Text="{Binding PhoneNumber}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
-
-                                            </HorizontalStackLayout>
-                                        </HorizontalStackLayout>
-                                        <HorizontalStackLayout HorizontalOptions="Start" Spacing="5">
-                                            <Label Text="Jméno" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Oranzova}" VerticalOptions="Center" />
-                                            <Label Text="{Binding Name}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalOptions="Center" />
-                                        </HorizontalStackLayout>
-                                        <HorizontalStackLayout HorizontalOptions="Start">
-                                            <inputs:SfRating x:Name="CustomerRating" IsReadOnly="True" ItemCount="5" Value="3"  ItemSize="20">
-                                                <inputs:SfRating.RatingSettings>
-                                                    <inputs:RatingSettings RatedFill="{StaticResource CustomOrangeText}" RatedStroke="{StaticResource TP}" />
-                                                </inputs:SfRating.RatingSettings>
-                                            </inputs:SfRating>
-                                        </HorizontalStackLayout>
-                                    </StackLayout>
-
-                                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" Margin="2">
-                                        <Image HorizontalOptions="End" Source="{FontImageSource Glyph={StaticResource banned}, FontFamily=FAPro, Size=20, Color={StaticResource Cervena}}" 
-                                               IsVisible="{Binding Rejected}"/>
-
-                                        <!--<buttons:SfCheckBox IsChecked="{Binding Rejected}" CornerRadius="5.0" IsEnabled="False" />-->
-                                    </VerticalStackLayout>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Telefonní číslo:" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Oranzova}" VerticalTextAlignment="Center" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding PhoneNumber}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
+                                    
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Jméno:" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource Oranzova}" VerticalTextAlignment="Center" />
+                                    <Label MaxLines="1" LineBreakMode="TailTruncation" Grid.Row="1" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource FS-16}" FontAttributes="Bold" TextColor="{StaticResource TCwhite}" VerticalTextAlignment="Center" />
+                                    
+                                    <inputs:SfRating HorizontalOptions="Start" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="CustomerRating" IsReadOnly="True" ItemCount="5" Value="3" ItemSize="20">
+                                        <inputs:SfRating.RatingSettings>
+                                            <inputs:RatingSettings RatedFill="{StaticResource CustomOrangeText}" RatedStroke="{StaticResource TP}" />
+                                        </inputs:SfRating.RatingSettings>
+                                    </inputs:SfRating>
+                                    
+                                    <Image Grid.Row="0" Grid.Column="2" HorizontalOptions="End" Source="{FontImageSource Glyph={StaticResource banned}, FontFamily=FAPro, Size=20, Color={StaticResource Cervena}}" 
+                                           IsVisible="{Binding Rejected}"/>
                                 </Grid>
                             </Frame>
                         </SwipeView>

@@ -16,48 +16,47 @@
                      />
     </ContentPage.ToolbarItems>
 
-        <Grid BackgroundColor="{StaticResource GridBG}" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+    <Grid BackgroundColor="{StaticResource GridBG}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <!-- Header -->
-            <Grid Padding="10">
-                <Grid.Background>
-                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                        <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
-                        <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
-                    </LinearGradientBrush>
-                </Grid.Background>
+        <!-- Header -->
+        <Grid Padding="10">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                    <GradientStop Color="{StaticResource GradientGray}" Offset="0.0" />
+                    <GradientStop Color="{StaticResource GradientOrange}" Offset="1.1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                        Style="{StaticResource Avatar}"
+     Text="{Binding DriverName}"
+        Command="{Binding ProfileOpenCommand}">
+
+            </Button>
+
+
+            <!-- Switch and Label -->
+            <Grid Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Avatar -->
-                <Frame Grid.Column="0" BackgroundColor="{StaticResource GridBG}" CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50" BorderColor="Transparent">
-                    <Label Text="{Binding DriverName}" Style="{StaticResource FS-14}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ProfileOpenCommand}" />
-                    </Frame.GestureRecognizers>
-
-                </Frame>
-
-                <!-- Switch and Label -->
-                <Grid Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Column="0" VerticalOptions="Center" FontSize="16" Text="Skrýt cizí jízdy" Margin="5,0"/>
-                    <Switch Grid.Column="1" VerticalOptions="Center"  Toggled="FilterChanged" IsToggled="{Binding ListMode,Mode=TwoWay}"/>
-                </Grid>
+                <Label Grid.Column="0" VerticalOptions="Center" FontSize="16" Text="Skrýt cizí jízdy" Margin="5,0"/>
+                <Switch Grid.Column="1" VerticalOptions="Center"  Toggled="FilterChanged" IsToggled="{Binding ListMode,Mode=TwoWay}"/>
             </Grid>
-            <!-- List -->
-            <RefreshView x:Name="RefreshView" Grid.Row="1" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        </Grid>
+        <!-- List -->
+        <RefreshView x:Name="RefreshView" Grid.Row="1" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <syncfusionList:SfListView x:Name="listJizdy" Grid.Row="1" ItemSize="190" ItemsSource="{Binding Items}" ItemSpacing="0">
 
                 <syncfusionList:SfListView.ItemTemplate>
@@ -139,7 +138,9 @@
                                             <Image Grid.Column="0" 
                                                    Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}"
                                                    VerticalOptions="Center" />
-                                            <Label Grid.Column="1" 
+                                            <Label MaxLines="1" 
+                                                   LineBreakMode="TailTruncation"
+                                                    Grid.Column="1" 
                                                    Text="{Binding Data.AddressBoarding}" 
                                                    FontAttributes="Bold" 
                                                    FontSize="16" 
@@ -156,7 +157,9 @@
                                             <Image Grid.Column="0" 
                                                    Source="{FontImageSource Glyph={StaticResource finish}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}"
                                                    VerticalOptions="Center" />
-                                            <Label Grid.Column="1" 
+                                            <Label MaxLines="1" 
+                                                     LineBreakMode="TailTruncation"
+                                                Grid.Column="1" 
                                                    Text="{Binding Data.AddressExit}" 
                                                    FontAttributes="Bold" 
                                                    FontSize="16" 
@@ -179,18 +182,18 @@
                     </DataTemplate>
                 </syncfusionList:SfListView.ItemTemplate>
             </syncfusionList:SfListView>
-            </RefreshView>
+        </RefreshView>
 
-<!--<Frame Grid.Row="0" Grid.RowSpan="2"
-                   Style="{StaticResource FloatingAdd}"
-            >
-                <Image Source="{FontImageSource Glyph={StaticResource plus}, FontFamily=FAPro, Size=35, Color=White}"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                      />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding TripAddCommand}" />
-                </Frame.GestureRecognizers>
-            </Frame>-->
-        </Grid>
+        <Button Grid.Row="0"
+        Grid.RowSpan="2"
+        Style="{StaticResource FloatingAdd}"
+        Command="{Binding TripAddCommand}">
+    <Button.ImageSource>
+        <FontImageSource Glyph="{StaticResource plus}"
+                         FontFamily="FAPro"
+                         Size="35"
+                         Color="White"/>
+    </Button.ImageSource>
+</Button>
+    </Grid>
 </ContentPage>

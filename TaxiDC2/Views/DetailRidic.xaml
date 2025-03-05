@@ -19,8 +19,8 @@
         </Grid.RowDefinitions>
 
         <!-- Content Section -->
-        <ScrollView Grid.Row="1" Padding="15">
-            <StackLayout Spacing="15" HorizontalOptions="FillAndExpand">
+        <ScrollView Grid.Row="1" Padding="10">
+            <StackLayout Spacing="10" HorizontalOptions="FillAndExpand">
 
                 <!-- Driver Details -->
                 <Frame Style="{StaticResource CustomFrame}">
@@ -76,13 +76,16 @@
                     <StackLayout>
                         <Label Text="Vyberte aktivní auto:" Style="{StaticResource CustomLblO}" />
                         <inputs:SfComboBox x:Name="CarSelector" HorizontalOptions="CenterAndExpand"
+                                            ClearButtonIconColor="Red"
                                            DisplayMemberPath="FullName"
+                                           DropDownBackground="{StaticResource GridBG}"
+                                            SelectedDropDownItemBackground="{StaticResource GradientGray}"
                                            SelectedItem="{Binding Driver.Car,Mode=TwoWay}"
                                            ItemsSource="{Binding CarsList}">
                             <inputs:SfComboBox.ItemTemplate>
                                 <DataTemplate x:DataType="models:Car">
                                     <HorizontalStackLayout Spacing="10">
-                                        <Image Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" WidthRequest="20" HeightRequest="20" />
+                                        <Image Margin="5" Source="{FontImageSource Glyph={StaticResource car}, FontFamily=FAPro, Size=20, Color={StaticResource Oranzova}}" WidthRequest="20" HeightRequest="20" />
                                         <Label Text="{Binding FullName}" TextColor="{StaticResource Bila}" VerticalTextAlignment="Center" />
                                     </HorizontalStackLayout>
                                 </DataTemplate>

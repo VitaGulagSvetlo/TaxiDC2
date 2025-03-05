@@ -20,11 +20,11 @@
 
             <!-- Scrollovatelný obsah -->
             <ScrollView Grid.Row="0">
-                <VerticalStackLayout Padding="15" Spacing="15">
+                <VerticalStackLayout Padding="10" Spacing="10">
 
                     <!-- Sekce: Telefon -->
                     <Frame Style="{StaticResource CustomFrame}">
-                        <VerticalStackLayout Spacing="10">
+                        <VerticalStackLayout>
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource phone}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
                                 <Label Text="Telefonní číslo" Style="{StaticResource CustomLblO}"/>
@@ -50,7 +50,7 @@
 
                     <!-- Sekce: Jméno -->
                     <Frame Style="{StaticResource CustomFrame}">
-                        <VerticalStackLayout Spacing="10">
+                        <VerticalStackLayout>
                             <Grid ColumnDefinitions="*, Auto">
                                 <HorizontalStackLayout Grid.Column="0" Spacing="5">
                                     <Image Source="{FontImageSource Glyph={StaticResource user}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
@@ -79,13 +79,14 @@
 
                     <!-- Sekce: Začátek a Cíl -->
                     <Frame Style="{StaticResource CustomFrame}">
-                        <VerticalStackLayout Spacing="10">
+                        <VerticalStackLayout>
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource start}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
                                 <Label Text="Začátek" Style="{StaticResource CustomLblO}" />
                             </HorizontalStackLayout>
                             <Entry x:Name="FromEntry"
                                Placeholder="Praha2"
+                               
                                PlaceholderColor="{StaticResource NRph}"
                                TextColor="{StaticResource TCwhite}"
                                FontSize="18"
@@ -106,7 +107,7 @@
 
                     <!-- Sekce: Čas jízdy -->
                     <Frame Style="{StaticResource CustomFrame}">
-                        <VerticalStackLayout Spacing="10">
+                        <VerticalStackLayout>
                             <HorizontalStackLayout Spacing="5">
                                 <Image Source="{FontImageSource Glyph={StaticResource time}, FontFamily=FAPro, Size=20, Color={StaticResource CustomOrange}}" />
                                 <Label Text="Čas jízdy" Style="{StaticResource CustomLblO}" />
@@ -144,7 +145,7 @@
             </ScrollView>
 
             <!-- Uložit změny tlačítko -->
-            <Button Text="ULOŽIT ZMĚNY" Grid.Row="1"
+            <Button Text="PŘIDAT JÍZDU" Grid.Row="1"
                     BackgroundColor="{StaticResource CustomOrangeBG}"
                     TextColor="{StaticResource Cerna}"
                     FontSize="16"
@@ -156,10 +157,11 @@
 
             <VerticalStackLayout>
                 <!-- POPUP pro výběr telefonního čísla -->
-                <popup:SfPopup IsOpen="{Binding TelPickerVisible}" HeaderTitle="Vyber telefonní číslo" HeightRequest="500" IsVisible="{Binding TelPickerVisible}">
+                <popup:SfPopup BackgroundColor="{StaticResource GridBG}" IsOpen="{Binding TelPickerVisible}" HeaderTitle="Vyber telefonní číslo" HeightRequest="500" IsVisible="{Binding TelPickerVisible}">
                     <popup:SfPopup.ContentTemplate>
                         <DataTemplate>
-                            <picker:SfPicker x:Name="picker"
+                        <picker:SfPicker BackgroundColor="{StaticResource GridBG}"
+                                                x:Name="picker"
                                              TextDisplayMode="FadeAndShrink"
                                              AcceptCommand="{Binding PhoneAcceptCommand}"
                                              DeclineCommand="{Binding PhoneCancelCommand}">

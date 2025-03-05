@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
 
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Grid.Row="0" Spacing="10" Padding="20">
+            <VerticalStackLayout Grid.Row="0" Spacing="10" Padding="10">
 
                 <Label Text="TAXI DC"
                     SemanticProperties.HeadingLevel="Level1" 
@@ -55,7 +55,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <Frame Style="{StaticResource CustomFrame}" VerticalOptions="End" Grid.Row="1"  Margin="20">
+        <Frame Style="{StaticResource CustomFrame}" VerticalOptions="End" Grid.Row="1"  Margin="10">
             <StackLayout Spacing="5">
                 <Label Text="Aktivní řidič / auto" Style="{StaticResource CustomLblO}" />
                 <HorizontalStackLayout Spacing="5">
@@ -71,7 +71,7 @@
                     <Label Grid.Column="1" Text="{Binding ActiveUser.CarName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0" 
                            HorizontalOptions="Start"
                            IsVisible="{Binding IsCarAssigned}"/>
-                    <Button Grid.Column="1" HorizontalOptions="End" Text="vybrat" HeightRequest="24" Padding="5,2" FontSize="14" BorderColor="Orange"
+                    <Button Grid.Column="1" HorizontalOptions="End" Text="vybrat" HeightRequest="24" Padding="5,2" FontSize="14" TextColor="{StaticResource Oranzova}" BackgroundColor="{StaticResource GradientGray}" BorderColor="Orange"
                             Clicked="Button_OnClicked" IsVisible="{Binding IsCarAssigned,Converter={StaticResource InverseBoolConverter}}"/>
                 </Grid>
             </StackLayout>
@@ -81,12 +81,13 @@
         <Label
             Grid.Row="2"
             Text="ver. 0.3 alfa"
-            HorizontalOptions="FillAndExpand"
+            HorizontalOptions="Fill"
             VerticalOptions="End"
-            Padding="5"
-            BackgroundColor="LightGray"
+            Padding="0"
+            BackgroundColor="{StaticResource CustomOrange}"
+            TextColor="{StaticResource Cerna}"
             FontSize="12"
-            HorizontalTextAlignment="Start"
+            HorizontalTextAlignment="Center"
             VerticalTextAlignment="Center"
         />
     </Grid>

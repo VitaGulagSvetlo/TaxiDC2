@@ -19,7 +19,7 @@
 
         <!-- Content Section -->
         <ScrollView Grid.Row="1">
-            <StackLayout Spacing="15" Padding="15" HorizontalOptions="FillAndExpand">
+            <StackLayout Spacing="10" Padding="10">
 
                 <!-- Car Type -->
                 <Frame Style="{StaticResource CustomFrame}">
@@ -47,10 +47,10 @@
 
                 <!-- Active Switch -->
                 <Frame Style="{StaticResource CustomFrame}">
-                    <StackLayout Spacing="10">
+                    <HorizontalStackLayout Spacing="10">
                         <Label Text="Aktivní:" Style="{StaticResource CustomLblO}" VerticalTextAlignment="Center" />
                         <Switch IsToggled="{Binding Car.Active}" HorizontalOptions="Start" />
-                    </StackLayout>
+                    </HorizontalStackLayout>
                 </Frame>
 
                 <!-- Save Button -->

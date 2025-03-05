@@ -12,6 +12,7 @@ namespace TaxiDC2
             InitializeComponent();
             BindingContext = _model = model;
         }
+        
 
         protected override void OnAppearing()
         {
