@@ -7,7 +7,7 @@ namespace TaxiDC2.ViewModels
 	public partial class AppShellViewModel:BaseViewModel, IDisposable
 	{
 		private readonly FirebaseAuthClient _authClient;
-		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+		private readonly CancellationTokenSource _cancellationTokenSource = new();
 
 		public AppShellViewModel(IDataService dataService, FirebaseAuthClient authClient):base(dataService)
 		{

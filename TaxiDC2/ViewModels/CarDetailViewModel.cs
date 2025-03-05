@@ -15,7 +15,7 @@ namespace TaxiDC2.ViewModels
         }
 
         [ObservableProperty]
-        private Car _car  = new Car();
+        private Car _car  = new();
 
 		[RelayCommand]
 		public async Task LoadData(Guid id)

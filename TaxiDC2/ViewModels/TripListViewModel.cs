@@ -11,8 +11,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	private IBussinessState _bs;
 	private readonly IPlaySoundService _soundService;
 
-	public ObservableCollection<TripListItemViewModel> Items { get; } =
-		new ObservableCollection<TripListItemViewModel>();
+	public ObservableCollection<TripListItemViewModel> Items { get; } = new();
 
 	private Timer timer = null;
 
@@ -31,6 +30,14 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 		MessagingCenter.Subscribe<INotificationMessage>(this, "MES", (sender) => { Task.Run(async () => await OnMessage(sender)).Wait(); });
 	}
 
+	/// <summary>
+	/// Prijeti PUSH notifikace a refresh dat
+	///
+	/// pokud je notifikace udalosti predani na ridice a je to predano na aktualniho ridice
+	/// tak zobrazi stranku s alertem
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <returns></returns>
 	private async Task OnMessage(INotificationMessage sender)
 	{
 		await RefreshData();
@@ -85,7 +92,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 					w.Data.TripState is (TripState.NewOrder or TripState.RejectedByDiver) ||
 					w.Data.Driver?.IdDriver == _bs.ActiveUserId);
 
-			// pidan lock, protoze nekdy UI vola refresh vicekrat v ruznejch
+			// pidan lock, protoze nekdy UI vola refresh vicekrat najednou v ruznejch
 			// taskach tak aby se korektne nacetla data do items jen 1x
 			lock (_balanceLock)
 			{
@@ -115,10 +122,9 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 
 	private void OnTimer(object state)
 	{
+		Debug.WriteLine($"Refresh time on list");
 		foreach (TripListItemViewModel item in Items)
-		{
 			item.RefreshTime();
-		}
 	}
 
 	[RelayCommand]
@@ -130,8 +136,13 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	[RelayCommand]
 	public async Task ProfileOpen()
 	{
+		//todo : jen ladeni  -- testovaci
+		await Shell.Current.GoToAsync($"{nameof(TripAlert)}?id={Items.First().Data.IdTrip}");
+		return;
+		//todo : jen ladeni  -- testovaci
+
 		if (_bs.IsLogged)
-			await Shell.Current.GoToAsync($"{nameof(DriverName)}?Id={_bs.ActiveUserId}");
+			await Shell.Current.GoToAsync($"{nameof(DetailRidic)}?id={_bs.ActiveUserId}");
 	}
 
 	[RelayCommand]

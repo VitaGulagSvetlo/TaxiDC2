@@ -6,7 +6,7 @@ namespace TaxiDC2.ViewModels
 {
 	public partial class CustomerListViewModel : BaseViewModel
     {
-        public ObservableCollection<Customer> Items { get; }= new ObservableCollection<Customer>();
+        public ObservableCollection<Customer> Items { get; }= new();
 
         public CustomerListViewModel(IDataService dataService) : base(dataService)
 		{

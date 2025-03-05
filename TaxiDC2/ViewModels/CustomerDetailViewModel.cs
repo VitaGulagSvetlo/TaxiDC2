@@ -11,7 +11,7 @@ namespace TaxiDC2.ViewModels
         }
 
 		[ObservableProperty]
-		private Customer _customer = new Customer();
+		private Customer _customer = new();
 
 		public async Task LoadData(Guid id)
 		{

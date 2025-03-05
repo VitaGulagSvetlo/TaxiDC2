@@ -15,7 +15,7 @@ namespace TaxiDC2.ViewModels
 		}
 
 		[ObservableProperty]
-		private Driver _driver = new Driver();
+		private Driver _driver = new();
 
 		public ObservableCollection<Car> CarsList { get; set; } = new();
 
