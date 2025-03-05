@@ -77,7 +77,7 @@ namespace TaxiDC2.ViewModels
 					return;
 				}
 
-				AuthenticationRequest authenticationRequest = new AuthenticationRequest
+				AuthenticationRequest authenticationRequest = new()
 				{
 					AllowPasswordAuth = true, // A chance to fallback to password auth
 					Title = "Authenticate", // On iOS only the title is relevant, everything else is unused. 

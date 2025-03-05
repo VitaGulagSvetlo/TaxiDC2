@@ -83,6 +83,7 @@ namespace TaxiDC2
 			builder.Services.AddTransient<SignInPage>();
 			builder.Services.AddTransient<SignUpPage>();
 			builder.Services.AddTransient<LoadingPage>();
+			builder.Services.AddTransient<TripAlert>();
 
 			builder.Services.AddSingleton<AppShellViewModel>();
 			builder.Services.AddSingleton<AppShell>();
