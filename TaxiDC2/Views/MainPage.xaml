@@ -71,8 +71,15 @@
                     <Label Grid.Column="1" Text="{Binding ActiveUser.CarName,FallbackValue='---'}" FontSize="18" TextColor="{StaticResource Bila}"  Padding="5,0" 
                            HorizontalOptions="Start"
                            IsVisible="{Binding IsCarAssigned}"/>
-                    <Button Grid.Column="1" HorizontalOptions="End" Text="vybrat" HeightRequest="24" Padding="5,2" FontSize="14" TextColor="{StaticResource Oranzova}" BackgroundColor="{StaticResource GradientGray}" BorderColor="Orange"
-                            Clicked="Button_OnClicked" IsVisible="{Binding IsCarAssigned,Converter={StaticResource InverseBoolConverter}}"/>
+                    <Button Grid.Column="1" HorizontalOptions="End" HeightRequest="24" Padding="5,2" FontSize="14" TextColor="{StaticResource Oranzova}" BackgroundColor="{StaticResource GradientGray}"
+                            Clicked="Button_OnClicked" >
+                        <Button.ImageSource>
+                            <FontImageSource Glyph="{StaticResource refresh}"
+                  FontFamily="FAPro"
+                  Size="20"
+                  Color="{StaticResource Oranzova}"/>
+                        </Button.ImageSource>
+                    </Button>
                 </Grid>
             </StackLayout>
         </Frame>
