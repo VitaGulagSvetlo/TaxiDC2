@@ -14,7 +14,7 @@
     <Color x:Key="TP">Transparent</Color>
     <Color x:Key="GradientGray">#404040</Color>
     <Color x:Key="GradientOrange">#FF8C00</Color>
-    <Color x:Key="GradientRed">Darkred</Color>
+    <Color x:Key="GradientRed">Red</Color>
 
 
     <!--///////////////////////////PENO old resource///////////////////////////-->

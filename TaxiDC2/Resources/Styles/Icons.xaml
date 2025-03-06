@@ -29,4 +29,5 @@
     <x:String x:Key="power">&#xf011;</x:String>
     <x:String x:Key="shield">&#xf3ed;</x:String>
     <x:String x:Key="add">&#xe5c2;</x:String>
+    <x:String x:Key="alert">&#xf071;</x:String>
 </ResourceDictionary>

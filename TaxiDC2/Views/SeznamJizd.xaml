@@ -41,7 +41,7 @@
         Style="{StaticResource Avatar}"
         Command="{Binding ProfileOpenCommand}"
         Text="{Binding DriverName}"         
-                    />
+         TextColor="White"           />
 
 
 
