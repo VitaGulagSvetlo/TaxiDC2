@@ -2,11 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaxiDC2.TripAlert"
               xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
-             xmlns:picker="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
-             xmlns:popup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
-             xmlns:converters="clr-namespace:TaxiDC2.Converters"  
-             Title="TripAlert"
-             BackgroundColor="{StaticResource GridBG}">
+             BackgroundColor="{StaticResource GridBG}"
+             xmlns:vm="clr-namespace:TaxiDC2.ViewModels"
+             x:DataType="vm:TripDetailViewModel"
+
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+
+             >
 
     <Grid BackgroundColor="{StaticResource GridBG}">
         <Grid.RowDefinitions>
@@ -105,8 +108,8 @@
         <!-- SEKCE S TLAČÍTKY -->
         <Grid Grid.Row="2" Padding="10">
             <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-                <Button Style="{StaticResource RideCancelBtn}" Text="Převzít" Command="{Binding StornoCommand}" />
-                <Button Style="{StaticResource RideCompleteBtn}" Text="Odmítnout" Command="{Binding CompletedCommand}" />
+                <Button Style="{StaticResource RideCompleteBtn}" Text="Převzít" Command="{Binding AccCommand}" />
+                <Button Style="{StaticResource RideCancelBtn}" Text="Odmítnout" Command="{Binding RejCommand}" />
             </HorizontalStackLayout>
         </Grid>
 

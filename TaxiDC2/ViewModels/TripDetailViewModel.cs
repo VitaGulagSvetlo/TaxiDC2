@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using static Android.Webkit.WebStorage;
 
 namespace TaxiDC2.ViewModels
 {
+	[QueryProperty(nameof(Origin), "origin")]
 	public partial class TripDetailViewModel : BaseViewModel
 	{
 		private readonly IBussinessState _bs;
@@ -279,6 +281,13 @@ namespace TaxiDC2.ViewModels
 			var ret = await DataService.AcceptTripByDriverAsync(Trip.IdTrip, _bs.ActiveUserId.Value);
 			if (ret)
 			{
+				// pokud je zranka volana z alertu tak po akci se vrat na predchozi strtanku
+				if (Origin == "alert")
+				{
+					await Shell.Current.GoToAsync($"..");
+					return;
+				}
+
 				Trip.TripState = TripState.AcceptedDiver;
 				await LoadData(Trip.IdTrip);
 			}
@@ -324,6 +333,10 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Ridic odmitl jizdu
+		/// </summary>
+		/// <returns></returns>
 		[RelayCommand]
 		private async Task Rej()
 
@@ -337,6 +350,13 @@ namespace TaxiDC2.ViewModels
 			var ret = await DataService.RejectTripAsync(Trip.IdTrip, _bs.ActiveUserId.Value);
 			if (ret)
 			{
+				// pokud je zranka volana z alertu tak po akci se vrat na predchozi strtanku
+				if (Origin == "alert")
+				{
+					await Shell.Current.GoToAsync($"..");
+					return;
+				}
+
 				Trip.TripState = TripState.RejectedByDiver;
 				await LoadData(Trip.IdTrip);
 			}
@@ -346,6 +366,10 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Jizda probiha
+		/// </summary>
+		/// <returns></returns>
 		[RelayCommand]
 		private async Task Run()
 		{
@@ -367,6 +391,10 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Zrisit jizdu
+		/// </summary>
+		/// <returns></returns>
 		[RelayCommand]
 		private async Task Storno()
 		{
@@ -383,6 +411,10 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// jizda hohova
+		/// </summary>
+		/// <returns></returns>
 		[RelayCommand]
 		private async Task Completed()
 		{
@@ -395,6 +427,10 @@ namespace TaxiDC2.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Predat na jineho ridice
+		/// </summary>
+		/// <returns></returns>
 		[RelayCommand]
 		private async Task Forward()
 		{
@@ -439,6 +475,25 @@ namespace TaxiDC2.ViewModels
 			PickerVisible = false;
 			return Task.CompletedTask;
 		}
+
+		///// <summary>
+		///// Odkud jsem sem prisel ?
+		///// </summary>
+		//private Type OriginPage
+		//{
+		//	get
+		//	{
+		//		var navStack = Shell.Current.Navigation.NavigationStack;
+		//		if (navStack.Count > 1)
+		//		{
+		//			var previousPage = navStack[^2];
+		//			return previousPage.GetType();
+		//		}
+		//		return null;
+		//	}
+		//}
+
+		public string? Origin { get; set; }
 
 	}
 }

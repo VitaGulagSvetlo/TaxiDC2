@@ -2,8 +2,8 @@ using TaxiDC2.ViewModels;
 
 namespace TaxiDC2
 {
-    public partial class TripAlert : ContentPage
-    {
+    public partial class TripAlert : ContentPage, IQueryAttributable
+	{
 	    private readonly TripDetailViewModel _model;
 
 	    public TripAlert( TripDetailViewModel model)
@@ -14,12 +14,12 @@ namespace TaxiDC2
 
 	    public void ApplyQueryAttributes(IDictionary<string, object> query)
 	    {
-		    if (query.ContainsKey("id"))
+		    if (query.TryGetValue("id", out object value))
 		    {
-			    var idAsString = query["id"]?.ToString();
-			    if (Guid.TryParse(idAsString, out var parsedId))
+			    string idAsString = value?.ToString();
+			    if (Guid.TryParse(idAsString, out Guid parsedId))
 			    {
-				    var vm = BindingContext as TripDetailViewModel;
+				    TripDetailViewModel vm = BindingContext as TripDetailViewModel;
 				    vm?.LoadData(parsedId);
 			    }
 		    }
