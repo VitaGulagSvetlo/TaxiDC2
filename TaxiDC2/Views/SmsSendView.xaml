@@ -6,9 +6,10 @@
     x:Class="TaxiDC2.SmsSendView"
     x:DataType="vm:SmsViewModel"
     Title="Odeslání SMS"
+    BackgroundColor="{StaticResource GridBG}"
     >
     
-    <StackLayout Orientation="Vertical" Margin="20,5" >
+    <StackLayout Spacing="10" Orientation="Vertical" Margin="20,5" >
         <StackLayout.Resources>
             <Style  TargetType="Button">
                 <Setter Property="Margin" Value="5,10"/>
@@ -19,9 +20,13 @@
                 <Setter Property="TextColor" Value="{StaticResource Oranzova}"/>
             </Style>
         </StackLayout.Resources>
-        <Label Text="SMS zpráva - přistavení" Margin="10" FontSize="16" FontAttributes="Bold" ></Label>
-        <Label Text="{Binding Message1}" Margin="10"  HorizontalOptions="CenterAndExpand" ></Label>
         <Frame Style="{StaticResource CustomFrame}">
+            <StackLayout>
+                
+                
+            <Label Text="SMS zpráva - přistavení" Margin="10" FontSize="18" FontAttributes="Bold" ></Label>
+        <Label Text="{Binding Message1}" Margin="10"  HorizontalOptions="CenterAndExpand" ></Label>
+        
         <CollectionView x:Name="ItemsListView"
                     ItemsSource="{Binding Buttons}"
                     SelectionMode="None" Background="Transparent" VerticalOptions="Start">
@@ -37,14 +42,21 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+            </StackLayout>
         </Frame>
-        <Label Text="SMS zpráva - jsme tu" Margin="10" FontSize="16" FontAttributes="Bold" ></Label>
+        <Frame Style="{StaticResource CustomFrame}">
+            <StackLayout>
+                
+           
+        <Label Text="SMS zpráva - jsme tu" Margin="10" FontSize="18" FontAttributes="Bold" ></Label>
         <Label Text="{Binding Message2}" Margin="10"  HorizontalOptions="CenterAndExpand" ></Label>
         <Button Style="{StaticResource CustomSettingsBtn}"
                 Text="Jsme na místě"
                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SmsViewModel}}, Path=SendCmd}"
                 CommandParameter="0" 
         />
+            </StackLayout>
+        </Frame>
         <StackLayout.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Right"
                                 Swiped="OnSwipe">
