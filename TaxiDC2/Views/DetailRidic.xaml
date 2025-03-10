@@ -97,9 +97,9 @@
         </ScrollView>
 
         <!-- Save Button -->
-        <Grid Grid.Row="2" Padding="15">
+        <Grid Grid.Row="2" Padding="10">
             <Button Text="ULOŽIT ZMĚNY" 
-                    BackgroundColor="{StaticResource Oranzova}" 
+                    BackgroundColor="{StaticResource CustomOrange}" 
                     TextColor="Black" 
                     FontSize="16" 
                     VerticalOptions="End" 

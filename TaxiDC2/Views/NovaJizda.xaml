@@ -151,9 +151,10 @@
                     FontSize="16"
                     VerticalOptions="End"
                     CornerRadius="10"
+                    Margin="10"
                     Command="{Binding SaveDataCommand}"
                     HeightRequest="50"
-                    Margin="20,5"/>
+                    HorizontalOptions="Fill"/>
         <VerticalStackLayout>
             <!-- POPUP pro výběr telefonního čísla -->
             <popup:SfPopup IsOpen="{Binding TelPickerVisible}" 
