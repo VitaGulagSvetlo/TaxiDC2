@@ -53,7 +53,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 				// jsem prijemce 
 				MainThread.BeginInvokeOnMainThread(async () =>
 				{
-					await Shell.Current.GoToAsync($"{nameof(TripAlert)}?IdTrip={t}");
+					await Shell.Current.GoToAsync($"{nameof(TripAlert)}?id={t}&origin=alert");
 					_soundService.PlaySystemSound("");
 				});
 			}
@@ -137,7 +137,7 @@ public partial class TripListViewModel : BaseViewModel, IDisposable
 	public async Task ProfileOpen()
 	{
 		//todo : jen ladeni  -- testovaci
-		await Shell.Current.GoToAsync($"{nameof(TripAlert)}?id={Items.First().Data.IdTrip}");
+		await Shell.Current.GoToAsync($"{nameof(TripAlert)}?id={Items.First().Data.IdTrip}&origin=alert");
 		return;
 		//todo : jen ladeni  -- testovaci
 
